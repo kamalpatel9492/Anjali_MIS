@@ -80,16 +80,16 @@
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.CountryID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.CountryID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CountryID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CountryID }, new { @id = "confirmDialog" })
+                            @*@Html.ActionLink("Details", "Details", new { id = item.CountryID }) |*@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CountryID })
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.CountryID }, new { @id = "confirmDialog" })*@
                         </td>
                     </tr>
                     }
                 </tbody>
             </table>
         </div>
-    </div>
+    @*</div>*@
     <!-- END PORTLET-->
     <!-- Modal -->
     <div class="modal fade" id="dialog-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

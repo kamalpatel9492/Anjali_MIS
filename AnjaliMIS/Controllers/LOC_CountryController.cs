@@ -93,6 +93,10 @@ namespace AnjaliMIS.Controllers
                 db.Entry(lOC_Country).State = EntityState.Modified;
                 lOC_Country.Modified = DateTime.Now;
                 lOC_Country.Created = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    lOC_Country.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
