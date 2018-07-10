@@ -52,8 +52,8 @@ namespace AnjaliMIS.Models
         }
     
         public int UserID { get; set; }
-        public int CreatedByUserID { get; set; }
-        public int EmployeeID { get; set; }
+        public Nullable<int> CreatedByUserID { get; set; }
+        public Nullable<int> EmployeeID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }

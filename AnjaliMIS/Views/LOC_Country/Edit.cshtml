@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @*@Html.ValidationSummary(true)*@
     @Html.HiddenFor(model => model.CountryID)
 
     <div class="col-md-12">
@@ -57,10 +57,6 @@
         <!-- END VALIDATION STATES-->
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -755,8 +755,8 @@
       <PropertyRef Name="UserID" />
     </Key>
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CreatedByUserID" Type="int" Nullable="false" />
-    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="IsAdmin" Type="bit" Nullable="false" />
@@ -2480,7 +2480,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SEC_User_CreatedByUserID_201806280640PM">
-    <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+    <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="0..1" />
     <End Role="SEC_User1" Type="Self.SEC_User" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SEC_User">
@@ -2492,7 +2492,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SEC_User_EmployeeID_201806280640PM">
-    <End Role="EMP_Employee" Type="Self.EMP_Employee" Multiplicity="1" />
+    <End Role="EMP_Employee" Type="Self.EMP_Employee" Multiplicity="0..1" />
     <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EMP_Employee">

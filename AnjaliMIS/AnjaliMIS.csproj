@@ -372,6 +372,7 @@
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModals\LoginViewModal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\layout2\css\custom.css" />
@@ -4548,11 +4549,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\LOC_Country\Create.cshtml" />
     <Content Include="Views\LOC_Country\Delete.cshtml" />
     <Content Include="Views\LOC_Country\Details.cshtml" />
     <Content Include="Views\LOC_Country\Edit.cshtml" />
     <Content Include="Views\LOC_Country\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -40,7 +40,8 @@ namespace AnjaliMIS.Controllers
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
+            LOC_Country lOC_Country = new LOC_Country();
+            return View("Edit", lOC_Country);
         }
 
         // POST: LOC_Country/Create
@@ -50,6 +51,9 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CountryID,CountryName,Remarks,Created,Modified,UserID")] LOC_Country lOC_Country)
         {
+            lOC_Country.Created = DateTime.Now;
+            lOC_Country.Modified = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.LOC_Country.Add(lOC_Country);
@@ -58,7 +62,7 @@ namespace AnjaliMIS.Controllers
             }
 
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", lOC_Country.UserID);
-            return View(lOC_Country);
+            return View();
         }
 
         // GET: LOC_Country/Edit/5
