@@ -89,6 +89,7 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                lOC_City.UserID = 3;
                 db.Entry(lOC_City).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

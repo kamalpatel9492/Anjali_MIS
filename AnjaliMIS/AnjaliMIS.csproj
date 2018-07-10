@@ -188,8 +188,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\EMP_DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LOC_CityController.cs" />
     <Compile Include="Controllers\LOC_CountryController.cs" />
+    <Compile Include="Controllers\LOC_StateController.cs" />
+    <Compile Include="Controllers\SEC_UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -375,6 +379,7 @@
     <Compile Include="ViewModals\LoginViewModal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddEdit.html" />
     <Content Include="assets\admin\layout2\css\custom.css" />
     <Content Include="assets\admin\layout2\css\layout.css" />
     <Content Include="assets\admin\layout2\css\themes\blue.css" />
@@ -4554,6 +4559,22 @@
     <Content Include="Views\LOC_Country\Edit.cshtml" />
     <Content Include="Views\LOC_Country\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\EMP_Department\Delete.cshtml" />
+    <Content Include="Views\EMP_Department\Details.cshtml" />
+    <Content Include="Views\EMP_Department\Edit.cshtml" />
+    <Content Include="Views\EMP_Department\Index.cshtml" />
+    <Content Include="Views\LOC_City\Delete.cshtml" />
+    <Content Include="Views\LOC_City\Details.cshtml" />
+    <Content Include="Views\LOC_City\Edit.cshtml" />
+    <Content Include="Views\LOC_City\Index.cshtml" />
+    <Content Include="Views\LOC_State\Delete.cshtml" />
+    <Content Include="Views\LOC_State\Details.cshtml" />
+    <Content Include="Views\LOC_State\Edit.cshtml" />
+    <Content Include="Views\LOC_State\Index.cshtml" />
+    <Content Include="Views\SEC_User\Delete.cshtml" />
+    <Content Include="Views\SEC_User\Details.cshtml" />
+    <Content Include="Views\SEC_User\Edit.cshtml" />
+    <Content Include="Views\SEC_User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
