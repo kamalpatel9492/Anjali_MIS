@@ -1,0 +1,987 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AnjaliMISModelStoreContainer" CdmEntityContainer="AnjaliMISEntities">
+    <EntitySetMapping Name="ACC_AccountHead">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_AccountHead">
+        <MappingFragment StoreEntitySet="ACC_AccountHead">
+          <ScalarProperty Name="AccountHeadID" ColumnName="AccountHeadID" />
+          <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_Bank">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_Bank">
+        <MappingFragment StoreEntitySet="ACC_Bank">
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="BankShortName" ColumnName="BankShortName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_Expense">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_Expense">
+        <MappingFragment StoreEntitySet="ACC_Expense">
+          <ScalarProperty Name="ExpensesID" ColumnName="ExpensesID" />
+          <ScalarProperty Name="AccountHeadID" ColumnName="AccountHeadID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_ExpenseHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_ExpenseHistory">
+        <MappingFragment StoreEntitySet="ACC_ExpenseHistory">
+          <ScalarProperty Name="ExpensesHistoryID" ColumnName="ExpensesHistoryID" />
+          <ScalarProperty Name="AccountHeadID" ColumnName="AccountHeadID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_PaymentMode">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_PaymentMode">
+        <MappingFragment StoreEntitySet="ACC_PaymentMode">
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_Receipt">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_Receipt">
+        <MappingFragment StoreEntitySet="ACC_Receipt">
+          <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+          <ScalarProperty Name="AccountHeadID" ColumnName="AccountHeadID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_ReceiptHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_ReceiptHistory">
+        <MappingFragment StoreEntitySet="ACC_ReceiptHistory">
+          <ScalarProperty Name="ReceiptHistoryID" ColumnName="ReceiptHistoryID" />
+          <ScalarProperty Name="AccountHeadID" ColumnName="AccountHeadID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACC_Tax">
+      <EntityTypeMapping TypeName="AnjaliMISModel.ACC_Tax">
+        <MappingFragment StoreEntitySet="ACC_Tax">
+          <ScalarProperty Name="TaxID" ColumnName="TaxID" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Percentage" ColumnName="Percentage" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_AssignCassettToMachine">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_AssignCassettToMachine">
+        <MappingFragment StoreEntitySet="DIA_AssignCassettToMachine">
+          <ScalarProperty Name="AssignCassettToMachineID" ColumnName="AssignCassettToMachineID" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="CassettID" ColumnName="CassettID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remrks" ColumnName="Remrks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_Cassett">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_Cassett">
+        <MappingFragment StoreEntitySet="DIA_Cassett">
+          <ScalarProperty Name="CassettsID" ColumnName="CassettsID" />
+          <ScalarProperty Name="CassettsNo" ColumnName="CassettsNo" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_Jangad">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_Jangad">
+        <MappingFragment StoreEntitySet="DIA_Jangad">
+          <ScalarProperty Name="JangadID" ColumnName="JangadID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RecivedAmount" ColumnName="RecivedAmount" />
+          <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+          <ScalarProperty Name="JangadNo" ColumnName="JangadNo" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PricePerCarat" ColumnName="PricePerCarat" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="TDSAmount" ColumnName="TDSAmount" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_JangadHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_JangadHistory">
+        <MappingFragment StoreEntitySet="DIA_JangadHistory">
+          <ScalarProperty Name="JangadHistoryID" ColumnName="JangadHistoryID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RecivedAmount" ColumnName="RecivedAmount" />
+          <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+          <ScalarProperty Name="JangadNo" ColumnName="JangadNo" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PricePerCarat" ColumnName="PricePerCarat" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="TDSAmount" ColumnName="TDSAmount" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="JangadID" ColumnName="JangadID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_JangadItem">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_JangadItem">
+        <MappingFragment StoreEntitySet="DIA_JangadItem">
+          <ScalarProperty Name="JangadItemID" ColumnName="JangadItemID" />
+          <ScalarProperty Name="JangadID" ColumnName="JangadID" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="PavalionAngle" ColumnName="PavalionAngle" />
+          <ScalarProperty Name="CrownAngle" ColumnName="CrownAngle" />
+          <ScalarProperty Name="CrownWeight" ColumnName="CrownWeight" />
+          <ScalarProperty Name="Girdle" ColumnName="Girdle" />
+          <ScalarProperty Name="Para1" ColumnName="Para1" />
+          <ScalarProperty Name="Para2" ColumnName="Para2" />
+          <ScalarProperty Name="Para3" ColumnName="Para3" />
+          <ScalarProperty Name="CassettsID" ColumnName="CassettsID" />
+          <ScalarProperty Name="PolishingStageID" ColumnName="PolishingStageID" />
+          <ScalarProperty Name="PavalionORCrown" ColumnName="PavalionORCrown" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="QCRemarks" ColumnName="QCRemarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PhysicalReceived" ColumnName="PhysicalReceived" />
+          <ScalarProperty Name="PhysicalReceivedDateTime" ColumnName="PhysicalReceivedDateTime" />
+          <ScalarProperty Name="PhysicalSend" ColumnName="PhysicalSend" />
+          <ScalarProperty Name="PhysicalSendDateTime" ColumnName="PhysicalSendDateTime" />
+          <ScalarProperty Name="Delivered" ColumnName="Delivered" />
+          <ScalarProperty Name="DeliveredDateTime" ColumnName="DeliveredDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_Machine">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_Machine">
+        <MappingFragment StoreEntitySet="DIA_Machine">
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
+          <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_MachineMaintenance">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_MachineMaintenance">
+        <MappingFragment StoreEntitySet="DIA_MachineMaintenance">
+          <ScalarProperty Name="MachineMaintenanceID" ColumnName="MachineMaintenanceID" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DIA_MachineWorkHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.DIA_MachineWorkHistory">
+        <MappingFragment StoreEntitySet="DIA_MachineWorkHistory">
+          <ScalarProperty Name="MachineWorkingHistoryID" ColumnName="MachineWorkingHistoryID" />
+          <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+          <ScalarProperty Name="CassettID" ColumnName="CassettID" />
+          <ScalarProperty Name="JangadItemID" ColumnName="JangadItemID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_Department">
+      <EntityTypeMapping TypeName="AnjaliMISModel.EMP_Department">
+        <MappingFragment StoreEntitySet="EMP_Department">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_Designation">
+      <EntityTypeMapping TypeName="AnjaliMISModel.EMP_Designation">
+        <MappingFragment StoreEntitySet="EMP_Designation">
+          <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_Employee">
+      <EntityTypeMapping TypeName="AnjaliMISModel.EMP_Employee">
+        <MappingFragment StoreEntitySet="EMP_Employee">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="IDProofDocName" ColumnName="IDProofDocName" />
+          <ScalarProperty Name="IDProofNumber" ColumnName="IDProofNumber" />
+          <ScalarProperty Name="IDProofPhotoPath" ColumnName="IDProofPhotoPath" />
+          <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+          <ScalarProperty Name="EndingDate" ColumnName="EndingDate" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="PanNo" ColumnName="PanNo" />
+          <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+          <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_EmployeeAttendance">
+      <EntityTypeMapping TypeName="AnjaliMISModel.EMP_EmployeeAttendance">
+        <MappingFragment StoreEntitySet="EMP_EmployeeAttendance">
+          <ScalarProperty Name="EmployeeAttendanceID" ColumnName="EmployeeAttendanceID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="InOutDate" ColumnName="InOutDate" />
+          <ScalarProperty Name="InTime" ColumnName="InTime" />
+          <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+          <ScalarProperty Name="NoOfPunch" ColumnName="NoOfPunch" />
+          <ScalarProperty Name="InOutStatus" ColumnName="InOutStatus" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_Punch">
+      <EntityTypeMapping TypeName="AnjaliMISModel.EMP_Punch">
+        <MappingFragment StoreEntitySet="EMP_Punch">
+          <ScalarProperty Name="PunchID" ColumnName="PunchID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="PunchDateTime" ColumnName="PunchDateTime" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_Invoice">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_Invoice">
+        <MappingFragment StoreEntitySet="INV_Invoice">
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="AmountPending" ColumnName="AmountPending" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_InvoiceHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_InvoiceHistory">
+        <MappingFragment StoreEntitySet="INV_InvoiceHistory">
+          <ScalarProperty Name="InvoiceHistoryID" ColumnName="InvoiceHistoryID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="AmountPending" ColumnName="AmountPending" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_InvoiceItem">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_InvoiceItem">
+        <MappingFragment StoreEntitySet="INV_InvoiceItem">
+          <ScalarProperty Name="InvoiceItemID" ColumnName="InvoiceItemID" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_Item">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_Item">
+        <MappingFragment StoreEntitySet="INV_Item">
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsConfigurable" ColumnName="IsConfigurable" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="MinStockLimit" ColumnName="MinStockLimit" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="RejectedQuantity" ColumnName="RejectedQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_ItemConfiguration">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_ItemConfiguration">
+        <MappingFragment StoreEntitySet="INV_ItemConfiguration">
+          <ScalarProperty Name="ItemConfigurationID" ColumnName="ItemConfigurationID" />
+          <ScalarProperty Name="MainItemID" ColumnName="MainItemID" />
+          <ScalarProperty Name="SubItemID" ColumnName="SubItemID" />
+          <ScalarProperty Name="Qunatity" ColumnName="Qunatity" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_ItemPrice">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_ItemPrice">
+        <MappingFragment StoreEntitySet="INV_ItemPrice">
+          <ScalarProperty Name="ItemPriceID" ColumnName="ItemPriceID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_PurchaseOrder">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_PurchaseOrder">
+        <MappingFragment StoreEntitySet="INV_PurchaseOrder">
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="SellerPartyID" ColumnName="SellerPartyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="PODate" ColumnName="PODate" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_PurchaseOrderHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_PurchaseOrderHistory">
+        <MappingFragment StoreEntitySet="INV_PurchaseOrderHistory">
+          <ScalarProperty Name="PurchaseOrderHistoryID" ColumnName="PurchaseOrderHistoryID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="SellerPartyID" ColumnName="SellerPartyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PaidAmount" ColumnName="PaidAmount" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+          <ScalarProperty Name="Casar" ColumnName="Casar" />
+          <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <ScalarProperty Name="PODate" ColumnName="PODate" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
+          <ScalarProperty Name="CGST" ColumnName="CGST" />
+          <ScalarProperty Name="CGSTAmount" ColumnName="CGSTAmount" />
+          <ScalarProperty Name="SGST" ColumnName="SGST" />
+          <ScalarProperty Name="SGSTAmount" ColumnName="SGSTAmount" />
+          <ScalarProperty Name="IGST" ColumnName="IGST" />
+          <ScalarProperty Name="IGSTAmount" ColumnName="IGSTAmount" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Operation" ColumnName="Operation" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_PurchaseOrderItem">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_PurchaseOrderItem">
+        <MappingFragment StoreEntitySet="INV_PurchaseOrderItem">
+          <ScalarProperty Name="PurchaseOrderItemID" ColumnName="PurchaseOrderItemID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+          <ScalarProperty Name="ReceivedQuantity" ColumnName="ReceivedQuantity" />
+          <ScalarProperty Name="ReceviedDate" ColumnName="ReceviedDate" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PuchasePrice" ColumnName="PuchasePrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_StockHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_StockHistory">
+        <MappingFragment StoreEntitySet="INV_StockHistory">
+          <ScalarProperty Name="StockHistoryID" ColumnName="StockHistoryID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OperationTypeID" ColumnName="OperationTypeID" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INV_Unit">
+      <EntityTypeMapping TypeName="AnjaliMISModel.INV_Unit">
+        <MappingFragment StoreEntitySet="INV_Unit">
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOC_City">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOC_City">
+        <MappingFragment StoreEntitySet="LOC_City">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOC_Country">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOC_Country">
+        <MappingFragment StoreEntitySet="LOC_Country">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOC_State">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOC_State">
+        <MappingFragment StoreEntitySet="LOC_State">
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_DBMSError">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOG_DBMSError">
+        <MappingFragment StoreEntitySet="LOG_DBMSError">
+          <ScalarProperty Name="DBMSErrorID" ColumnName="DBMSErrorID" />
+          <ScalarProperty Name="SPDetail" ColumnName="SPDetail" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="VerifiedOn" ColumnName="VerifiedOn" />
+          <ScalarProperty Name="VerifiedRemarks" ColumnName="VerifiedRemarks" />
+          <ScalarProperty Name="IsSolved" ColumnName="IsSolved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_PageError">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOG_PageError">
+        <MappingFragment StoreEntitySet="LOG_PageError">
+          <ScalarProperty Name="PageErrorID" ColumnName="PageErrorID" />
+          <ScalarProperty Name="ErrorCode" ColumnName="ErrorCode" />
+          <ScalarProperty Name="ErrorPage" ColumnName="ErrorPage" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="VerifiedOn" ColumnName="VerifiedOn" />
+          <ScalarProperty Name="VerifiedRemarks" ColumnName="VerifiedRemarks" />
+          <ScalarProperty Name="IsSolved" ColumnName="IsSolved" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_PageVisited">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOG_PageVisited">
+        <MappingFragment StoreEntitySet="LOG_PageVisited">
+          <ScalarProperty Name="PageVisitedID" ColumnName="PageVisitedID" />
+          <ScalarProperty Name="FormName" ColumnName="FormName" />
+          <ScalarProperty Name="MenuURL" ColumnName="MenuURL" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LOG_SPExecution">
+      <EntityTypeMapping TypeName="AnjaliMISModel.LOG_SPExecution">
+        <MappingFragment StoreEntitySet="LOG_SPExecution">
+          <ScalarProperty Name="SPExecutionID" ColumnName="SPExecutionID" />
+          <ScalarProperty Name="SPName" ColumnName="SPName" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="ExecutionTime" ColumnName="ExecutionTime" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MST_Party">
+      <EntityTypeMapping TypeName="AnjaliMISModel.MST_Party">
+        <MappingFragment StoreEntitySet="MST_Party">
+          <ScalarProperty Name="PartyID" ColumnName="PartyID" />
+          <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PartyTypeID" ColumnName="PartyTypeID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modofied" ColumnName="Modofied" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PanNo" ColumnName="PanNo" />
+          <ScalarProperty Name="TanNo" ColumnName="TanNo" />
+          <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+          <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SEC_LoginHistory">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SEC_LoginHistory">
+        <MappingFragment StoreEntitySet="SEC_LoginHistory">
+          <ScalarProperty Name="LoginHistoryID" ColumnName="LoginHistoryID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+          <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Remarls" ColumnName="Remarls" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SEC_User">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SEC_User">
+        <MappingFragment StoreEntitySet="SEC_User">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SEC_UserPrivileges">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SEC_UserPrivileges">
+        <MappingFragment StoreEntitySet="SEC_UserPrivileges">
+          <ScalarProperty Name="UserPrivilegesID" ColumnName="UserPrivilegesID" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_Company">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_Company">
+        <MappingFragment StoreEntitySet="SYS_Company">
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="PanNo" ColumnName="PanNo" />
+          <ScalarProperty Name="TanNo" ColumnName="TanNo" />
+          <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_FinYear">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_FinYear">
+        <MappingFragment StoreEntitySet="SYS_FinYear">
+          <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+          <ScalarProperty Name="FinYear" ColumnName="FinYear" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modifed" ColumnName="Modifed" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_Module">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_Module">
+        <MappingFragment StoreEntitySet="SYS_Module">
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="IconName" ColumnName="IconName" />
+          <ScalarProperty Name="StrictlyStop" ColumnName="StrictlyStop" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_OperationType">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_OperationType">
+        <MappingFragment StoreEntitySet="SYS_OperationType">
+          <ScalarProperty Name="OperationTypeID" ColumnName="OperationTypeID" />
+          <ScalarProperty Name="OperationType" ColumnName="OperationType" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_PartyType">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_PartyType">
+        <MappingFragment StoreEntitySet="SYS_PartyType">
+          <ScalarProperty Name="PartyTypeID" ColumnName="PartyTypeID" />
+          <ScalarProperty Name="PartyType" ColumnName="PartyType" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_PolishingStage">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_PolishingStage">
+        <MappingFragment StoreEntitySet="SYS_PolishingStage">
+          <ScalarProperty Name="PolishingStageID" ColumnName="PolishingStageID" />
+          <ScalarProperty Name="SatgeName" ColumnName="SatgeName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SYS_Status">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SYS_Status">
+        <MappingFragment StoreEntitySet="SYS_Status">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+          <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQL_CustomFK">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SQL_CustomFK">
+        <MappingFragment StoreEntitySet="SQL_CustomFK">
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+          <ScalarProperty Name="FKType" ColumnName="FKType" />
+          <ScalarProperty Name="TableID" ColumnName="TableID" />
+          <ScalarProperty Name="JoinOrder" ColumnName="JoinOrder" />
+          <ScalarProperty Name="PKTable" ColumnName="PKTable" />
+          <ScalarProperty Name="PKSchema" ColumnName="PKSchema" />
+          <ScalarProperty Name="PKColumn" ColumnName="PKColumn" />
+          <ScalarProperty Name="FKTable" ColumnName="FKTable" />
+          <ScalarProperty Name="FKSchema" ColumnName="FKSchema" />
+          <ScalarProperty Name="FKColumn" ColumnName="FKColumn" />
+          <ScalarProperty Name="CustomFKName" ColumnName="CustomFKName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQL_FixColumn">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SQL_FixColumn">
+        <MappingFragment StoreEntitySet="SQL_FixColumn">
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQL_FKDisplayMember">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SQL_FKDisplayMember">
+        <MappingFragment StoreEntitySet="SQL_FKDisplayMember">
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="IsSeparate" ColumnName="IsSeparate" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SQL_Sequence">
+      <EntityTypeMapping TypeName="AnjaliMISModel.SQL_Sequence">
+        <MappingFragment StoreEntitySet="SQL_Sequence">
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="SchemaName" ColumnName="SchemaName" />
+          <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SELECTALL_LOC_City" FunctionName="AnjaliMISModel.Store.SELECTALL_LOC_City">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnjaliMISModel.SELECTALL_LOC_City_Result">
+          <ScalarProperty Name="CityID" ColumnName="CityID" />
+          <ScalarProperty Name="StateID" ColumnName="StateID" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

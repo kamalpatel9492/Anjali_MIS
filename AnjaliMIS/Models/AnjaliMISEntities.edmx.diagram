@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="414365d9f8794caeb0a5e87948d44194" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_AccountHead" Width="1.5" PointX="0.75" PointY="60.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Bank" Width="1.5" PointX="0.75" PointY="64.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Expense" Width="1.5" PointX="3" PointY="62.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_ExpenseHistory" Width="1.5" PointX="12.75" PointY="95.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_PaymentMode" Width="1.5" PointX="0.75" PointY="68" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Receipt" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_ReceiptHistory" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Tax" Width="1.5" PointX="13.5" PointY="83.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_AssignCassettToMachine" Width="1.5" PointX="10.5" PointY="71.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Cassett" Width="1.5" PointX="13.5" PointY="69.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Jangad" Width="1.5" PointX="15.75" PointY="97.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadHistory" Width="1.5" PointX="27" PointY="92.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadItem" Width="1.5" PointX="18" PointY="82.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Machine" Width="1.5" PointX="13.5" PointY="64.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineMaintenance" Width="1.5" PointX="18.75" PointY="68.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineWorkHistory" Width="1.5" PointX="21.25" PointY="74.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Department" Width="1.5" PointX="10.5" PointY="83.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Designation" Width="1.5" PointX="10.5" PointY="86.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Employee" Width="1.5" PointX="6" PointY="61.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_EmployeeAttendance" Width="1.5" PointX="10.5" PointY="67" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Punch" Width="1.5" PointX="8.25" PointY="57.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Invoice" Width="1.5" PointX="12.75" PointY="102.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceHistory" Width="1.5" PointX="24" PointY="102.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceItem" Width="1.5" PointX="20.75" PointY="89.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Item" Width="1.5" PointX="16.5" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemConfiguration" Width="1.5" PointX="21.75" PointY="69.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemPrice" Width="1.5" PointX="21.75" PointY="96.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrder" Width="1.5" PointX="18.75" PointY="97" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderHistory" Width="1.5" PointX="24" PointY="94" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderItem" Width="1.5" PointX="21" PointY="84.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_StockHistory" Width="1.5" PointX="21.75" PointY="100.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Unit" Width="1.5" PointX="14.25" PointY="61.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_City" Width="1.5" PointX="13.5" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_Country" Width="1.5" PointX="10.5" PointY="116.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_State" Width="1.5" PointX="12.75" PointY="91.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_DBMSError" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_PageError" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_PageVisited" Width="1.5" PointX="10.5" PointY="120.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_SPExecution" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.MST_Party" Width="1.5" PointX="15.75" PointY="88.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_LoginHistory" Width="1.5" PointX="10.5" PointY="123.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_User" Width="1.5" PointX="8.25" PointY="66.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_UserPrivileges" Width="1.5" PointX="10.5" PointY="75.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Company" Width="1.5" PointX="18.75" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_FinYear" Width="1.5" PointX="10.5" PointY="130.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Module" Width="1.5" PointX="8.25" PointY="77.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_OperationType" Width="1.5" PointX="19.5" PointY="105.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PartyType" Width="1.5" PointX="13.5" PointY="79.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PolishingStage" Width="1.5" PointX="15.75" PointY="79.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Status" Width="1.5" PointX="11.25" PointY="61.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_CustomFK" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_FixColumn" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_FKDisplayMember" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_Sequence" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_Expense_AccountHeadID_201807011016PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_AccountHeadID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_Expense_BankID_201807011016PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_BankID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_BankID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_Expense_FinYearID_201807011016PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_Expense_PaymentModeID_201807011016PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_Expense_UserID_201807011016PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_ExpenseID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_FinYearID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_PaymentModeID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_ACC_ExpenseHistory_UserID_201807011018PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_CGST_201806280655PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_IGST_201806280655PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_SGST_201806280655PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_TDS_201806280655PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_CGST_201806280656PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_IGST_201806280656PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_SGST_201806280656PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_TDS_201806280656PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_CGST_201806280657PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_IGST_201806280657PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_SGST_201806280657PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_CGST_201806280658PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_IGST_201806280658PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_SGST_201806280658PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_CGST_201806280659PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_IGST_201806280659PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_SGST_201806280659PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_CGST_201806280700PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_IGST_201806280700PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_SGST_201806280700PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_AssignCassettToMachine_CassettID_201806280450PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_AssignCassettToMachine_MachineID_201806280450PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_AssignCassettToMachine_StatusID_201806280450PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_AssignCassettToMachine_UserID_201806280450PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Cassett_CompanyID_201806280452PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Cassett_StatusID_201806280452PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Cassett_UserID_201806280452PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_CassettsID_201806280502PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_CassettID_201806280509PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_CompanyID_201806280454PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_FinYearID_201806280454PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_PartyID_201806280454PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_StatusID_201806280454PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_UserID_201806280454PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_JangadID_201806280701PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_JangadID_201806280502PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_CompanyID_201806280459PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_FinYearID_201806280459PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_PartyID_201806280459PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_StatusID_201806280459PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_UserID_201806280459PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_PolishingStageID_201806280502PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_StatusID_201806280502PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_UserID_201806280502PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_JangadItemID_201806280509PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Machine_CompanyID_201806280504PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_Machine_UserID_201806280504PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_MachineID_201806280507PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_MachineID_201806280509PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_CompanyID_201806280507PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_ItemID_201806280507PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_UserID_201806280507PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_UserID_201806280509PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Department_UserID_201806280516PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_DepartmentID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Designation_UserID_201806280516PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_DesignationID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_CityID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_CompanyID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_FinYearID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_StateID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_UserID_201806280519PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_EmployeeAttendance_EmployeeID_201806280521PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_Punch_EmployeeID_201806280554PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_User_EmployeeID_201806280640PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_EMP_EmployeeAttendance_UserID_201806280521PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_CompanyID_201806280558PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_FinYearID_201806280558PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_PartyID_201806280558PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_StatusID_201806280558PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_UserID_201806280558PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_InvoiceID_201806280701PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_InvoiceID_201806280616PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_CompanyID_201806280604PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_FinYearID_201806280604PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_PartyID_201806280604PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_StatusID_201806280604PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_UserID_201806280604PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_ItemID_201806280616PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_SubItemID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_ItemID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderItem_ItemID_201806280626PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_ItemID_201806280628PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_UserID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_FinYearID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_UserID_201806280619PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_CompanyID_201806280621PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_FinYearID_201806280621PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_SellerPartyID_201806280621PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_StatusID_201806280621PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_UserID_201806280621PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_PurchaseOrderID_201806280700PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderItem_PurchaseOrderID_201806280626PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_CompanyID_201806280623PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_FinYearID_201806280623PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_SellerPartyID_201806280623PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_StatusID_201806280623PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_UserID_201806280623PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_FinYearID_201806280628PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_OperationTypeID_201806280628PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_UserID_201806280628PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOC_City_StateID_201806280630PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOC_City_UserID_201806280630PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_CityID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SYS_Company_CityID_201806280643PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOC_Country_UserID_201806280631PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOC_State_CountryID_201806280632PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_CountryID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOC_State_UserID_201806280632PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_StateID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_LOG_PageVisited_UserID_201806280635PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_CompanyID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_PartyTypeID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_MST_Party_UserID_201806280639PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_LoginHistory_UserID_201806280640PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_User_CreatedByUserID_201806280640PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_UserPrivileges_CreatedByUserID_201806280642PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_UserPrivileges_UserID_201806280642PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SYS_Company_UserID_201806280643PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SYS_FinYear_UserID_201806280644PM" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A157D8_AnjaliMISModel.FK_SEC_UserPrivileges_ModuleID_201806280642PM" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
