@@ -31,7 +31,7 @@
 </head>
 <body class="login">
     <div class="logo">
-       <h3 style="color:white !important">Anjali MIS</h3>
+        <h3 style="color:white !important">Anjali MIS</h3>
     </div>
     <div class="content">
 
@@ -40,7 +40,7 @@
             <h3 class="form-title">Login to your account</h3>
 
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
+            @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
             @*@if (@ViewBag.Message != null)
                 {
                     <div style="border: 1px solid red">
@@ -56,8 +56,8 @@
                     <i class="fa fa-user"></i>
                     @*<input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" />*@
                     @Html.TextBoxFor(a => a.UserName, new { @class = "form-control placeholder-no-fix", @placeholder = "Username" })
-                    @Html.ValidationMessageFor(a => a.UserName)
                 </div>
+                @Html.ValidationMessageFor(a => a.UserName, String.Empty, new { @class = "help-inline", @style = "color:red" })
             </div>
             <div class="form-group">
                 <label class="control-label visible-ie8 visible-ie9">Password</label>
@@ -65,13 +65,12 @@
                     <i class="fa fa-lock"></i>
                     @*<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />*@
                     @Html.PasswordFor(a => a.Password, new { @class = "form-control placeholder-no-fix", @placeholder = "Password", @Type = "password" })
-                    @Html.ValidationMessageFor(a => a.Password)
-
                 </div>
+                @Html.ValidationMessageFor(a => a.Password, String.Empty, new { @class = "help-inline", @style = "color:red" })
             </div>
             <div class="form-actions">
                 <label class="checkbox">
-                    <input type="checkbox" name="remember" value="1" /> Remember me
+                    @*<input type="checkbox" name="remember" value="1" /> Remember me*@
                 </label>
                 <button type="submit" class="btn green-haze pull-right">
                     Login <i class="m-icon-swapright m-icon-white"></i>

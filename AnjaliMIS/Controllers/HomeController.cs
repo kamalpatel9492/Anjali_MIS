@@ -37,6 +37,10 @@ namespace AnjaliMIS.Controllers
                         Session["UserName"] = obj.UserName.ToString();
                         return RedirectToAction("Index");
                     }
+                    else
+                    {
+                        ModelState.AddModelError("", "Enter valid Credentials..");
+                    }
                 }
             }
             return View(objUser);
