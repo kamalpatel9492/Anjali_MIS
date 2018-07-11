@@ -1,102 +1,79 @@
 ﻿@model AnjaliMIS.Models.LOC_State
 
 @{
-	ViewBag.Title = "Edit";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+@*<h2>Edit</h2>*@
 
 
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Created)
+    @Html.HiddenFor(model => model.StateID)
+    <body>
+        <!--Add-Edit code start-->
+        <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>State Edit
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <div class="form-horizontal">
+                        <div class="form-body">
+                            @*<h3 class="form-section">Basic validation States</h3>*@
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CountryID, "CountryID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-	<body>
-		<!--Add-Edit code start-->
-		<div class="col-md-12">
-			<!-- BEGIN VALIDATION STATES-->
-			<div class="portlet box blue">
-				<div class="portlet-title">
-					<div class="caption">
-						<i class="fa fa-gift"></i>State Edit
-					</div>
-				</div>
-				<div class="portlet-body form">
-					<!-- BEGIN FORM-->
-					<div class="form-horizontal">
-						<div class="form-body">
-							@*<h3 class="form-section">Basic validation States</h3>*@
-							<div class="form-group">
-								@Html.LabelFor(model => model.CountryID, "CountryID", htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
-									@Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
-								</div>
-							</div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
-							<div class="form-group">
-								@Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.EditorFor(model => model.StateName, new { htmlAttributes = new { @class = "form-control" } })
-									@Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
-								</div>
-							</div>
-
-							<div class="form-group">
-								@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-									@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
-								</div>
-							</div>
-
-							<div class="form-group">
-								@Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-									@Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-								</div>
-							</div>
-
-							<div class="form-group">
-								@Html.LabelFor(model => model.Modified, htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.EditorFor(model => model.Modified, new { htmlAttributes = new { @class = "form-control" } })
-									@Html.ValidationMessageFor(model => model.Modified, "", new { @class = "text-danger" })
-								</div>
-							</div>
-
-							<div class="form-group">
-								@Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
-								<div class="col-md-10">
-									@Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-									@Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-								</div>
-							</div>
-						</div>
-						<div class="form-actions">
-							<div class="row">
-								<div class="col-md-offset-3 col-md-9">
-									<input type="submit" value="Save" class="btn green" />
-									@Html.ActionLink("Back to List", "index", "LOC_State", new { @class = "btn default" })
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- END FORM-->
-				</div>
-			</div>
-			<!-- END VALIDATION STATES-->
-		</div>
-		<!--Add-Edit code end-->
-	</body>
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <input type="submit" value="Save" class="btn green" />
+                                    @Html.ActionLink("Back to List", "index", "LOC_State", new { @class = "btn default" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END FORM-->
+                </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+        </div>
+        <!--Add-Edit code end-->
+    </body>
 }
 
-<div>
-	@Html.ActionLink("Back to List", "Index")
-</div>
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
 
 @section Scripts {
-	@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 }

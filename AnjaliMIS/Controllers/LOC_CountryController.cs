@@ -45,6 +45,29 @@ namespace AnjaliMIS.Controllers
             LOC_Country lOC_Country = new LOC_Country();
             return View("Edit", lOC_Country);
         }
+        // POST: LOC_Country/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "CountryID,CountryName,Remarks,Created,Modified,UserID")] LOC_Country lOC_Country)
+        {
+            lOC_Country.Created = DateTime.Now;
+            lOC_Country.Modified = DateTime.Now;
+            if (Session["UserID"] != null)
+            {
+                lOC_Country.UserID = Convert.ToInt16(Session["UserID"].ToString());
+            }
+            if (ModelState.IsValid)
+            {
+                db.LOC_Country.Add(lOC_Country);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", lOC_Country.UserID);
+            return View();
+        }
 
         // GET: LOC_Country/Edit/5
         public ActionResult Edit(int? id)
