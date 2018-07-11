@@ -1,0 +1,73 @@
+﻿@model AnjaliMIS.Models.EMP_Designation
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(model => model.Created)
+	@Html.HiddenFor(model => model.DesignationID)
+
+	<!--Add-Edit code start-->
+	<div class="col-md-12">
+		<!-- BEGIN VALIDATION STATES-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift"></i>Designation Edit
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<div class="form-horizontal">
+					<div class="form-body">
+						@*<h3 class="form-section">Basic validation States</h3>*@
+						<div class="form-group">
+							@Html.LabelFor(model => model.Designation, htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.Designation, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+							</div>
+						</div>
+
+						<div class="form-group">
+							@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+							</div>
+						</div>
+
+						<div class="form-group">
+							@Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+								@Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<input type="submit" value="Save" class="btn green" />
+								@Html.ActionLink("Back to List", "index", "EMP_Designation", new { @class = "btn default" })
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END FORM-->
+			</div>
+		</div>
+		<!-- END VALIDATION STATES-->
+	</div>
+	<!--Add-Edit code end-->
+}
+
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}
