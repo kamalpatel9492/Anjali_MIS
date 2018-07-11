@@ -191,6 +191,7 @@
     <Compile Include="CommonConfig.cs" />
     <Compile Include="Controllers\EMP_DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
     <Compile Include="Controllers\LOC_CountryController.cs" />
     <Compile Include="Controllers\LOC_StateController.cs" />
@@ -4576,6 +4577,11 @@
     <Content Include="Views\SEC_User\Details.cshtml" />
     <Content Include="Views\SEC_User\Edit.cshtml" />
     <Content Include="Views\SEC_User\Index.cshtml" />
+    <Content Include="Views\INV_Unit\Create.cshtml" />
+    <Content Include="Views\INV_Unit\Delete.cshtml" />
+    <Content Include="Views\INV_Unit\Details.cshtml" />
+    <Content Include="Views\INV_Unit\Edit.cshtml" />
+    <Content Include="Views\INV_Unit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
