@@ -30,15 +30,17 @@
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-container-bg-solid">
     <div class="page-header navbar navbar-fixed-top">
         <div class="page-header-inner">
-            <div class="float-left">
+            <div class="page-logo float-left">
+                @*Anjali MIS*@
                 <h4 class="site-title " style="color:white !important; padding-left:10px; padding-top:3px ">
-                    Anjali MIS
-                </h4>
+            Anjali MIS
+        </h4>
             </div>
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                        @Html.ActionLink("Log Out", "Logout", "Home")
+                    </li>
                 </ul>
             </div>
         </div>
@@ -49,8 +51,11 @@
         <div class="page-sidebar-wrapper">
             <div class="page-sidebar navbar-collapse collapse">
                 <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                    <li>@Html.ActionLink("Country", "index", "LOC_Country", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("State", "index", "LOC_State", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Country", "index", "LOC_country", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("State", "index", "LOC_state", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("City", "index", "LOC_city", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Department", "index", "EMP_department", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("User", "index", "SEC_user", new { area = "" }, null)</li>
                     @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
                 </ul>
             </div>
