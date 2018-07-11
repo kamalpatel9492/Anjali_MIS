@@ -43,26 +43,8 @@ namespace AnjaliMIS.Controllers
         {
             ViewBag.CountryID = new SelectList(db.LOC_Country, "CountryID", "CountryName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
-        }
-
-        // POST: LOC_State/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StateID,CountryID,StateName,Remarks,Created,Modified,UserID")] LOC_State lOC_State)
-        {
-            if (ModelState.IsValid)
-            {
-                db.LOC_State.Add(lOC_State);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CountryID = new SelectList(db.LOC_Country, "CountryID", "CountryName", lOC_State.CountryID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", lOC_State.UserID);
-            return View(lOC_State);
+            LOC_State _lOC_State = new LOC_State();
+            return View("Edit", _lOC_State);
         }
 
         // GET: LOC_State/Edit/5
@@ -89,6 +71,13 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StateID,CountryID,StateName,Remarks,Created,Modified,UserID")] LOC_State lOC_State)
         {
+            lOC_State.Created = Convert.ToDateTime(lOC_State.Created);
+            lOC_State.Modified = DateTime.Now;
+            if (Session["UserID"] != null)
+            {
+                lOC_State.UserID = Convert.ToInt16(Session["UserID"].ToString());
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(lOC_State).State = EntityState.Modified;
