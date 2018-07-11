@@ -52,16 +52,5 @@ namespace AnjaliMIS.Controllers
             Session.Abandon(); // it will clear the session at the end of request
             return RedirectToAction("index");
         }
-        //public ActionResult UserDashBoard()
-        //{
-        //    if (Session["UserID"] != null)
-        //    {
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Login");
-        //    }
-        //}
     }
 }

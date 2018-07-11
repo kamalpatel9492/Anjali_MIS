@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
+    [SessionTimeout]
     public class SEC_UserController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();

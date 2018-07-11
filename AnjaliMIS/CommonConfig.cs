@@ -12,13 +12,18 @@ namespace AnjaliMIS
 {
     public class CommonConfig
     {
-        //public int getUserID()
-        //{
-        //    //if (SessionStateAttribute["UserID"] != null)
-        //    //{
-        //    //    return Convert.ToInt16(Session["UserID"].ToString());
-        //    //}
-        //    //return 0;
-        //}
+        public class SessionTimeoutAttribute : ActionFilterAttribute
+        {
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+                HttpContext ctx = HttpContext.Current;
+                if (HttpContext.Current.Session["UserID"] == null)
+                {
+                    filterContext.Result = new RedirectResult("~/Home/index");
+                    return;
+                }
+                base.OnActionExecuting(filterContext);
+            }
+        }
     }
 }
