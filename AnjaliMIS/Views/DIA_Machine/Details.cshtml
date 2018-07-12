@@ -1,0 +1,82 @@
+﻿@model AnjaliMIS.Models.DIA_Machine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Machine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MachineNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MachineNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_Company.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MachineID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
