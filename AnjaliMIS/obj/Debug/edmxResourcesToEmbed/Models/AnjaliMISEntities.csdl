@@ -603,6 +603,9 @@
       <End Role="SYS_Module" EntitySet="SYS_Module" />
       <End Role="SEC_UserPrivileges" EntitySet="SEC_UserPrivileges" />
     </AssociationSet>
+    <FunctionImport Name="PR_SEC_UserPrivileges_SelectByUserID" ReturnType="Collection(DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="ACC_AccountHead">
     <Key>
@@ -3445,4 +3448,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="PR_SEC_UserPrivileges_SelectByUserID_Result">
+    <Property Type="Int32" Name="ModuleID" Nullable="false" />
+    <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Controller" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Action" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="URL" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="IconName" Nullable="false" MaxLength="100" />
+    <Property Type="Boolean" Name="StrictlyStop" Nullable="false" />
+    <Property Type="Int32" Name="Sequence" Nullable="false" />
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+  </ComplexType>
 </Schema>

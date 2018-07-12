@@ -1,0 +1,10 @@
+﻿
+
+@model IEnumerable<AnjaliMIS.ViewModals.MenuViewModal>
+<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    @foreach (var item in Model)
+    {
+        @*<li>@Html.ActionLink(item.ModuleName, item.Action, item.Controller, new { area = "" }, null)</li>*@
+        <li class="@(ViewContext.RouteData.Values["controller"].ToString() == item.Controller ? "active" : "")"><a href="@Url.Action(item.Action, item.Controller)"><i class="@item.IconName icon-large"></i> @item.ModuleName</a></li>
+    }
+</ul>

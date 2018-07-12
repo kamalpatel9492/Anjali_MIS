@@ -2575,6 +2575,9 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="PR_SEC_UserPrivileges_SelectByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="DB_A157D8_AnjaliMISModelStoreContainer">
     <EntitySet Name="ACC_AccountHead" EntityType="Self.ACC_AccountHead" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ACC_Bank" EntityType="Self.ACC_Bank" Schema="dbo" store:Type="Tables" />

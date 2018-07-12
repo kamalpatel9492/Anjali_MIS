@@ -972,5 +972,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="PR_SEC_UserPrivileges_SelectByUserID" FunctionName="DB_A157D8_AnjaliMISModel.Store.PR_SEC_UserPrivileges_SelectByUserID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result">
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="IconName" ColumnName="IconName" />
+          <ScalarProperty Name="StrictlyStop" ColumnName="StrictlyStop" />
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
