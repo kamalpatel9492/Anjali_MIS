@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AnjaliMIS.Models.MST_Party>
+﻿@model IEnumerable<AnjaliMIS.Models.EMP_Employee>
 
 @{
 	ViewBag.Title = "Index";
@@ -11,13 +11,13 @@
 		<div class="portlet-title">
 			<div class="caption">
 				<i class="icon-bar-chart font-green-sharp hide"></i>
-				<span class="caption-subject font-green-sharp bold uppercase">Country</span>
+				<span class="caption-subject font-green-sharp bold uppercase">Employee</span>
 				@*<span class="caption-helper">weekly stats...</span>*@
 			</div>
 			<div class="actions">
 				<div class="btn-group">
 					@Html.ActionLink("Create New", "Create",
-					new { controller = "MST_Party" },
+					new { controller = "EMP_Employee" },
 					new { @class = "btn btn-transparent green btn-circle btn-sm active" })
 				</div>
 			</div>
@@ -28,64 +28,85 @@
 					<tr>
 
 						<th>
-							@Html.DisplayNameFor(model => model.PartyName)
+							@Html.DisplayNameFor(model => model.EmployeeName)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.Address)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.ContactPerson)
+							@Html.DisplayNameFor(model => model.IDProofDocName)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Mobile)
+							@Html.DisplayNameFor(model => model.IDProofNumber)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Phone)
+							@Html.DisplayNameFor(model => model.IDProofPhotoPath)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Email)
+							@Html.DisplayNameFor(model => model.PhotoPath)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Description)
+							@Html.DisplayNameFor(model => model.Gender)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Created)
+							@Html.DisplayNameFor(model => model.DOB)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Modofied)
+							@Html.DisplayNameFor(model => model.Age)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.Remarks)
+							@Html.DisplayNameFor(model => model.JoiningDate)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.EndingDate)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Salary)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.IsActive)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.PanNo)
+							@Html.DisplayNameFor(model => model.Created)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.TanNo)
+							@Html.DisplayNameFor(model => model.Modified)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Remarks)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.PanNo)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.AadharNo)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.GSTIN)
+							@Html.DisplayNameFor(model => model.AccountNo)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.IFSCCode)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.ACC_Bank.BankName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.EMP_Department.DepartmentName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.EMP_Designation.Designation)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.LOC_City.CityName)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.LOC_Country.CountryName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.LOC_State.StateName)
-						</th>
-						<th>
 							@Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
 						</th>
 						<th>
-							@Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
+							@Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.LOC_State.StateName)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.SEC_User.UserName)
@@ -100,72 +121,93 @@
 					{
 					<tr>
 						<td>
-							@Html.DisplayFor(modelItem => item.PartyName)
+							@Html.DisplayFor(modelItem => item.EmployeeName)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Address)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.ContactPerson)
+							@Html.DisplayFor(modelItem => item.IDProofDocName)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Mobile)
+							@Html.DisplayFor(modelItem => item.IDProofNumber)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Phone)
+							@Html.DisplayFor(modelItem => item.IDProofPhotoPath)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Email)
+							@Html.DisplayFor(modelItem => item.PhotoPath)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Description)
+							@Html.DisplayFor(modelItem => item.Gender)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Created)
+							@Html.DisplayFor(modelItem => item.DOB)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Modofied)
+							@Html.DisplayFor(modelItem => item.Age)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.Remarks)
+							@Html.DisplayFor(modelItem => item.JoiningDate)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EndingDate)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Salary)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.IsActive)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.PanNo)
+							@Html.DisplayFor(modelItem => item.Created)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.TanNo)
+							@Html.DisplayFor(modelItem => item.Modified)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Remarks)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.PanNo)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.AadharNo)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.GSTIN)
+							@Html.DisplayFor(modelItem => item.AccountNo)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.IFSCCode)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.ACC_Bank.BankName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMP_Department.DepartmentName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EMP_Designation.Designation)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.LOC_City.CityName)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.LOC_Country.CountryName)
+							@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.LOC_State.StateName)
 						</td>
 						<td>
-							@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SYS_PartyType.PartyType)
-						</td>
-						<td>
 							@Html.DisplayFor(modelItem => item.SEC_User.UserName)
 						</td>
 						<td>
-							@Html.ActionLink("Edit", "Edit", new { id = item.PartyID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.PartyID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.PartyID })
+							@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+							@Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
 						</td>
 					</tr>
 					}
