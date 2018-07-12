@@ -5,12 +5,6 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-	@Html.ActionLink("Create New", "Create")
-</p>
-
 <!--List Code Start-->
 <div class="col-md-12 col-sm-12">
 	<!-- BEGIN PORTLET-->
@@ -19,16 +13,12 @@
 			<div class="caption">
 				<i class="icon-bar-chart font-green-sharp hide"></i>
 				<span class="caption-subject font-green-sharp bold uppercase">Department</span>
-				@*<span class="caption-helper">weekly stats...</span>*@
 			</div>
 			<div class="actions">
-				<div class="btn-group btn-group-devided" data-toggle="buttons">
+				<div class="btn-group btn-group-devided">
 					@Html.ActionLink("Create New", "Create",
-					new { controller = "LOC_Country" },
-					new { @class = "btn btn-transparent grey-salsa btn-circle btn-sm active" })
-					@*<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
-								@Html.ActionLink("Create New", "Create", new { @class = "btn btn-transparent grey-salsa btn-circle btn-sm active" })
-						</label>*@
+					new { controller = "EMP_Department" },
+					new { @class = "btn btn-transparent green btn-circle btn-sm active" })
 				</div>
 			</div>
 		</div>
@@ -55,8 +45,6 @@
 						<th>
 							@Html.DisplayNameFor(model => model.SEC_User.UserName)
 						</th>
-						<th></th>
-
 						<th>
 							Action
 						</th>
@@ -86,8 +74,7 @@
 						</td>
 						<td>
 							@Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID }, new { @id = "confirmDialog" })
+							@Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
 						</td>
 					</tr>
 					}

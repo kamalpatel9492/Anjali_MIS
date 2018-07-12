@@ -43,7 +43,8 @@ namespace AnjaliMIS.Controllers
         {
             ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName");
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
+            SEC_User sEC_User = new SEC_User();
+            return View("Edit", sEC_User);
         }
 
         // POST: SEC_User/Create
@@ -55,6 +56,12 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                sEC_User.Created = DateTime.Now;
+                sEC_User.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    sEC_User.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.SEC_User.Add(sEC_User);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -92,6 +99,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(sEC_User).State = EntityState.Modified;
+                sEC_User.Created = Convert.ToDateTime(sEC_User.Created);
+                sEC_User.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    sEC_User.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -25,71 +25,59 @@
 		<div class="portlet-body">
 			<table class="table table-striped table-bordered table-advance table-hover" id="myTable">
 				<thead>
-					<tr>
+                    <tr>
 
-						<th>
-							@Html.DisplayNameFor(model => model.CassettsNo)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Capacity)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Created)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Modified)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Remarks)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_Status.StatusName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SEC_User.UserName)
-						</th>
-						<th>
-							Action
-						</th>
-					</tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CassettsNo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Capacity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Modified)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
 				</thead>
 				<tbody>
 					@foreach (var item in Model)
 					{
-					<tr>
-						<td>
-							@Html.DisplayFor(modelItem => item.CassettsNo)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Capacity)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Created)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Modified)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Remarks)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SEC_User.UserName)
-						</td>
-						<td>
-							@Html.ActionLink("Edit", "Edit", new { id = item.CassettsID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.CassettsID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.CassettsID }, new { @id = "confirmDialog" })
-						</td>
-					</tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CassettsNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Capacity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Modified)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SEC_User.UserName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CassettsID }) |
+                            @*@Html.ActionLink("Details", "Details", new { id = item.CassettsID }) |*@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CassettsID })
+                        </td>
+                    </tr>
 					}
 				</tbody>
 			</table>

@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
+    [SessionTimeout]
     public class INV_UnitController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
@@ -38,7 +40,8 @@ namespace AnjaliMIS.Controllers
         // GET: INV_Unit/Create
         public ActionResult Create()
         {
-            return View();
+            INV_Unit iNV_Unit = new INV_Unit();
+            return View("Edit", iNV_Unit);
         }
 
         // POST: INV_Unit/Create
@@ -50,6 +53,12 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                iNV_Unit.Created = DateTime.Now;
+                iNV_Unit.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Unit.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.INV_Unit.Add(iNV_Unit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +92,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_Unit).State = EntityState.Modified;
+                iNV_Unit.Created = Convert.ToDateTime(iNV_Unit.Created);
+                iNV_Unit.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Unit.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

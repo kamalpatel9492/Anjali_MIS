@@ -189,13 +189,16 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="CommonConfig.cs" />
+    <Compile Include="Controllers\DIA_CassettController.cs" />
     <Compile Include="Controllers\EMP_DepartmentController.cs" />
+    <Compile Include="Controllers\EMP_DesignationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
     <Compile Include="Controllers\LOC_CountryController.cs" />
     <Compile Include="Controllers\LOC_StateController.cs" />
     <Compile Include="Controllers\SEC_UserController.cs" />
+    <Compile Include="Controllers\SYS_PartyTypeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4578,11 +4581,22 @@
     <Content Include="Views\SEC_User\Details.cshtml" />
     <Content Include="Views\SEC_User\Edit.cshtml" />
     <Content Include="Views\SEC_User\Index.cshtml" />
-    <Content Include="Views\INV_Unit\Create.cshtml" />
     <Content Include="Views\INV_Unit\Delete.cshtml" />
     <Content Include="Views\INV_Unit\Details.cshtml" />
     <Content Include="Views\INV_Unit\Edit.cshtml" />
     <Content Include="Views\INV_Unit\Index.cshtml" />
+    <Content Include="Views\DIA_Cassett\Delete.cshtml" />
+    <Content Include="Views\DIA_Cassett\Details.cshtml" />
+    <Content Include="Views\DIA_Cassett\Edit.cshtml" />
+    <Content Include="Views\DIA_Cassett\Index.cshtml" />
+    <Content Include="Views\EMP_Designation\Delete.cshtml" />
+    <Content Include="Views\EMP_Designation\Details.cshtml" />
+    <Content Include="Views\EMP_Designation\Edit.cshtml" />
+    <Content Include="Views\EMP_Designation\Index.cshtml" />
+    <Content Include="Views\SYS_PartyType\Delete.cshtml" />
+    <Content Include="Views\SYS_PartyType\Details.cshtml" />
+    <Content Include="Views\SYS_PartyType\Edit.cshtml" />
+    <Content Include="Views\SYS_PartyType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -43,7 +43,8 @@ namespace AnjaliMIS.Controllers
         {
             ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
+            LOC_City _lOL_City = new LOC_City();
+            return View("Edit", _lOL_City);
         }
 
         // POST: LOC_City/Create
@@ -55,6 +56,12 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                lOC_City.Created = DateTime.Now;
+                lOC_City.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    lOC_City.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.LOC_City.Add(lOC_City);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,7 +98,12 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                lOC_City.UserID = 3;
+                lOC_City.Created = Convert.ToDateTime(lOC_City.Created);
+                lOC_City.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    lOC_City.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.Entry(lOC_City).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -42,7 +42,8 @@ namespace AnjaliMIS.Controllers
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
+            EMP_Department eMP_Department = new EMP_Department();
+            return View("Edit", eMP_Department);
         }
 
         // POST: EMP_Department/Create
@@ -52,13 +53,16 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DepartmentID,DepartmentName,Remarks,Created,Modified,UserID,IsActive")] EMP_Department eMP_Department)
         {
+            eMP_Department.Created = DateTime.Now;
+            eMP_Department.Modified = DateTime.Now;
+            if (Session["UserID"] != null)
+            {
+                eMP_Department.UserID = Convert.ToInt16(Session["UserID"].ToString());
+            }
             if (ModelState.IsValid)
             {
-				eMP_Department.Created = DateTime.Now;
-				eMP_Department.Modified = DateTime.Now;
-				eMP_Department.UserID = 1;
-				db.EMP_Department.Add(eMP_Department);
-				db.SaveChanges();
+                db.EMP_Department.Add(eMP_Department);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -92,6 +96,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(eMP_Department).State = EntityState.Modified;
+                eMP_Department.Created = Convert.ToDateTime(eMP_Department.Created);
+                eMP_Department.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    eMP_Department.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

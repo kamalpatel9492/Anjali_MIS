@@ -12,7 +12,6 @@
 			<div class="caption">
 				<i class="icon-bar-chart font-green-sharp hide"></i>
 				<span class="caption-subject font-green-sharp bold uppercase">Designation</span>
-				@*<span class="caption-helper">weekly stats...</span>*@
 			</div>
 			<div class="actions">
 				<div class="btn-group">
@@ -68,8 +67,8 @@
 						</td>
 						<td>
 							@Html.ActionLink("Edit", "Edit", new { id = item.DesignationID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.DesignationID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.DesignationID }, new { @id = "confirmDialog" })
+							@*@Html.ActionLink("Details", "Details", new { id = item.DesignationID }) |*@
+							@Html.ActionLink("Delete", "Delete", new { id = item.DesignationID })
 						</td>
 					</tr>
 					}
