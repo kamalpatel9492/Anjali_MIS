@@ -1,0 +1,186 @@
+﻿@model AnjaliMIS.Models.MST_Party
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MST_Party</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modofied)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modofied)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PanNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PanNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TanNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TanNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AadharNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AadharNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GSTIN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GSTIN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOC_City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOC_City.CityName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOC_Country.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOC_Country.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOC_State.StateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOC_State.StateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_Company.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_PartyType.PartyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PartyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,153 @@
+﻿@model IEnumerable<AnjaliMIS.Models.MST_Party>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PartyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modofied)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PanNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TanNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AadharNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GSTIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOC_City.CityName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOC_Country.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LOC_State.StateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PartyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactPerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modofied)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PanNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TanNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AadharNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GSTIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOC_City.CityName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOC_Country.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LOC_State.StateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SYS_PartyType.PartyType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEC_User.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PartyID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PartyID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PartyID })
+        </td>
+    </tr>
+}
+
+</table>
