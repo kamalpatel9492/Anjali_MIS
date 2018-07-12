@@ -10,6 +10,8 @@
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
+	@Html.HiddenFor(model => model.Created)
+	@Html.HiddenFor(model => model.PartyID)
 
 	<!--Add-Edit code start-->
 	<div class="col-md-12">
