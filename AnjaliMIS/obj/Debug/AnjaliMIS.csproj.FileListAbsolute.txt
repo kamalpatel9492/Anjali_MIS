@@ -239,7 +239,6 @@ G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\ko\System.Spatial.resources.d
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\ru\System.Spatial.resources.dll
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\zh-Hans\System.Spatial.resources.dll
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\zh-Hant\System.Spatial.resources.dll
-G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csprojAssemblyReference.cache
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csproj.CoreCompileInputs.cache
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csproj.CopyComplete
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.dll
