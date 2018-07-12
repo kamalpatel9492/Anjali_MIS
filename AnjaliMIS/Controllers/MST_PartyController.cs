@@ -7,10 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
-    public class MST_PartyController : Controller
+	[SessionTimeout]
+	public class MST_PartyController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
@@ -45,8 +47,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.PartyTypeID = new SelectList(db.SYS_PartyType, "PartyTypeID", "PartyType");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            return View();
-        }
+			MST_Party _mST_Party = new MST_Party();
+			return View("Edit", _mST_Party);
+		}
 
         // POST: MST_Party/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -57,7 +60,13 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MST_Party.Add(mST_Party);
+				mST_Party.Created = DateTime.Now;
+				mST_Party.Modofied = DateTime.Now;
+				if (Session["UserID"] != null)
+				{
+					mST_Party.UserID = Convert.ToInt16(Session["UserID"].ToString());
+				}
+				db.MST_Party.Add(mST_Party);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -102,7 +111,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(mST_Party).State = EntityState.Modified;
-                db.SaveChanges();
+				mST_Party.Modofied = Convert.ToDateTime(DateTime.Now);
+				if (Session["UserID"] != null)
+				{
+					mST_Party.UserID = Convert.ToInt16(Session["UserID"].ToString());
+				}
+				db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.CityID = new SelectList(db.LOC_City, "CityID", "CityName", mST_Party.CityID);
