@@ -13,8 +13,6 @@ namespace AnjaliMIS.Models
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    //using System.Data.Objects;
-    //using System.Data.Objects.DataClasses;
     using System.Linq;
     
     public partial class DB_A157D8_AnjaliMISEntities1 : DbContext
@@ -84,13 +82,13 @@ namespace AnjaliMIS.Models
         public DbSet<SQL_FKDisplayMember> SQL_FKDisplayMember { get; set; }
         public DbSet<SQL_Sequence> SQL_Sequence { get; set; }
     
-        public virtual ObjectResult<PR_SEC_UserPrivileges_SelectByUserID_Result> PR_SEC_UserPrivileges_SelectByUserID(Nullable<int> userID)
+        public virtual ObjectResult<PR_SEC_UserPrivileges_SelectByUserID_Result1> PR_SEC_UserPrivileges_SelectByUserID(Nullable<int> userID)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
                 new ObjectParameter("UserID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PR_SEC_UserPrivileges_SelectByUserID_Result>("PR_SEC_UserPrivileges_SelectByUserID", userIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PR_SEC_UserPrivileges_SelectByUserID_Result1>("PR_SEC_UserPrivileges_SelectByUserID", userIDParameter);
         }
     }
 }

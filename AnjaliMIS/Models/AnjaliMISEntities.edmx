@@ -3829,10 +3829,21 @@ FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
             <End Role="SYS_Module" EntitySet="SYS_Module" />
             <End Role="SEC_UserPrivileges" EntitySet="SEC_UserPrivileges" />
           </AssociationSet>
-          <FunctionImport Name="PR_SEC_UserPrivileges_SelectByUserID" ReturnType="Collection(DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result)">
+          <FunctionImport Name="PR_SEC_UserPrivileges_SelectByUserID" ReturnType="Collection(DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result1)">
             <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="PR_SEC_UserPrivileges_SelectByUserID_Result">
+          <Property Type="Int32" Name="ModuleID" Nullable="false" />
+          <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Controller" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Action" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="URL" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="IconName" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="StrictlyStop" Nullable="false" />
+          <Property Type="Int32" Name="Sequence" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="ACC_AccountHead">
           <Key>
             <PropertyRef Name="AccountHeadID" />
@@ -6674,7 +6685,7 @@ FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="PR_SEC_UserPrivileges_SelectByUserID_Result">
+        <ComplexType Name="PR_SEC_UserPrivileges_SelectByUserID_Result1">
           <Property Type="Int32" Name="ModuleID" Nullable="false" />
           <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Controller" Nullable="false" MaxLength="100" />
@@ -7664,7 +7675,7 @@ FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="PR_SEC_UserPrivileges_SelectByUserID" FunctionName="DB_A157D8_AnjaliMISModel.Store.PR_SEC_UserPrivileges_SelectByUserID">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result">
+              <ComplexTypeMapping TypeName="DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result1">
                 <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
                 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
                 <ScalarProperty Name="Controller" ColumnName="Controller" />

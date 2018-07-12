@@ -346,6 +346,9 @@
     <Compile Include="Models\PR_SEC_UserPrivileges_SelectByUserID_Result.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PR_SEC_UserPrivileges_SelectByUserID_Result1.cs">
+      <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SEC_LoginHistory.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
@@ -4606,7 +4609,6 @@
     <Content Include="Views\SYS_PartyType\Details.cshtml" />
     <Content Include="Views\SYS_PartyType\Edit.cshtml" />
     <Content Include="Views\SYS_PartyType\Index.cshtml" />
-    <Content Include="Views\MST_Party\Create.cshtml" />
     <Content Include="Views\MST_Party\Delete.cshtml" />
     <Content Include="Views\MST_Party\Details.cshtml" />
     <Content Include="Views\MST_Party\Edit.cshtml" />

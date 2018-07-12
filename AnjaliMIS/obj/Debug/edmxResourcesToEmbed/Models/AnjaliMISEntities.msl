@@ -974,7 +974,7 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="PR_SEC_UserPrivileges_SelectByUserID" FunctionName="DB_A157D8_AnjaliMISModel.Store.PR_SEC_UserPrivileges_SelectByUserID">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result">
+        <ComplexTypeMapping TypeName="DB_A157D8_AnjaliMISModel.PR_SEC_UserPrivileges_SelectByUserID_Result1">
           <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
           <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
           <ScalarProperty Name="Controller" ColumnName="Controller" />
