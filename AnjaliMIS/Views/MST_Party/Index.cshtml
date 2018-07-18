@@ -11,7 +11,7 @@
 		<div class="portlet-title">
 			<div class="caption">
 				<i class="icon-bar-chart font-green-sharp hide"></i>
-				<span class="caption-subject font-green-sharp bold uppercase">Country</span>
+				<span class="caption-subject font-green-sharp bold uppercase">Party</span>
 				@*<span class="caption-helper">weekly stats...</span>*@
 			</div>
 			<div class="actions">
@@ -30,22 +30,22 @@
 						<th>
 							@Html.DisplayNameFor(model => model.PartyName)
 						</th>
-						<th>
+						@*<th>
 							@Html.DisplayNameFor(model => model.Address)
-						</th>
+						</th>*@
 						<th>
 							@Html.DisplayNameFor(model => model.ContactPerson)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.Mobile)
 						</th>
-						<th>
+						@*<th>
 							@Html.DisplayNameFor(model => model.Phone)
-						</th>
+						</th>*@
 						<th>
 							@Html.DisplayNameFor(model => model.Email)
 						</th>
-						<th>
+						@*<th>
 							@Html.DisplayNameFor(model => model.Description)
 						</th>
 						<th>
@@ -56,10 +56,10 @@
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.Remarks)
-						</th>
-						<th>
+						</th>*@
+						@*<th>
 							@Html.DisplayNameFor(model => model.IsActive)
-						</th>
+						</th>*@
 						<th>
 							@Html.DisplayNameFor(model => model.PanNo)
 						</th>
@@ -72,7 +72,7 @@
 						<th>
 							@Html.DisplayNameFor(model => model.GSTIN)
 						</th>
-						<th>
+						@*<th>
 							@Html.DisplayNameFor(model => model.LOC_City.CityName)
 						</th>
 						<th>
@@ -80,16 +80,16 @@
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.LOC_State.StateName)
-						</th>
+						</th>*@
 						<th>
 							@Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
 						</th>
 						<th>
 							@Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
 						</th>
-						<th>
+						@*<th>
 							@Html.DisplayNameFor(model => model.SEC_User.UserName)
-						</th>
+						</th>*@
 						<th>
 							Action
 						</th>
@@ -102,22 +102,22 @@
 						<td>
 							@Html.DisplayFor(modelItem => item.PartyName)
 						</td>
-						<td>
+						@*<td>
 							@Html.DisplayFor(modelItem => item.Address)
-						</td>
+						</td>*@
 						<td>
 							@Html.DisplayFor(modelItem => item.ContactPerson)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Mobile)
 						</td>
-						<td>
+						@*<td>
 							@Html.DisplayFor(modelItem => item.Phone)
-						</td>
+						</td>*@
 						<td>
 							@Html.DisplayFor(modelItem => item.Email)
 						</td>
-						<td>
+						@*<td>
 							@Html.DisplayFor(modelItem => item.Description)
 						</td>
 						<td>
@@ -128,10 +128,10 @@
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.Remarks)
-						</td>
-						<td>
+						</td>*@
+						@*<td>
 							@Html.DisplayFor(modelItem => item.IsActive)
-						</td>
+						</td>*@
 						<td>
 							@Html.DisplayFor(modelItem => item.PanNo)
 						</td>
@@ -144,7 +144,7 @@
 						<td>
 							@Html.DisplayFor(modelItem => item.GSTIN)
 						</td>
-						<td>
+						@*<td>
 							@Html.DisplayFor(modelItem => item.LOC_City.CityName)
 						</td>
 						<td>
@@ -152,19 +152,19 @@
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.LOC_State.StateName)
-						</td>
+						</td>*@
 						<td>
 							@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
 						</td>
 						<td>
 							@Html.DisplayFor(modelItem => item.SYS_PartyType.PartyType)
 						</td>
-						<td>
+						@*<td>
 							@Html.DisplayFor(modelItem => item.SEC_User.UserName)
-						</td>
+						</td>*@
 						<td>
 							@Html.ActionLink("Edit", "Edit", new { id = item.PartyID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.PartyID }) |
+							@*@Html.ActionLink("Details", "Details", new { id = item.PartyID }) |*@
 							@Html.ActionLink("Delete", "Delete", new { id = item.PartyID })
 						</td>
 					</tr>

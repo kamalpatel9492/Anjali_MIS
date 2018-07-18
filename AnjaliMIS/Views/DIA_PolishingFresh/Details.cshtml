@@ -1,0 +1,218 @@
+﻿@model AnjaliMIS.Models.DIA_JangadItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DIA_JangadItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PavalionAngle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PavalionAngle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CrownAngle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CrownAngle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CrownWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CrownWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Girdle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Girdle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Para1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Para1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Para2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Para2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Para3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Para3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PavalionORCrown)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PavalionORCrown)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QCRemarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QCRemarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Completed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Completed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalReceived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalReceived)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalReceivedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalReceivedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalSend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalSend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhysicalSendDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhysicalSendDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delivered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delivered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIA_Cassett.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIA_Cassett.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIA_Jangad.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIA_Jangad.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_PolishingStage.SatgeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_PolishingStage.SatgeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_Status.StatusName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JangadItemID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

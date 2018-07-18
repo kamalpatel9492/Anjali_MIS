@@ -190,7 +190,10 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="CommonConfig.cs" />
     <Compile Include="Controllers\DIA_CassettController.cs" />
+    <Compile Include="Controllers\DIA_JangadController.cs" />
+    <Compile Include="Controllers\DIA_JangadItemController.cs" />
     <Compile Include="Controllers\DIA_MachineController.cs" />
+    <Compile Include="Controllers\DIA_PolishingFresh.cs" />
     <Compile Include="Controllers\EMP_DepartmentController.cs" />
     <Compile Include="Controllers\EMP_DesignationController.cs" />
     <Compile Include="Controllers\EMP_EmployeeController.cs" />
@@ -4623,6 +4626,23 @@
     <Content Include="Views\EMP_Employee\Index.cshtml" />
     <Content Include="Views\PartialViewMenu\_MainMenu.cshtml" />
     <Content Include="Views\Home\_MainMenu.cshtml" />
+    <Content Include="Views\DIA_Jangad\Delete.cshtml" />
+    <Content Include="Views\DIA_Jangad\Details.cshtml" />
+    <Content Include="Views\DIA_Jangad\Edit.cshtml" />
+    <Content Include="Views\DIA_Jangad\Index.cshtml" />
+    <Content Include="Views\DIA_JangadItem\Delete.cshtml" />
+    <Content Include="Views\DIA_JangadItem\Details.cshtml" />
+    <Content Include="Views\DIA_JangadItem\Edit.cshtml" />
+    <Content Include="Views\DIA_JangadItem\Index.cshtml" />
+    <Content Include="Views\DIA_PolishingFresh\Delete.cshtml" />
+    <Content Include="Views\DIA_PolishingFresh\Details.cshtml" />
+    <Content Include="Views\DIA_PolishingFresh\Edit.cshtml" />
+    <Content Include="Views\DIA_PolishingFresh\Index.cshtml" />
+    <Content Include="Views\DIA_JangadItem\IndexPolishingFresh.cshtml" />
+    <Content Include="Views\DIA_JangadItem\Forward.cshtml" />
+    <Content Include="Views\DIA_JangadItem\IndexPlanning.cshtml" />
+    <Content Include="Views\DIA_JangadItem\IndexFixing.cshtml" />
+    <Content Include="Views\DIA_JangadItem\IndexSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

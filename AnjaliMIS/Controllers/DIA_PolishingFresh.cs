@@ -7,26 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
-using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
-    [SessionTimeout]
-    public class DIA_JangadItemController : Controller
+    public class DIA_PolishingFresh : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
-        // GET: DIA_JangadItem
+        // GET: DIA_PolishingFresh
         public ActionResult Index()
         {
             var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
             ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
 
             var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 1).ToList());
+            return View(dIA_JangadItem.ToList());
         }
 
-        // GET: DIA_JangadItem/Details/5
+        // GET: DIA_PolishingFresh/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,7 +39,7 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
-        // GET: DIA_JangadItem/Create
+        // GET: DIA_PolishingFresh/Create
         public ActionResult Create()
         {
             ViewBag.CassettsID = new SelectList(db.DIA_Cassett, "CassettsID", "Remarks");
@@ -53,7 +51,7 @@ namespace AnjaliMIS.Controllers
             return View("Edit", _dIA_JangadItem);
         }
 
-        // POST: DIA_JangadItem/Create
+        // POST: DIA_PolishingFresh/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -67,9 +65,6 @@ namespace AnjaliMIS.Controllers
                 {
                     dIA_JangadItem.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
-                dIA_JangadItem.PolishingStageID = 1;
-                dIA_JangadItem.StatusID = 1;
-
                 db.DIA_JangadItem.Add(dIA_JangadItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,7 +78,7 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
-        // GET: DIA_JangadItem/Edit/5
+        // GET: DIA_PolishingFresh/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,7 +98,7 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
-        // POST: DIA_JangadItem/Edit/5
+        // POST: DIA_PolishingFresh/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,8 +112,6 @@ namespace AnjaliMIS.Controllers
                 {
                     dIA_JangadItem.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
-                dIA_JangadItem.PolishingStageID = 1;
-                dIA_JangadItem.StatusID = 1;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -130,7 +123,7 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
-        // GET: DIA_JangadItem/Delete/5
+        // GET: DIA_PolishingFresh/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -145,7 +138,7 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
-        // POST: DIA_JangadItem/Delete/5
+        // POST: DIA_PolishingFresh/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -164,103 +157,5 @@ namespace AnjaliMIS.Controllers
             }
             base.Dispose(disposing);
         }
-
-        // GET: DIA_JangadItem
-        public ActionResult IndexPolishingFresh()
-        {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
-            ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
-
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.ToList());
-        }
-
-        // GET: DIA_JangadItem/Forward/5
-        public ActionResult Forward(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Find(id);
-            if (dIA_JangadItem == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CassettsID = new SelectList(db.DIA_Cassett, "CassettsID", "Remarks", dIA_JangadItem.CassettsID);
-            ViewBag.JangadID = new SelectList(db.DIA_Jangad, "JangadID", "Remarks", dIA_JangadItem.JangadID);
-            ViewBag.PolishingStageID = new SelectList(db.SYS_PolishingStage, "PolishingStageID", "SatgeName", dIA_JangadItem.PolishingStageID);
-            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_JangadItem.StatusID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_JangadItem.UserID);
-            return View(dIA_JangadItem);
-        }
-
-        // POST: DIA_JangadItem/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Forward([Bind(Include = "JangadItemID,PolishingStageID")] DIA_JangadItem dIA_JangadItem)
-        {
-
-            DIA_JangadItem _OldDIA_JangadItem = db.DIA_JangadItem.Find(dIA_JangadItem.JangadItemID);
-            _OldDIA_JangadItem.PolishingStageID = dIA_JangadItem.PolishingStageID;
-            if (ModelState.IsValid)
-            {
-                db.Entry(_OldDIA_JangadItem).State = EntityState.Modified;
-                if (Session["UserID"] != null)
-                {
-                    _OldDIA_JangadItem.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                }
-                //dIA_JangadItem.PolishingStageID = 1;
-                _OldDIA_JangadItem.StatusID = 1;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CassettsID = new SelectList(db.DIA_Cassett, "CassettsID", "Remarks", dIA_JangadItem.CassettsID);
-            ViewBag.JangadID = new SelectList(db.DIA_Jangad, "JangadID", "Remarks", dIA_JangadItem.JangadID);
-            ViewBag.PolishingStageID = new SelectList(db.SYS_PolishingStage, "PolishingStageID", "SatgeName", dIA_JangadItem.PolishingStageID);
-            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_JangadItem.StatusID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_JangadItem.UserID);
-            return View(dIA_JangadItem);
-        }
-
-
-        #region Planning
-        // GET: DIA_JangadItem/IndexPlanning
-        public ActionResult IndexPlanning()
-        {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
-            ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
-
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 2).ToList());
-        }
-        #endregion Planning
-
-        #region Fixing
-        // GET: DIA_JangadItem/IndexPlanning
-        public ActionResult IndexFixing()
-        {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
-            ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
-
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 3).ToList());
-        }
-        #endregion Fixing
-
-        #region Fixing
-        // GET: DIA_JangadItem/IndexPlanning
-        public ActionResult IndexSetup()
-        {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
-            ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
-
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 4).ToList());
-        }
-        #endregion Fixing
-
     }
 }
