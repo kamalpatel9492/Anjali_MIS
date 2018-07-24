@@ -202,6 +202,7 @@
     <Compile Include="Controllers\INV_ItemConfigurationController.cs" />
     <Compile Include="Controllers\INV_ItemController.cs" />
     <Compile Include="Controllers\INV_ItemPriceController.cs" />
+    <Compile Include="Controllers\INV_StockHistoryController.cs" />
     <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
     <Compile Include="Controllers\LOC_CountryController.cs" />
@@ -4663,6 +4664,11 @@
     <Content Include="Views\INV_Item\Details.cshtml" />
     <Content Include="Views\INV_Item\Edit.cshtml" />
     <Content Include="Views\INV_Item\Index.cshtml" />
+    <Content Include="Views\INV_StockHistory\Create.cshtml" />
+    <Content Include="Views\INV_StockHistory\Delete.cshtml" />
+    <Content Include="Views\INV_StockHistory\Details.cshtml" />
+    <Content Include="Views\INV_StockHistory\Edit.cshtml" />
+    <Content Include="Views\INV_StockHistory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

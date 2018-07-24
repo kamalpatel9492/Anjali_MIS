@@ -11,8 +11,8 @@ using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
-	[SessionTimeout]
-	public class INV_ItemController : Controller
+    [SessionTimeout]
+    public class INV_ItemController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
@@ -44,9 +44,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-			INV_Item _iNV_Item = new INV_Item();
-			return View("Edit", _iNV_Item);
-		}
+            INV_Item _iNV_Item = new INV_Item();
+            return View("Edit", _iNV_Item);
+        }
 
         // POST: INV_Item/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -63,20 +63,38 @@ namespace AnjaliMIS.Controllers
             }
             if (!string.IsNullOrEmpty(iNV_Item.ItemName))
             {
-                ModelState.AddModelError("ItemName", "Item is required");
+                if (db.INV_Item.Where(I => I.ItemName == iNV_Item.ItemName).Count() > 0)
+                {
+                    ModelState.AddModelError("ItemNameDuplicate", iNV_Item.ItemName + " Already added.");
+                }
             }
             #endregion Validation
 
             if (ModelState.IsValid)
             {
-				iNV_Item.Created = DateTime.Now;
-				iNV_Item.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.INV_Item.Add(iNV_Item);
+                iNV_Item.Created = DateTime.Now;
+                iNV_Item.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.INV_Item.Add(iNV_Item);
                 db.SaveChanges();
+
+                #region Update INV_StockHistory 
+                int newPK = iNV_Item.ItemID;
+                INV_StockHistory _iNV_StockHistory = new INV_StockHistory();
+                _iNV_StockHistory.ItemID = iNV_Item.ItemID;
+                _iNV_StockHistory.OperationTypeID = 6;
+                _iNV_StockHistory.Quantity = iNV_Item.Quantity;
+                _iNV_StockHistory.UserID = iNV_Item.UserID;
+                _iNV_StockHistory.FinYearID = 2;
+                _iNV_StockHistory.Created = DateTime.Now;
+                _iNV_StockHistory.Modified = DateTime.Now;
+                db.INV_StockHistory.Add(_iNV_StockHistory);
+                db.SaveChanges();
+                #endregion Update INV_StockHistory 
+
                 return RedirectToAction("Index");
             }
 
@@ -113,14 +131,25 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-				db.Entry(iNV_Item).State = EntityState.Modified;
-				iNV_Item.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				
+                db.Entry(iNV_Item).State = EntityState.Modified;
+                iNV_Item.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+
                 db.SaveChanges();
+                #region Update INV_StockHistory 
+                INV_StockHistory _iNV_StockHistoryOld = db.INV_StockHistory.Where(IS => IS.ItemID == iNV_Item.ItemID).FirstOrDefault();
+                _iNV_StockHistoryOld.ItemID = iNV_Item.ItemID;
+                _iNV_StockHistoryOld.OperationTypeID = 6;
+                _iNV_StockHistoryOld.Quantity = iNV_Item.Quantity;
+                _iNV_StockHistoryOld.UserID = iNV_Item.UserID;
+                _iNV_StockHistoryOld.FinYearID = 2;
+                _iNV_StockHistoryOld.Modified = DateTime.Now;
+                db.Entry(_iNV_StockHistoryOld).State = EntityState.Modified;
+                db.SaveChanges();
+                #endregion Update INV_StockHistory 
                 return RedirectToAction("Index");
             }
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
@@ -165,3 +194,4 @@ namespace AnjaliMIS.Controllers
         }
     }
 }
+

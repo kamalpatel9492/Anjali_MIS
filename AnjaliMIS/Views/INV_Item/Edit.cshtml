@@ -1,4 +1,5 @@
-﻿@model AnjaliMIS.Models.INV_Item
+﻿
+@model AnjaliMIS.Models.INV_Item
 
 @{
     ViewBag.Title = "Edit";
@@ -7,7 +8,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.ItemID)
 
@@ -24,6 +25,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<h3 class="form-section">Basic validation States</h3>*@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ItemName, "Item Name", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -97,4 +99,3 @@
     <!--Add-Edit code end-->
 
 }
-

@@ -1,11 +1,5 @@
 ﻿@model AnjaliMIS.Models.INV_ItemConfiguration
 
-@{
-	ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
@@ -18,7 +12,7 @@
 		<div class="portlet box blue">
 			<div class="portlet-title">
 				<div class="caption">
-					<i class="fa fa-gift"></i>ItemConfiguration Edit
+					<i class="fa fa-gift"></i>Item Configuration 
 				</div>
 			</div>
 			<div class="portlet-body form">
@@ -27,7 +21,7 @@
 					<div class="form-body">
 						@*<h3 class="form-section">Basic validation States</h3>*@
 						<div class="form-group">
-							@Html.LabelFor(model => model.MainItemID, "MainItemID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.MainItemID, "Main Item", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-10">
 								@Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.MainItemID, "", new { @class = "text-danger" })
@@ -35,7 +29,7 @@
 						</div>
 
 						<div class="form-group">
-							@Html.LabelFor(model => model.SubItemID, "SubItemID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-10">
 								@Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
@@ -47,30 +41,6 @@
 							<div class="col-md-10">
 								@Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control" } })
 								@Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })
-							</div>
-						</div>
-
-						<div class="form-group">
-							@Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-							</div>
-						</div>
-
-						<div class="form-group">
-							@Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-							</div>
-						</div>
-
-						<div class="form-group">
-							@Html.LabelFor(model => model.Modified, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.EditorFor(model => model.Modified, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Modified, "", new { @class = "text-danger" })
 							</div>
 						</div>
 
