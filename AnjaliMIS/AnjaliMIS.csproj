@@ -198,6 +198,9 @@
     <Compile Include="Controllers\EMP_DesignationController.cs" />
     <Compile Include="Controllers\EMP_EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INV_InvoiceController.cs" />
+    <Compile Include="Controllers\INV_ItemConfigurationController.cs" />
+    <Compile Include="Controllers\INV_ItemController.cs" />
     <Compile Include="Controllers\INV_ItemPriceController.cs" />
     <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
@@ -4648,6 +4651,18 @@
     <Content Include="Views\INV_ItemPrice\Details.cshtml" />
     <Content Include="Views\INV_ItemPrice\Edit.cshtml" />
     <Content Include="Views\INV_ItemPrice\Index.cshtml" />
+    <Content Include="Views\INV_Invoice\Delete.cshtml" />
+    <Content Include="Views\INV_Invoice\Details.cshtml" />
+    <Content Include="Views\INV_Invoice\Edit.cshtml" />
+    <Content Include="Views\INV_Invoice\Index.cshtml" />
+    <Content Include="Views\INV_ItemConfiguration\Delete.cshtml" />
+    <Content Include="Views\INV_ItemConfiguration\Details.cshtml" />
+    <Content Include="Views\INV_ItemConfiguration\Edit.cshtml" />
+    <Content Include="Views\INV_ItemConfiguration\Index.cshtml" />
+    <Content Include="Views\INV_Item\Delete.cshtml" />
+    <Content Include="Views\INV_Item\Details.cshtml" />
+    <Content Include="Views\INV_Item\Edit.cshtml" />
+    <Content Include="Views\INV_Item\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -55,6 +55,18 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
         {
+
+            #region Validation
+            if (string.IsNullOrEmpty(iNV_Item.ItemName))
+            {
+                ModelState.AddModelError("ItemName", "Item is required");
+            }
+            if (!string.IsNullOrEmpty(iNV_Item.ItemName))
+            {
+                ModelState.AddModelError("ItemName", "Item is required");
+            }
+            #endregion Validation
+
             if (ModelState.IsValid)
             {
 				iNV_Item.Created = DateTime.Now;
@@ -71,7 +83,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Item.UserID);
-            return View(iNV_Item);
+            return View("Edit", iNV_Item);
         }
 
         // GET: INV_Item/Edit/5

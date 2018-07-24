@@ -25,89 +25,64 @@
 		<div class="portlet-body">
 			<table class="table table-striped table-bordered table-advance table-hover" id="myTable">
 				<thead>
-					<tr>
+                    <tr>
 
-						<th>
-							@Html.DisplayNameFor(model => model.ItemName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.IsConfigurable)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Quantity)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.MinStockLimit)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Created)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Modified)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Remarks)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.RejectedQuantity)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.INV_Unit.Unit)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SEC_User.UserName)
-						</th>
-						<th>
-							Action
-						</th>
-					</tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ItemName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.INV_Unit.Unit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+                        </th>
+                        @*<th>
+            @Html.DisplayNameFor(model => model.IsConfigurable)
+        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MinStockLimit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RejectedQuantity)
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
 				</thead>
 				<tbody>
 					@foreach (var item in Model)
 					{
-					<tr>
-						<td>
-							@Html.DisplayFor(modelItem => item.ItemName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.IsConfigurable)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Quantity)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.MinStockLimit)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Created)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Modified)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.Remarks)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.RejectedQuantity)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.INV_Unit.Unit)
-						</td>
-						<td>
-							@Html.DisplayFor(modelItem => item.SEC_User.UserName)
-						</td>
-						<td>
-							@Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
-							@Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
-							@Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
-						</td>
-					</tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.INV_Unit.Unit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+                        </td>
+                        @*<td>
+            @Html.DisplayFor(modelItem => item.IsConfigurable)
+        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinStockLimit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RejectedQuantity)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+                        </td>
+                    </tr>
 					}
 				</tbody>
 			</table>
