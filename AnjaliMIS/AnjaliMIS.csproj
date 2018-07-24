@@ -198,6 +198,7 @@
     <Compile Include="Controllers\EMP_DesignationController.cs" />
     <Compile Include="Controllers\EMP_EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INV_ItemPriceController.cs" />
     <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
     <Compile Include="Controllers\LOC_CountryController.cs" />
@@ -4643,6 +4644,10 @@
     <Content Include="Views\DIA_JangadItem\IndexPlanning.cshtml" />
     <Content Include="Views\DIA_JangadItem\IndexFixing.cshtml" />
     <Content Include="Views\DIA_JangadItem\IndexSetup.cshtml" />
+    <Content Include="Views\INV_ItemPrice\Delete.cshtml" />
+    <Content Include="Views\INV_ItemPrice\Details.cshtml" />
+    <Content Include="Views\INV_ItemPrice\Edit.cshtml" />
+    <Content Include="Views\INV_ItemPrice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

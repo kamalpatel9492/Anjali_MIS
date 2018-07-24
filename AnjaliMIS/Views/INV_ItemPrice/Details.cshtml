@@ -1,0 +1,74 @@
+﻿@model AnjaliMIS.Models.INV_ItemPrice
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>INV_ItemPrice</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchasePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchasePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.INV_Item.ItemName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.INV_Item.ItemName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SYS_FinYear.FinYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemPriceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
