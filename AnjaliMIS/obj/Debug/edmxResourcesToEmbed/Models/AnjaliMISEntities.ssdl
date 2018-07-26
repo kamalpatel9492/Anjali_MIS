@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DB_A157D8_AnjaliMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DB_A157D8_AnjaliMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="ACC_AccountHead">
     <Key>
       <PropertyRef Name="AccountHeadID" />
@@ -494,6 +494,7 @@
     <Property Name="Modified" Type="datetime" />
     <Property Name="Remarks" Type="varchar" MaxLength="500" />
     <Property Name="RejectedQuantity" Type="int" />
+    <Property Name="IsLock" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="INV_ItemConfiguration">
     <Key>
@@ -1939,19 +1940,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_INV_Item_CompanyID_201806280618PM">
-    <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
-    <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SYS_Company">
-        <PropertyRef Name="CompanyID" />
-      </Principal>
-      <Dependent Role="INV_Item">
-        <PropertyRef Name="CompanyID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_INV_Item_UnitID_201806280618PM">
+  <Association Name="FK_INV_Item_INV_Unit">
     <End Role="INV_Unit" Type="Self.INV_Unit" Multiplicity="1" />
     <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1963,7 +1952,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_INV_Item_UserID_201806280618PM">
+  <Association Name="FK_INV_Item_SEC_User">
     <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
     <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1972,6 +1961,18 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
       </Principal>
       <Dependent Role="INV_Item">
         <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INV_Item_SYS_Company">
+    <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
+    <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SYS_Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="INV_Item">
+        <PropertyRef Name="CompanyID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2631,42 +2632,42 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
     <EntitySet Name="SYS_Status" EntityType="Self.SYS_Status" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SQL_CustomFK" EntityType="Self.SQL_CustomFK" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[SQL_CustomFK].[IsEnable] AS [IsEnable], 
-[SQL_CustomFK].[FKType] AS [FKType], 
-[SQL_CustomFK].[TableID] AS [TableID], 
-[SQL_CustomFK].[JoinOrder] AS [JoinOrder], 
-[SQL_CustomFK].[PKTable] AS [PKTable], 
-[SQL_CustomFK].[PKSchema] AS [PKSchema], 
-[SQL_CustomFK].[PKColumn] AS [PKColumn], 
-[SQL_CustomFK].[FKTable] AS [FKTable], 
-[SQL_CustomFK].[FKSchema] AS [FKSchema], 
-[SQL_CustomFK].[FKColumn] AS [FKColumn], 
-[SQL_CustomFK].[CustomFKName] AS [CustomFKName]
-FROM [dbo].[SQL_CustomFK] AS [SQL_CustomFK]</DefiningQuery>
+    [SQL_CustomFK].[IsEnable] AS [IsEnable], 
+    [SQL_CustomFK].[FKType] AS [FKType], 
+    [SQL_CustomFK].[TableID] AS [TableID], 
+    [SQL_CustomFK].[JoinOrder] AS [JoinOrder], 
+    [SQL_CustomFK].[PKTable] AS [PKTable], 
+    [SQL_CustomFK].[PKSchema] AS [PKSchema], 
+    [SQL_CustomFK].[PKColumn] AS [PKColumn], 
+    [SQL_CustomFK].[FKTable] AS [FKTable], 
+    [SQL_CustomFK].[FKSchema] AS [FKSchema], 
+    [SQL_CustomFK].[FKColumn] AS [FKColumn], 
+    [SQL_CustomFK].[CustomFKName] AS [CustomFKName]
+    FROM [dbo].[SQL_CustomFK] AS [SQL_CustomFK]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="SQL_FixColumn" EntityType="Self.SQL_FixColumn" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[SQL_FixColumn].[TableName] AS [TableName], 
-[SQL_FixColumn].[SchemaName] AS [SchemaName], 
-[SQL_FixColumn].[ColumnName] AS [ColumnName]
-FROM [dbo].[SQL_FixColumn] AS [SQL_FixColumn]</DefiningQuery>
+    [SQL_FixColumn].[TableName] AS [TableName], 
+    [SQL_FixColumn].[SchemaName] AS [SchemaName], 
+    [SQL_FixColumn].[ColumnName] AS [ColumnName]
+    FROM [dbo].[SQL_FixColumn] AS [SQL_FixColumn]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="SQL_FKDisplayMember" EntityType="Self.SQL_FKDisplayMember" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[SQL_FKDisplayMember].[TableName] AS [TableName], 
-[SQL_FKDisplayMember].[SchemaName] AS [SchemaName], 
-[SQL_FKDisplayMember].[ColumnName] AS [ColumnName], 
-[SQL_FKDisplayMember].[IsSeparate] AS [IsSeparate], 
-[SQL_FKDisplayMember].[Sequence] AS [Sequence]
-FROM [dbo].[SQL_FKDisplayMember] AS [SQL_FKDisplayMember]</DefiningQuery>
+    [SQL_FKDisplayMember].[TableName] AS [TableName], 
+    [SQL_FKDisplayMember].[SchemaName] AS [SchemaName], 
+    [SQL_FKDisplayMember].[ColumnName] AS [ColumnName], 
+    [SQL_FKDisplayMember].[IsSeparate] AS [IsSeparate], 
+    [SQL_FKDisplayMember].[Sequence] AS [Sequence]
+    FROM [dbo].[SQL_FKDisplayMember] AS [SQL_FKDisplayMember]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="SQL_Sequence" EntityType="Self.SQL_Sequence" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-[SQL_Sequence].[TableName] AS [TableName], 
-[SQL_Sequence].[SchemaName] AS [SchemaName], 
-[SQL_Sequence].[ColumnName] AS [ColumnName], 
-[SQL_Sequence].[Sequence] AS [Sequence]
-FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
+    [SQL_Sequence].[TableName] AS [TableName], 
+    [SQL_Sequence].[SchemaName] AS [SchemaName], 
+    [SQL_Sequence].[ColumnName] AS [ColumnName], 
+    [SQL_Sequence].[Sequence] AS [Sequence]
+    FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_ACC_Expense_AccountHeadID_201807011016PM" Association="Self.FK_ACC_Expense_AccountHeadID_201807011016PM">
       <End Role="ACC_AccountHead" EntitySet="ACC_AccountHead" />
@@ -3004,16 +3005,16 @@ FROM [dbo].[SQL_Sequence] AS [SQL_Sequence]</DefiningQuery>
       <End Role="INV_Item" EntitySet="INV_Item" />
       <End Role="INV_InvoiceItem" EntitySet="INV_InvoiceItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_INV_Item_CompanyID_201806280618PM" Association="Self.FK_INV_Item_CompanyID_201806280618PM">
-      <End Role="SYS_Company" EntitySet="SYS_Company" />
-      <End Role="INV_Item" EntitySet="INV_Item" />
-    </AssociationSet>
-    <AssociationSet Name="FK_INV_Item_UnitID_201806280618PM" Association="Self.FK_INV_Item_UnitID_201806280618PM">
+    <AssociationSet Name="FK_INV_Item_INV_Unit" Association="Self.FK_INV_Item_INV_Unit">
       <End Role="INV_Unit" EntitySet="INV_Unit" />
       <End Role="INV_Item" EntitySet="INV_Item" />
     </AssociationSet>
-    <AssociationSet Name="FK_INV_Item_UserID_201806280618PM" Association="Self.FK_INV_Item_UserID_201806280618PM">
+    <AssociationSet Name="FK_INV_Item_SEC_User" Association="Self.FK_INV_Item_SEC_User">
       <End Role="SEC_User" EntitySet="SEC_User" />
+      <End Role="INV_Item" EntitySet="INV_Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INV_Item_SYS_Company" Association="Self.FK_INV_Item_SYS_Company">
+      <End Role="SYS_Company" EntitySet="SYS_Company" />
       <End Role="INV_Item" EntitySet="INV_Item" />
     </AssociationSet>
     <AssociationSet Name="FK_INV_ItemConfiguration_MainItemID_201806280619PM" Association="Self.FK_INV_ItemConfiguration_MainItemID_201806280619PM">

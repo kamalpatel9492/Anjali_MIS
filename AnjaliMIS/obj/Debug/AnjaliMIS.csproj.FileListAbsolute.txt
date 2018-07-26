@@ -208,6 +208,7 @@ G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Http.Tracing.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Http.WebHost.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Mvc.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Optimization.xml
+G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Providers.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.Razor.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.WebPages.xml
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\bin\System.Web.WebPages.Deployment.xml

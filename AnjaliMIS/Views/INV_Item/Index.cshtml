@@ -50,6 +50,9 @@
                             @Html.DisplayNameFor(model => model.RejectedQuantity)
                         </th>
                         <th>
+                            @Html.DisplayNameFor(model => model.IsLock)
+                        </th>
+                        <th>
                             Action
                         </th>
                     </tr>
@@ -78,6 +81,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.RejectedQuantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsLock)
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
