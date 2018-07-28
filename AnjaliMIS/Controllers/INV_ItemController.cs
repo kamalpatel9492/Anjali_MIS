@@ -53,7 +53,7 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
+        public ActionResult Create([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
         {
 
             #region Validation
@@ -127,7 +127,7 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
+        public ActionResult Edit([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
         {
             if (ModelState.IsValid)
             {
@@ -140,15 +140,18 @@ namespace AnjaliMIS.Controllers
 
                 db.SaveChanges();
                 #region Update INV_StockHistory 
-                INV_StockHistory _iNV_StockHistoryOld = db.INV_StockHistory.Where(IS => IS.ItemID == iNV_Item.ItemID).FirstOrDefault();
-                _iNV_StockHistoryOld.ItemID = iNV_Item.ItemID;
-                _iNV_StockHistoryOld.OperationTypeID = 6;
-                _iNV_StockHistoryOld.Quantity = iNV_Item.Quantity;
-                _iNV_StockHistoryOld.UserID = iNV_Item.UserID;
-                _iNV_StockHistoryOld.FinYearID = 2;
-                _iNV_StockHistoryOld.Modified = DateTime.Now;
-                db.Entry(_iNV_StockHistoryOld).State = EntityState.Modified;
-                db.SaveChanges();
+                INV_StockHistory _iNV_StockHistoryOld = db.INV_StockHistory.Where(IS => IS.ItemID == iNV_Item.ItemID & iNV_Item.IsLock == false).FirstOrDefault();
+                if (_iNV_StockHistoryOld != null)
+                {
+                    _iNV_StockHistoryOld.ItemID = iNV_Item.ItemID;
+                    _iNV_StockHistoryOld.OperationTypeID = 6;
+                    _iNV_StockHistoryOld.Quantity = iNV_Item.Quantity;
+                    _iNV_StockHistoryOld.UserID = iNV_Item.UserID;
+                    _iNV_StockHistoryOld.FinYearID = 2;
+                    _iNV_StockHistoryOld.Modified = DateTime.Now;
+                    db.Entry(_iNV_StockHistoryOld).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
                 #endregion Update INV_StockHistory 
                 return RedirectToAction("Index");
             }
