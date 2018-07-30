@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using AnjaliMIS.ViewModals;
 using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
@@ -169,6 +170,21 @@ namespace AnjaliMIS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: INV_Invoice
+        public ActionResult CreateInvoice()
+        {
+            var model = new INV_InvoiceViewModal();
+            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
+            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
+            ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+            return View(model);
         }
     }
 }
