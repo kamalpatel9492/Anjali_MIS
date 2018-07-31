@@ -4,7 +4,12 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                    new { controller = "INV_Item" })
+    </li>
+}
 <!--List Code Start-->
 <div class="col-md-12 col-sm-12">
     <!-- BEGIN PORTLET-->

@@ -3,7 +3,12 @@
 @{
     ViewBag.Title = "Edit";
 }
-
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                    new { controller = "INV_Item" })
+    </li>
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

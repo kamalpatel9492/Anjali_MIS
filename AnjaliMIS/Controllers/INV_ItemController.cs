@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using AnjaliMIS.ViewModals;
 using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
@@ -194,6 +195,15 @@ namespace AnjaliMIS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        // GET: INV_Item
+        public ActionResult Dashboard()
+        {
+            var modal = new DashboardViewModal();
+            modal.InvoiceCount = db.INV_Invoice.Count();
+            modal.ItemCount = db.INV_Item.Count();
+            modal.POCount = db.INV_PurchaseOrder.Count();
+            return View(modal);
         }
     }
 }

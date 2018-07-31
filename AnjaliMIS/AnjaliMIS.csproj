@@ -400,6 +400,7 @@
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModals\DashboardViewModal.cs" />
     <Compile Include="ViewModals\INV_InvoiceViewModal.cs" />
     <Compile Include="ViewModals\LoginViewModal.cs" />
     <Compile Include="ViewModals\MenuViewModal.cs" />
@@ -4671,6 +4672,7 @@
     <Content Include="Views\INV_StockHistory\Edit.cshtml" />
     <Content Include="Views\INV_StockHistory\Index.cshtml" />
     <Content Include="Views\INV_Invoice\CreateInvoice.cshtml" />
+    <Content Include="Views\INV_Item\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
