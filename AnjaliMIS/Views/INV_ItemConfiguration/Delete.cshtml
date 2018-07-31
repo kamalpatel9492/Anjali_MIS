@@ -3,78 +3,98 @@
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ItemConfiguration</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Qunatity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Qunatity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Modified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Modified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.INV_Item.ItemName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.INV_Item.ItemName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.INV_Item1.ItemName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.INV_Item1.ItemName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEC_User.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEC_User.UserName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                    new { controller = "INV_Item" })
+    </li>
+}
+<!--Delete Page Start-->
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-green-sharp hide"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Are you sure you want to delete this?</span>
+            </div>
+            <div class="actions">
+            </div>
         </div>
-    }
+        <div class="portlet-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Qunatity)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Qunatity)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Modified)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Modified)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Remarks)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.INV_Item.ItemName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.INV_Item.ItemName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.INV_Item1.ItemName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.INV_Item1.ItemName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SEC_User.UserName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SEC_User.UserName)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="submit" value="Delete" class="btn red danger" />
+                            @Html.ActionLink("Back to List", "Index", "LOC_Country", new { @class = "btn default" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- END PORTLET-->
 </div>
+<!--Delete Page End-->
