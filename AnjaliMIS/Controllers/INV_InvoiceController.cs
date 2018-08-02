@@ -11,8 +11,8 @@ using AnjaliMIS.ViewModals;
 using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
-{	
-	[SessionTimeout]
+{
+    [SessionTimeout]
     public class INV_InvoiceController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
@@ -50,9 +50,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
             ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-			INV_Invoice _iNV_Invoice = new INV_Invoice();
-			return View("Edit", _iNV_Invoice);
-		}
+            INV_Invoice _iNV_Invoice = new INV_Invoice();
+            return View("Edit", _iNV_Invoice);
+        }
 
         // POST: INV_Invoice/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -63,13 +63,13 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-				iNV_Invoice.Created = DateTime.Now;
-				iNV_Invoice.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.INV_Invoice.Add(iNV_Invoice);
+                iNV_Invoice.Created = DateTime.Now;
+                iNV_Invoice.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.INV_Invoice.Add(iNV_Invoice);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -118,12 +118,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_Invoice).State = EntityState.Modified;
-				iNV_Invoice.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.SaveChanges();
+                iNV_Invoice.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.CGST);
@@ -280,6 +280,53 @@ namespace AnjaliMIS.Controllers
 
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: INV_Invoice/Print/5
+        public ActionResult Print(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            INV_InvoiceViewModal _iNV_InvoiceViewModal;
+
+            var InvoiceData = db.INV_Invoice.Find(id);
+            _iNV_InvoiceViewModal = new INV_InvoiceViewModal()
+            {
+                InvoiceID = InvoiceData.InvoiceID,
+                CompanyID = InvoiceData.CompanyID,
+                PartyID = InvoiceData.PartyID,
+                PartyIDName = InvoiceData.MST_Party.PartyName,
+                UserID = InvoiceData.UserID,
+                Amount = InvoiceData.Amount,
+                AmountReceived = InvoiceData.AmountReceived,
+                StatusID = InvoiceData.StatusID,
+                Created = InvoiceData.Created,
+                Modified = InvoiceData.Modified,
+                Remarks = InvoiceData.Remarks,
+                InvoiceDate = InvoiceData.InvoiceDate,
+                InvoiceNo = InvoiceData.InvoiceNo,
+                PONo = InvoiceData.PONo,
+                AmountPending = InvoiceData.AmountPending,
+                FinYearID = InvoiceData.FinYearID,
+                CGST = InvoiceData.CGST,
+                CGSTAmount = InvoiceData.CGSTAmount,
+                SGST = InvoiceData.SGST,
+                SGSTAmount = InvoiceData.SGSTAmount,
+                IGST = InvoiceData.IGST,
+                IGSTAmount = InvoiceData.IGSTAmount,
+                IsLocal = InvoiceData.IsLocal,
+                IsActive = InvoiceData.IsActive,
+                Casar = InvoiceData.Casar,
+                TotalAmount = InvoiceData.TotalAmount
+            };
+            _iNV_InvoiceViewModal.INV_InvoiceItems = db.INV_InvoiceItem.Where(I => I.InvoiceID == id).ToList();
+            if (_iNV_InvoiceViewModal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(_iNV_InvoiceViewModal);
         }
     }
 }

@@ -69,41 +69,42 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.InvoiceDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.InvoiceNo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TotalAmount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Amount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AmountReceived)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AmountPending)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Casar)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.InvoiceID }) 
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InvoiceDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.InvoiceNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AmountReceived)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AmountPending)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Casar)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.InvoiceID }) |
+                                @Html.ActionLink("Print", "Print", new { id = item.InvoiceID }, new { target = "_blank" }) |
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

@@ -17,6 +17,8 @@ namespace AnjaliMIS.ViewModals
         public int InvoiceID { get; set; }
         public int CompanyID { get; set; }
         public Nullable<int> PartyID { get; set; }
+        public string PartyIDName { get; set; }
+
         public Nullable<int> UserID { get; set; }
         public int Amount { get; set; }
         public int AmountReceived { get; set; }
