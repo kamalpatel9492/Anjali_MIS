@@ -1,0 +1,27 @@
+﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
+
+@{
+    ViewBag.Title = "Edit";
+}
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                    new { controller = "INV_Item" })
+    </li>
+}
+
+@using (Html.BeginForm())
+{
+    <h3>Name : @Model.PONo</h3>
+    <h4>Interests</h4>
+    <div class="divIntersts">
+        <table id="container">
+            <tr>
+                <th>Name</th>
+                <th>Have Experience?</th>
+            </tr>
+            @Html.EditorFor(x => x.INV_PurchaseOrderItems)
+        </table>
+    </div>
+    <p><input type="submit" value="Save" /></p>
+}

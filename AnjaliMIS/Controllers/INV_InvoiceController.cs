@@ -184,7 +184,102 @@ namespace AnjaliMIS.Controllers
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
             ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+            ViewBag.ItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
+            //ViewBag.ItemPrice = new SelectList(db.INV_ItemPrice, "ItemPriceID", "PurchasePrice");
             return View(model);
+        }
+
+        public JsonResult DropDownItemPrice(int ItemID)
+        {
+            try
+            {
+                decimal itemPrice = db.INV_ItemPrice.Where(e => e.ItemID == ItemID).FirstOrDefault().PurchasePrice;
+
+                return Json(itemPrice, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AddInvoice(INV_InvoiceViewModal inv_InvoiceViewModal)
+        {
+            try
+            {
+                if (inv_InvoiceViewModal == null)
+                {
+                    //error meesage or expception handle
+                }
+                else if (inv_InvoiceViewModal.INV_InvoiceItems == null)
+                {
+                    //error meesage or expception handle
+                }
+                else
+                {
+                    INV_Invoice new_INV_Invoice = new INV_Invoice();
+                    new_INV_Invoice.CompanyID = inv_InvoiceViewModal.CompanyID;
+                    new_INV_Invoice.PartyID = inv_InvoiceViewModal.PartyID;
+                    if (Session["UserID"] != null)
+                    {
+                        new_INV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    }
+
+                    new_INV_Invoice.Amount = inv_InvoiceViewModal.Amount;
+                    new_INV_Invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
+                    new_INV_Invoice.StatusID = inv_InvoiceViewModal.StatusID;
+                    new_INV_Invoice.Created = DateTime.Now;
+                    new_INV_Invoice.Modified = DateTime.Now;
+                    new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;
+                    new_INV_Invoice.InvoiceDate = DateTime.Now;
+                    new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
+                    new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
+                    new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
+                    new_INV_Invoice.FinYearID = inv_InvoiceViewModal.FinYearID;
+                    new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST;
+                    new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGSTAmount;
+                    new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST;
+                    new_INV_Invoice.SGSTAmount = inv_InvoiceViewModal.SGSTAmount;
+                    new_INV_Invoice.IGST = inv_InvoiceViewModal.IGST;
+                    new_INV_Invoice.IGSTAmount = inv_InvoiceViewModal.IGSTAmount;
+                    new_INV_Invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
+                    new_INV_Invoice.IsActive = true;
+                    new_INV_Invoice.Casar = inv_InvoiceViewModal.Casar;
+                    new_INV_Invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
+
+                    db.INV_Invoice.Add(new_INV_Invoice);
+                    db.SaveChanges();
+
+                    int newInvoiceId = new_INV_Invoice.InvoiceID;
+                    List<INV_InvoiceItem> newList_INV_InvoiceItem = new List<INV_InvoiceItem>();
+                    foreach (var item in inv_InvoiceViewModal.INV_InvoiceItems)
+                    {
+                        INV_InvoiceItem new_INV_InvoiceItem = new INV_InvoiceItem();
+                        new_INV_InvoiceItem.InvoiceItemID = item.InvoiceItemID;
+                        new_INV_InvoiceItem.InvoiceID = newInvoiceId;
+                        new_INV_InvoiceItem.ItemID = item.ItemID;
+                        new_INV_InvoiceItem.Quantity = item.Quantity;
+                        new_INV_InvoiceItem.Created = DateTime.Now;
+                        new_INV_InvoiceItem.Modified = DateTime.Now;
+                        new_INV_InvoiceItem.Remarks = item.Remarks;
+                        new_INV_InvoiceItem.PricePerUnit = item.PricePerUnit;
+
+                        newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
+                    }
+                    db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);
+                    db.SaveChanges();
+
+                }
+
+                return Json("Sucess", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\INV_ItemConfigurationController.cs" />
     <Compile Include="Controllers\INV_ItemController.cs" />
     <Compile Include="Controllers\INV_ItemPriceController.cs" />
+    <Compile Include="Controllers\INV_PurchaseOrderController.cs" />
     <Compile Include="Controllers\INV_StockHistoryController.cs" />
     <Compile Include="Controllers\INV_UnitController.cs" />
     <Compile Include="Controllers\LOC_CityController.cs" />
@@ -402,6 +403,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModals\DashboardViewModal.cs" />
     <Compile Include="ViewModals\INV_InvoiceViewModal.cs" />
+    <Compile Include="ViewModals\INV_PurchaseOrderViewModal.cs" />
     <Compile Include="ViewModals\LoginViewModal.cs" />
     <Compile Include="ViewModals\MenuViewModal.cs" />
   </ItemGroup>
@@ -4673,6 +4675,12 @@
     <Content Include="Views\INV_StockHistory\Index.cshtml" />
     <Content Include="Views\INV_Invoice\CreateInvoice.cshtml" />
     <Content Include="Views\INV_Item\Dashboard.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Create.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Delete.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Details.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Edit.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\CreatePurchaseOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

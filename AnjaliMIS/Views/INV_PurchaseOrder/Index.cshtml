@@ -1,0 +1,159 @@
+﻿@model IEnumerable<AnjaliMIS.Models.INV_PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Casar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PONo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PODate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsLocal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CGSTAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SGSTAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IGSTAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACC_Tax.Tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACC_Tax1.Tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACC_Tax2.Tax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MST_Party.PartyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaidAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remarks)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PendingAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Casar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PONo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PODate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsLocal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CGSTAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SGSTAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IGSTAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACC_Tax.Tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACC_Tax1.Tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACC_Tax2.Tax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEC_User.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseOrderID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PurchaseOrderID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseOrderID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -39,6 +39,8 @@ namespace AnjaliMIS.ViewModals
         public Nullable<bool> IsActive { get; set; }
         public Nullable<decimal> Casar { get; set; }
         public decimal TotalAmount { get; set; }
+        public Nullable<int> ItemID { get; set; }
+        //public Nullable<int> ItemPrice { get; set; }
 
         public List<INV_InvoiceItem> INV_InvoiceItems { get; set; }
     }
