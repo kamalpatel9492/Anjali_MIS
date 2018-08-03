@@ -146,7 +146,6 @@
                                         </tr>
                                     </thead>
                                     <tbody class="list">
-
                                         <tr>
                                             <td colspan="4" class="text-right">Item Total</td>
                                             <td colspan="4" id="tdItemTotal"></td>
@@ -404,7 +403,7 @@
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         $('#tdFinalTotal').html(finaltotal);
 
-        var newAmountPending =finaltotal - $('#AmountReceived').val() - $('#Casar').val();
+        var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(newAmountPending);
     }
 
