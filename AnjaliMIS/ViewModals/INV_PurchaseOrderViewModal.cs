@@ -36,7 +36,7 @@ namespace AnjaliMIS.ViewModals
         public Nullable<int> IGST { get; set; }
         public Nullable<decimal> IGSTAmount { get; set; }
         public decimal TotalAmount { get; set; }
-
+        public Nullable<int> ItemID { get; set; }
         public List<INV_PurchaseOrderItem> INV_PurchaseOrderItems { get; set; }
 
     }

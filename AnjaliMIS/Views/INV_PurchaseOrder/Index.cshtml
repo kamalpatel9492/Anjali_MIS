@@ -17,12 +17,12 @@
 		<div class="portlet-title">
 			<div class="caption">
 				<i class="icon-bar-chart font-green-sharp hide"></i>
-				<span class="caption-subject font-green-sharp bold uppercase">Country</span>
+				<span class="caption-subject font-green-sharp bold uppercase">Purchase</span>
 				@*<span class="caption-helper">weekly stats...</span>*@
 			</div>
 			<div class="actions">
 				<div class="btn-group">
-					@Html.ActionLink("Create New", "Create",
+					@Html.ActionLink("Create New", "CreatePurchaseOrder",
 					new { controller = "INV_PurchaseOrder" },
 					new { @class = "btn btn-transparent green btn-circle btn-sm active" })
 				</div>
@@ -31,83 +31,41 @@
 		<div class="portlet-body">
 			<table class="table table-striped table-bordered table-advance table-hover" id="myTable">
 				<thead>
-					<tr>
-						<th>
-							Date
-						</th>
-						<th>
-							Po. No.
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Amount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.PaidAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Created)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Modified)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Remarks)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.PendingAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.Casar)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.PONo)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.PODate)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.IsLocal)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.CGSTAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SGSTAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.IGSTAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.TotalAmount)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.ACC_Tax.Tax)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.ACC_Tax1.Tax)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.ACC_Tax2.Tax)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.MST_Party.PartyName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SYS_Status.StatusName)
-						</th>
-						<th>
-							@Html.DisplayNameFor(model => model.SEC_User.UserName)
-						</th>
-						<th>
-							Action
-						</th>
-					</tr>
+                    <tr>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Po. No.
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PaidAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PendingAmount)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Casar)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MST_Party.PartyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
 				</thead>
 				<tbody>
 					@foreach (var item in Model)
@@ -119,20 +77,11 @@
 							<td>
 								@Html.DisplayFor(modelItem => item.PONo)
 							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Amount)
-							</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalAmount)
+                            </td>
 							<td>
 								@Html.DisplayFor(modelItem => item.PaidAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Created)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Modified)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Remarks)
 							</td>
 							<td>
 								@Html.DisplayFor(modelItem => item.PendingAmount)
@@ -140,30 +89,7 @@
 							<td>
 								@Html.DisplayFor(modelItem => item.Casar)
 							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.IsLocal)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.CGSTAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.SGSTAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.IGSTAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.TotalAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.ACC_Tax.Tax)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.ACC_Tax1.Tax)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.ACC_Tax2.Tax)
-							</td>
+							
 							<td>
 								@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
 							</td>
@@ -177,11 +103,7 @@
 								@Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
 							</td>
 							<td>
-								@Html.DisplayFor(modelItem => item.SEC_User.UserName)
-							</td>
-							<td>
 								@Html.ActionLink("Edit", "Edit", new { id = item.PurchaseOrderID })
-								@Html.ActionLink("Details", "Details", new { id = item.PurchaseOrderID }) |
 							</td>
 						</tr>
 					}

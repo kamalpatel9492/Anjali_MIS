@@ -31,24 +31,24 @@
 					<div class="form-body">
 						<h3 class="form-section">Purchase Order Details</h3>
 						<div class="form-group">
-							@Html.LabelFor(model => model.CompanyID, "CompanyID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
 							</div>
-							@Html.LabelFor(model => model.FinYearID, "FinYearID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.FinYearID, "Fin Year", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.DropDownList("FinYearID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.FinYearID, "", new { @class = "text-danger" })
 							</div>
 						</div>
 						<div class="form-group">
-							@Html.LabelFor(model => model.SellerPartyID, "SellerPartyID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.SellerPartyID, "", new { @class = "text-danger" })
 							</div>
-							@Html.LabelFor(model => model.StatusID, "StatusID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
@@ -118,11 +118,11 @@
 						</div>
 						<h3 class="form-section">Purchase Order Items</h3>
 						<div class="form-group">
-							@*@Html.LabelFor(model => model.ItemID, "ItemID", htmlAttributes: new { @class = "control-label col-md-2" })
+							@Html.LabelFor(model => model.ItemID, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-2">
 								@Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
 								@Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
-							</div>*@
+							</div>
 							<label class="control-label col-md-2">Quantity</label>
 							<div class="col-md-2">
 								<input id="txtQuantity" type="text" class="form-control" />
