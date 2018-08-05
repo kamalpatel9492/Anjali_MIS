@@ -189,7 +189,7 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddInvoice(INV_PurchaseOrderViewModal iNV_PurchaseOrderViewModal)
+        public JsonResult AddPurchaseOrder(INV_PurchaseOrderViewModal iNV_PurchaseOrderViewModal)
         {
             try
             {
@@ -203,57 +203,55 @@ namespace AnjaliMIS.Controllers
                 }
                 else
                 {
-                    INV_Invoice new_INV_Invoice = new INV_Invoice();
-                    new_INV_Invoice.CompanyID = iNV_PurchaseOrderViewModal.CompanyID;
-                    new_INV_Invoice.PartyID = iNV_PurchaseOrderViewModal.PartyID;
+                    INV_PurchaseOrder new_INV_PurchaseOrder = new INV_PurchaseOrder();
+                    new_INV_PurchaseOrder.CompanyID = iNV_PurchaseOrderViewModal.CompanyID;
+                    new_INV_PurchaseOrder.SellerPartyID = iNV_PurchaseOrderViewModal.SellerPartyID;
                     if (Session["UserID"] != null)
                     {
-                        new_INV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        new_INV_PurchaseOrder.UserID = Convert.ToInt16(Session["UserID"].ToString());
                     }
 
-                    new_INV_Invoice.Amount = iNV_PurchaseOrderViewModal.Amount;
-                    new_INV_Invoice.AmountReceived = iNV_PurchaseOrderViewModal.AmountReceived;
-                    new_INV_Invoice.StatusID = Convert.ToInt32(iNV_PurchaseOrderViewModal.StatusID);
-                    new_INV_Invoice.Created = DateTime.Now;
-                    new_INV_Invoice.Modified = DateTime.Now;
-                    new_INV_Invoice.Remarks = iNV_PurchaseOrderViewModal.Remarks;
-                    new_INV_Invoice.InvoiceDate = DateTime.Now;
-                    new_INV_Invoice.InvoiceNo = iNV_PurchaseOrderViewModal.InvoiceNo;
-                    new_INV_Invoice.PONo = iNV_PurchaseOrderViewModal.PONo;
-                    new_INV_Invoice.AmountPending = iNV_PurchaseOrderViewModal.AmountPending;
-                    new_INV_Invoice.FinYearID = iNV_PurchaseOrderViewModal.FinYearID;
-                    new_INV_Invoice.CGST = iNV_PurchaseOrderViewModal.CGST;
-                    new_INV_Invoice.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
-                    new_INV_Invoice.SGST = iNV_PurchaseOrderViewModal.SGST;
-                    new_INV_Invoice.SGSTAmount = iNV_PurchaseOrderViewModal.SGSTAmount;
-                    new_INV_Invoice.IGST = iNV_PurchaseOrderViewModal.IGST;
-                    new_INV_Invoice.IGSTAmount = iNV_PurchaseOrderViewModal.IGSTAmount;
-                    new_INV_Invoice.IsLocal = iNV_PurchaseOrderViewModal.IsLocal;
-                    new_INV_Invoice.IsActive = true;
-                    new_INV_Invoice.Casar = iNV_PurchaseOrderViewModal.Casar;
-                    new_INV_Invoice.TotalAmount = iNV_PurchaseOrderViewModal.TotalAmount;
+                    new_INV_PurchaseOrder.Amount = iNV_PurchaseOrderViewModal.Amount;
+                    new_INV_PurchaseOrder.PaidAmount = iNV_PurchaseOrderViewModal.PaidAmount;
+                    new_INV_PurchaseOrder.StatusID = Convert.ToInt32(iNV_PurchaseOrderViewModal.StatusID);
+                    new_INV_PurchaseOrder.Created = DateTime.Now;
+                    new_INV_PurchaseOrder.Modified = DateTime.Now;
+                    new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
+                    new_INV_PurchaseOrder.PODate = DateTime.Now;
+                    new_INV_PurchaseOrder.PONo = iNV_PurchaseOrderViewModal.PONo;
+                    new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
+                    new_INV_PurchaseOrder.FinYearID = iNV_PurchaseOrderViewModal.FinYearID;
+                    new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
+                    new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
+                    new_INV_PurchaseOrder.SGST = iNV_PurchaseOrderViewModal.SGST;
+                    new_INV_PurchaseOrder.SGSTAmount = iNV_PurchaseOrderViewModal.SGSTAmount;
+                    new_INV_PurchaseOrder.IGST = iNV_PurchaseOrderViewModal.IGST;
+                    new_INV_PurchaseOrder.IGSTAmount = iNV_PurchaseOrderViewModal.IGSTAmount;
+                    new_INV_PurchaseOrder.IsLocal = iNV_PurchaseOrderViewModal.IsLocal;
+                    new_INV_PurchaseOrder.Casar = iNV_PurchaseOrderViewModal.Casar;
+                    new_INV_PurchaseOrder.TotalAmount = iNV_PurchaseOrderViewModal.TotalAmount;
 
-                    db.INV_Invoice.Add(new_INV_Invoice);
+                    db.INV_PurchaseOrder.Add(new_INV_PurchaseOrder);
                     db.SaveChanges();
 
-                    int newInvoiceId = new_INV_Invoice.InvoiceID;
+                    int newInvoiceId = new_INV_PurchaseOrder.PurchaseOrderID;
                     List<INV_PurchaseOrderItem> newINV_PurchaseOrderItem = new List<INV_PurchaseOrderItem>();
                     foreach (var item in iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems)
                     {
-                        INV_InvoiceItem new_INV_InvoiceItem = new INV_InvoiceItem();
-                        new_INV_InvoiceItem.InvoiceItemID = item.PurchaseOrderItemID;
-                        new_INV_InvoiceItem.InvoiceID = newInvoiceId;
-                        new_INV_InvoiceItem.ItemID = item.ItemID;
-                        new_INV_InvoiceItem.Quantity = item.OrderedQuantity;
-                        new_INV_InvoiceItem.Quantity = item.ReceivedQuantity;
-                        new_INV_InvoiceItem.Created = DateTime.Now;
-                        new_INV_InvoiceItem.Modified = DateTime.Now;
-                        new_INV_InvoiceItem.Remarks = item.Remarks;
-                        new_INV_InvoiceItem.PricePerUnit = item.PricePerUnit;
+                        INV_PurchaseOrderItem new_INV_PurchaseOrderItem = new INV_PurchaseOrderItem();
+                        new_INV_PurchaseOrderItem.PurchaseOrderItemID = item.PurchaseOrderItemID;
+                        new_INV_PurchaseOrderItem.PurchaseOrderID = newInvoiceId;
+                        new_INV_PurchaseOrderItem.ItemID = item.ItemID;
+                        new_INV_PurchaseOrderItem.OrderedQuantity = item.OrderedQuantity;
+                        new_INV_PurchaseOrderItem.ReceivedQuantity = item.ReceivedQuantity;
+                        new_INV_PurchaseOrderItem.Created = DateTime.Now;
+                        new_INV_PurchaseOrderItem.Modified = DateTime.Now;
+                        new_INV_PurchaseOrderItem.Remarks = item.Remarks;
+                        new_INV_PurchaseOrderItem.PuchasePrice = item.PuchasePrice;
 
-                        newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
+                        newINV_PurchaseOrderItem.Add(new_INV_PurchaseOrderItem);
                     }
-                    db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);
+                    db.INV_PurchaseOrderItem.AddRange(newINV_PurchaseOrderItem);
                     db.SaveChanges();
 
                 }
