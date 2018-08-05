@@ -85,11 +85,6 @@
 									@Html.ValidationMessageFor(model => model.IsLocal, "", new { @class = "text-danger" })
 								</div>
 							</div>
-							@Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
-							</div>
 						</div>
 
 
@@ -227,22 +222,22 @@
 	$(document).ready(function () {
 		$('#btnSave').click(function () {
 			debugger;
-			AddNewInvoiceWithItem();
+			AddNewPurchaseOrderWithItem();
 		});
 		$("#ItemID").change(function () {
 			debugger;
 			var ddlitemid = $('#ItemID').val();
 			GetItemPrice(ddlitemid);
 		});
-		$("#AmountReceived").change(function () {
+		$("#PaidAmount").change(function () {
 
-			var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-			$('#AmountPending').val(newAmountPending);
+			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+			$('#PendingAmount').val(newAmountPending);
 		});
 		$("#Casar").change(function () {
 
-			var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-			$('#AmountPending').val(newAmountPending);
+			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+			$('#PendingAmount').val(newAmountPending);
 		});
 		$("#btnModalOK").click(function () {
 			$('#InvoiceMessage').modal('hide');
@@ -351,23 +346,21 @@
 		});
 	}
 
-	function AddNewInvoiceWithItem() {
+	function AddNewPurchaseOrderWithItem() {
 		debugger;
 		var newData = {
 			//InvoiceID: InvoiceID,
 			CompanyID: $('#CompanyID').val(),
-			PartyID: $('#PartyID').val(),
+			SellerPartyID: $('#SellerPartyID').val(),
 			//UserID: $('#ddlupdateInstituteType').val(),
 			Amount: $('#Amount').val(),
-			AmountReceived: $('#AmountReceived').val(),
+			PaidAmount: $('#PaidAmount').val(),
 			StatusID: $('#StatusID').val(),
 			//Created: Created,
 			//Modified: Modified,
 			Remarks: $('#Remarks').val(),
-			InvoiceDate: $('#InvoiceDate').val(),
-			InvoiceNo: $('#InvoiceNo').val(),
 			PONo: $('#PONo').val(),
-			AmountPending: $('#AmountPending').val(),
+			PendingAmount: $('#PendingAmount').val(),
 			FinYearID: $('#FinYearID').val(),
 			CGST: $('#CGST').val(),
 			CGSTAmount: $('#tdCGST').html(),
@@ -385,7 +378,7 @@
 		console.log(newData);
 
 		$.ajax({
-			url: "/INV_Invoice/AddInvoice",
+			url: "/INV_PurchaseOrder/AddPurchaseOrder",
 			data: JSON.stringify(newData),
 			type: "POST",
 			contentType: "application/json;charset=utf-8",
@@ -412,8 +405,8 @@
 		var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
 		$('#tdFinalTotal').html(finaltotal);
 
-		var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-		$('#AmountPending').val(newAmountPending);
+		var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
+		$('#PendingAmount').val(newAmountPending);
 	}
 
 </script>
