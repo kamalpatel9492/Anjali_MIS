@@ -70,13 +70,14 @@
 
 
                         <div class="form-group">
-
                             @Html.LabelFor(model => model.IsLocal, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.IsLocal)
-                                    @Html.ValidationMessageFor(model => model.IsLocal, "", new { @class = "text-danger" })
-                                </div>
+                            <div class="col-md-4 radio-list">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="isLocal" value="True">Yes
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="isLocal" value="False">No
+                                    </label>
                             </div>
                             @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
@@ -89,32 +90,36 @@
                         <div id="divCGST" class="form-group" hidden>
                             @Html.LabelFor(model => model.CGST, "CGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("CGST", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CGST, "", new { @class = "text-danger" })
+                                <select id="ddlCGST" class="form-control"></select>
+                                @*@Html.DropDownList("CGST", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CGST, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
 
                         <div id="divSGST" class="form-group" hidden>
                             @Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("SGST", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.SGST, "", new { @class = "text-danger" })
+                                <select id="ddlSGST" class="form-control"></select>
+                                @*@Html.DropDownList("SGST", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SGST, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("IGST", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.IGST, "", new { @class = "text-danger" })
+                                <select id="ddlIGST" class="form-control"></select>
+                                @*@Html.DropDownList("IGST", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.IGST, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <h3 class="form-section">Invoice Items</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.ItemID, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                                <select id="ddlItemList" class="form-control"></select>
+                                @*@Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })*@
                             </div>
                             <label class="control-label col-md-2">Quantity</label>
                             <div class="col-md-2">
@@ -129,7 +134,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-10">
-                                <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
                             </div>
                         </div>
                         <div id="divItemList" class="form-group" hidden>
@@ -151,15 +156,15 @@
                                             <td colspan="4" id="tdItemTotal"></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-right">SGST</td>
+                                            <td colspan="4" class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></td>
                                             <td colspan="4" id="tdSGST"></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-right">CGST</td>
+                                            <td colspan="4" class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></td>
                                             <td colspan="4" id="tdCGST"></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-right">IGST</td>
+                                            <td colspan="4" class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></td>
                                             <td colspan="4" id="tdIGST"></td>
                                         </tr>
                                         <tr>
@@ -216,13 +221,19 @@
     var productList = [];
     var itemWiseEachStepAddTotalAmount = 0;
     $(document).ready(function () {
+        RetrieveSGST();
+        RetrieveCGST();
+        RetrieveIGST();
+        RetrieveitemList();
+
         $('#btnSave').click(function () {
-            debugger;
+
             AddNewInvoiceWithItem();
         });
-        $("#ItemID").change(function () {
-            debugger;
-            var ddlitemid = $('#ItemID').val();
+        $("#ddlItemList").change(function () {
+
+            //var ddlitemid = $('#ItemID').val();
+            var ddlitemid = $('#ddlItemList').val();
             GetItemPrice(ddlitemid);
         });
         $("#AmountReceived").change(function () {
@@ -240,13 +251,29 @@
             location.reload(true);
         });
 
-        $("#IsLocal").change(function () {
+        //$("#IsLocal").change(function () {
 
-            if ($("#IsLocal").val() == "true") {
+        //    if ($("#IsLocal").val() == "true") {
+        //        $('#divSGST').show();
+        //        $('#divCGST').hide();
+        //    }
+        //    else if ($("#IsLocal").val() == "false") {
+        //        $('#divCGST').show();
+        //        $('#divSGST').hide();
+        //    } else {
+        //        $('#divCGST').hide();
+        //        $('#divSGST').hide();
+        //    }
+        //    //var ddlitemid = $('#ItemID').val();
+        //    //GetItemPrice(ddlitemid);
+        //});
+
+        $('input:radio[name=isLocal]').change(function () {
+            if ($('input[name=isLocal]:checked').val() == "True") {
                 $('#divSGST').show();
                 $('#divCGST').hide();
             }
-            else if ($("#IsLocal").val() == "false") {
+            else if ($('input[name=isLocal]:checked').val() == "False") {
                 $('#divCGST').show();
                 $('#divSGST').hide();
             } else {
@@ -257,15 +284,14 @@
             //GetItemPrice(ddlitemid);
         });
 
-
         $(".add-row").click(function () {
 
-            debugger;
+            
             $('#divItemList').show();
-            if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
-                debugger;
-                var itemid = $("#ItemID").val();
-                var itemname = $("#ItemID").find('option:selected').text();
+            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
+                
+                var itemid = $("#ddlItemList").val();
+                var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
                 var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
@@ -290,20 +316,20 @@
 
 
         $(".delete-row").click(function () {
-            debugger;
+            
             $("table tbody").find('input[name="record"]').each(function () {
                 if ($(this).is(":checked")) {
-                    debugger;
+
                     var checkId = this.id;
                     $(this).parents("tr").remove();
-                    debugger;
+
                     //$.grep(productList, function (e) {
-                    //    debugger;
+                    //    
                     //     e.ItemID == checkId;
                     //});
-                    debugger;
+
                     $.each(productList, function (key, value) {
-                        debugger;
+
                         var checkitemid = value.ItemID;
                         var deductquantity = value.Quantity;
                         var deductpriceperunit = value.PricePerUnit;
@@ -324,7 +350,7 @@
         });
     });
     function GetItemPrice(ddlitemid) {
-        debugger;
+
         $.ajax({
             type: 'POST',
             dataType: "json",
@@ -332,7 +358,7 @@
             contentType: "application/json;charset=utf-8",
             url: "/INV_Invoice/DropDownItemPrice",
             success: (function (result) {
-                debugger;
+
                 $('#txtItemPrice').val(result);
 
             }),
@@ -343,13 +369,13 @@
     }
 
     function AddNewInvoiceWithItem() {
-        debugger;
+
         var newData = {
             //InvoiceID: InvoiceID,
             CompanyID: $('#CompanyID').val(),
             PartyID: $('#PartyID').val(),
             //UserID: $('#ddlupdateInstituteType').val(),
-            Amount: $('#Amount').val(),
+            Amount: $('#tdItemTotal').html(),
             AmountReceived: $('#AmountReceived').val(),
             StatusID: $('#StatusID').val(),
             //Created: Created,
@@ -360,20 +386,20 @@
             PONo: $('#PONo').val(),
             AmountPending: $('#AmountPending').val(),
             FinYearID: $('#FinYearID').val(),
-            CGST: $('#CGST').val(),
+            CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
-            SGST: $('#SGST').val(),
+            SGST: $('#ddlSGST').val(),
             SGSTAmount: $('#tdSGST').html(),
-            IGST: $('#IGST').val(),
+            IGST: $('#ddlIGST').val(),
             IGSTAmount: $('#tdIGST').html(),
-            IsLocal: $('#IsLocal').val(),
+            //IsLocal: $('#IsLocal').val(),
+            IsLocal: $('input[name=isLocal]:checked').val(),
             IsActive: $('#IsActive').val(),
             Casar: $('#Casar').val(),
             TotalAmount: $('#tdFinalTotal').html(),
             INV_InvoiceItems: productList
         };
-        debugger;
-        console.log(newData);
+
 
         $.ajax({
             url: "/INV_Invoice/AddInvoice",
@@ -382,31 +408,155 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
 
 
                 $('#InvoiceMessage').modal('show');
             },
             error: function (errormessage) {
-                debugger;
+
 
             }
         });
     }
+    //function FinalCalculation() {
+    //    var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+    //    $('#tdIGST').html(igstCalculation);
+    //    var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+    //    $('#tdCGST').html(cgstCalculation);
+    //    var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+    //    $('#tdSGST').html(sgstCalculation);
+    //    var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+    //    $('#tdFinalTotal').html(finaltotal);
+
+    //    var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
+    //    $('#AmountPending').val(newAmountPending);
+    //}
     function FinalCalculation() {
-        var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+
+        var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
+        var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         $('#tdIGST').html(igstCalculation);
-        var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+        $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
         $('#tdCGST').html(cgstCalculation);
-        var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+        $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
+        var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
         $('#tdSGST').html(sgstCalculation);
+        $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         $('#tdFinalTotal').html(finaltotal);
-
+        
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(newAmountPending);
     }
 
+
+    //Retrive SGST
+    function RetrieveSGST() {
+        $.ajax({
+            url: "/INV_Invoice/RetrieveSGST",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlSGST").empty();
+                    $("#ddlSGST").append('<option value="0" data-id="0">Select SGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);;
+                        $("#ddlSGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    //Retrive CGST
+    function RetrieveCGST() {
+        $.ajax({
+            url: "/INV_Invoice/RetrieveCGST",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlCGST").empty();
+                    $("#ddlCGST").append('<option value="0" data-id="0">Select CGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
+                        $("#ddlCGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    //Retrive IGST
+    function RetrieveIGST() {
+        $.ajax({
+            url: "/INV_Invoice/RetrieveIGST",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlIGST").empty();
+                    $("#ddlIGST").append('<option value="0" data-id="0">Select IGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
+                        $("#ddlIGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+    //Retrive SGST
+    function RetrieveitemList() {
+        $.ajax({
+            url: "/INV_Invoice/RetrieveItemList",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlItemList").empty();
+                    $("#ddlItemList").append('<option value="0">Select Item</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                        $("#ddlItemList").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
 </script>
 
 

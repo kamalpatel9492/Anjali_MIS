@@ -113,16 +113,51 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InvoiceID,CompanyID,PartyID,UserID,Amount,AmountReceived,StatusID,Created,Modified,Remarks,InvoiceDate,InvoiceNo,PONo,AmountPending,FinYearID,CGST,CGSTAmount,SGST,SGSTAmount,IGST,IGSTAmount,IsLocal,IsActive,Casar,TotalAmount")] INV_Invoice iNV_Invoice)
+        public ActionResult Edit([Bind(Include = "InvoiceID,UserID,Amount,AmountReceived,StatusID,Created,Modified,Remarks,InvoiceDate,InvoiceNo,PONo,AmountPending,FinYearID,CGST,CGSTAmount,SGST,SGSTAmount,IGST,IGSTAmount,IsLocal,IsActive,Casar,TotalAmount,NewAmountPending,NewAmountReceived")] INV_Invoice iNV_Invoice)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(iNV_Invoice).State = EntityState.Modified;
-                iNV_Invoice.Modified = DateTime.Now;
+                INV_Invoice getInvoiceData = db.INV_Invoice.Where(e => e.InvoiceID == iNV_Invoice.InvoiceID).FirstOrDefault();
+                
+                INV_InvoiceHistory add_INV_InvoiceHistory = new INV_InvoiceHistory();
+                add_INV_InvoiceHistory.CompanyID = getInvoiceData.CompanyID;
+                add_INV_InvoiceHistory.PartyID = getInvoiceData.PartyID;
+                add_INV_InvoiceHistory.UserID = getInvoiceData.CompanyID;
+                add_INV_InvoiceHistory.Amount = getInvoiceData.Amount;
+                add_INV_InvoiceHistory.AmountReceived = getInvoiceData.AmountReceived;
+                add_INV_InvoiceHistory.StatusID = getInvoiceData.StatusID;
+                add_INV_InvoiceHistory.Created = getInvoiceData.Created;
+                add_INV_InvoiceHistory.Remarks = getInvoiceData.Remarks;
+                add_INV_InvoiceHistory.InvoiceDate = getInvoiceData.InvoiceDate;
+                add_INV_InvoiceHistory.InvoiceNo = getInvoiceData.InvoiceNo;
+                add_INV_InvoiceHistory.PONo = getInvoiceData.PONo;
+                add_INV_InvoiceHistory.AmountPending = getInvoiceData.AmountPending;
+                add_INV_InvoiceHistory.FinYearID = getInvoiceData.FinYearID;
+                add_INV_InvoiceHistory.CGST = getInvoiceData.CGST;
+                add_INV_InvoiceHistory.CGSTAmount = getInvoiceData.CGSTAmount;
+                add_INV_InvoiceHistory.SGST = getInvoiceData.SGST;
+                add_INV_InvoiceHistory.SGSTAmount = getInvoiceData.SGSTAmount;
+                add_INV_InvoiceHistory.IGST = getInvoiceData.IGST;
+                add_INV_InvoiceHistory.IGSTAmount = getInvoiceData.IGSTAmount;
+                add_INV_InvoiceHistory.IsLocal = getInvoiceData.IsLocal;
+                add_INV_InvoiceHistory.IsActive = true;
+                add_INV_InvoiceHistory.Casar = getInvoiceData.Casar;
+                add_INV_InvoiceHistory.TotalAmount = getInvoiceData.TotalAmount;
+                add_INV_InvoiceHistory.Operation = "Operation";
+                add_INV_InvoiceHistory.InvoiceID = getInvoiceData.InvoiceID;
+
+                db.INV_InvoiceHistory.Add(add_INV_InvoiceHistory);
+                //db.SaveChanges();
+                //db.Entry(iNV_Invoice).State = EntityState.Modified;
                 if (Session["UserID"] != null)
                 {
-                    iNV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    getInvoiceData.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    getInvoiceData.Modified = DateTime.Now;
+                    getInvoiceData.AmountReceived= iNV_Invoice.NewAmountReceived;
+                    getInvoiceData.AmountPending = getInvoiceData.AmountPending - iNV_Invoice.NewAmountReceived;
+                    
                 }
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -204,6 +239,99 @@ namespace AnjaliMIS.Controllers
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult RetrieveSGST()
+        {
+            try
+            {
+                var sgst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                {
+                    TaxID = e.TaxID,
+                    Tax = e.Tax,
+                    Percentage = e.Percentage
+                }).ToList();
+
+                if (sgst.Count > 0)
+                {
+                    return Json(sgst, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult RetrieveCGST()
+        {
+            try
+            {
+                var cgst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                {
+                    TaxID = e.TaxID,
+                    Tax = e.Tax,
+                    Percentage = e.Percentage
+                }).ToList();
+
+                if (cgst.Count > 0)
+                {
+                    return Json(cgst, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult RetrieveIGST()
+        {
+            try
+            {
+                var igst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                {
+                    TaxID = e.TaxID,
+                    Tax = e.Tax,
+                    Percentage = e.Percentage
+                }).ToList();
+
+                if (igst.Count > 0)
+                {
+                    return Json(igst, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RetrieveItemList()
+        {
+            try
+            {
+                var itemList = db.INV_Item.Select(e => new
+                {
+                    ItemID = e.ItemID,
+                    ItemName = e.ItemName
+                }).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult AddInvoice(INV_InvoiceViewModal inv_InvoiceViewModal)
         {
@@ -238,12 +366,12 @@ namespace AnjaliMIS.Controllers
                     new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
                     new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
                     new_INV_Invoice.FinYearID = inv_InvoiceViewModal.FinYearID;
-                    new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST;
-                    new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGSTAmount;
-                    new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST;
-                    new_INV_Invoice.SGSTAmount = inv_InvoiceViewModal.SGSTAmount;
-                    new_INV_Invoice.IGST = inv_InvoiceViewModal.IGST;
-                    new_INV_Invoice.IGSTAmount = inv_InvoiceViewModal.IGSTAmount;
+                    new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
+                    new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
+                    new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGST;
+                    new_INV_Invoice.SGSTAmount = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGSTAmount;
+                    new_INV_Invoice.IGST = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGST;
+                    new_INV_Invoice.IGSTAmount = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGSTAmount;
                     new_INV_Invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
                     new_INV_Invoice.IsActive = true;
                     new_INV_Invoice.Casar = inv_InvoiceViewModal.Casar;
