@@ -26,6 +26,7 @@ namespace AnjaliMIS.Models
         public Nullable<int> UserID { get; set; }
         public int Amount { get; set; }
         public int AmountReceived { get; set; }
+        public int NewAmountReceived { get; set; }
         public int StatusID { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
@@ -34,6 +35,7 @@ namespace AnjaliMIS.Models
         public int InvoiceNo { get; set; }
         public int PONo { get; set; }
         public Nullable<int> AmountPending { get; set; }
+        public Nullable<int> NewAmountPending { get; set; }
         public int FinYearID { get; set; }
         public Nullable<int> CGST { get; set; }
         public Nullable<decimal> CGSTAmount { get; set; }
