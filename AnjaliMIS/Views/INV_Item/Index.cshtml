@@ -39,9 +39,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.INV_Unit.Unit)
                         </th>
-                        <th>
+                        @*<th>
                             @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-                        </th>
+                        </th>*@
                         @*<th>
                                 @Html.DisplayNameFor(model => model.IsConfigurable)
                             </th>*@
@@ -72,9 +72,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.INV_Unit.Unit)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-                            </td>
+                            </td>*@
                             @*<td>
                                     @Html.DisplayFor(modelItem => item.IsConfigurable)
                                 </td>*@
@@ -91,8 +91,12 @@
                                 @Html.DisplayFor(modelItem => item.IsLock)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) 
+
+                                @if (!item.IsLock)
+                                {
+                                    @Html.ActionLink("| Delete", "Delete", new { id = item.ItemID })
+                                }
                             </td>
                         </tr>
                     }

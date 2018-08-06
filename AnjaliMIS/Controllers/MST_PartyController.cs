@@ -62,7 +62,9 @@ namespace AnjaliMIS.Controllers
             {
 				mST_Party.Created = DateTime.Now;
 				mST_Party.Modofied = DateTime.Now;
-				if (Session["UserID"] != null)
+                mST_Party.CompanyID = 4;
+
+                if (Session["UserID"] != null)
 				{
 					mST_Party.UserID = Convert.ToInt16(Session["UserID"].ToString());
 				}
