@@ -251,7 +251,7 @@ namespace AnjaliMIS.Controllers
 
                         #region INV_ItemPrice
                         INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
-                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PuchasePrice).FirstOrDefault();
+                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PuchasePrice).OrderByDescending(o => o.Created).FirstOrDefault();
                         if (_iNV_ItemPrice == null)
                         {
                             _iNV_ItemPrice = new INV_ItemPrice();

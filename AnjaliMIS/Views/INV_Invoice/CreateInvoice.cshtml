@@ -23,18 +23,18 @@
                 <div class="form-horizontal">
                     <div class="form-body">
                         <h3 class="form-section">Invoice Details</h3>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.FinYearID, "Fin Year", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownList("FinYearID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.FinYearID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.FinYearID, "Fin Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.DropDownList("FinYearID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FinYearID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
@@ -48,12 +48,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.InvoiceDate, "Invoice Date", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker" } })
+                                @*<span class="input-group-btn">
+                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                </span>*@
                                 @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.InvoiceNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.InvoiceNo, "Invoice No", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.InvoiceNo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.InvoiceNo, "", new { @class = "text-danger" })
@@ -70,16 +73,16 @@
 
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.IsLocal, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4 radio-list">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="isLocal" value="True">Yes
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="isLocal" value="False">No
-                                    </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="isLocal" value="True">Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="isLocal" value="False">No
+                                </label>
                             </div>
-                            @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PONo, "PO. No. ", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
@@ -217,6 +220,7 @@
 
     <!--Add-Edit code end-->
 }
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     var productList = [];
     var itemWiseEachStepAddTotalAmount = 0;
@@ -286,10 +290,10 @@
 
         $(".add-row").click(function () {
 
-            
+
             $('#divItemList').show();
             if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
-                
+
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
@@ -316,7 +320,7 @@
 
 
         $(".delete-row").click(function () {
-            
+
             $("table tbody").find('input[name="record"]').each(function () {
                 if ($(this).is(":checked")) {
 
@@ -324,7 +328,7 @@
                     $(this).parents("tr").remove();
 
                     //$.grep(productList, function (e) {
-                    //    
+                    //
                     //     e.ItemID == checkId;
                     //});
 
@@ -372,7 +376,7 @@
 
         var newData = {
             //InvoiceID: InvoiceID,
-            CompanyID: $('#CompanyID').val(),
+            //CompanyID: $('#CompanyID').val(),
             PartyID: $('#PartyID').val(),
             //UserID: $('#ddlupdateInstituteType').val(),
             Amount: $('#tdItemTotal').html(),
@@ -447,7 +451,7 @@
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         $('#tdFinalTotal').html(finaltotal);
-        
+
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(newAmountPending);
     }
@@ -558,8 +562,28 @@
         });
     }
 </script>
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script type="text/javascript" src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/admin/pages/scripts/components-pickers.js"></script>
 
-
+<script>
+    //$('#datepicker').datepicker();
+    if (jQuery().datepicker) {
+        $('.date-picker').datepicker({
+            orientation: "left",
+            autoclose: true
+        });
+        //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+    }
+    $('#InvoiceDate').datepicker({
+        format: 'dd/mm/yyyy'
+    });
+</script>
 <!-- Modal -->
 <div class="modal fade" id="InvoiceMessage" role="dialog">
     <div class="modal-dialog">
