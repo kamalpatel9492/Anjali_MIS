@@ -118,7 +118,7 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 INV_Invoice getInvoiceData = db.INV_Invoice.Where(e => e.InvoiceID == iNV_Invoice.InvoiceID).FirstOrDefault();
-                
+
                 INV_InvoiceHistory add_INV_InvoiceHistory = new INV_InvoiceHistory();
                 add_INV_InvoiceHistory.CompanyID = getInvoiceData.CompanyID;
                 add_INV_InvoiceHistory.PartyID = getInvoiceData.PartyID;
@@ -153,11 +153,11 @@ namespace AnjaliMIS.Controllers
                 {
                     getInvoiceData.UserID = Convert.ToInt16(Session["UserID"].ToString());
                     getInvoiceData.Modified = DateTime.Now;
-                    getInvoiceData.AmountReceived= iNV_Invoice.NewAmountReceived;
+                    getInvoiceData.AmountReceived = iNV_Invoice.NewAmountReceived;
                     getInvoiceData.AmountPending = getInvoiceData.AmountPending - iNV_Invoice.NewAmountReceived;
-                    
+
                 }
-               
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -236,7 +236,7 @@ namespace AnjaliMIS.Controllers
             {
 
             }
-            return Json("failure", JsonRequestBehavior.AllowGet);
+            return Json("0", JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult RetrieveSGST()
@@ -393,6 +393,26 @@ namespace AnjaliMIS.Controllers
                         new_INV_InvoiceItem.Modified = DateTime.Now;
                         new_INV_InvoiceItem.Remarks = item.Remarks;
                         new_INV_InvoiceItem.PricePerUnit = item.PricePerUnit;
+
+                        #region INV_ItemPrice
+                        INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
+                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).FirstOrDefault();
+                        if(_iNV_ItemPrice == null)
+                        {
+                            _iNV_ItemPrice = new INV_ItemPrice();
+                            _iNV_ItemPrice.ItemID = item.ItemID;
+                            _iNV_ItemPrice.PurchasePrice = item.PricePerUnit;
+                            _iNV_ItemPrice.Created = DateTime.Now;
+                            _iNV_ItemPrice.Modified = DateTime.Now;
+                            _iNV_ItemPrice.FinYearID = inv_InvoiceViewModal.FinYearID;
+                            if (Session["UserID"] != null)
+                            {
+                                _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                            }
+                            db.INV_ItemPrice.Add(_iNV_ItemPrice);
+                            db.SaveChanges();
+                        }
+                        #endregion INV_ItemPrice
 
                         newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
                     }

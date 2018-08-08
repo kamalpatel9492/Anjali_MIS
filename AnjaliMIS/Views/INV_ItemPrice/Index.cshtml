@@ -16,9 +16,9 @@
             </div>
             <div class="actions">
                 <div class="btn-group">
-                    @Html.ActionLink("Create New", "Create",
+                    @*@Html.ActionLink("Create New", "Create",
                     new { controller = "INV_ItemPrice" },
-                    new { @class = "btn btn-transparent green btn-circle btn-sm active" })
+                    new { @class = "btn btn-transparent green btn-circle btn-sm active" })*@
                 </div>
             </div>
         </div>
@@ -47,9 +47,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.SEC_User.UserName)
                         </th>
-                        <th>
+                        @*<th>
                             Action
-                        </th>
+                        </th>*@
                     </tr>
                 </thead>
                 <tbody>
@@ -78,10 +78,10 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.SEC_User.UserName)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemPriceID }) |
                                 @Html.ActionLink("Delete", "Delete", new { id = item.ItemPriceID })
-                            </td>
+                            </td>*@
                         </tr>
                     }
                 </tbody>

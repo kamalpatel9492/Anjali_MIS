@@ -249,6 +249,26 @@ namespace AnjaliMIS.Controllers
                         new_INV_PurchaseOrderItem.Remarks = item.Remarks;
                         new_INV_PurchaseOrderItem.PuchasePrice = item.PuchasePrice;
 
+                        #region INV_ItemPrice
+                        INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
+                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PuchasePrice).FirstOrDefault();
+                        if (_iNV_ItemPrice == null)
+                        {
+                            _iNV_ItemPrice = new INV_ItemPrice();
+                            _iNV_ItemPrice.ItemID = item.ItemID;
+                            _iNV_ItemPrice.PurchasePrice = Convert.ToDecimal(item.PuchasePrice);
+                            _iNV_ItemPrice.Created = DateTime.Now;
+                            _iNV_ItemPrice.Modified = DateTime.Now;
+                            _iNV_ItemPrice.FinYearID = new_INV_PurchaseOrder.FinYearID;
+                            if (Session["UserID"] != null)
+                            {
+                                _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                            }
+                            db.INV_ItemPrice.Add(_iNV_ItemPrice);
+                            db.SaveChanges();
+                        }
+                        #endregion INV_ItemPrice
+
                         newINV_PurchaseOrderItem.Add(new_INV_PurchaseOrderItem);
                     }
                     db.INV_PurchaseOrderItem.AddRange(newINV_PurchaseOrderItem);

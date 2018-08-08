@@ -62,9 +62,9 @@
                         <th>
                             @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
                         </th>
-                        <th>
+                        @*<th>
                             Action
-                        </th>
+                        </th>*@
                     </tr>
 				</thead>
 				<tbody>
@@ -102,9 +102,9 @@
 							<td>
 								@Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
 							</td>
-							<td>
+							@*<td>
 								@Html.ActionLink("Edit", "Edit", new { id = item.PurchaseOrderID })
-							</td>
+							</td>*@
 						</tr>
 					}
 				</tbody>
