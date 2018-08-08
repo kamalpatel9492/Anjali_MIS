@@ -1,71 +1,180 @@
-﻿@model AnjaliMIS.Models.INV_ItemConfiguration
+﻿@model AnjaliMIS.ViewModals.INV_ItemConfigurationViewModal
 
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
-	@Html.HiddenFor(model => model.Created)
-	@Html.HiddenFor(model => model.ItemConfigurationID)
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Created)
+    @Html.HiddenFor(model => model.ItemConfigurationID)
 
-	<!--Add-Edit code start-->
-	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
-			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-gift"></i>Item Configuration 
-				</div>
-			</div>
-			<div class="portlet-body form">
-				<!-- BEGIN FORM-->
-				<div class="form-horizontal">
-					<div class="form-body">
-						@*<h3 class="form-section">Basic validation States</h3>*@
-						<div class="form-group">
-							@Html.LabelFor(model => model.MainItemID, "Main Item", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.MainItemID, "", new { @class = "text-danger" })
-							</div>
-						</div>
+    <!--Add-Edit code start-->
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Item Configuration
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        @*<h3 class="form-section">Basic validation States</h3>*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MainItemID, "Main Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MainItemID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							@Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
 
-						<div class="form-group">
-							@Html.LabelFor(model => model.Qunatity, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Qunatity, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
-							</div>
-						</div>
-					</div>
-					<div class="form-actions">
-						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
-								<input type="submit" value="Save" class="btn green" />
-								@Html.ActionLink("Back to List", "index", "INV_ItemConfiguration", new { @class = "btn default" })
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- END FORM-->
-			</div>
-		</div>
-		<!-- END VALIDATION STATES-->
-	</div>
-	<!--Add-Edit code end-->
+
+
+                        <h3 class="form-section">Invoice Items</h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                <select id="ddlItemListSubItem" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-md-10">
+                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                            </div>
+                        </div>
+                        <div id="divItemList" class="form-group" hidden>
+                            <label class="control-label col-md-2">Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="selected_units">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Main Item</th>
+                                            <th>Sub Item</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr>
+                                            <td colspan="4" class="text-right">Main Item</td>
+                                            <td colspan="4" id="tdMainItem"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">Sub Item</td>
+                                            <td colspan="4" id="tdSubItem"></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Save" class="btn green" />
+                                @Html.ActionLink("Back to List", "index", "INV_ItemConfiguration", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END FORM-->
+            </div>
+        </div>
+        <!-- END VALIDATION STATES-->
+    </div>
+    <!--Add-Edit code end-->
 
 }
+<script>
+    $(document).ready(function () {
+        RetrieveitemList();
+
+        $('#btnSave').click(function () {
+            AddNewInvoiceWithItem();
+        });
+        $(".delete-row").click(function () {
+
+            $("table tbody").find('input[name="record"]').each(function () {
+                if ($(this).is(":checked")) {
+
+                    var checkId = this.id;
+                    $(this).parents("tr").remove();
+
+                    //$.grep(productList, function (e) {
+                    //    
+                    //     e.ItemID == checkId;
+                    //});
+
+                    $.each(productList, function (key, value) {
+
+                        var checkitemid = value.ItemID;
+                        var deductquantity = value.Quantity;
+                        var deductpriceperunit = value.PricePerUnit;
+                        if (checkId == checkitemid) {
+                            //productList.pop(key);
+
+                            productList.splice(key, 1);
+                            itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
+                            $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                            FinalCalculation();
+                            return false;
+                        }
+
+                    });
+                }
+            });
+
+        });
+
+        //Retrive SGST
+        function RetrieveitemList() {
+            $.ajax({
+                url: "/INV_Invoice/RetrieveItemList",
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: (function (result) {
+
+                    if (result.length > 0) {
+                        $("#ddlItemListSubItem").empty();
+                        $("#ddlItemListSubItem").append('<option value="0">Select Sub Item</option>');
+                        for (var i = 0; i < result.length; i++) {
+                            var option = $("<option/>");
+                            option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                            $("#ddlItemListSubItem").append(option);
+                        }
+                    }
+                }),
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+</script>

@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using AnjaliMIS.ViewModals;
 using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
-	[SessionTimeout]
-	public class INV_ItemConfigurationController : Controller
+    [SessionTimeout]
+    public class INV_ItemConfigurationController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
@@ -44,9 +45,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
             ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-			INV_ItemConfiguration _iNV_ItemConfiguration = new INV_ItemConfiguration();
-			return View("Edit", _iNV_ItemConfiguration);
-		}
+            INV_ItemConfigurationViewModal _iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
+            return View("Edit", _iNV_ItemConfigurationViewModal);
+        }
 
         // POST: INV_ItemConfiguration/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -57,13 +58,13 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-				iNV_ItemConfiguration.Created = DateTime.Now;
-				iNV_ItemConfiguration.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.INV_ItemConfiguration.Add(iNV_ItemConfiguration);
+                iNV_ItemConfiguration.Created = DateTime.Now;
+                iNV_ItemConfiguration.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.INV_ItemConfiguration.Add(iNV_ItemConfiguration);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -81,15 +82,29 @@ namespace AnjaliMIS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
             INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
-            if (iNV_ItemConfiguration == null)
+            iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
+            {
+                ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
+                MainItemID = iNV_ItemConfiguration.MainItemID,
+                SubItemID = iNV_ItemConfiguration.SubItemID,
+                Qunatity = iNV_ItemConfiguration.Qunatity,
+                UserID = iNV_ItemConfiguration.UserID,
+                Created = iNV_ItemConfiguration.Created,
+                Modified = iNV_ItemConfiguration.Modified,
+                Remarks = iNV_ItemConfiguration.Remarks
+            };
+            //iNV_ItemConfigurationViewModal.INV_Items = db.INV_ItemConfiguration.Where()
+
+            if (iNV_ItemConfigurationViewModal == null)
             {
                 return HttpNotFound();
             }
             ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
             ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
-            return View(iNV_ItemConfiguration);
+            return View(iNV_ItemConfigurationViewModal);
         }
 
         // POST: INV_ItemConfiguration/Edit/5
@@ -102,12 +117,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_ItemConfiguration).State = EntityState.Modified;
-				iNV_ItemConfiguration.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.SaveChanges();
+                iNV_ItemConfiguration.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
@@ -149,6 +164,29 @@ namespace AnjaliMIS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult RetrieveItemList()
+        {
+            try
+            {
+                var itemList = db.INV_Item.Select(e => new
+                {
+                    ItemID = e.ItemID,
+                    ItemName = e.ItemName
+                }).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
         }
     }
 }
