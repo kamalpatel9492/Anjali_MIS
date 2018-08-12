@@ -185,6 +185,100 @@ namespace AnjaliMIS.Controllers
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult SaveMainItem(INV_ItemConfiguration iNV_ItemConfiguration)
+        {
+            try
+            {
+                if (iNV_ItemConfiguration != null)
+                {
+                    //erroor handle
+                }
+                if (iNV_ItemConfiguration != null)
+                {
+                    if (Session["UserID"] != null)
+                    {
+                        iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    }
+                    var inv_Item = db.INV_Item.Where(e => e.ItemID == iNV_ItemConfiguration.MainItemID).FirstOrDefault();
+                    if (inv_Item != null)
+                    {
+                        INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                        new_INV_StockHistory.ItemID = inv_Item.ItemID;
+                        new_INV_StockHistory.OperationTypeID = 7;
+                        new_INV_StockHistory.ReferenceID = null;
+                        new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                        new_INV_StockHistory.UserID = iNV_ItemConfiguration.UserID;
+                        new_INV_StockHistory.Created = DateTime.Now;
+                        new_INV_StockHistory.Modified = DateTime.Now;
+                        new_INV_StockHistory.Remarks = null;
+                        new_INV_StockHistory.FinYearID = 2;
+                        db.INV_StockHistory.Add(new_INV_StockHistory);
+                        db.SaveChanges();
+
+                        inv_Item.Quantity = inv_Item.Quantity + iNV_ItemConfiguration.Qunatity;
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveSubItem(List<INV_ItemConfiguration> iNV_ItemConfiguration_List)
+        {
+            try
+            {
+                if (iNV_ItemConfiguration_List != null)
+                {
+                    //erroor handle
+                }
+                if (iNV_ItemConfiguration_List != null)
+                {
+                    foreach (var item in iNV_ItemConfiguration_List)
+                    {
+                        if (Session["UserID"] != null)
+                        {
+                            item.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        }
+
+                        var inv_Item = db.INV_Item.Where(e => e.ItemID == item.SubItemID).FirstOrDefault();
+
+                        if (inv_Item != null)
+                        {
+                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                            new_INV_StockHistory.ItemID = inv_Item.ItemID;
+                            new_INV_StockHistory.OperationTypeID = 7;
+                            new_INV_StockHistory.ReferenceID = null;
+                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                            new_INV_StockHistory.UserID = item.UserID;
+                            new_INV_StockHistory.Created = DateTime.Now;
+                            new_INV_StockHistory.Modified = DateTime.Now;
+                            new_INV_StockHistory.Remarks = null;
+                            new_INV_StockHistory.FinYearID = 2;
+                            db.INV_StockHistory.Add(new_INV_StockHistory);
+                            db.SaveChanges();
+
+                            inv_Item.Quantity = inv_Item.Quantity + item.Qunatity;
+                            db.SaveChanges();
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
     }
 
 

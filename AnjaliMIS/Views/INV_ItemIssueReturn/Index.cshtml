@@ -14,14 +14,14 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Issue tab
+                <i class="fa fa-gift"></i>Common
             </div>
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
             <div class="form-horizontal">
                 <div class="form-body">
-                    <h3 class="form-section">Issue tab details</h3>
+                    <h3 class="form-section">Common details</h3>
                     <div class="form-group">
 
                         <label class="control-label col-md-2">Item List</label>
@@ -37,6 +37,40 @@
                             <select id="ddlUserList" class="form-control"></select>
                         </div>
                     </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Issue tab
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="form-section">Issue tab details</h3>
+                    @*<div class="form-group">
+
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <select id="ddlItemList" class="form-control"></select>
+                        </div>
+
+                    </div>*@
+                    @*<div class="form-group">
+
+                        <label class="control-label col-md-2">User List</label>
+                        <div class="col-md-2">
+                            <select id="ddlUserList" class="form-control"></select>
+                        </div>
+                    </div>*@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Assign</label>
@@ -73,9 +107,7 @@
                                         <th>Quantity</th>
                                     </tr>
                                 </thead>
-                                <tbody class="tbodyForAssmeble" id="tbodyForAssmeble">
-                                   
-                                </tbody>
+                                <tbody class="tbodyForAssmeble" id="tbodyForAssmeble"></tbody>
                             </table>
                         </div>
                     </div>
@@ -100,10 +132,11 @@
 
         RetrieveitemList();
         RetrieveUserList();
+        //assign radio button change event
         $('input:radio[name=assign]').change(function () {
             if ($('input[name=assign]:checked').val() == "True") {
-                debugger;
-                GetItem();
+                
+                GetForIssueItem();
                 $('#tableForUse').show();
                 $('#btnForUSer').show();
                 $('#divForAssmeble').hide();
@@ -113,15 +146,15 @@
 
             }
             else if ($('input[name=assign]:checked').val() == "False") {
-                debugger;
-                GetItem();
+                
+                GetForIssueItem();
                 $('#tableForUse').hide();
                 $('#btnForUSer').hide();
                 $('#divForAssmeble').show();
                 $('#btnForAssmeble').show();
 
             } else {
-                debugger;
+                
                 $('#tableForUse').hide();
                 $('#btnForUSer').hide();
                 $('#divForAssmeble').hide();
@@ -129,16 +162,60 @@
             }
         });
 
+        //rbtnItem radio button change event
+        $('input:radio[name=rbtnItem]').change(function () {
+            if ($('input[name=rbtnItem]:checked').val() == "True") {
+
+                GetForReturnItem();
+                $('#tableMainItem').show();
+                $('#btnMainItem').show();
+                $('#divSubItem').hide();
+                $('#btnSubItem').hide();
+                
+
+
+            }
+            else if ($('input[name=rbtnItem]:checked').val() == "False") {
+
+                GetForReturnItem();
+                $('#tableMainItem').hide();
+                $('#btnMainItem').hide();
+                $('#divSubItem').show();
+                $('#btnSubItem').show();
+
+            } else {
+
+                $('#tableMainItem').hide();
+                $('#btnMainItem').hide();
+                $('#divSubItem').hide();
+                $('#btnSubItem').hide();
+            }
+        });
+
         //btnSaveForUse click event
         $("#btnSaveForUse").click(function () {
-            debugger;
+            
             SaveItemForUse();
 
         });
         //btnSaveForAssmeble click event
         $("#btnSaveForAssmeble").click(function () {
-            debugger;
+            
             SaveItemForAssmeble();
+
+        });
+
+
+        //btnSaveMainItem click event
+        $("#btnSaveMainItem").click(function () {
+
+            SaveMainItem();
+
+        });
+        //btnSaveSubItem click event
+        $("#btnSaveSubItem").click(function () {
+
+            SaveSubItem();
 
         });
     });
@@ -193,8 +270,8 @@
     }
 
 
-    function GetItem() {
-
+    function GetForIssueItem() {
+       
         var postData = {
             MainItemID: $('#ddlItemList').val(),
             //UserID: $('#ddlUserList').val(),
@@ -209,16 +286,17 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
+                
                 if ($('input[name=assign]:checked').val() == "True") {
                     $('#txtItemName').val(result.ItemName);
                     $('#txtQuantity').val(result.Qunatity);
                 }
                 else if ($('input[name=assign]:checked').val() == "False") {
-                    var html = '';
+                    $('#tbodyForAssmeble').html('');
+                    var html = '';                  
                     var i = 1;
                     $.each(result, function (key, value) {
-                        html += '<tr id='+i+'>';
+                        html += '<tr id=' + i + '>';
                         html += '<td><input type="checkbox" name="chkForAssmeble" value="' + result[key].SubItemID + '"></td>';
                         html += '<td>' + result[key].ItemName + '</td>';
                         html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
@@ -227,6 +305,7 @@
                     });
                     $('#tbodyForAssmeble').append(html);
                 }
+               
                 //alert(result);
             },
             error: function (errormessage) {
@@ -236,12 +315,58 @@
         });
     }
 
+    function GetForReturnItem() {
+     
+
+
+        var postData = {
+            MainItemID: $('#ddlItemList').val(),
+            //UserID: $('#ddlUserList').val(),
+            RetrieveType: $('input[name=rbtnItem]:checked').val()
+        };
+
+
+        $.ajax({
+            url: "/INV_ItemIssueReturn/Retrieve_INV_ItemConfiguration_List",
+            data: JSON.stringify(postData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                
+                if ($('input[name=rbtnItem]:checked').val() == "True") {
+                    $('#txtReturnItemName').val(result.ItemName);
+                    $('#txtReturnQuantity').val(result.Qunatity);
+                }
+                else if ($('input[name=rbtnItem]:checked').val() == "False") {
+                    $('#tbodySubItem').html('');
+                    var html = '';
+                    var i = 1;
+                    $.each(result, function (key, value) {
+                        html += '<tr id=' + i + '>';
+                        html += '<td><input type="checkbox" name="chkSubItem" value="' + result[key].SubItemID + '"></td>';
+                        html += '<td>' + result[key].ItemName + '</td>';
+                        html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
+                        html += '</tr>';
+                        i++;
+                    });
+                    $('#tbodySubItem').append(html);
+                }
+               
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
     function SaveItemForUse() {
 
         var postData = {
             MainItemID: $('#ddlItemList').val(),
             Qunatity: $('#txtQuantity').val()
-            
+
             //UserID: $('#ddlUserList').val(),
             //RetrieveType: $('input[name=assign]:checked').val()
         };
@@ -254,7 +379,7 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
+                
                 location.reload();
                 //alert(result);
             },
@@ -268,17 +393,17 @@
 
         var itemList = [];
         $('#tableForAssmeble input:checked').each(function () {
-            var checkbboxid=$(this).val();
-            
+            var checkbboxid = $(this).val();
+
             var tablerowid = $(this).closest('tr').attr('id');
-            var quantityValue = $("#quantity" + tablerowid).val();          
+            var quantityValue = $("#quantity" + tablerowid).val();
             itemList.push({
 
                 SubItemID: checkbboxid,
                 Qunatity: quantityValue
             });
         });
-        
+
 
         //var postData = {
         //    MainItemID: $('#ddlItemList').val(),
@@ -294,7 +419,65 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
+                
+                location.reload();
+                //itemList = [];
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
+    
+    function SaveMainItem() {
+
+        var postData = {
+            MainItemID: $('#ddlItemList').val(),
+            Qunatity: $('#txtReturnQuantity').val()
+
+        };
+        $.ajax({
+            url: "/INV_ItemIssueReturn/SaveMainItem",
+            data: JSON.stringify(postData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                location.reload();
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
+    function SaveSubItem() {
+
+        var itemList = [];
+        $('#tableSubItem input:checked').each(function () {
+            var checkbboxid = $(this).val();
+
+            var tablerowid = $(this).closest('tr').attr('id');
+            var quantityValue = $("#quantity" + tablerowid).val();
+            itemList.push({
+
+                SubItemID: checkbboxid,
+                Qunatity: quantityValue
+            });
+        });
+
+        $.ajax({
+            url: "/INV_ItemIssueReturn/SaveSubItem",
+            data: JSON.stringify(itemList),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
                 location.reload();
                 //itemList = [];
                 //alert(result);
@@ -321,21 +504,21 @@
             <div class="form-horizontal">
                 <div class="form-body">
                     <h3 class="form-section">Return tab details</h3>
-                    <div class="form-group">
+                    @*<div class="form-group">
 
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-2">
                             <select id="ddlItemList" class="form-control"></select>
                         </div>
 
-                    </div>
-                    <div class="form-group">
+                    </div>*@
+                    @*<div class="form-group">
 
                         <label class="control-label col-md-2">User List</label>
                         <div class="col-md-2">
                             <select id="ddlUserList" class="form-control"></select>
                         </div>
-                    </div>
+                    </div>*@
 
                     <div class="form-group">
                         <label class="control-label col-md-2">Item</label>
@@ -344,31 +527,47 @@
                                 <input type="radio" name="rbtnItem" value="True">Main Item
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="rbtntem" value="False">Sub Item
+                                <input type="radio" name="rbtnItem" value="False">Sub Item
                             </label>
                         </div>
                     </div>
 
-                    <div class="form-group" id="tableForUse" hidden>
+                    <div class="form-group" id="tableMainItem" hidden>
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-2">
-                            <input id="txtItemName" type="text" class="form-control" readonly />
+                            <input id="txtReturnItemName" type="text" class="form-control" readonly />
                         </div>
 
                         <label class="control-label col-md-2">Quantity</label>
                         <div class="col-md-2">
-                            <input id="txtQuantity" type="text" class="form-control" />
+                            <input id="txtReturnQuantity" type="text" class="form-control" />
                         </div>
                     </div>
 
-                    <div class="form-group" id="btnForUSer" hidden>
-                        <div class="col-md-2">
-                            <button id="btnSaveForUse" class="form-control">For Use Save</button>
+                    <div class="form-group" id="divSubItem" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-10">
+                            <table class="table table-bordered table-responsive" id="tableSubItem">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodySubItem" id="tbodySubItem"></tbody>
+                            </table>
                         </div>
                     </div>
-                    <div class="form-group" id="btnForAssmeble" hidden>
+
+                    <div class="form-group" id="btnMainItem" hidden>
                         <div class="col-md-2">
-                            <button id="btnSaveForAssmeble" class="form-control">For Assmeble Save</button>
+                            <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="btnSubItem" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveSubItem" class="form-control">SubItem Save</button>
                         </div>
                     </div>
                 </div>
