@@ -40,6 +40,16 @@
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                        @{
+                            if (Session["UserName"] != null)
+                            {
+                                string UserName = Session["UserName"].ToString();
+                                @Html.ActionLink(@UserName, "", "")
+                            }
+                        }
+                    </li>
+
+                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                         @Html.ActionLink("Log Out", "Logout", "Home")
                     </li>
                 </ul>
@@ -61,12 +71,12 @@
 
 
                 @*<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">*@
-                    @*@foreach (var item in Model)
-            {
-                <li>@Html.ActionLink(item.ModuleName, item.Action, item.Controller, new { area = "" }, null)</li>
-            }*@
+                @*@foreach (var item in Model)
+                    {
+                        <li>@Html.ActionLink(item.ModuleName, item.Action, item.Controller, new { area = "" }, null)</li>
+                    }*@
 
-                    @*<li class="@(ViewContext.RouteData.Values["controller"].ToString() == "LOC_country" ? "active" : "")"><a href="@Url.Action("index", "LOC_country")"><i class="icon-home icon-large"></i> Country</a></li>
+                @*<li class="@(ViewContext.RouteData.Values["controller"].ToString() == "LOC_country" ? "active" : "")"><a href="@Url.Action("index", "LOC_country")"><i class="icon-home icon-large"></i> Country</a></li>
 
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "LOC_country" ? "active" : "")">@Html.ActionLink("Country", "index", "LOC_country", new { area = "" }, null)</li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "LOC_state" ? "active" : "")">@Html.ActionLink("State", "index", "LOC_state", new { area = "" }, null)</li>
@@ -79,18 +89,18 @@
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "EMP_Employee" ? "active" : "")">@Html.ActionLink("Employee", "index", "EMP_Employee", new { area = "" }, null)</li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "SEC_user" ? "active" : "")">@Html.ActionLink("User", "index", "SEC_user", new { area = "" }, null)</li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "DIA_Machine" ? "active" : "")">@Html.ActionLink("Machine", "index", "DIA_Machine", new { area = "" }, null)</li>*@
-                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
-                    @*<li>@Html.ActionLink("Country", "index", "LOC_country", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("State", "index", "LOC_state", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("City", "index", "LOC_city", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("Unit", "index", "INV_Unit", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("Department", "index", "EMP_department", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("Cassett", "index", "DIA_Cassett", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("Designation", "index", "EMP_Designation", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("PartyType", "index", "SYS_PartyType", new { area = "" }, null)</li>
-            <li>@Html.ActionLink("User", "index", "SEC_user", new { area = "" }, null)</li>*@
+                @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                @*<li>@Html.ActionLink("Country", "index", "LOC_country", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("State", "index", "LOC_state", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("City", "index", "LOC_city", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Unit", "index", "INV_Unit", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Department", "index", "EMP_department", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Cassett", "index", "DIA_Cassett", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Designation", "index", "EMP_Designation", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("PartyType", "index", "SYS_PartyType", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("User", "index", "SEC_user", new { area = "" }, null)</li>*@
 
-                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
                 @*</ul>*@
             </div>
         </div>

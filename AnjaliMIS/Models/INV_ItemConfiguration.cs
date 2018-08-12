@@ -14,7 +14,11 @@ namespace AnjaliMIS.Models
     
     public partial class INV_ItemConfiguration
     {
-        public int ItemConfigurationID { get; set; }
+		public INV_ItemConfiguration()
+		{
+			INV_Items = new List<INV_ItemConfiguration>();
+		}
+		public int ItemConfigurationID { get; set; }
         public int MainItemID { get; set; }
         public int SubItemID { get; set; }
         public int Qunatity { get; set; }
@@ -26,6 +30,9 @@ namespace AnjaliMIS.Models
         public virtual INV_Item INV_Item { get; set; }
         public virtual INV_Item INV_Item1 { get; set; }
         public virtual SEC_User SEC_User { get; set; }
+
+		public List<INV_ItemConfiguration> INV_Items { get; set; }
+	
 
         //retrieve type means:- 1/True= FOR USE 0/False=For Assmeble  
         public bool RetrieveType { get; set; }

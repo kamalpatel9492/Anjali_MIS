@@ -101,7 +101,7 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <input type="submit" value="Save" class="btn green" />
+                                <input id="btnSave" type="submit" value="Save" class="btn green" />
                                 @Html.ActionLink("Back to List", "index", "INV_ItemConfiguration", new { @class = "btn default" })
                             </div>
                         </div>
@@ -121,28 +121,25 @@
 		RetrieveitemList();
 
 		$('#btnSave').click(function () {
-			AddNewInvoiceWithItem();
+			AddNewItemConfigurationWithItem();
 		});
 		$(".add-row").click(function () {
 
-
 			$('#divItemList').show();
 
-
-			var itemid = $("#ddlItemListSubItem").val();
-			var MainItem = $("#MainItemID").find('option:selected').text();
+			var subItemID = $("#ddlItemListSubItem").val();
+			var MainItemID = $("#MainItemID").find('option:selected').text();
 			var itemname = $("#ddlItemListSubItem").find('option:selected').text();
+			var Remarks = $('#Remarks').val();
 
 				var invoiceID = 1;
 			var quantity = $('#Qunatity').val();
 				productList.push({
-					//InvoiceItemID: InvoiceItemID,
-					//InvoiceID: invoiceID,
-					ItemID: itemid,
-					Quantity: quantity
+					SubItemID: subItemID,
+					Qunatity: quantity,
 				});
 				invoiceID++;
-			var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + MainItem + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
+			var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
 				$("table .list").prepend(markup);
 
 
@@ -159,10 +156,8 @@
 					//    
 					//     e.ItemID == checkId;
 					//});
-
 					$.each(productList, function (key, value) {
-
-						var checkitemid = value.ItemID;
+						var checkitemid = value.SubItemID;
 						var deductquantity = value.Quantity;
 						if (checkId == checkitemid) {
 							//productList.pop(key);
@@ -181,7 +176,6 @@
 		//Retrive SGST
 	});
 	function RetrieveitemList() {
-		debugger;
 		$.ajax({
 			url: "/INV_ItemConfiguration/RetrieveItemList",
 			type: "GET",
@@ -205,41 +199,17 @@
 		});
 	}
 
-	function AddNewInvoiceWithItem() {
+	function AddNewItemConfigurationWithItem() {
 
 		var newData = {
-			//InvoiceID: InvoiceID,
-			CompanyID: $('#CompanyID').val(),
-			PartyID: $('#PartyID').val(),
-			//UserID: $('#ddlupdateInstituteType').val(),
-			Amount: $('#tdItemTotal').html(),
-			AmountReceived: $('#AmountReceived').val(),
-			StatusID: $('#StatusID').val(),
-			//Created: Created,
-			//Modified: Modified,
 			Remarks: $('#Remarks').val(),
-			InvoiceDate: $('#InvoiceDate').val(),
-			InvoiceNo: $('#InvoiceNo').val(),
-			PONo: $('#PONo').val(),
-			AmountPending: $('#AmountPending').val(),
-			FinYearID: $('#FinYearID').val(),
-			CGST: $('#ddlCGST').val(),
-			CGSTAmount: $('#tdCGST').html(),
-			SGST: $('#ddlSGST').val(),
-			SGSTAmount: $('#tdSGST').html(),
-			IGST: $('#ddlIGST').val(),
-			IGSTAmount: $('#tdIGST').html(),
-			//IsLocal: $('#IsLocal').val(),
-			IsLocal: $('input[name=isLocal]:checked').val(),
-			IsActive: $('#IsActive').val(),
-			Casar: $('#Casar').val(),
-			TotalAmount: $('#tdFinalTotal').html(),
-			INV_InvoiceItems: productList
+			MainItemID: $('#MainItemID').val(),
+			INV_Items: productList
 		};
 
 
 		$.ajax({
-			url: "/INV_ItemConfiguration/Edit",
+			url: "/INV_ItemConfiguration/Create",
 			data: JSON.stringify(newData),
 			type: "POST",
 			contentType: "application/json;charset=utf-8",
@@ -250,7 +220,6 @@
 				$('#InvoiceMessage').modal('show');
 			},
 			error: function (errormessage) {
-
 
 			}
 		});

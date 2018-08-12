@@ -53,83 +53,104 @@ namespace AnjaliMIS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemConfigurationID,MainItemID,SubItemID,Qunatity,UserID,Created,Modified,Remarks")] INV_ItemConfiguration iNV_ItemConfiguration)
+        public ActionResult Create(INV_ItemConfiguration iNV_ItemConfiguration)
         {
-            if (ModelState.IsValid)
-            {
-                iNV_ItemConfiguration.Created = DateTime.Now;
-                iNV_ItemConfiguration.Modified = DateTime.Now;
-                if (Session["UserID"] != null)
-                {
-                    iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                }
-                db.INV_ItemConfiguration.Add(iNV_ItemConfiguration);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+			if (ModelState.IsValid)
+			{
+				iNV_ItemConfiguration.Modified = DateTime.Now;
+				if (Session["UserID"] != null)
+				{
+					iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
+				}
+				List<INV_ItemConfiguration> newINV_ItemConfiguration = new List<INV_ItemConfiguration>();
+				foreach (var item in iNV_ItemConfiguration.INV_Items)
+				{
+					INV_ItemConfiguration new_INV_InvoiceItem = new INV_ItemConfiguration();
+					new_INV_InvoiceItem.MainItemID = iNV_ItemConfiguration.MainItemID;
+					new_INV_InvoiceItem.SubItemID = item.SubItemID;
+					new_INV_InvoiceItem.Qunatity = item.Qunatity;
+					new_INV_InvoiceItem.Created = DateTime.Now;
+					new_INV_InvoiceItem.Modified = DateTime.Now;
+					new_INV_InvoiceItem.UserID = iNV_ItemConfiguration.UserID;
+					new_INV_InvoiceItem.Remarks = iNV_ItemConfiguration.Remarks;
 
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
-            return View(iNV_ItemConfiguration);
-        }
+					newINV_ItemConfiguration.Add(new_INV_InvoiceItem);
+				}
+				db.INV_ItemConfiguration.AddRange(newINV_ItemConfiguration);
+				db.SaveChanges();
+				
+			}
+			return RedirectToAction("Index");
+		}
 
         // GET: INV_ItemConfiguration/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
-            INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
-            iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
-            {
-                ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
-                MainItemID = iNV_ItemConfiguration.MainItemID,
-                SubItemID = iNV_ItemConfiguration.SubItemID,
-                Qunatity = iNV_ItemConfiguration.Qunatity,
-                UserID = iNV_ItemConfiguration.UserID,
-                Created = iNV_ItemConfiguration.Created,
-                Modified = iNV_ItemConfiguration.Modified,
-                Remarks = iNV_ItemConfiguration.Remarks
-            };
-            //iNV_ItemConfigurationViewModal.INV_Items = db.INV_ItemConfiguration.Where()
+    //    public ActionResult Edit(int? id)
+    //    {
+    //        if (id == null)
+    //        {
+    //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+    //        }
+    //        INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
+    //        INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
+    //        iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
+    //        {
+    //            ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
+    //            MainItemID = iNV_ItemConfiguration.MainItemID,
+    //            SubItemID = iNV_ItemConfiguration.SubItemID,
+    //            Qunatity = iNV_ItemConfiguration.Qunatity,
+    //            UserID = iNV_ItemConfiguration.UserID,
+    //            Created = iNV_ItemConfiguration.Created,
+    //            Modified = iNV_ItemConfiguration.Modified,
+    //            Remarks = iNV_ItemConfiguration.Remarks
+    //        };
+    //        //iNV_ItemConfigurationViewModal.INV_Items = db.INV_ItemConfiguration.Where()
 
-            if (iNV_ItemConfigurationViewModal == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
-            return View(iNV_ItemConfigurationViewModal);
-        }
+    //        if (iNV_ItemConfigurationViewModal == null)
+    //        {
+    //            return HttpNotFound();
+    //        }
+    //        ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
+    //        ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
+    //        ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+    //        return View(iNV_ItemConfigurationViewModal);
+    //    }
 
-        // POST: INV_ItemConfiguration/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemConfigurationID,MainItemID,SubItemID,Qunatity,UserID,Created,Modified,Remarks")] INV_ItemConfiguration iNV_ItemConfiguration)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(iNV_ItemConfiguration).State = EntityState.Modified;
-                iNV_ItemConfiguration.Modified = DateTime.Now;
-                if (Session["UserID"] != null)
-                {
-                    iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                }
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
-            return View(iNV_ItemConfiguration);
-        }
+    //    // POST: INV_ItemConfiguration/Edit/5
+    //    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    //    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+    //    [HttpPost]
+    //    [ValidateAntiForgeryToken]
+    //    public ActionResult Edit([Bind(Include = "ItemConfigurationID,MainItemID,SubItemID,Qunatity,UserID,Created,Modified,Remarks")] INV_ItemConfiguration iNV_ItemConfiguration)
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            db.Entry(iNV_ItemConfiguration).State = EntityState.Modified;
+    //            iNV_ItemConfiguration.Modified = DateTime.Now;
+    //            if (Session["UserID"] != null)
+    //            {
+    //                iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
+    //            }
+				//List<INV_ItemConfiguration> newINV_ItemConfiguration = new List<INV_ItemConfiguration>();
+				//foreach (var item in iNV_ItemConfiguration.INV_Items)
+				//{
+				//	INV_ItemConfiguration new_INV_InvoiceItem = new INV_ItemConfiguration();
+				//	new_INV_InvoiceItem.MainItemID = iNV_ItemConfiguration.MainItemID;
+				//	new_INV_InvoiceItem.SubItemID = item.SubItemID;
+				//	new_INV_InvoiceItem.Qunatity = item.Qunatity;
+				//	new_INV_InvoiceItem.Created = DateTime.Now;
+				//	new_INV_InvoiceItem.Modified = DateTime.Now;
+
+				//	newINV_ItemConfiguration.Add(new_INV_InvoiceItem);
+				//}
+				//db.INV_ItemConfiguration.AddRange(newINV_ItemConfiguration);
+				//db.SaveChanges();
+    //            return RedirectToAction("Index");
+    //        }
+    //        ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
+    //        ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
+    //        ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+    //        return View(iNV_ItemConfiguration);
+    //    }
 
         // GET: INV_ItemConfiguration/Delete/5
         public ActionResult Delete(int? id)

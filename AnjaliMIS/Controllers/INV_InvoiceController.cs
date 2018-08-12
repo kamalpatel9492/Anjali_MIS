@@ -228,7 +228,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                decimal itemPrice = db.INV_ItemPrice.Where(e => e.ItemID == ItemID).FirstOrDefault().PurchasePrice;
+                decimal itemPrice = db.INV_ItemPrice.Where(e => e.ItemID == ItemID).OrderByDescending(o => o.Created).FirstOrDefault().PurchasePrice;
 
                 return Json(itemPrice, JsonRequestBehavior.AllowGet);
             }
@@ -348,7 +348,7 @@ namespace AnjaliMIS.Controllers
                 else
                 {
                     INV_Invoice new_INV_Invoice = new INV_Invoice();
-                    new_INV_Invoice.CompanyID = inv_InvoiceViewModal.CompanyID;
+                    new_INV_Invoice.CompanyID = 4;
                     new_INV_Invoice.PartyID = inv_InvoiceViewModal.PartyID;
                     if (Session["UserID"] != null)
                     {
@@ -396,8 +396,8 @@ namespace AnjaliMIS.Controllers
 
                         #region INV_ItemPrice
                         INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
-                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).FirstOrDefault();
-                        if(_iNV_ItemPrice == null)
+                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).OrderByDescending(o => o.Created).FirstOrDefault();
+                        if (_iNV_ItemPrice == null)
                         {
                             _iNV_ItemPrice = new INV_ItemPrice();
                             _iNV_ItemPrice.ItemID = item.ItemID;
