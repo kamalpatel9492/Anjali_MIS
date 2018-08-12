@@ -204,7 +204,8 @@ namespace AnjaliMIS.Controllers
                 else
                 {
                     INV_PurchaseOrder new_INV_PurchaseOrder = new INV_PurchaseOrder();
-                    new_INV_PurchaseOrder.CompanyID = iNV_PurchaseOrderViewModal.CompanyID;
+                    new_INV_PurchaseOrder.CompanyID = 4;
+                    new_INV_PurchaseOrder.FinYearID = 2;
                     new_INV_PurchaseOrder.SellerPartyID = iNV_PurchaseOrderViewModal.SellerPartyID;
                     if (Session["UserID"] != null)
                     {
@@ -220,7 +221,6 @@ namespace AnjaliMIS.Controllers
                     new_INV_PurchaseOrder.PODate = DateTime.Now;
                     new_INV_PurchaseOrder.PONo = iNV_PurchaseOrderViewModal.PONo;
                     new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
-                    new_INV_PurchaseOrder.FinYearID = iNV_PurchaseOrderViewModal.FinYearID;
                     new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                     new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
                     new_INV_PurchaseOrder.SGST = iNV_PurchaseOrderViewModal.SGST;

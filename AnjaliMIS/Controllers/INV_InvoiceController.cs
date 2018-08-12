@@ -414,6 +414,14 @@ namespace AnjaliMIS.Controllers
                         }
                         #endregion INV_ItemPrice
 
+                        INV_Item _INV_Item = new INV_Item();
+                        _INV_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+                        if (_INV_Item != null)
+                        {
+                            _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
+                            db.SaveChanges();
+                        }
+
                         newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
                     }
                     db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);

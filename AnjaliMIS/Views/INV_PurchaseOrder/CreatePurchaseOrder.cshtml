@@ -31,18 +31,6 @@
 					<div class="form-body">
 						<h3 class="form-section">Purchase Order Details</h3>
 						<div class="form-group">
-							@Html.LabelFor(model => model.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-							</div>
-							@Html.LabelFor(model => model.FinYearID, "Fin Year", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.DropDownList("FinYearID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.FinYearID, "", new { @class = "text-danger" })
-							</div>
-						</div>
-						<div class="form-group">
 							@Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control" })
@@ -350,7 +338,7 @@
 		debugger;
 		var newData = {
 			//InvoiceID: InvoiceID,
-			CompanyID: $('#CompanyID').val(),
+			//CompanyID: $('#CompanyID').val(),
 			SellerPartyID: $('#SellerPartyID').val(),
 			//UserID: $('#ddlupdateInstituteType').val(),
 			Amount: $('#Amount').val(),
@@ -361,7 +349,7 @@
 			Remarks: $('#Remarks').val(),
 			PONo: $('#PONo').val(),
 			PendingAmount: $('#PendingAmount').val(),
-			FinYearID: $('#FinYearID').val(),
+			//FinYearID: $('#FinYearID').val(),
 			CGST: $('#CGST').val(),
 			CGSTAmount: $('#tdCGST').html(),
 			SGST: $('#SGST').val(),

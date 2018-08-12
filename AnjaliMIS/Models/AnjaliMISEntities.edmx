@@ -512,7 +512,7 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
-          <Property Name="Remarks" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="INV_ItemPrice">
           <Key>
@@ -728,8 +728,8 @@
           <Property Name="StateID" Type="int" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Mobile" Type="varchar" MaxLength="1" />
-          <Property Name="Phone" Type="varchar" MaxLength="1" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="PartyTypeID" Type="int" Nullable="false" />
           <Property Name="CompanyID" Type="int" Nullable="false" />
@@ -4501,7 +4501,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
-          <Property Name="Remarks" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM" FromRole="INV_ItemConfiguration" ToRole="INV_Item" />
           <NavigationProperty Name="INV_Item1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_SubItemID_201806280619PM" FromRole="INV_ItemConfiguration" ToRole="INV_Item" />
           <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_UserID_201806280619PM" FromRole="INV_ItemConfiguration" ToRole="SEC_User" />
@@ -4763,8 +4763,8 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="StateID" Type="Int32" Nullable="false" />
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Mobile" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PartyTypeID" Type="Int32" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
