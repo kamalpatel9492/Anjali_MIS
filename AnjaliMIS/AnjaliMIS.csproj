@@ -49,10 +49,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -201,6 +203,7 @@
     <Compile Include="Controllers\INV_InvoiceController.cs" />
     <Compile Include="Controllers\INV_ItemConfigurationController.cs" />
     <Compile Include="Controllers\INV_ItemController.cs" />
+    <Compile Include="Controllers\INV_ItemIssueReturnController.cs" />
     <Compile Include="Controllers\INV_ItemPriceController.cs" />
     <Compile Include="Controllers\INV_PurchaseOrderController.cs" />
     <Compile Include="Controllers\INV_StockHistoryController.cs" />
@@ -4683,6 +4686,7 @@
     <Content Include="Views\INV_PurchaseOrder\Index.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\CreatePurchaseOrder.cshtml" />
     <Content Include="Views\INV_Invoice\Print.cshtml" />
+    <Content Include="Views\INV_ItemIssueReturn\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,5 +26,8 @@ namespace AnjaliMIS.Models
         public virtual INV_Item INV_Item { get; set; }
         public virtual INV_Item INV_Item1 { get; set; }
         public virtual SEC_User SEC_User { get; set; }
+
+        //retrieve type means:- 1/True= FOR USE 0/False=For Assmeble  
+        public bool RetrieveType { get; set; }
     }
 }

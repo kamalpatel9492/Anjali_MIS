@@ -1,0 +1,378 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Index",
+                    new { controller = "INV_ItemIssueReturn" })
+    </li>
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Issue tab
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="form-section">Issue tab details</h3>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <select id="ddlItemList" class="form-control"></select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">User List</label>
+                        <div class="col-md-2">
+                            <select id="ddlUserList" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Assign</label>
+                        <div class="col-md-4 radio-list">
+                            <label class="radio-inline">
+                                <input type="radio" name="assign" value="True">for use
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="assign" value="False">for assmeble
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="tableForUse" hidden>
+                        <label class="control-label col-md-2">Item </label>
+                        <div class="col-md-2">
+                            <input id="txtItemName" type="text" class="form-control" readonly />
+                        </div>
+
+                        <label class="control-label col-md-2">Quantity</label>
+                        <div class="col-md-2">
+                            <input id="txtQuantity" type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="divForAssmeble" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-10">
+                            <table class="table table-bordered table-responsive" id="tableForAssmeble">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyForAssmeble" id="tbodyForAssmeble">
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="btnForUSer" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveForUse" class="form-control">For Use Save</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="btnForAssmeble" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveForAssmeble" class="form-control">For Assmeble Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        RetrieveitemList();
+        RetrieveUserList();
+        $('input:radio[name=assign]').change(function () {
+            if ($('input[name=assign]:checked').val() == "True") {
+                debugger;
+                GetItem();
+                $('#tableForUse').show();
+                $('#btnForUSer').show();
+                $('#divForAssmeble').hide();
+                $('#btnForAssmeble').hide();
+
+
+
+            }
+            else if ($('input[name=assign]:checked').val() == "False") {
+                debugger;
+                GetItem();
+                $('#tableForUse').hide();
+                $('#btnForUSer').hide();
+                $('#divForAssmeble').show();
+                $('#btnForAssmeble').show();
+
+            } else {
+                debugger;
+                $('#tableForUse').hide();
+                $('#btnForUSer').hide();
+                $('#divForAssmeble').hide();
+                $('#btnForAssmeble').hide();
+            }
+        });
+
+        //btnSaveForUse click event
+        $("#btnSaveForUse").click(function () {
+            debugger;
+            SaveItemForUse();
+
+        });
+        //btnSaveForAssmeble click event
+        $("#btnSaveForAssmeble").click(function () {
+            debugger;
+            SaveItemForAssmeble();
+
+        });
+    });
+    function RetrieveitemList() {
+        $.ajax({
+            url: "/INV_Invoice/RetrieveItemList",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlItemList").empty();
+                    $("#ddlItemList").append('<option value="0">Select Item</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                        $("#ddlItemList").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    function RetrieveUserList() {
+        $.ajax({
+            url: "/INV_ItemIssueReturn/RetrieveUserList",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlUserList").empty();
+                    $("#ddlUserList").append('<option value="0">Select User</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].UserID).text(result[i].UserName);
+                        $("#ddlUserList").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+    function GetItem() {
+
+        var postData = {
+            MainItemID: $('#ddlItemList').val(),
+            //UserID: $('#ddlUserList').val(),
+            RetrieveType: $('input[name=assign]:checked').val()
+        };
+
+
+        $.ajax({
+            url: "/INV_ItemIssueReturn/Retrieve_INV_ItemConfiguration_List",
+            data: JSON.stringify(postData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                if ($('input[name=assign]:checked').val() == "True") {
+                    $('#txtItemName').val(result.ItemName);
+                    $('#txtQuantity').val(result.Qunatity);
+                }
+                else if ($('input[name=assign]:checked').val() == "False") {
+                    var html = '';
+                    var i = 1;
+                    $.each(result, function (key, value) {
+                        html += '<tr id='+i+'>';
+                        html += '<td><input type="checkbox" name="chkForAssmeble" value="' + result[key].SubItemID + '"></td>';
+                        html += '<td>' + result[key].ItemName + '</td>';
+                        html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
+                        html += '</tr>';
+                        i++;
+                    });
+                    $('#tbodyForAssmeble').append(html);
+                }
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
+
+    function SaveItemForUse() {
+
+        var postData = {
+            MainItemID: $('#ddlItemList').val(),
+            Qunatity: $('#txtQuantity').val()
+            
+            //UserID: $('#ddlUserList').val(),
+            //RetrieveType: $('input[name=assign]:checked').val()
+        };
+
+
+        $.ajax({
+            url: "/INV_ItemIssueReturn/SaveForUse",
+            data: JSON.stringify(postData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                location.reload();
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
+    function SaveItemForAssmeble() {
+
+        var itemList = [];
+        $('#tableForAssmeble input:checked').each(function () {
+            var checkbboxid=$(this).val();
+            
+            var tablerowid = $(this).closest('tr').attr('id');
+            var quantityValue = $("#quantity" + tablerowid).val();          
+            itemList.push({
+
+                SubItemID: checkbboxid,
+                Qunatity: quantityValue
+            });
+        });
+        
+
+        //var postData = {
+        //    MainItemID: $('#ddlItemList').val(),
+        //    UserID: $('#ddlUserList').val(),
+        //    RetrieveType: $('input[name=assign]:checked').val()
+        //};
+
+
+        $.ajax({
+            url: "/INV_ItemIssueReturn/SaveForAssmeble",
+            data: JSON.stringify(itemList),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                location.reload();
+                //itemList = [];
+                //alert(result);
+            },
+            error: function (errormessage) {
+
+
+            }
+        });
+    }
+
+</script>
+
+
+<div class="col-md-12">
+    <div class="portlet box blue">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-gift"></i>Return tab
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <!-- BEGIN FORM-->
+            <div class="form-horizontal">
+                <div class="form-body">
+                    <h3 class="form-section">Return tab details</h3>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <select id="ddlItemList" class="form-control"></select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2">User List</label>
+                        <div class="col-md-2">
+                            <select id="ddlUserList" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Item</label>
+                        <div class="col-md-4 radio-list">
+                            <label class="radio-inline">
+                                <input type="radio" name="rbtnItem" value="True">Main Item
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="rbtntem" value="False">Sub Item
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="tableForUse" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <input id="txtItemName" type="text" class="form-control" readonly />
+                        </div>
+
+                        <label class="control-label col-md-2">Quantity</label>
+                        <div class="col-md-2">
+                            <input id="txtQuantity" type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="btnForUSer" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveForUse" class="form-control">For Use Save</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="btnForAssmeble" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveForAssmeble" class="form-control">For Assmeble Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
