@@ -7,12 +7,10 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
-using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
-	[SessionTimeout]
-	public class EMP_EmployeeController : Controller
+    public class EMP_EmployeeController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
@@ -49,9 +47,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-			EMP_Employee _eMP_Employee = new EMP_Employee();
-			return View("Edit", _eMP_Employee);
-		}
+            EMP_Employee _eMP_Employee = new EMP_Employee();
+            return View("Edit", _eMP_Employee);
+        }
 
         // POST: EMP_Employee/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -62,13 +60,13 @@ namespace AnjaliMIS.Controllers
         {
             if (ModelState.IsValid)
             {
-				eMP_Employee.Created = DateTime.Now;
-				eMP_Employee.Modified = DateTime.Now;
-				if (Session["UserID"] != null)
-				{
-					eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.EMP_Employee.Add(eMP_Employee);
+                eMP_Employee.Created = DateTime.Now;
+                eMP_Employee.Modified = DateTime.Now;
+                if (Session["UserID"] != null)
+                {
+                    eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.EMP_Employee.Add(eMP_Employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -117,12 +115,12 @@ namespace AnjaliMIS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(eMP_Employee).State = EntityState.Modified;
-				eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
-				if (Session["UserID"] != null)
-				{
-					eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
-				}
-				db.SaveChanges();
+                eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
+                if (Session["UserID"] != null)
+                {
+                    eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.BankID = new SelectList(db.ACC_Bank, "BankID", "BankName", eMP_Employee.BankID);

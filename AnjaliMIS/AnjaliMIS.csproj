@@ -4633,10 +4633,6 @@
     <Content Include="Views\DIA_Machine\Details.cshtml" />
     <Content Include="Views\DIA_Machine\Edit.cshtml" />
     <Content Include="Views\DIA_Machine\Index.cshtml" />
-    <Content Include="Views\EMP_Employee\Delete.cshtml" />
-    <Content Include="Views\EMP_Employee\Details.cshtml" />
-    <Content Include="Views\EMP_Employee\Edit.cshtml" />
-    <Content Include="Views\EMP_Employee\Index.cshtml" />
     <Content Include="Views\PartialViewMenu\_MainMenu.cshtml" />
     <Content Include="Views\Home\_MainMenu.cshtml" />
     <Content Include="Views\DIA_Jangad\Delete.cshtml" />
@@ -4687,6 +4683,11 @@
     <Content Include="Views\INV_PurchaseOrder\CreatePurchaseOrder.cshtml" />
     <Content Include="Views\INV_Invoice\Print.cshtml" />
     <Content Include="Views\INV_ItemIssueReturn\Index.cshtml" />
+    <Content Include="Views\EMP_Employee\Create.cshtml" />
+    <Content Include="Views\EMP_Employee\Delete.cshtml" />
+    <Content Include="Views\EMP_Employee\Details.cshtml" />
+    <Content Include="Views\EMP_Employee\Edit.cshtml" />
+    <Content Include="Views\EMP_Employee\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
