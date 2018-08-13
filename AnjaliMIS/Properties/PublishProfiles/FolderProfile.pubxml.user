@@ -271,478 +271,478 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:38:41</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/custom.css">
-      <publishTime>07/04/2018 03:38:41</publishTime>
+      <publishTime>07/26/2018 19:11:14</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/layout.css">
-      <publishTime>07/04/2018 03:38:41</publishTime>
+      <publishTime>07/26/2018 19:11:14</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/themes/blue.css">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/themes/dark.css">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/themes/default.css">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/themes/grey.css">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/css/themes/light.css">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/ajax-loading.gif">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/ajax-modal-loading.gif">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/arrow-down.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar1.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar10.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar11.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar1_small.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar2.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar3.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar3_small.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar4.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar5.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar6.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar7.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar8.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:15</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/avatar9.jpg">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/hor-menu-red-arrow.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/icon-color-close.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/icon-color.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/icon-img-down.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/icon-img-up.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/inbox-nav-arrow-blue.png">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/loading-spinner-blue.gif">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/loading-spinner-default.gif">
-      <publishTime>07/04/2018 03:38:42</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/loading-spinner-grey.gif">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/loading.gif">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/logo-big-white.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/logo-big.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/logo-default.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/logo.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/menu-toggler.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/photo1.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/photo2.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/remove-icon-small.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/search_icon_light.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar-menu-arrow-reverse.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar-menu-arrow-right.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar-menu-arrow.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar-toggler-inverse.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:16</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar-toggler.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_arrow_icon_light.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_arrow_icon_light_rtl.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_blue.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_darkblue.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_default.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_grey.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_light.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_inline_toggler_icon_light2.jpg">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_blue.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_darkblue.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_default.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_grey.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_light.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/img/sidebar_toggler_icon_light2.png">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/scripts/demo.js">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/scripts/layout.js">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout2/scripts/quick-sidebar.js">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/custom.css">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/layout.css">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/blue-hoki.css">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/blue-steel.css">
-      <publishTime>07/04/2018 03:38:43</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/default.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/green-haze.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:17</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/purple-plum.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/purple-studio.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/red-intense.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/red-sunglo.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/yellow-crusta.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/css/themes/yellow-orange.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/ajax-loading.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/ajax-modal-loading.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar1.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar10.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar11.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar2.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar3.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar4.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar5.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar6.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar7.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar8.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/avatar9.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/icon-color-close.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/icon-color.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/loading-spinner-blue.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/loading-spinner-default.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/loading-spinner-grey.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/loading.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-big-white.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-big.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-blue-hoki.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-blue-steel.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-default.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-green-haze.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-purple-plum.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:18</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-purple-studio.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-red-intense.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-red-sunglo.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-yellow-crusta.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo-yellow-orange.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/logo.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/img/menu-toggler.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/scripts/demo.js">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout3/scripts/layout.js">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/css/custom.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/css/layout.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/css/themes/default.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/css/themes/light.css">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/ajax-loading.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/ajax-modal-loading.gif">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/arrow-down.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar.png">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar1.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar10.jpg">
-      <publishTime>07/04/2018 03:38:44</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar11.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar1_small.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar2.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar3.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar3_small.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar4.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar5.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar6.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar7.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar8.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/avatar9.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/hor-menu-red-arrow.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/icon-color-close.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/icon-color.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/icon-img-down.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/icon-img-up.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/inbox-nav-arrow-blue.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/loading-spinner-blue.gif">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/loading-spinner-default.gif">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/loading-spinner-grey.gif">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/loading.gif">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/logo-big-white.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/logo-big.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/logo-default.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/logo-light.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/logo.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/menu-toggler.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/photo1.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/photo2.jpg">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/remove-icon-small.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/search_icon_light.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/sidebar-toggle-dark.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/img/sidebar-toggle-light.png">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:19</publishTime>
     </File>
     <File Include="assets/admin/layout4/scripts/demo.js">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:20</publishTime>
     </File>
     <File Include="assets/admin/layout4/scripts/layout.js">
-      <publishTime>07/04/2018 03:38:45</publishTime>
+      <publishTime>07/26/2018 19:11:20</publishTime>
     </File>
     <File Include="assets/admin/pages/css/about-us.css">
       <publishTime>07/04/2018 03:38:45</publishTime>
@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>07/19/2018 01:32:07</publishTime>
+      <publishTime>08/13/2018 00:27:22</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>07/19/2018 01:32:07</publishTime>
+      <publishTime>08/13/2018 00:27:22</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>07/10/2018 01:02:03</publishTime>
@@ -12247,10 +12247,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
-      <publishTime>07/03/2018 20:56:17</publishTime>
+      <publishTime>06/18/2018 13:00:14</publishTime>
     </File>
     <File Include="bin/AutoMapper.pdb">
-      <publishTime>07/03/2018 20:56:17</publishTime>
+      <publishTime>06/18/2018 13:00:14</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
       <publishTime>07/03/2018 21:05:11</publishTime>
@@ -12364,7 +12364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2018 21:04:04</publishTime>
     </File>
     <File Include="bin/System.Web.Providers.dll">
-      <publishTime>08/14/2012 14:50:14</publishTime>
+      <publishTime>11/22/2013 10:21:56</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>07/02/2018 23:00:46</publishTime>
@@ -12577,10 +12577,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/12/2018 09:14:59</publishTime>
     </File>
     <File Include="Models/AnjaliMISEntities.edmx.diagram">
-      <publishTime>07/13/2018 04:01:32</publishTime>
+      <publishTime>08/12/2018 23:07:02</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/13/2018 01:26:29</publishTime>
+      <publishTime>08/12/2018 22:07:55</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
       <publishTime>07/03/2018 20:50:28</publishTime>
@@ -12735,26 +12735,119 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/EMP_Designation/Index.cshtml">
       <publishTime>07/12/2018 09:34:46</publishTime>
     </File>
+    <File Include="Views/EMP_Employee/Create.cshtml">
+      <publishTime>08/12/2018 23:57:55</publishTime>
+    </File>
     <File Include="Views/EMP_Employee/Delete.cshtml">
-      <publishTime>07/13/2018 01:45:20</publishTime>
+      <publishTime>08/12/2018 23:57:57</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Details.cshtml">
-      <publishTime>07/13/2018 01:45:20</publishTime>
+      <publishTime>08/12/2018 23:58:00</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Edit.cshtml">
-      <publishTime>07/13/2018 02:04:07</publishTime>
+      <publishTime>08/13/2018 00:06:37</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Index.cshtml">
-      <publishTime>07/13/2018 01:45:20</publishTime>
+      <publishTime>08/13/2018 00:08:41</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>07/13/2018 01:26:18</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
-      <publishTime>07/11/2018 01:46:57</publishTime>
+      <publishTime>07/31/2018 00:11:16</publishTime>
     </File>
     <File Include="Views/Home/_MainMenu.cshtml">
       <publishTime>07/13/2018 03:39:51</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/CreateInvoice.cshtml">
+      <publishTime>08/09/2018 02:35:21</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/Delete.cshtml">
+      <publishTime>07/24/2018 23:38:06</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/Details.cshtml">
+      <publishTime>07/24/2018 23:38:06</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/Edit.cshtml">
+      <publishTime>08/06/2018 13:10:39</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/Index.cshtml">
+      <publishTime>08/09/2018 01:44:56</publishTime>
+    </File>
+    <File Include="Views/INV_Invoice/Print.cshtml">
+      <publishTime>08/03/2018 00:27:49</publishTime>
+    </File>
+    <File Include="Views/INV_Item/Dashboard.cshtml">
+      <publishTime>08/01/2018 01:49:17</publishTime>
+    </File>
+    <File Include="Views/INV_Item/Delete.cshtml">
+      <publishTime>07/28/2018 07:14:54</publishTime>
+    </File>
+    <File Include="Views/INV_Item/Details.cshtml">
+      <publishTime>07/24/2018 23:38:06</publishTime>
+    </File>
+    <File Include="Views/INV_Item/Edit.cshtml">
+      <publishTime>08/01/2018 01:50:05</publishTime>
+    </File>
+    <File Include="Views/INV_Item/Index.cshtml">
+      <publishTime>08/05/2018 17:01:20</publishTime>
+    </File>
+    <File Include="Views/INV_ItemConfiguration/Delete.cshtml">
+      <publishTime>08/01/2018 01:59:21</publishTime>
+    </File>
+    <File Include="Views/INV_ItemConfiguration/Details.cshtml">
+      <publishTime>07/24/2018 23:38:06</publishTime>
+    </File>
+    <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
+      <publishTime>08/12/2018 22:05:28</publishTime>
+    </File>
+    <File Include="Views/INV_ItemConfiguration/Index.cshtml">
+      <publishTime>08/12/2018 16:35:15</publishTime>
+    </File>
+    <File Include="Views/INV_ItemIssueReturn/Index.cshtml">
+      <publishTime>08/12/2018 22:07:55</publishTime>
+    </File>
+    <File Include="Views/INV_ItemPrice/Delete.cshtml">
+      <publishTime>08/01/2018 01:57:22</publishTime>
+    </File>
+    <File Include="Views/INV_ItemPrice/Details.cshtml">
+      <publishTime>07/24/2018 22:48:39</publishTime>
+    </File>
+    <File Include="Views/INV_ItemPrice/Edit.cshtml">
+      <publishTime>07/24/2018 23:25:26</publishTime>
+    </File>
+    <File Include="Views/INV_ItemPrice/Index.cshtml">
+      <publishTime>08/09/2018 00:20:11</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/CreatePurchaseOrder.cshtml">
+      <publishTime>08/12/2018 23:24:54</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/Delete.cshtml">
+      <publishTime>08/04/2018 10:03:14</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/Details.cshtml">
+      <publishTime>08/04/2018 10:03:14</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/Edit.cshtml">
+      <publishTime>08/04/2018 10:03:14</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/Index.cshtml">
+      <publishTime>08/09/2018 01:44:20</publishTime>
+    </File>
+    <File Include="Views/INV_StockHistory/Create.cshtml">
+      <publishTime>07/25/2018 02:22:24</publishTime>
+    </File>
+    <File Include="Views/INV_StockHistory/Delete.cshtml">
+      <publishTime>07/25/2018 02:22:26</publishTime>
+    </File>
+    <File Include="Views/INV_StockHistory/Details.cshtml">
+      <publishTime>07/25/2018 02:22:29</publishTime>
+    </File>
+    <File Include="Views/INV_StockHistory/Edit.cshtml">
+      <publishTime>07/25/2018 02:22:31</publishTime>
+    </File>
+    <File Include="Views/INV_StockHistory/Index.cshtml">
+      <publishTime>07/25/2018 02:31:04</publishTime>
     </File>
     <File Include="Views/INV_Unit/Delete.cshtml">
       <publishTime>07/12/2018 09:19:20</publishTime>
@@ -12823,10 +12916,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/13/2018 01:45:20</publishTime>
     </File>
     <File Include="Views/MST_Party/Edit.cshtml">
-      <publishTime>07/18/2018 21:08:52</publishTime>
+      <publishTime>08/05/2018 16:01:44</publishTime>
     </File>
     <File Include="Views/MST_Party/Index.cshtml">
-      <publishTime>07/18/2018 21:16:24</publishTime>
+      <publishTime>08/05/2018 15:52:44</publishTime>
     </File>
     <File Include="Views/PartialViewMenu/_MainMenu.cshtml">
       <publishTime>07/13/2018 03:28:04</publishTime>
@@ -12847,7 +12940,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/13/2018 03:29:51</publishTime>
+      <publishTime>08/09/2018 01:34:43</publishTime>
     </File>
     <File Include="Views/SYS_PartyType/Delete.cshtml">
       <publishTime>07/12/2018 09:38:44</publishTime>
@@ -12868,7 +12961,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/13/2018 03:45:13</publishTime>
+      <publishTime>08/13/2018 00:12:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

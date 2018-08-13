@@ -4675,7 +4675,6 @@
     <Content Include="Views\INV_StockHistory\Index.cshtml" />
     <Content Include="Views\INV_Invoice\CreateInvoice.cshtml" />
     <Content Include="Views\INV_Item\Dashboard.cshtml" />
-    <Content Include="Views\INV_PurchaseOrder\Create.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\Delete.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\Details.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\Edit.cshtml" />

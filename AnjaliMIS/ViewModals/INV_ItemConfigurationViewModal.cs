@@ -10,7 +10,7 @@ namespace AnjaliMIS.ViewModals
     {
         public INV_ItemConfigurationViewModal()
         {
-            SubItems = new List<INV_Item>();
+            SubItems = new List<INV_ItemConfiguration>();
         }
         public int ItemConfigurationID { get; set; }
         public int MainItemID { get; set; }
@@ -19,9 +19,9 @@ namespace AnjaliMIS.ViewModals
         public int UserID { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
-        public Nullable<System.DateTime> Remarks { get; set; }
+        public string Remarks { get; set; }
 
-        public List<INV_Item> SubItems { get; set; }
+        public List<INV_ItemConfiguration> SubItems { get; set; }
 
     }
 }
