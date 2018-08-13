@@ -169,7 +169,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
             ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
-            ViewBag.ItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
+            ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             //model.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.ToList();
             return View(model);
         }

@@ -45,8 +45,8 @@ namespace AnjaliMIS.Controllers
         // GET: INV_ItemConfiguration/Create
         public ActionResult Create()
         {
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
+            ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
+            ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
             INV_ItemConfigurationViewModal _iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
             return View("Edit", _iNV_ItemConfigurationViewModal);
@@ -117,8 +117,8 @@ namespace AnjaliMIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
+            ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
+            ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
             return View(iNV_ItemConfigurationViewModal);
         }
@@ -162,8 +162,8 @@ namespace AnjaliMIS.Controllers
                 }
             }
 
-            ViewBag.MainItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
-            ViewBag.SubItemID = new SelectList(db.INV_Item, "ItemID", "ItemName", iNV_ItemConfiguration.SubItemID);
+            ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
+            ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
             return RedirectToAction("Index");
         }
@@ -208,7 +208,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var itemList = db.INV_Item.Select(e => new
+                var itemList = db.INV_Item.Where(w => w.IsLock == true).Select(e => new
                 {
                     ItemID = e.ItemID,
                     ItemName = e.ItemName

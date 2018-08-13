@@ -64,16 +64,24 @@
 						</div>
 
 
-						<div class="form-group">
-
-							@Html.LabelFor(model => model.IsLocal, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								<div class="checkbox">
-									@Html.EditorFor(model => model.IsLocal)
-									@Html.ValidationMessageFor(model => model.IsLocal, "", new { @class = "text-danger" })
-								</div>
-							</div>
-						</div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="isLocal" value="True">Yes
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="isLocal" value="False">No
+                                </label>
+                            </div>
+                            @*@Html.LabelFor(model => model.IsLocal, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.IsLocal)
+                                    @Html.ValidationMessageFor(model => model.IsLocal, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        </div>
 
 
 						<div id="divCGST" class="form-group" hidden>
@@ -92,7 +100,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group" id="divIGST" hidden>
 							@Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-10">
 								@Html.DropDownList("IGST", null, htmlAttributes: new { @class = "form-control" })
@@ -112,7 +120,7 @@
 							</div>
 							<label class="control-label col-md-2">Item Price</label>
 							<div class="col-md-2">
-								<input id="txtItemPrice" type="text" class="form-control" readonly />
+								<input id="txtItemPrice" type="text" class="form-control" />
 							</div>
 						</div>
 
@@ -232,22 +240,22 @@
 			location.reload(true);
 		});
 
-		$("#IsLocal").change(function () {
-
-			if ($("#IsLocal").val() == "true") {
-				$('#divSGST').show();
-				$('#divCGST').hide();
-			}
-			else if ($("#IsLocal").val() == "false") {
-				$('#divCGST').show();
-				$('#divSGST').hide();
-			} else {
-				$('#divCGST').hide();
-				$('#divSGST').hide();
-			}
-			//var ddlitemid = $('#ItemID').val();
-			//GetItemPrice(ddlitemid);
-		});
+        $('input:radio[name=isLocal]').change(function () {
+            if ($('input[name=isLocal]:checked').val() == "True") {
+                $('#divSGST').show();
+                $('#divCGST').show();
+                $('#divIGST').hide();
+            }
+            else if ($('input[name=isLocal]:checked').val() == "False") {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').show();
+            } else {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').hide();
+            }
+        });
 
 
 		$(".add-row").click(function () {
@@ -356,7 +364,7 @@
 			SGSTAmount: $('#tdSGST').html(),
 			IGST: $('#IGST').val(),
 			IGSTAmount: $('#tdIGST').html(),
-			IsLocal: $('#IsLocal').val(),
+            IsLocal: $('input[name=isLocal]:checked').val(),
 			IsActive: $('#IsActive').val(),
 			Casar: $('#Casar').val(),
 			TotalAmount: $('#tdFinalTotal').html(),

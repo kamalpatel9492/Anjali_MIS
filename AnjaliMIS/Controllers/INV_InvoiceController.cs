@@ -219,7 +219,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
             ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
-            ViewBag.ItemID = new SelectList(db.INV_Item, "ItemID", "ItemName");
+            ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             //ViewBag.ItemPrice = new SelectList(db.INV_ItemPrice, "ItemPriceID", "PurchasePrice");
             return View(model);
         }
@@ -313,7 +313,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var itemList = db.INV_Item.Select(e => new
+                var itemList = db.INV_Item.Where(w => w.IsLock == true).Select(e => new
                 {
                     ItemID = e.ItemID,
                     ItemName = e.ItemName

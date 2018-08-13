@@ -75,6 +75,7 @@ namespace AnjaliMIS.Controllers
             {
                 iNV_Item.Created = DateTime.Now;
                 iNV_Item.Modified = DateTime.Now;
+                iNV_Item.CompanyID = 4;
                 if (Session["UserID"] != null)
                 {
                     iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());

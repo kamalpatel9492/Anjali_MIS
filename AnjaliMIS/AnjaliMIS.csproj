@@ -4687,6 +4687,7 @@
     <Content Include="Views\EMP_Employee\Details.cshtml" />
     <Content Include="Views\EMP_Employee\Edit.cshtml" />
     <Content Include="Views\EMP_Employee\Index.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

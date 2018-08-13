@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>08/13/2018 00:27:22</publishTime>
+      <publishTime>08/14/2018 00:27:38</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>08/13/2018 00:27:22</publishTime>
+      <publishTime>08/14/2018 00:27:38</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>07/10/2018 01:02:03</publishTime>
@@ -12799,10 +12799,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
-      <publishTime>08/12/2018 22:05:28</publishTime>
+      <publishTime>08/14/2018 00:22:47</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Index.cshtml">
-      <publishTime>08/12/2018 16:35:15</publishTime>
+      <publishTime>08/13/2018 23:12:55</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Index.cshtml">
       <publishTime>08/12/2018 22:07:55</publishTime>

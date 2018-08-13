@@ -39,19 +39,46 @@
             </div>
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
-                        @{
-                            if (Session["UserName"] != null)
-                            {
-                                string UserName = Session["UserName"].ToString();
-                                @Html.ActionLink(@UserName, "", "")
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />
+                            <span class="username username-hide-on-mobile">
+                                @{
+                                    if (Session["UserName"] != null)
+                                    {
+                                        string UserName = Session["UserName"].ToString();
+                                        @UserName
+                                    }
+                                }
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="#">
+                                    <i class="icon-user"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout", "Home")">
+                                    <i class="icon-key"></i> Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                        @*<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                            @{
+                                if (Session["UserName"] != null)
+                                {
+                                    string UserName = Session["UserName"].ToString();
+                                    @Html.ActionLink(@UserName, "", "")
+                                }
                             }
-                        }
-                    </li>
+                        </li>*@
 
-                    <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    @*<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                         @Html.ActionLink("Log Out", "Logout", "Home")
-                    </li>
+                    </li>*@
                 </ul>
             </div>
         </div>
