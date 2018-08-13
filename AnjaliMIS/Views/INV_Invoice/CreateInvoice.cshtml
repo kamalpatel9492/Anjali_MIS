@@ -360,7 +360,7 @@
             dataType: "json",
             data: "{ ItemID:'" + ddlitemid + "'}",
             contentType: "application/json;charset=utf-8",
-            url: "/INV_Invoice/DropDownItemPrice",
+            url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
             success: (function (result) {
 
                 $('#txtItemPrice').val(result);
@@ -406,7 +406,7 @@
 
 
         $.ajax({
-            url: "/INV_Invoice/AddInvoice",
+            url: '@Url.Action("AddInvoice", "INV_Invoice")',
             data: JSON.stringify(newData),
             type: "POST",
             contentType: "application/json;charset=utf-8",
@@ -460,7 +460,7 @@
     //Retrive SGST
     function RetrieveSGST() {
         $.ajax({
-            url: "/INV_Invoice/RetrieveSGST",
+            url: '@Url.Action("RetrieveSGST", "INV_Invoice")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
@@ -486,7 +486,7 @@
     //Retrive CGST
     function RetrieveCGST() {
         $.ajax({
-            url: "/INV_Invoice/RetrieveCGST",
+            url: '@Url.Action("RetrieveCGST", "INV_Invoice")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
@@ -512,7 +512,7 @@
     //Retrive IGST
     function RetrieveIGST() {
         $.ajax({
-            url: "/INV_Invoice/RetrieveIGST",
+            url: '@Url.Action("RetrieveIGST", "INV_Invoice")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
@@ -539,7 +539,7 @@
     //Retrive SGST
     function RetrieveitemList() {
         $.ajax({
-            url: "/INV_Invoice/RetrieveItemList",
+            url: '@Url.Action("RetrieveItemList", "INV_Invoice")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",

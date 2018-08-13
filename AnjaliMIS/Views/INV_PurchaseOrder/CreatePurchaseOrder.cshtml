@@ -330,7 +330,7 @@
 			dataType: "json",
 			data: "{ ItemID:'" + ddlitemid + "'}",
 			contentType: "application/json;charset=utf-8",
-			url: "/INV_Invoice/DropDownItemPrice",
+			url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
 			success: (function (result) {
 				debugger;
 				$('#txtItemPrice').val(result);
@@ -374,7 +374,7 @@
 		console.log(newData);
 
 		$.ajax({
-			url: "/INV_PurchaseOrder/AddPurchaseOrder",
+			url: '@Url.Action("AddPurchaseOrder", "INV_PurchaseOrder")',
 			data: JSON.stringify(newData),
 			type: "POST",
 			contentType: "application/json;charset=utf-8",

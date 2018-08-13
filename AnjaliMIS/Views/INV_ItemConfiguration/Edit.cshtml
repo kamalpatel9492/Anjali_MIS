@@ -200,7 +200,7 @@
     });
     function RetrieveitemList() {
         $.ajax({
-            url: "/INV_ItemConfiguration/RetrieveItemList",
+            url: '@Url.Action("RetrieveItemList", "INV_ItemConfiguration")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
@@ -232,7 +232,7 @@
 
 
         $.ajax({
-            url: "/INV_ItemConfiguration/Create",
+            url: '@Url.Action("Create", "INV_ItemConfiguration")',
             data: JSON.stringify(newData),
             type: "POST",
             contentType: "application/json;charset=utf-8",
