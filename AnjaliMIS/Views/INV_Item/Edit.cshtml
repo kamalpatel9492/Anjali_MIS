@@ -16,7 +16,12 @@
 
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.ItemID)
-
+    @Html.HiddenFor(model => model.ItemCode)
+    @Html.HiddenFor(model => model.UnitID)
+    if (Model.IsLock == true)
+    {
+        @Html.HiddenFor(model => model.IsLock)
+    }
     <!--Add-Edit code start-->
     <div class="col-md-12">
         <!-- BEGIN VALIDATION STATES-->
@@ -33,6 +38,13 @@
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<h3 class="form-section">Basic validation States</h3>*@
                         <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
                             @Html.LabelFor(model => model.ItemName, "Item Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
@@ -40,7 +52,14 @@
                             </div>
                             @Html.LabelFor(model => model.UnitID, "Unit", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control" })
+                                @if (Model.IsLock == true)
+                                {
+                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control" })
+                                }
                                 @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -60,6 +79,21 @@
                                 </div>
                             </div>
                         }
+                        else
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.MinStockLimit, "Min. Stock ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.MinStockLimit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.MinStockLimit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,7 +102,7 @@
                                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.RejectedQuantity,"Rejected Qty.", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.RejectedQuantity, "Rejected Qty.", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
                                     @Html.EditorFor(model => model.RejectedQuantity, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.RejectedQuantity, "", new { @class = "text-danger" })
@@ -88,9 +122,17 @@
                                 @Html.LabelFor(model => model.IsLock, "Is Lock?", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
                                     <div class="checkbox">
-                                        @*@Html.CheckBoxFor(nameof(Model.IsLock), Model.IsLock ?? false)*@
-                                        @*@Html.CheckBoxFor(model => model.IsLock.GetValueOrDefault())*@
                                         @Html.CheckBoxFor(model => model.IsLock)
+                                        @Html.ValidationMessageFor(model => model.IsLock, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.IsLock, "Is Lock?", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(model => model.IsLock, htmlAttributes: new { @disabled = "disabled" })
                                         @Html.ValidationMessageFor(model => model.IsLock, "", new { @class = "text-danger" })
                                     </div>
                                 </div>

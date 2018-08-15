@@ -200,6 +200,7 @@
     <Compile Include="Controllers\EMP_DesignationController.cs" />
     <Compile Include="Controllers\EMP_EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INV_CategoryController.cs" />
     <Compile Include="Controllers\INV_InvoiceController.cs" />
     <Compile Include="Controllers\INV_ItemConfigurationController.cs" />
     <Compile Include="Controllers\INV_ItemController.cs" />
@@ -296,6 +297,9 @@
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EMP_Punch.cs">
+      <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INV_Category.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\INV_Invoice.cs">
@@ -4688,6 +4692,11 @@
     <Content Include="Views\EMP_Employee\Edit.cshtml" />
     <Content Include="Views\EMP_Employee\Index.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\Print.cshtml" />
+    <Content Include="Views\INV_Category\Create.cshtml" />
+    <Content Include="Views\INV_Category\Delete.cshtml" />
+    <Content Include="Views\INV_Category\Details.cshtml" />
+    <Content Include="Views\INV_Category\Edit.cshtml" />
+    <Content Include="Views\INV_Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

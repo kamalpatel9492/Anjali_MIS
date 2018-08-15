@@ -48,6 +48,7 @@ namespace AnjaliMIS.Models
         public DbSet<EMP_Employee> EMP_Employee { get; set; }
         public DbSet<EMP_EmployeeAttendance> EMP_EmployeeAttendance { get; set; }
         public DbSet<EMP_Punch> EMP_Punch { get; set; }
+        public DbSet<INV_Category> INV_Category { get; set; }
         public DbSet<INV_Invoice> INV_Invoice { get; set; }
         public DbSet<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
         public DbSet<INV_InvoiceItem> INV_InvoiceItem { get; set; }

@@ -1,6 +1,8 @@
-﻿@model AnjaliMIS.Models.INV_Item
+﻿@model AnjaliMIS.Models.INV_Category
 
 @{
+    /**/
+
     ViewBag.Title = "Delete";
 }
 
@@ -23,35 +25,19 @@
                 @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
                 <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.ItemName)
+                        @Html.DisplayNameFor(model => model.CategoryName)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.ItemName)
+                        @Html.DisplayFor(model => model.CategoryName)
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.IsConfigurable)
+                        @Html.DisplayNameFor(model => model.CategoryShortName)
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.IsConfigurable)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.Quantity)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.MinStockLimit)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.MinStockLimit)
+                        @Html.DisplayFor(model => model.CategoryShortName)
                     </dd>
 
                     <dt>
@@ -79,30 +65,6 @@
                     </dd>
 
                     <dt>
-                        @Html.DisplayNameFor(model => model.RejectedQuantity)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.RejectedQuantity)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.SYS_Company.CompanyName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.INV_Unit.Unit)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.INV_Unit.Unit)
-                    </dd>
-
-                    <dt>
                         @Html.DisplayNameFor(model => model.SEC_User.UserName)
                     </dt>
 
@@ -112,17 +74,15 @@
 
                 </dl>
 
-                <div class="form-actions">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <input type="submit" value="Delete" class="btn red danger" />
-                            @Html.ActionLink("Back to List", "Index", "INV_Item", new { @class = "btn default" })
-                        </div>
-                    </div>
+
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn red danger" />
+                    @Html.ActionLink("Back to List", "Index", "INV_Category", new { @class = "btn default" })
                 </div>
             }
         </div>
     </div>
-    <!-- END PORTLET-->
 </div>
+<!-- END PORTLET-->
 <!--Delete Page End-->

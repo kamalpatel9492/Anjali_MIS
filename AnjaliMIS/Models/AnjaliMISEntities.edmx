@@ -409,6 +409,18 @@
           <Property Name="Remarks" Type="varchar" MaxLength="50" />
           <Property Name="Created" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="INV_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CategoryShortName" Type="varchar" MaxLength="50" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="500" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="INV_Invoice">
           <Key>
             <PropertyRef Name="InvoiceID" />
@@ -500,6 +512,9 @@
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="RejectedQuantity" Type="int" />
           <Property Name="IsLock" Type="bit" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="INV_ItemConfiguration">
           <Key>
@@ -1717,6 +1732,18 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INV_Category_SEC_User">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+          <End Role="INV_Category" Type="Self.INV_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_Category">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_INV_Invoice_CGST_201806280657PM">
           <End Role="ACC_Tax" Type="Self.ACC_Tax" Multiplicity="0..1" />
           <End Role="INV_Invoice" Type="Self.INV_Invoice" Multiplicity="*" />
@@ -1945,7 +1972,31 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_INV_Unit">
+        <Association Name="FK_INV_Item_CompanyID_201806280618PM">
+          <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
+          <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_INV_Category">
+          <End Role="INV_Category" Type="Self.INV_Category" Multiplicity="0..1" />
+          <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_UnitID_201806280618PM">
           <End Role="INV_Unit" Type="Self.INV_Unit" Multiplicity="1" />
           <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1957,7 +2008,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_SEC_User">
+        <Association Name="FK_INV_Item_UserID_201806280618PM">
           <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
           <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1966,18 +2017,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Principal>
             <Dependent Role="INV_Item">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INV_Item_SYS_Company">
-          <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
-          <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Company">
-              <PropertyRef Name="CompanyID" />
-            </Principal>
-            <Dependent Role="INV_Item">
-              <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2606,6 +2645,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySet Name="EMP_Employee" EntityType="Self.EMP_Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMP_EmployeeAttendance" EntityType="Self.EMP_EmployeeAttendance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EMP_Punch" EntityType="Self.EMP_Punch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_Category" EntityType="Self.INV_Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_Invoice" EntityType="Self.INV_Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_InvoiceHistory" EntityType="Self.INV_InvoiceHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_InvoiceItem" EntityType="Self.INV_InvoiceItem" Schema="dbo" store:Type="Tables" />
@@ -2934,6 +2974,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="EMP_Employee" EntitySet="EMP_Employee" />
             <End Role="EMP_Punch" EntitySet="EMP_Punch" />
           </AssociationSet>
+          <AssociationSet Name="FK_INV_Category_SEC_User" Association="Self.FK_INV_Category_SEC_User">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_Category" EntitySet="INV_Category" />
+          </AssociationSet>
           <AssociationSet Name="FK_INV_Invoice_CGST_201806280657PM" Association="Self.FK_INV_Invoice_CGST_201806280657PM">
             <End Role="ACC_Tax" EntitySet="ACC_Tax" />
             <End Role="INV_Invoice" EntitySet="INV_Invoice" />
@@ -3010,16 +3054,20 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="INV_Item" EntitySet="INV_Item" />
             <End Role="INV_InvoiceItem" EntitySet="INV_InvoiceItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_INV_Unit" Association="Self.FK_INV_Item_INV_Unit">
+          <AssociationSet Name="FK_INV_Item_CompanyID_201806280618PM" Association="Self.FK_INV_Item_CompanyID_201806280618PM">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_INV_Category" Association="Self.FK_INV_Item_INV_Category">
+            <End Role="INV_Category" EntitySet="INV_Category" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_UnitID_201806280618PM" Association="Self.FK_INV_Item_UnitID_201806280618PM">
             <End Role="INV_Unit" EntitySet="INV_Unit" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SEC_User" Association="Self.FK_INV_Item_SEC_User">
+          <AssociationSet Name="FK_INV_Item_UserID_201806280618PM" Association="Self.FK_INV_Item_UserID_201806280618PM">
             <End Role="SEC_User" EntitySet="SEC_User" />
-            <End Role="INV_Item" EntitySet="INV_Item" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SYS_Company" Association="Self.FK_INV_Item_SYS_Company">
-            <End Role="SYS_Company" EntitySet="SYS_Company" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
           <AssociationSet Name="FK_INV_ItemConfiguration_MainItemID_201806280619PM" Association="Self.FK_INV_ItemConfiguration_MainItemID_201806280619PM">
@@ -3252,6 +3300,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySet Name="EMP_Employee" EntityType="DB_A157D8_AnjaliMISModel.EMP_Employee" />
           <EntitySet Name="EMP_EmployeeAttendance" EntityType="DB_A157D8_AnjaliMISModel.EMP_EmployeeAttendance" />
           <EntitySet Name="EMP_Punch" EntityType="DB_A157D8_AnjaliMISModel.EMP_Punch" />
+          <EntitySet Name="INV_Category" EntityType="DB_A157D8_AnjaliMISModel.INV_Category" />
           <EntitySet Name="INV_Invoice" EntityType="DB_A157D8_AnjaliMISModel.INV_Invoice" />
           <EntitySet Name="INV_InvoiceHistory" EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceHistory" />
           <EntitySet Name="INV_InvoiceItem" EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceItem" />
@@ -3597,6 +3646,14 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="SEC_User" EntitySet="SEC_User" />
             <End Role="EMP_EmployeeAttendance" EntitySet="EMP_EmployeeAttendance" />
           </AssociationSet>
+          <AssociationSet Name="FK_INV_Category_SEC_User" Association="DB_A157D8_AnjaliMISModel.FK_INV_Category_SEC_User">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_Category" EntitySet="INV_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_INV_Category" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Category">
+            <End Role="INV_Category" EntitySet="INV_Category" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
           <AssociationSet Name="FK_INV_Invoice_CompanyID_201806280558PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_CompanyID_201806280558PM">
             <End Role="SYS_Company" EntitySet="SYS_Company" />
             <End Role="INV_Invoice" EntitySet="INV_Invoice" />
@@ -3649,16 +3706,16 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="INV_Item" EntitySet="INV_Item" />
             <End Role="INV_InvoiceItem" EntitySet="INV_InvoiceItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_INV_Unit" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit">
+          <AssociationSet Name="FK_INV_Item_CompanyID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_UnitID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM">
             <End Role="INV_Unit" EntitySet="INV_Unit" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SEC_User" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User">
+          <AssociationSet Name="FK_INV_Item_UserID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM">
             <End Role="SEC_User" EntitySet="SEC_User" />
-            <End Role="INV_Item" EntitySet="INV_Item" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SYS_Company" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company">
-            <End Role="SYS_Company" EntitySet="SYS_Company" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
           <AssociationSet Name="FK_INV_ItemConfiguration_MainItemID_201806280619PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM">
@@ -4367,6 +4424,20 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="EMP_Employee" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_Punch_EmployeeID_201806280554PM" FromRole="EMP_Punch" ToRole="EMP_Employee" />
         </EntityType>
+        <EntityType Name="INV_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Category_SEC_User" FromRole="INV_Category" ToRole="SEC_User" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Category" FromRole="INV_Category" ToRole="INV_Item" />
+        </EntityType>
         <EntityType Name="INV_Invoice">
           <Key>
             <PropertyRef Name="InvoiceID" />
@@ -4479,11 +4550,15 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="RejectedQuantity" Type="Int32" />
           <Property Name="IsLock" Type="Boolean" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="DIA_MachineMaintenance" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_ItemID_201806280507PM" FromRole="INV_Item" ToRole="DIA_MachineMaintenance" />
+          <NavigationProperty Name="INV_Category" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Category" FromRole="INV_Item" ToRole="INV_Category" />
           <NavigationProperty Name="INV_InvoiceItem" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_ItemID_201806280616PM" FromRole="INV_Item" ToRole="INV_InvoiceItem" />
-          <NavigationProperty Name="INV_Unit" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit" FromRole="INV_Item" ToRole="INV_Unit" />
-          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User" FromRole="INV_Item" ToRole="SEC_User" />
-          <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company" FromRole="INV_Item" ToRole="SYS_Company" />
+          <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM" FromRole="INV_Item" ToRole="SYS_Company" />
+          <NavigationProperty Name="INV_Unit" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM" FromRole="INV_Item" ToRole="INV_Unit" />
+          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM" FromRole="INV_Item" ToRole="SEC_User" />
           <NavigationProperty Name="INV_ItemConfiguration" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemConfiguration1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_SubItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemPrice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_ItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemPrice" />
@@ -4644,7 +4719,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit" FromRole="INV_Unit" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM" FromRole="INV_Unit" ToRole="INV_Item" />
         </EntityType>
         <EntityType Name="LOC_City">
           <Key>
@@ -4833,9 +4908,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="EMP_Employee" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_UserID_201806280519PM" FromRole="SEC_User" ToRole="EMP_Employee" />
           <NavigationProperty Name="EMP_Employee1" Relationship="DB_A157D8_AnjaliMISModel.FK_SEC_User_EmployeeID_201806280640PM" FromRole="SEC_User" ToRole="EMP_Employee" />
           <NavigationProperty Name="EMP_EmployeeAttendance" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_EmployeeAttendance_UserID_201806280521PM" FromRole="SEC_User" ToRole="EMP_EmployeeAttendance" />
+          <NavigationProperty Name="INV_Category" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Category_SEC_User" FromRole="SEC_User" ToRole="INV_Category" />
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_UserID_201806280558PM" FromRole="SEC_User" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_InvoiceHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_UserID_201806280604PM" FromRole="SEC_User" ToRole="INV_InvoiceHistory" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User" FromRole="SEC_User" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM" FromRole="SEC_User" ToRole="INV_Item" />
           <NavigationProperty Name="INV_ItemConfiguration" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_UserID_201806280619PM" FromRole="SEC_User" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemPrice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_UserID_201806280619PM" FromRole="SEC_User" ToRole="INV_ItemPrice" />
           <NavigationProperty Name="INV_PurchaseOrder" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_UserID_201806280621PM" FromRole="SEC_User" ToRole="INV_PurchaseOrder" />
@@ -4898,7 +4974,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="EMP_Employee" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_CompanyID_201806280519PM" FromRole="SYS_Company" ToRole="EMP_Employee" />
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_CompanyID_201806280558PM" FromRole="SYS_Company" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_InvoiceHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_CompanyID_201806280604PM" FromRole="SYS_Company" ToRole="INV_InvoiceHistory" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company" FromRole="SYS_Company" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM" FromRole="SYS_Company" ToRole="INV_Item" />
           <NavigationProperty Name="INV_PurchaseOrder" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_CompanyID_201806280621PM" FromRole="SYS_Company" ToRole="INV_PurchaseOrder" />
           <NavigationProperty Name="INV_PurchaseOrderHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_CompanyID_201806280623PM" FromRole="SYS_Company" ToRole="INV_PurchaseOrderHistory" />
           <NavigationProperty Name="LOC_City" Relationship="DB_A157D8_AnjaliMISModel.FK_SYS_Company_CityID_201806280643PM" FromRole="SYS_Company" ToRole="LOC_City" />
@@ -5990,6 +6066,30 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INV_Category_SEC_User">
+          <End Type="DB_A157D8_AnjaliMISModel.SEC_User" Role="SEC_User" Multiplicity="1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_Category" Role="INV_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_Category">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_INV_Category">
+          <End Type="DB_A157D8_AnjaliMISModel.INV_Category" Role="INV_Category" Multiplicity="0..1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_INV_Invoice_CompanyID_201806280558PM">
           <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
           <End Type="DB_A157D8_AnjaliMISModel.INV_Invoice" Role="INV_Invoice" Multiplicity="*" />
@@ -6146,7 +6246,19 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_INV_Unit">
+        <Association Name="FK_INV_Item_CompanyID_201806280618PM">
+          <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_UnitID_201806280618PM">
           <End Type="DB_A157D8_AnjaliMISModel.INV_Unit" Role="INV_Unit" Multiplicity="1" />
           <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6158,7 +6270,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_SEC_User">
+        <Association Name="FK_INV_Item_UserID_201806280618PM">
           <End Type="DB_A157D8_AnjaliMISModel.SEC_User" Role="SEC_User" Multiplicity="1" />
           <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6167,18 +6279,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Principal>
             <Dependent Role="INV_Item">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INV_Item_SYS_Company">
-          <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
-          <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Company">
-              <PropertyRef Name="CompanyID" />
-            </Principal>
-            <Dependent Role="INV_Item">
-              <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7144,6 +7244,19 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="INV_Category">
+            <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.INV_Category">
+              <MappingFragment StoreEntitySet="INV_Category">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CategoryShortName" ColumnName="CategoryShortName" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="INV_Invoice">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.INV_Invoice">
               <MappingFragment StoreEntitySet="INV_Invoice">
@@ -7224,6 +7337,9 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="INV_Item">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.INV_Item">
               <MappingFragment StoreEntitySet="INV_Item">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="IsLock" ColumnName="IsLock" />
                 <ScalarProperty Name="RejectedQuantity" ColumnName="RejectedQuantity" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />

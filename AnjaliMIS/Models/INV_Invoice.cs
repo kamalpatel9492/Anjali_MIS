@@ -11,7 +11,7 @@ namespace AnjaliMIS.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class INV_Invoice
     {
         public INV_Invoice()
@@ -19,7 +19,7 @@ namespace AnjaliMIS.Models
             this.INV_InvoiceHistory = new HashSet<INV_InvoiceHistory>();
             this.INV_InvoiceItem = new HashSet<INV_InvoiceItem>();
         }
-
+    
         public int InvoiceID { get; set; }
         public int CompanyID { get; set; }
         public Nullable<int> PartyID { get; set; }
@@ -45,7 +45,7 @@ namespace AnjaliMIS.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<decimal> Casar { get; set; }
         public decimal TotalAmount { get; set; }
-
+    
         public virtual ACC_Tax ACC_Tax { get; set; }
         public virtual ACC_Tax ACC_Tax1 { get; set; }
         public virtual ACC_Tax ACC_Tax2 { get; set; }

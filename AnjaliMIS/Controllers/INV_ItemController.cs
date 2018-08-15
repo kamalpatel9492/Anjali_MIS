@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_Item
         public ActionResult Index()
         {
-            var iNV_Item = db.INV_Item.Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User);
+            var iNV_Item = db.INV_Item.Where(i=>i.IsActive != false).Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User).Include(i => i.INV_Category);
             return View(iNV_Item.ToList());
         }
 
@@ -45,6 +45,8 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+            ViewBag.CategoryID = new SelectList(db.INV_Category, "CategoryID", "CategoryName");
+
             INV_Item _iNV_Item = new INV_Item();
             return View("Edit", _iNV_Item);
         }
@@ -54,7 +56,7 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
+        public ActionResult Create([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity,CategoryID,ItemCode")] INV_Item iNV_Item)
         {
 
             #region Validation
@@ -76,6 +78,24 @@ namespace AnjaliMIS.Controllers
                 iNV_Item.Created = DateTime.Now;
                 iNV_Item.Modified = DateTime.Now;
                 iNV_Item.CompanyID = 4;
+
+                #region Generate Item Code
+                if (iNV_Item.CategoryID != null && iNV_Item.CategoryID > 0)
+                {
+                    Int32 NextNumber = db.INV_Item.Where(i => i.CategoryID == iNV_Item.CategoryID).Count() + 1;
+                    String PrefixForCode = db.INV_Category.Where(i => i.CategoryID == iNV_Item.CategoryID).FirstOrDefault().CategoryShortName;
+                    iNV_Item.ItemCode = PrefixForCode + "-" + NextNumber;
+                }
+                else
+                {
+                    Int32 NextNumber = db.INV_Item.Count() + 1;
+                    String PrefixForCode = "ITM";
+                    iNV_Item.ItemCode = PrefixForCode + "-" + NextNumber;
+                }
+
+
+                #endregion Generate Item Code
+
                 if (Session["UserID"] != null)
                 {
                     iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
@@ -103,6 +123,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Item.UserID);
+            ViewBag.CategoryID = new SelectList(db.INV_Category, "CategoryID", "CategoryName", iNV_Item.CategoryID);
             return View("Edit", iNV_Item);
         }
 
@@ -121,6 +142,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Item.UserID);
+            ViewBag.CategoryID = new SelectList(db.INV_Category, "CategoryID", "CategoryName", iNV_Item.CategoryID);
             return View(iNV_Item);
         }
 
@@ -129,16 +151,48 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity")] INV_Item iNV_Item)
+        public ActionResult Edit([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity,CategoryID,ItemCode")] INV_Item iNV_Item)
         {
+            if(iNV_Item.ItemID > 0)
+            {
+                if(iNV_Item.Remarks == null || iNV_Item.Remarks == "")
+                {
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
+                    ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Item.UserID);
+                    ViewBag.CategoryID = new SelectList(db.INV_Category, "CategoryID", "CategoryName", iNV_Item.CategoryID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_Item);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_Item).State = EntityState.Modified;
                 iNV_Item.Modified = DateTime.Now;
+                iNV_Item.CompanyID = 4;
                 if (Session["UserID"] != null)
                 {
                     iNV_Item.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
+                #region Generate Item Code
+
+                if (iNV_Item.ItemID <= 0)
+                {
+                    if (iNV_Item.CategoryID != null && iNV_Item.CategoryID > 0)
+                    {
+                        Int32 NextNumber = db.INV_Item.Where(i => i.CategoryID == iNV_Item.CategoryID).Count() + 1;
+                        String PrefixForCode = db.INV_Category.Where(i => i.CategoryID == iNV_Item.CategoryID).FirstOrDefault().CategoryShortName;
+                        iNV_Item.ItemCode = PrefixForCode + "-" + NextNumber;
+                    }
+                    else
+                    {
+                        Int32 NextNumber = db.INV_Item.Count() + 1;
+                        String PrefixForCode = "ITM";
+                        iNV_Item.ItemCode = PrefixForCode + "-" + NextNumber;
+                    }
+                }
+
+                #endregion Generate Item Code
 
                 db.SaveChanges();
                 #region Update INV_StockHistory 
@@ -160,6 +214,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
             ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Item.UserID);
+            ViewBag.CategoryID = new SelectList(db.INV_Category, "CategoryID", "CategoryName", iNV_Item.CategoryID);
             return View(iNV_Item);
         }
 
@@ -183,9 +238,31 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             INV_Item iNV_Item = db.INV_Item.Find(id);
-            db.INV_Item.Remove(iNV_Item);
-            db.SaveChanges();
+            try
+            {
+                if (iNV_Item.IsLock)
+                {
+                    iNV_Item.IsActive = false;
+                    db.Entry(iNV_Item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    List<INV_StockHistory> StockHistory = db.INV_StockHistory.Where(i => i.ItemID == iNV_Item.ItemID).ToList();
+                    db.INV_StockHistory.RemoveRange(StockHistory);
+                    db.SaveChanges();
+                    db.INV_Item.Remove(iNV_Item);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this Item.");
+                //return RedirectToAction("Index");
+                return View(iNV_Item);
+            }
             return RedirectToAction("Index");
         }
 
