@@ -414,6 +414,7 @@
     <Compile Include="ViewModals\INV_PurchaseOrderViewModal.cs" />
     <Compile Include="ViewModals\LoginViewModal.cs" />
     <Compile Include="ViewModals\MenuViewModal.cs" />
+    <Compile Include="ViewModals\SEC_UserModal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddEdit.html" />
