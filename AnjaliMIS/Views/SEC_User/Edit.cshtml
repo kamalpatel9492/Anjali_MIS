@@ -27,12 +27,12 @@
                         <div class="form-body">
                             @*<h3 class="form-section">Basic validation States</h3>*@
                             @*<div class="form-group">
-            @Html.LabelFor(model => model.sEC_User.CreatedByUserID, "CreatedByUserID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CreatedByUserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.sEC_User.CreatedByUserID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                                    @Html.LabelFor(model => model.sEC_User.CreatedByUserID, "CreatedByUserID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownList("CreatedByUserID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.sEC_User.CreatedByUserID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
                             <h3 class="form-section">User Details</h3>
 
                             <div class="form-group">
@@ -84,29 +84,32 @@
                                     @Html.ValidationMessageFor(model => model.sEC_User.Remarks, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <h3 class="form-section">User Privileges</h3>
-                            <div class="form-group">
-                                @*@Html.LabelFor(model => model.sEC_User.SEC_UserPrivileges, "User Privileges", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <div id="divPrevilledge">
+                                <h3 class="form-section">User Privileges</h3>
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.sEC_User.SEC_UserPrivileges, "User Privileges", htmlAttributes: new { @class = "control-label col-md-2" })*@
 
-                                @for (int i = 0; i < Model.sYS_ModuleList.Count; i++)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="checkbox">
-                                            @Html.CheckBoxFor(model => model.sYS_ModuleList[i].IsSelected)
-                                            @Html.DisplayFor(model => model.sYS_ModuleList[i].ModuleName)
-                                            @Html.HiddenFor(model => model.sYS_ModuleList[i].ModuleID)
+                                    @for (int i = 0; i < Model.sYS_ModuleList.Count; i++)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="checkbox">
+                                                @Html.CheckBoxFor(model => model.sYS_ModuleList[i].IsSelected)
+                                                @Html.DisplayFor(model => model.sYS_ModuleList[i].ModuleName)
+                                                @Html.HiddenFor(model => model.sYS_ModuleList[i].ModuleID)
+                                            </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
 
 
-                                @*@foreach (var item in ViewBag.sys_module_list)
-            {
-                <div class="checkbox">
-                    <input class="control-label col-md-2" name="sys_module_list" type="checkbox" value="@item.Text" id="@item.Value" /> @item.Text<br />
-                </div>
-            }*@
+                                    @*@foreach (var item in ViewBag.sys_module_list)
+                                        {
+                                            <div class="checkbox">
+                                                <input class="control-label col-md-2" name="sys_module_list" type="checkbox" value="@item.Text" id="@item.Value" /> @item.Text<br />
+                                            </div>
+                                        }*@
+                                </div>
                             </div>
+
                         </div>
                         <div class="form-actions">
                             <div class="row">
@@ -127,10 +130,44 @@
 
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+    $(document).ready(function () {
+        
+        if ($('#uniform-sEC_User_IsAdmin :checkbox').is(':checked')) {
+            $('#divPrevilledge').hide();
+        }
+        else {
+            $('#divPrevilledge').show();
+        }
+
+        $('#uniform-sEC_User_IsAdmin :checkbox').click(function () {
+            if ($(this).is(':checked')) {  // or $(this).prop('checked');
+                $('#divPrevilledge').hide();
+            }
+            else {
+                $('#divPrevilledge').show();
+            }
+        });
+
+
+        //$('input:checkbox[name=sEC_User_IsAdmin]').change(function () {
+        //    if ($('input[name=sEC_User.IsAdmin]:checked').val() == "True") {
+        //        $('#divPrevilledge').hide();
+        //    }
+        //    else if ($('input[name=sEC_User.IsAdmin]:checked').val() == "False") {
+        //        $('#divPrevilledge').show();
+        //    } else {
+        //        $('#divPrevilledge').show();
+        //    }
+        //    //var ddlitemid = $('#ItemID').val();
+        //    //GetItemPrice(ddlitemid);
+        //});
+
+    });
+</script>
+
