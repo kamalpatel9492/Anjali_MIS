@@ -18,84 +18,85 @@
             </div>
         </div>
         <div class="portlet-body">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.UserName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Password)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Password)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.IsAdmin)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.IsAdmin)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.IsActive)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Created)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Created)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Modified)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Modified)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Remarks)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Remarks)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.EMP_Employee1.EmployeeName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.EMP_Employee1.EmployeeName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.SEC_User2.UserName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.SEC_User2.UserName)
-                </dd>
-
-            </dl>
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UserName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Password)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsAdmin)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsAdmin)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Created)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Created)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Modified)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Modified)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Remarks)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EMP_Employee1.EmployeeName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EMP_Employee1.EmployeeName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SEC_User2.UserName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SEC_User2.UserName)
+                    </dd>
+
+                </dl>
+
                 <div class="form-actions">
                     <div class="row">
                         <div class="col-md-9">
