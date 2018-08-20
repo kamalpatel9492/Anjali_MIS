@@ -1,192 +1,210 @@
 ﻿@model AnjaliMIS.Models.MST_Party
 
 @{
+    /**/
+
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Party</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PartyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PartyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactPerson)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactPerson)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Modofied)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Modofied)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PanNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PanNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TanNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TanNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AadharNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AadharNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GSTIN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GSTIN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LOC_City.CityName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LOC_City.CityName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LOC_Country.CountryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LOC_Country.CountryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LOC_State.StateName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LOC_State.StateName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SYS_Company.CompanyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SYS_PartyType.PartyType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEC_User.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEC_User.UserName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<!--Delete Page Start-->
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-green-sharp hide"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Are you sure you want to delete this?</span>
+            </div>
+            <div class="actions">
+            </div>
         </div>
-    }
+        <div class="portlet-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PartyName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PartyName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ContactPerson)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContactPerson)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Mobile)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Phone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Created)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Created)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Modofied)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Modofied)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Remarks)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsActive)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PanNo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PanNo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TanNo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TanNo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AadharNo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AadharNo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GSTIN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.GSTIN)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LOC_City.CityName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LOC_City.CityName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LOC_Country.CountryName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LOC_Country.CountryName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LOC_State.StateName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LOC_State.StateName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SYS_Company.CompanyName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SYS_PartyType.PartyType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SYS_PartyType.PartyType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SEC_User.UserName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SEC_User.UserName)
+                    </dd>
+
+                </dl>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="submit" value="Delete" class="btn red danger" />
+                            @Html.ActionLink("Back to List", "Index", "MST_Party", new { @class = "btn default" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- END PORTLET-->
 </div>
+<!--Delete Page End-->

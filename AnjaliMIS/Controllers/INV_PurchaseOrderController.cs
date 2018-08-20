@@ -144,8 +144,16 @@ namespace AnjaliMIS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             INV_PurchaseOrder iNV_PurchaseOrder = db.INV_PurchaseOrder.Find(id);
-            db.INV_PurchaseOrder.Remove(iNV_PurchaseOrder);
-            db.SaveChanges();
+            try
+            {
+                db.INV_PurchaseOrder.Remove(iNV_PurchaseOrder);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this Employee.");
+                return View(iNV_PurchaseOrder);
+            }
             return RedirectToAction("Index");
         }
 

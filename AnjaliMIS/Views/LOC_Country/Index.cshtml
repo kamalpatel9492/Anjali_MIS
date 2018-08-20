@@ -4,16 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- BEGIN PAGE LEVEL STYLES -->
-<link rel="stylesheet" type="text/css" href="/assets/global/plugins/select2/select2.css" />
-<link rel="stylesheet" type="text/css" href="/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
-<!-- END PAGE LEVEL STYLES -->
-<!-- BEGIN THEME STYLES -->
-<link href="/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
-<link href="/assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
-<link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
-<link id="style_color" href="/assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" />
-<link href="/assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
 <!-- END THEME STYLES -->
 <!--List Code Start-->
 <div class="col-md-12 col-sm-12">
@@ -33,7 +23,7 @@
             </div>
         </div>
         <div class="portlet-body">
-            <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
+            <table class="table table-striped table-bordered table-advance table-hover" id="MyTable">
                 <thead>
                     <tr>
 
@@ -105,29 +95,16 @@
                 </div>
             </div>
         </div>
-
-
-
-        @section scripts {
-            @*@Scripts.Render("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
-                <script>
-
-                    $(document).ready(function () {
-                        $('#myTable').DataTable();
-                    });
-                </script>*@
-            <script>
-                $('body').on('click', '#confirmDialog', function (e) {
-                    e.preventDefault();
-                    $(this).attr('data-target', '#dialog-confirm');
-                    $(this).attr('data-toggle', 'modal');
-                });
-                TableManaged.init();            </script>
-        }
     </div>
 </div>
 
-
-
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
+@section scripts {
+    <script>
+        $('body').on('click', '#confirmDialog', function (e) {
+            e.preventDefault();
+            $(this).attr('data-target', '#dialog-confirm');
+            $(this).attr('data-toggle', 'modal');
+        });
+        TableManaged.init();
+    </script>
+}

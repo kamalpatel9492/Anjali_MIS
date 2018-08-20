@@ -189,9 +189,18 @@ namespace AnjaliMIS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
-            var LisIiNV_ItemConfiguration = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
-            db.INV_ItemConfiguration.RemoveRange(LisIiNV_ItemConfiguration);
-            db.SaveChanges();
+            try
+            {
+                var LisIiNV_ItemConfiguration = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
+                db.INV_ItemConfiguration.RemoveRange(LisIiNV_ItemConfiguration);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this Employee.");
+                return View(iNV_ItemConfiguration);
+            }
+
             return RedirectToAction("Index");
         }
 
