@@ -216,7 +216,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName", sEC_UserAddEditModel.sEC_User.CreatedByUserID);
 
-            return View(sEC_UserAddEditModel);
+            return RedirectToAction("Index");
         }
 
         // GET: SEC_User/Delete/5
