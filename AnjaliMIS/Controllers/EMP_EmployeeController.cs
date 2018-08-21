@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -55,14 +56,33 @@ namespace AnjaliMIS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeID,UserID,CompanyID,EmployeeName,DesignationID,Address,StateID,CityID,IDProofDocName,IDProofNumber,IDProofPhotoPath,PhotoPath,Gender,DOB,Age,JoiningDate,EndingDate,Salary,IsActive,Created,Modified,Remarks,DepartmentID,FinYearID,PanNo,AadharNo,AccountNo,BankID,IFSCCode")] EMP_Employee eMP_Employee)
+        public ActionResult Create(EMP_Employee eMP_Employee)
         {
             if (ModelState.IsValid)
             {
                 eMP_Employee.Created = DateTime.Now;
                 eMP_Employee.Modified = DateTime.Now;
-                if (Session["UserID"] != null)
+
+				HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
+				if (photoProof != null && photoProof.FileName != "")
+				{
+					//create path to store in database
+					eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
+
+					//store image in folder
+					photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
+				}
+				HttpPostedFileBase photo = Request.Files["PhotoPath"];
+				if (photo!=null && photo.FileName!="")
+				{
+					//create path to store in database
+					eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
+
+					//store image in folder
+					photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
+				}
+				
+				if (Session["UserID"] != null)
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
@@ -116,7 +136,26 @@ namespace AnjaliMIS.Controllers
             {
                 db.Entry(eMP_Employee).State = EntityState.Modified;
                 eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
-                if (Session["UserID"] != null)
+				
+				HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
+				if (photoProof != null && photoProof.FileName != "")
+				{
+					//create path to store in database
+					eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
+
+					//store image in folder
+					photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
+				}
+				HttpPostedFileBase photo = Request.Files["PhotoPath"];
+				if (photo != null && photo.FileName != "")
+				{
+					//create path to store in database
+					eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
+
+					//store image in folder
+					photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
+				}
+				if (Session["UserID"] != null)
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }

@@ -11,8 +11,10 @@ namespace AnjaliMIS.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class EMP_Employee
+	using System.ComponentModel.DataAnnotations;
+	using System.Web;
+
+	public partial class EMP_Employee
     {
         public EMP_Employee()
         {
@@ -33,7 +35,8 @@ namespace AnjaliMIS.Models
         public Nullable<int> IDProofNumber { get; set; }
         public string IDProofPhotoPath { get; set; }
         public string PhotoPath { get; set; }
-        public string Gender { get; set; }
+		[Required]
+		public string Gender { get; set; }
         public System.DateTime DOB { get; set; }
         public int Age { get; set; }
         public System.DateTime JoiningDate { get; set; }

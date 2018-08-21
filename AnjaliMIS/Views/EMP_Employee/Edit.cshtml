@@ -6,7 +6,7 @@
                 ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "EMP_Employee", FormMethod.Post, new { encType = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Created)
@@ -21,7 +21,7 @@
                     <i class="fa fa-gift"></i>Employee Edit
                 </div>
             </div>
-            <div class="portlet-body form">
+            <div class="portlet-body">
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
@@ -103,7 +103,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.IDProofPhotoPath, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.IDProofPhotoPath, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.IDProofPhotoPath, new { htmlAttributes = new { @class = "form-control", Type = "File" } })
                                 @Html.ValidationMessageFor(model => model.IDProofPhotoPath, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PhotoPath, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.PhotoPath, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PhotoPath, new { htmlAttributes = new { @class = "form-control" , Type = "File" } })
                                 @Html.ValidationMessageFor(model => model.PhotoPath, "", new { @class = "text-danger" })
                             </div>
                         </div>
