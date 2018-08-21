@@ -32,8 +32,14 @@ namespace AnjaliMIS
                   "~/assets/admin/layout/scripts/layout.js",
                   "~/assets/admin/layout/scripts/quick-sidebar.js",
                   "~/assets/admin/layout/scripts/demo.js",
-                  "~/assets/admin/pages/scripts/index.js",
-                  "~/assets/admin/pages/scripts/tasks.js"));
+                  "~/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js",
+                  "~/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js",
+                  "~/assets/admin/layout/scripts/layout.js",
+                  "~/assets/admin/layout/scripts/demo.js",
+                  "~/assets/admin/pages/scripts/table-managed.js",
+                  "~/assets/global/plugins/bootstrap/js/bootstrap.min.js",
+                  "~/assets/admin/pages/scripts/tasks.js"
+                  ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -60,6 +66,13 @@ namespace AnjaliMIS
                        "~/assets/global/css/plugins.css",
                        "~/assets/admin/layout/css/layout.css",
                        "~/assets/admin/layout/css/themes/default.css",
+                       "~/assets/global/plugins/select2/select2.css",
+                       "~/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css",
+                       "~/assets/global/css/components.css",
+                       "~/assets/global/css/plugins.css",
+                       "~/assets/admin/layout/css/layout.css",
+                       "~/assets/admin/layout/css/themes/darkblue.css",
+                       "~/assets/admin/layout/css/custom.css",
                 "~/assets/admin/layout/css/custom.css"));
 
             //bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

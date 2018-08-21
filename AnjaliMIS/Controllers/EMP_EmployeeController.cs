@@ -193,9 +193,23 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             EMP_Employee eMP_Employee = db.EMP_Employee.Find(id);
-            db.EMP_Employee.Remove(eMP_Employee);
-            db.SaveChanges();
+
+            try
+            {
+                db.EMP_Employee.Remove(eMP_Employee);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this Employee.");
+                //return RedirectToAction("Index");
+                return View(eMP_Employee);
+            }
+
+
+
             return RedirectToAction("Index");
         }
 

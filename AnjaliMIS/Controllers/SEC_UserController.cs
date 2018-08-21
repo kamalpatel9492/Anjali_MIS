@@ -54,7 +54,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName");
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName");
             //ViewBag.SYS_Module_List = new SelectList(db.SYS_Module, "ModuleID", "ModuleName");
-           
+
             return View("Edit", model);
         }
 
@@ -167,7 +167,7 @@ namespace AnjaliMIS.Controllers
             {
                 //error handle
             }
-          
+
             if (sEC_UserAddEditModel != null)
             {
                 if (sEC_UserAddEditModel.sEC_User != null)
@@ -208,7 +208,7 @@ namespace AnjaliMIS.Controllers
                     }
                     List<int> getAllSelectedModuleList = sEC_UserAddEditModel.sYS_ModuleList.Where(e => e.IsSelected == true).Select(e => e.ModuleID).ToList();
                     List<SEC_UserPrivileges> removeRange = db.SEC_UserPrivileges.Where(t => t.UserID == sEC_UserAddEditModel.sEC_User.UserID && !getAllSelectedModuleList.Contains(t.ModuleID)).Select(t => t).ToList();
-                    
+
                     db.SEC_UserPrivileges.RemoveRange(removeRange);
                     db.SaveChanges();
                 }
@@ -216,7 +216,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName", sEC_UserAddEditModel.sEC_User.CreatedByUserID);
 
-            return View(sEC_UserAddEditModel);
+            return RedirectToAction("Index");
         }
 
         // GET: SEC_User/Delete/5
@@ -240,10 +240,19 @@ namespace AnjaliMIS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             SEC_User sEC_User = db.SEC_User.Find(id);
-            db.SEC_User.Remove(sEC_User);
-            List<SEC_UserPrivileges> sEC_UserPrivileges_List = db.SEC_UserPrivileges.Where(e => e.UserID == sEC_User.UserID).ToList();
-            db.SEC_UserPrivileges.RemoveRange(sEC_UserPrivileges_List);
-            db.SaveChanges();
+            try
+            {
+                db.SEC_User.Remove(sEC_User);
+                List<SEC_UserPrivileges> sEC_UserPrivileges_List = db.SEC_UserPrivileges.Where(e => e.UserID == sEC_User.UserID).ToList();
+                db.SEC_UserPrivileges.RemoveRange(sEC_UserPrivileges_List);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this User.");
+                //return RedirectToAction("Index");
+                return View(sEC_User);
+            }
             return RedirectToAction("Index");
         }
 

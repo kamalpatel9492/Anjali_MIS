@@ -151,8 +151,16 @@ namespace AnjaliMIS.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             MST_Party mST_Party = db.MST_Party.Find(id);
-            db.MST_Party.Remove(mST_Party);
-            db.SaveChanges();
+            try
+            {
+                db.MST_Party.Remove(mST_Party);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "You can not Delete this Employee.");
+                return View(mST_Party);
+            }
             return RedirectToAction("Index");
         }
 
