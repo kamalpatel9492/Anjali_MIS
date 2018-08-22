@@ -38,6 +38,6 @@ namespace AnjaliMIS.ViewModals
         public decimal TotalAmount { get; set; }
         public Nullable<int> ItemID { get; set; }
         public List<INV_PurchaseOrderItem> INV_PurchaseOrderItems { get; set; }
-
+        public string PartyIDName { get; set; }
     }
 }

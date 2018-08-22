@@ -45,7 +45,17 @@ namespace AnjaliMIS.Controllers
         // GET: INV_ItemConfiguration/Create
         public ActionResult Create()
         {
-            ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
+            var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+
+            ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
             ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
             INV_ItemConfigurationViewModal _iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
@@ -100,6 +110,7 @@ namespace AnjaliMIS.Controllers
             }
             INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
             INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
+            iNV_ItemConfiguration.Remarks = "";
             iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
             {
                 ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
@@ -117,7 +128,17 @@ namespace AnjaliMIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
+            var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+
+            ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
             ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
             return View(iNV_ItemConfigurationViewModal);
@@ -130,6 +151,28 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ItemConfigurationID,MainItemID,SubItemID,Qunatity,UserID,Created,Modified,Remarks")] INV_ItemConfiguration iNV_ItemConfiguration)
         {
+            if (iNV_ItemConfiguration.ItemConfigurationID > 0)
+            {
+                if (iNV_ItemConfiguration.Remarks == null || iNV_ItemConfiguration.Remarks == "")
+                {
+                    var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+
+                    ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
+                    ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_ItemConfiguration);
+                }
+            }
+
             if (iNV_ItemConfiguration.INV_Items != null)
             {
                 if (ModelState.IsValid)
@@ -220,7 +263,31 @@ namespace AnjaliMIS.Controllers
                 var itemList = db.INV_Item.Where(w => w.IsLock == true).Select(e => new
                 {
                     ItemID = e.ItemID,
-                    ItemName = e.ItemName
+                    ItemName = e.ItemName + " - " + e.ItemCode
+                }).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RetrieveItemSubList(int MainItemID)
+        {
+
+            try
+            {
+                var itemList = db.INV_Item.Where(w => w.IsLock == true & w.ItemID != MainItemID).Select(e => new
+                {
+                    ItemID = e.ItemID,
+                    ItemName = e.ItemName + " - " + e.ItemCode
                 }).ToList();
 
                 if (itemList.Count > 0)

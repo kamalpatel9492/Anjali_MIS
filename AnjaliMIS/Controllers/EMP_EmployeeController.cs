@@ -8,9 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
+    [SessionTimeout]
     public class EMP_EmployeeController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
@@ -62,8 +64,9 @@ namespace AnjaliMIS.Controllers
             {
                 eMP_Employee.Created = DateTime.Now;
                 eMP_Employee.Modified = DateTime.Now;
-
-				HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
+                eMP_Employee.CompanyID = 4;
+                eMP_Employee.FinYearID = 2;
+                HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
 				if (photoProof != null && photoProof.FileName != "")
 				{
 					//create path to store in database
@@ -136,8 +139,9 @@ namespace AnjaliMIS.Controllers
             {
                 db.Entry(eMP_Employee).State = EntityState.Modified;
                 eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
-				
-				HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
+                eMP_Employee.CompanyID = 4;
+                eMP_Employee.FinYearID = 2;
+                HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
 				if (photoProof != null && photoProof.FileName != "")
 				{
 					//create path to store in database

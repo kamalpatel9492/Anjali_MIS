@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
 using AnjaliMIS.ViewModals;
+using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
 {
+    [SessionTimeout]
     public class INV_PurchaseOrderController : Controller
     {
         private DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
@@ -151,7 +153,7 @@ namespace AnjaliMIS.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "You can not Delete this Employee.");
+                ModelState.AddModelError("", "You can not Delete this PO.");
                 return View(iNV_PurchaseOrder);
             }
             return RedirectToAction("Index");
@@ -300,44 +302,40 @@ namespace AnjaliMIS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INV_InvoiceViewModal _iNV_InvoiceViewModal;
+            INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal;
 
-            var InvoiceData = db.INV_Invoice.Find(id);
-            _iNV_InvoiceViewModal = new INV_InvoiceViewModal()
+            var POData = db.INV_PurchaseOrder.Find(id);
+            _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
             {
-                InvoiceID = InvoiceData.InvoiceID,
-                CompanyID = InvoiceData.CompanyID,
-                PartyID = InvoiceData.PartyID,
-                PartyIDName = InvoiceData.MST_Party.PartyName,
-                UserID = InvoiceData.UserID,
-                Amount = InvoiceData.Amount,
-                AmountReceived = InvoiceData.AmountReceived,
-                StatusID = InvoiceData.StatusID,
-                Created = InvoiceData.Created,
-                Modified = InvoiceData.Modified,
-                Remarks = InvoiceData.Remarks,
-                InvoiceDate = InvoiceData.InvoiceDate,
-                InvoiceNo = InvoiceData.InvoiceNo,
-                PONo = InvoiceData.PONo,
-                AmountPending = InvoiceData.AmountPending,
-                FinYearID = InvoiceData.FinYearID,
-                CGST = InvoiceData.CGST,
-                CGSTAmount = InvoiceData.CGSTAmount,
-                SGST = InvoiceData.SGST,
-                SGSTAmount = InvoiceData.SGSTAmount,
-                IGST = InvoiceData.IGST,
-                IGSTAmount = InvoiceData.IGSTAmount,
-                IsLocal = InvoiceData.IsLocal,
-                IsActive = InvoiceData.IsActive,
-                Casar = InvoiceData.Casar,
-                TotalAmount = InvoiceData.TotalAmount
+                PurchaseOrderID = POData.PurchaseOrderID,
+                CompanyID = POData.CompanyID,
+                SellerPartyID = POData.SellerPartyID,
+                PartyIDName = POData.MST_Party.PartyName,
+                UserID = POData.UserID,
+                Amount = POData.Amount,
+                StatusID = POData.StatusID,
+                Created = POData.Created,
+                Modified = POData.Modified,
+                Remarks = POData.Remarks,
+                PODate = POData.PODate,
+                PONo = POData.PONo,
+                FinYearID = POData.FinYearID,
+                CGST = POData.CGST,
+                CGSTAmount = POData.CGSTAmount,
+                SGST = POData.SGST,
+                SGSTAmount = POData.SGSTAmount,
+                IGST = POData.IGST,
+                IGSTAmount = POData.IGSTAmount,
+                IsLocal = POData.IsLocal,
+                Casar = POData.Casar,
+                TotalAmount = POData.TotalAmount
             };
-            _iNV_InvoiceViewModal.INV_InvoiceItems = db.INV_InvoiceItem.Where(I => I.InvoiceID == id).ToList();
-            if (_iNV_InvoiceViewModal == null)
+            _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == id).ToList();
+            if (_iNV_PurchaseOrderViewModal == null)
             {
                 return HttpNotFound();
             }
-            return View(_iNV_InvoiceViewModal);
+            return View(_iNV_PurchaseOrderViewModal);
         }
     }
 }

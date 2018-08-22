@@ -21,6 +21,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<h3 class="form-section">Basic validation States</h3>*@
                         <div class="form-group">
                             @Html.LabelFor(model => model.MainItemID, "Main Item", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,12 +32,12 @@
                         </div>
 
                         @*<div class="form-group">
-                                    @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                            @Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
-                                    </div>
-                            </div>*@
+                @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                        @Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
+                </div>
+        </div>*@
                         <h3 class="form-section">Sub Items</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,17 +74,17 @@
                                     <tbody class="list">
 
                                         @*<tr>
-                                                <td colspan="4" class="text-right">Main Item</td>
-                                                <td colspan="4" id="tdMainItem"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-right">Sub Item</td>
-                                                <td colspan="4" id="tdSubItem"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-right">Quantity</td>
-                                                <td colspan="4" id="tdQuantity"></td>
-                                            </tr>*@
+                            <td colspan="4" class="text-right">Main Item</td>
+                            <td colspan="4" id="tdMainItem"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">Sub Item</td>
+                            <td colspan="4" id="tdSubItem"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-right">Quantity</td>
+                            <td colspan="4" id="tdQuantity"></td>
+                        </tr>*@
                                     </tbody>
 
                                 </table>
@@ -143,6 +144,39 @@
     //var productList = [];
     $(document).ready(function () {
         RetrieveitemList();
+        $("#MainItemID").change(function () {
+
+            //var ddlitemid = $('#ItemID').val();
+            var mainItemID = $('#MainItemID').val();
+            GetSubItem(mainItemID);
+        });
+
+        function GetSubItem(mainItemID) {
+
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            data: "{ MainItemID:'" + mainItemID + "'}",
+            contentType: "application/json;charset=utf-8",
+            url: '@Url.Action("RetrieveItemSubList", "INV_ItemConfiguration")',
+            success: (function (result) {
+
+                if (result.length > 0) {
+                    $("#ddlItemListSubItem").empty();
+                    $("#ddlItemListSubItem").append('<option value="0">Select Sub Item</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                        $("#ddlItemListSubItem").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
         $('#btnSave').click(function () {
             AddNewItemConfigurationWithItem();
         });

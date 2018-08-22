@@ -1,36 +1,36 @@
 ﻿@model IEnumerable<AnjaliMIS.Models.INV_PurchaseOrder>
 
 @{
-	ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 @section breadcrumb {
-	<li>
-		@Html.ActionLink("Inventory Dashboard", "Dashboard",
-								new { controller = "INV_Item" })
-	</li>
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                                new { controller = "INV_Item" })
+    </li>
 }
 <!--List Code Start-->
 <div class="col-md-12 col-sm-12">
-	<!-- BEGIN PORTLET-->
-	<div class="portlet light ">
-		<div class="portlet-title">
-			<div class="caption">
-				<i class="icon-bar-chart font-green-sharp hide"></i>
-				<span class="caption-subject font-green-sharp bold uppercase">Purchase</span>
-				@*<span class="caption-helper">weekly stats...</span>*@
-			</div>
-			<div class="actions">
-				<div class="btn-group">
-					@Html.ActionLink("Create New", "CreatePurchaseOrder",
-					new { controller = "INV_PurchaseOrder" },
-					new { @class = "btn btn-transparent green btn-circle btn-sm active" })
-				</div>
-			</div>
-		</div>
-		<div class="portlet-body">
-			<table class="table table-striped table-bordered table-advance table-hover" id="MyTable">
-				<thead>
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-bar-chart font-green-sharp hide"></i>
+                <span class="caption-subject font-green-sharp bold uppercase">Purchase</span>
+                @*<span class="caption-helper">weekly stats...</span>*@
+            </div>
+            <div class="actions">
+                <div class="btn-group">
+                    @Html.ActionLink("Create New", "CreatePurchaseOrder",
+                    new { controller = "INV_PurchaseOrder" },
+                    new { @class = "btn btn-transparent green btn-circle btn-sm active" })
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <table class="table table-striped table-bordered table-advance table-hover" id="MyTable">
+                <thead>
                     <tr>
                         <th>
                             Date
@@ -51,8 +51,8 @@
                             @Html.DisplayNameFor(model => model.Casar)
                         </th>
                         @*<th>
-                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-                        </th>*@
+                                @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
+                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
                         </th>
@@ -62,92 +62,93 @@
                         <th>
                             @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
                         </th>
-                        @*<th>
-                            Action
-                        </th>*@
+                        <th>
+                                Action
+                            </th>
                     </tr>
-				</thead>
-				<tbody>
-					@foreach (var item in Model)
-					{
-						<tr>
-							<td>
-								@Html.DisplayFor(modelItem => item.PODate)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.PONo)
-							</td>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PODate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PONo)
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TotalAmount)
                             </td>
-							<td>
-								@Html.DisplayFor(modelItem => item.PaidAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.PendingAmount)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.Casar)
-							</td>
-							
-							@*<td>
-								@Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-							</td>*@
-							<td>
-								@Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.MST_Party.PartyName)
-							</td>
-							<td>
-								@Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
-							</td>
-							@*<td>
-								@Html.ActionLink("Edit", "Edit", new { id = item.PurchaseOrderID })
-							</td>*@
-						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<!-- END PORTLET-->
-	<!-- Modal -->
-	<div class="modal fade" id="dialog-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Delete</h4>
-				</div>
-				<div class="modal-body">
-					Do you want to delete this item?
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-danger">Delete</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaidAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PendingAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Casar)
+                            </td>
+
+                            @*<td>
+                                    @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseOrderID }) |
+                                @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END PORTLET-->
+    <!-- Modal -->
+    <div class="modal fade" id="dialog-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Delete</h4>
+                </div>
+                <div class="modal-body">
+                    Do you want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-	@section scripts {
-		@*@Scripts.Render("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
-			<script>
+    @section scripts {
+        @*@Scripts.Render("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+            <script>
 
-					$(document).ready(function () {
-							$('#myTable').DataTable();
-					});
-			</script>*@
-		<script>
-			$('body').on('click', '#confirmDialog', function (e) {
-				e.preventDefault();
-				$(this).attr('data-target', '#dialog-confirm');
-				$(this).attr('data-toggle', 'modal');
-			});
-		</script>
-	}
+                    $(document).ready(function () {
+                            $('#myTable').DataTable();
+                    });
+            </script>*@
+        <script>
+            $('body').on('click', '#confirmDialog', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#dialog-confirm');
+                $(this).attr('data-toggle', 'modal');
+            });
+        </script>
+    }
 </div>
 <!--List Code End-->

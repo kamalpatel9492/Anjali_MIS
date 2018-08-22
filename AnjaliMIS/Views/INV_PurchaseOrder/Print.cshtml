@@ -1,7 +1,181 @@
-﻿
+﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
 @{
     ViewBag.Title = "Print";
+    //Layout = null;
 }
 
-<h2>Print</h2>
+<div>
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../assets/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+</div>
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="invoice">
+                <div class="row invoice-logo">
+                    <div class="col-xs-6 invoice-logo-space">
+                        <img src="~/Images/Logo.jpeg" class="img-responsive" alt="" />
+                    </div>
+                    <div class="col-xs-6">
+                        <p>
+                            #@Model.PONo / @DateTime.Now.ToShortDateString() <span class="muted">
+                                @Model.PartyIDName
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h3>Client:</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                John Doe
+                            </li>
+                            <li>
+                                Mr Nilson Otto
+                            </li>
+                            <li>
+                                FoodMaster Ltd
+                            </li>
+                            <li>
+                                Madrid
+                            </li>
+                            <li>
+                                Spain
+                            </li>
+                            <li>
+                                1982 OOP
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4">
+                        @*<h3>About:</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    Drem psum dolor sit amet
+                                </li>
+                                <li>
+                                    Laoreet dolore magna
+                                </li>
+                                <li>
+                                    Consectetuer adipiscing elit
+                                </li>
+                                <li>
+                                    Magna aliquam tincidunt erat volutpat
+                                </li>
+                                <li>
+                                    Olor sit amet adipiscing eli
+                                </li>
+                                <li>
+                                    Laoreet dolore magna
+                                </li>
+                            </ul>*@
+                    </div>
+                    <div class="col-xs-4 invoice-payment">
+                        <h3>Payment Details:</h3>
+                        <ul class="list-unstyled">
+                            <li>
+                                <strong>V.A.T Reg #:</strong> 542554(DEMO)78
+                            </li>
+                            <li>
+                                <strong>Account Name:</strong> FoodMaster Ltd
+                            </li>
+                            <li>
+                                <strong>SWIFT code:</strong> 45454DEMO545DEMO
+                            </li>
+                            <li>
+                                <strong>V.A.T Reg #:</strong> 542554(DEMO)78
+                            </li>
+                            <li>
+                                <strong>Account Name:</strong> FoodMaster Ltd
+                            </li>
+                            <li>
+                                <strong>SWIFT code:</strong> 45454DEMO545DEMO
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
 
+                        <table class="table table-bordered table-responsive" id="selected_units">
+                            <thead>
+                                <tr>
+                                    <th>Sr.</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @{ Decimal ItemTotal = 0; }
+
+                                @foreach (var item in Model.INV_PurchaseOrderItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            @(rowNo += 1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderedQuantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PuchasePrice)
+                                        </td>
+                                        <td>
+                                            @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice)
+                                            @{ ItemTotal += @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice); }
+                                            @*@(ItemTotal += @Convert.ToDecimal(item.Quantity * item.PricePerUnit))*@
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="4" class="text-right">Item Total</td>
+                                    <td colspan="4" id="tdItemTotal">@ItemTotal</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">SGST</td>
+                                    <td colspan="4" id="tdSGST">@Model.SGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">CGST</td>
+                                    <td colspan="4" id="tdCGST">@Model.CGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">IGST</td>
+                                    <td colspan="4" id="tdIGST">@Model.IGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">Final Total</td>
+                                    <td colspan="4" id="tdFinalTotal">@Model.TotalAmount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                      
+                    </div>
+                    <div class="col-xs-8 invoice-block">
+                        <br />
+                        <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                            Print <i class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+    </div>
+    <!-- END PORTLET-->
+</div>

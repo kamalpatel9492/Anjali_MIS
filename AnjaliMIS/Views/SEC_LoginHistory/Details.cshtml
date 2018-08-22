@@ -1,0 +1,66 @@
+﻿@model AnjaliMIS.Models.SEC_LoginHistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SEC_LoginHistory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LogoutTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogoutTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarls)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarls)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEC_User.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LoginHistoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

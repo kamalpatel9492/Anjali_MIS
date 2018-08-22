@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_Item
         public ActionResult Index()
         {
-            var iNV_Item = db.INV_Item.Where(i=>i.IsActive != false).Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User).Include(i => i.INV_Category);
+            var iNV_Item = db.INV_Item.Where(i => i.IsActive != false).Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User).Include(i => i.INV_Category);
             return View(iNV_Item.ToList());
         }
 
@@ -135,6 +135,7 @@ namespace AnjaliMIS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             INV_Item iNV_Item = db.INV_Item.Find(id);
+            iNV_Item.Remarks = "";
             if (iNV_Item == null)
             {
                 return HttpNotFound();
@@ -153,9 +154,9 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ItemID,CompanyID,ItemName,UnitID,UserID,IsConfigurable,IsLock,Quantity,MinStockLimit,Created,Modified,Remarks,RejectedQuantity,CategoryID,ItemCode")] INV_Item iNV_Item)
         {
-            if(iNV_Item.ItemID > 0)
+            if (iNV_Item.ItemID > 0)
             {
-                if(iNV_Item.Remarks == null || iNV_Item.Remarks == "")
+                if (iNV_Item.Remarks == null || iNV_Item.Remarks == "")
                 {
                     ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Item.CompanyID);
                     ViewBag.UnitID = new SelectList(db.INV_Unit, "UnitID", "Unit", iNV_Item.UnitID);

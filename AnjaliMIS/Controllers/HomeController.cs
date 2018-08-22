@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -36,6 +37,30 @@ namespace AnjaliMIS.Controllers
                     {
                         Session["UserID"] = obj.UserID.ToString();
                         Session["UserName"] = obj.UserName.ToString();
+
+                        #region SEC_LoginHistory
+                        SEC_LoginHistory sEC_LoginHistory = new SEC_LoginHistory();
+                        sEC_LoginHistory.Created = DateTime.Now;
+                        sEC_LoginHistory.Modified = DateTime.Now;
+                        sEC_LoginHistory.LoginTime = DateTime.Now;
+                        sEC_LoginHistory.LogoutTime = DateTime.Now;
+                        sEC_LoginHistory.Remarls = "Login..";
+                        if (Session["UserID"] != null)
+                        {
+                            sEC_LoginHistory.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        }
+                        if (ModelState.IsValid)
+                        {
+                            db.SEC_LoginHistory.Add(sEC_LoginHistory);
+                            db.SaveChanges();
+                            if (sEC_LoginHistory.LoginHistoryID > 0)
+                            {
+                                Session["LoginHistoryID"] = sEC_LoginHistory.LoginHistoryID.ToString();
+                            }
+                        }
+
+                        #endregion SEC_LoginHistory
+
                         return RedirectToAction("Index");
                     }
                     else
@@ -48,9 +73,34 @@ namespace AnjaliMIS.Controllers
         }
         public ActionResult LogOut()
         {
+            try
+            {
+                if (Session["LoginHistoryID"] != null)
+                {
+                    #region SEC_LoginHistory Update
+                    using (DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1())
+                    {
+                        Int32 id = Convert.ToInt16(Session["LoginHistoryID"].ToString());
+                        SEC_LoginHistory sEC_LoginHistory = db.SEC_LoginHistory.Find(id);
+                        db.Entry(sEC_LoginHistory).State = EntityState.Modified;
+                        sEC_LoginHistory.Modified = DateTime.Now;
+                        sEC_LoginHistory.LogoutTime = DateTime.Now;
+                        sEC_LoginHistory.Remarls = "Logout..";
+                        db.SaveChanges();
+                    }
+                    #endregion SEC_LoginHistory Update
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             FormsAuthentication.SignOut();
             Session.Clear();
             Session.Abandon(); // it will clear the session at the end of request
+
             return RedirectToAction("index");
         }
 

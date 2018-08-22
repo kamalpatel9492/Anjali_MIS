@@ -214,6 +214,7 @@
     <Compile Include="Controllers\LOC_StateController.cs" />
     <Compile Include="Controllers\MST_PartyController.cs" />
     <Compile Include="Controllers\PartialViewMenuController.cs" />
+    <Compile Include="Controllers\SEC_LoginHistoryController.cs" />
     <Compile Include="Controllers\SEC_UserController.cs" />
     <Compile Include="Controllers\SYS_PartyTypeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -4698,6 +4699,11 @@
     <Content Include="Views\INV_Category\Details.cshtml" />
     <Content Include="Views\INV_Category\Edit.cshtml" />
     <Content Include="Views\INV_Category\Index.cshtml" />
+    <Content Include="Views\SEC_LoginHistory\Create.cshtml" />
+    <Content Include="Views\SEC_LoginHistory\Delete.cshtml" />
+    <Content Include="Views\SEC_LoginHistory\Details.cshtml" />
+    <Content Include="Views\SEC_LoginHistory\Edit.cshtml" />
+    <Content Include="Views\SEC_LoginHistory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
