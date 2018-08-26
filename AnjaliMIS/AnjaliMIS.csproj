@@ -4704,6 +4704,10 @@
     <Content Include="Views\SEC_LoginHistory\Details.cshtml" />
     <Content Include="Views\SEC_LoginHistory\Edit.cshtml" />
     <Content Include="Views\SEC_LoginHistory\Index.cshtml" />
+    <Content Include="Views\INV_ItemIssueReturn\Issue.cshtml" />
+    <Content Include="Views\INV_ItemIssueReturn\Return.cshtml" />
+    <Content Include="Views\INV_ItemIssueReturn\AddIssueItem.cshtml" />
+    <Content Include="Views\INV_ItemIssueReturn\AddReturnItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

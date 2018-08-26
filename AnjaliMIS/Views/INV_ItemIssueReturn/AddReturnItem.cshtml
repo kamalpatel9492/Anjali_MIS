@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AddReturnItem";
 }
+
 @section breadcrumb {
     <li>
         @Html.ActionLink("Inventory Dashboard", "Index",
@@ -10,128 +11,91 @@
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
+
 <div class="col-md-12">
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Common
+                <i class="fa fa-gift"></i>Return tab
             </div>
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
             <div class="form-horizontal">
                 <div class="form-body">
-                    <h3 class="form-section">Common details</h3>
+                    <h3 class="form-section">Return tab details</h3>
 
-
-
-
-                    @*<div class="form-group">
-
-                            <label class="control-label col-md-2">Item List</label>
-                            <div class="col-md-2">
-                                <select id="ddlItemList" class="form-control"></select>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-
-                            <label class="control-label col-md-2">User List</label>
-                            <div class="col-md-2">
-                                <select id="ddlUserList" class="form-control"></select>
-                            </div>
-                        </div>*@
                     <div class="form-group">
-                        @using (Html.BeginForm("Issue", "INV_ItemIssueReturn", FormMethod.Post))
-                        {
-                            <div class="col-md-2">
-                                <button type="submit" id="btnIssueTab" class="form-control btn-success">Issue Tab</button>
-                            </div>
-                        }
-                        @using (Html.BeginForm("Return", "INV_ItemIssueReturn", FormMethod.Post))
-                        {
-                            <div class="col-md-2">
-                                <button type="submit" id="btnReturnTab" class="form-control btn-success">Return Tab</button>
-                            </div>
-                        }
+
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <select id="ddlItemList" class="form-control"></select>
+                        </div>
 
                     </div>
+                    <div class="form-group">
 
+                        <label class="control-label col-md-2">User List</label>
+                        <div class="col-md-2">
+                            <select id="ddlUserList" class="form-control"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Item</label>
+                        <div class="col-md-4 radio-list">
+                            <label class="radio-inline">
+                                <input type="radio" name="rbtnItem" value="True">Main Item
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="rbtnItem" value="False">Sub Item
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="tableMainItem" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-2">
+                            <input id="txtReturnItemName" type="text" class="form-control" readonly />
+                        </div>
+
+                        <label class="control-label col-md-2">Quantity</label>
+                        <div class="col-md-2">
+                            <input id="txtReturnQuantity" type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="divSubItem" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-10">
+                            <table class="table table-bordered table-responsive" id="tableSubItem">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodySubItem" id="tbodySubItem"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="btnMainItem" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="btnSubItem" hidden>
+                        <div class="col-md-2">
+                            <button id="btnSaveSubItem" class="form-control">SubItem Save</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@*<div class="col-md-12">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-gift"></i>Issue tab
-                </div>
-            </div>
-            <div class="portlet-body form">
-                 BEGIN FORM
-                <div class="form-horizontal">
-                    <div class="form-body">
-                        <h3 class="form-section">Issue tab details</h3>
-
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Assign</label>
-                            <div class="col-md-4 radio-list">
-                                <label class="radio-inline">
-                                    <input type="radio" name="assign" value="True">for use
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="assign" value="False">for assmeble
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="tableForUse" hidden>
-                            <label class="control-label col-md-2">Item </label>
-                            <div class="col-md-2">
-                                <input id="txtItemName" type="text" class="form-control" readonly />
-                            </div>
-
-                            <label class="control-label col-md-2">Quantity</label>
-                            <div class="col-md-2">
-                                <input id="txtQuantity" type="text" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="divForAssmeble" hidden>
-                            <label class="control-label col-md-2">Item List</label>
-                            <div class="col-md-10">
-                                <table class="table table-bordered table-responsive" id="tableForAssmeble">
-                                    <thead>
-                                        <tr>
-                                            <th>Select</th>
-                                            <th>Item Name</th>
-                                            <th>Quantity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tbodyForAssmeble" id="tbodyForAssmeble"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="btnForUSer" hidden>
-                            <div class="col-md-2">
-                                <button id="btnSaveForUse" class="form-control">For Use Save</button>
-                            </div>
-                        </div>
-                        <div class="form-group" id="btnForAssmeble" hidden>
-                            <div class="col-md-2">
-                                <button id="btnSaveForAssmeble" class="form-control">For Assmeble Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
 <script>
     $(document).ready(function () {
@@ -367,7 +331,7 @@
             }
         });
     }
-    function SaveItemForUse() {
+    @*function SaveItemForUse() {
 
         var postData = {
             MainItemID: $('#ddlItemList').val(),
@@ -385,8 +349,8 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                location.reload();
+                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
+                //location.reload();
                 //alert(result);
             },
             error: function (errormessage) {
@@ -411,11 +375,6 @@
         });
 
 
-        //var postData = {
-        //    MainItemID: $('#ddlItemList').val(),
-        //    UserID: $('#ddlUserList').val(),
-        //    RetrieveType: $('input[name=assign]:checked').val()
-        //};
 
 
         $.ajax({
@@ -425,8 +384,8 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                location.reload();
+                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
+                //location.reload();
                 //itemList = [];
                 //alert(result);
             },
@@ -435,7 +394,7 @@
 
             }
         });
-    }
+    }*@
 
     function SaveMainItem() {
 
@@ -451,8 +410,8 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                location.reload();
+                location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
+                //location.reload();
                 //alert(result);
             },
             error: function (errormessage) {
@@ -483,8 +442,8 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                location.reload();
+                location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
+                //location.reload();
                 //itemList = [];
                 //alert(result);
             },
@@ -496,74 +455,3 @@
     }
 
 </script>
-
-
-@*<div class="col-md-12">
-        <div class="portlet box blue">
-            <div class="portlet-title">
-                <div class="caption">
-                    <i class="fa fa-gift"></i>Return tab
-                </div>
-            </div>
-            <div class="portlet-body form">
-                 BEGIN FORM
-                <div class="form-horizontal">
-                    <div class="form-body">
-                        <h3 class="form-section">Return tab details</h3>
-
-
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Item</label>
-                            <div class="col-md-4 radio-list">
-                                <label class="radio-inline">
-                                    <input type="radio" name="rbtnItem" value="True">Main Item
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="rbtnItem" value="False">Sub Item
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="tableMainItem" hidden>
-                            <label class="control-label col-md-2">Item List</label>
-                            <div class="col-md-2">
-                                <input id="txtReturnItemName" type="text" class="form-control" readonly />
-                            </div>
-
-                            <label class="control-label col-md-2">Quantity</label>
-                            <div class="col-md-2">
-                                <input id="txtReturnQuantity" type="text" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="divSubItem" hidden>
-                            <label class="control-label col-md-2">Item List</label>
-                            <div class="col-md-10">
-                                <table class="table table-bordered table-responsive" id="tableSubItem">
-                                    <thead>
-                                        <tr>
-                                            <th>Select</th>
-                                            <th>Item Name</th>
-                                            <th>Quantity</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tbodySubItem" id="tbodySubItem"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="btnMainItem" hidden>
-                            <div class="col-md-2">
-                                <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
-                            </div>
-                        </div>
-                        <div class="form-group" id="btnSubItem" hidden>
-                            <div class="col-md-2">
-                                <button id="btnSaveSubItem" class="form-control">SubItem Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
