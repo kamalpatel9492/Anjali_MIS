@@ -14,14 +14,14 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Common
+                <i class="fa fa-gift"></i>Issue / Return Items
             </div>
         </div>
         <div class="portlet-body form">
             <!-- BEGIN FORM-->
             <div class="form-horizontal">
                 <div class="form-body">
-                    <h3 class="form-section">Common details</h3>
+                    @*<h3 class="form-section">Common details</h3>*@
 
 
 
@@ -45,13 +45,13 @@
                         @using (Html.BeginForm("Issue", "INV_ItemIssueReturn", FormMethod.Post))
                         {
                             <div class="col-md-2">
-                                <button type="submit" id="btnIssueTab" class="form-control btn-success">Issue Tab</button>
+                                <button type="submit" id="btnIssueTab" class="form-control btn-success">Issue Item(s)</button>
                             </div>
                         }
                         @using (Html.BeginForm("Return", "INV_ItemIssueReturn", FormMethod.Post))
                         {
                             <div class="col-md-2">
-                                <button type="submit" id="btnReturnTab" class="form-control btn-success">Return Tab</button>
+                                <button type="submit" id="btnReturnTab" class="form-control btn-success">Return Item(s)</button>
                             </div>
                         }
 

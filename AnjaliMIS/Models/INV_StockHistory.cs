@@ -29,5 +29,7 @@ namespace AnjaliMIS.Models
         public virtual SYS_FinYear SYS_FinYear { get; set; }
         public virtual SYS_OperationType SYS_OperationType { get; set; }
         public virtual SEC_User SEC_User { get; set; }
+        public string IssueNumber { get; set; }
+        public string ReturnNumber { get; set; }
     }
 }
