@@ -104,7 +104,10 @@
                             </td>
                             <td>
                                 @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseOrderID }) |
-                                @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" })
+                                @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" }) 
+                                @*|
+                                @Html.ActionLink("PO Return", "POReturn", new { id = item.PurchaseOrderID }, new { target = "_blank" })*@ 
+
                             </td>
                         </tr>
                     }

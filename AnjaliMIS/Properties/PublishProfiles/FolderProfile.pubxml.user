@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>08/21/2018 03:19:34</publishTime>
+      <publishTime>08/27/2018 10:17:26</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>08/21/2018 03:19:34</publishTime>
+      <publishTime>08/27/2018 10:17:26</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>10/07/2018 01:02:03</publishTime>
@@ -12574,7 +12574,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="List.html">
-      <publishTime>08/21/2018 02:51:13</publishTime>
+      <publishTime>08/27/2018 09:56:54</publishTime>
     </File>
     <File Include="Models/AnjaliMISEntities.edmx.diagram">
       <publishTime>08/16/2018 00:21:49</publishTime>
@@ -12736,7 +12736,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:11</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Create.cshtml">
-      <publishTime>08/12/2018 23:57:55</publishTime>
+      <publishTime>08/23/2018 03:06:51</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Delete.cshtml">
       <publishTime>08/21/2018 03:02:53</publishTime>
@@ -12745,7 +12745,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2018 23:58:00</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Edit.cshtml">
-      <publishTime>08/13/2018 00:06:37</publishTime>
+      <publishTime>08/23/2018 03:14:21</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Index.cshtml">
       <publishTime>08/21/2018 02:59:16</publishTime>
@@ -12802,7 +12802,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_Item/Edit.cshtml">
-      <publishTime>08/16/2018 01:59:51</publishTime>
+      <publishTime>08/23/2018 00:58:14</publishTime>
     </File>
     <File Include="Views/INV_Item/Index.cshtml">
       <publishTime>08/21/2018 02:52:32</publishTime>
@@ -12814,13 +12814,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
-      <publishTime>08/14/2018 02:22:31</publishTime>
+      <publishTime>08/23/2018 03:01:10</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Index.cshtml">
       <publishTime>08/21/2018 02:52:38</publishTime>
     </File>
+    <File Include="Views/INV_ItemIssueReturn/AddIssueItem.cshtml">
+      <publishTime>08/27/2018 08:36:03</publishTime>
+    </File>
+    <File Include="Views/INV_ItemIssueReturn/AddReturnItem.cshtml">
+      <publishTime>08/27/2018 08:36:03</publishTime>
+    </File>
     <File Include="Views/INV_ItemIssueReturn/Index.cshtml">
-      <publishTime>08/12/2018 22:07:55</publishTime>
+      <publishTime>08/27/2018 08:44:24</publishTime>
+    </File>
+    <File Include="Views/INV_ItemIssueReturn/Issue.cshtml">
+      <publishTime>08/27/2018 09:57:09</publishTime>
+    </File>
+    <File Include="Views/INV_ItemIssueReturn/Return.cshtml">
+      <publishTime>08/27/2018 10:02:09</publishTime>
     </File>
     <File Include="Views/INV_ItemPrice/Delete.cshtml">
       <publishTime>08/01/2018 01:57:22</publishTime>
@@ -12847,10 +12859,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/04/2018 10:03:14</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Index.cshtml">
-      <publishTime>08/21/2018 02:52:48</publishTime>
+      <publishTime>08/27/2018 10:13:10</publishTime>
+    </File>
+    <File Include="Views/INV_PurchaseOrder/POReturn.cshtml">
+      <publishTime>08/27/2018 10:13:14</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Print.cshtml">
-      <publishTime>08/14/2018 01:01:23</publishTime>
+      <publishTime>08/27/2018 10:07:39</publishTime>
     </File>
     <File Include="Views/INV_StockHistory/Create.cshtml">
       <publishTime>07/25/2018 02:22:24</publishTime>
@@ -12865,7 +12880,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2018 02:22:31</publishTime>
     </File>
     <File Include="Views/INV_StockHistory/Index.cshtml">
-      <publishTime>08/21/2018 02:52:55</publishTime>
+      <publishTime>08/23/2018 03:04:43</publishTime>
     </File>
     <File Include="Views/INV_Unit/Delete.cshtml">
       <publishTime>07/12/2018 09:19:20</publishTime>
@@ -12942,6 +12957,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/PartialViewMenu/_MainMenu.cshtml">
       <publishTime>07/13/2018 03:28:04</publishTime>
     </File>
+    <File Include="Views/SEC_LoginHistory/Create.cshtml">
+      <publishTime>08/23/2018 00:22:00</publishTime>
+    </File>
+    <File Include="Views/SEC_LoginHistory/Delete.cshtml">
+      <publishTime>08/23/2018 00:22:03</publishTime>
+    </File>
+    <File Include="Views/SEC_LoginHistory/Details.cshtml">
+      <publishTime>08/23/2018 00:22:05</publishTime>
+    </File>
+    <File Include="Views/SEC_LoginHistory/Edit.cshtml">
+      <publishTime>08/23/2018 00:22:08</publishTime>
+    </File>
+    <File Include="Views/SEC_LoginHistory/Index.cshtml">
+      <publishTime>08/23/2018 00:48:07</publishTime>
+    </File>
     <File Include="Views/SEC_User/Delete.cshtml">
       <publishTime>08/21/2018 02:06:57</publishTime>
     </File>
@@ -12979,7 +13009,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/16/2018 01:38:34</publishTime>
+      <publishTime>08/27/2018 10:17:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -337,5 +337,49 @@ namespace AnjaliMIS.Controllers
             }
             return View(_iNV_PurchaseOrderViewModal);
         }
+
+        // GET: GRN
+        public ActionResult POReturn(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal;
+
+            var POData = db.INV_PurchaseOrder.Find(id);
+            _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
+            {
+                PurchaseOrderID = POData.PurchaseOrderID,
+                CompanyID = POData.CompanyID,
+                SellerPartyID = POData.SellerPartyID,
+                PartyIDName = POData.MST_Party.PartyName,
+                UserID = POData.UserID,
+                Amount = POData.Amount,
+                StatusID = POData.StatusID,
+                Created = POData.Created,
+                Modified = POData.Modified,
+                Remarks = POData.Remarks,
+                PODate = POData.PODate,
+                PONo = POData.PONo,
+                FinYearID = POData.FinYearID,
+                CGST = POData.CGST,
+                CGSTAmount = POData.CGSTAmount,
+                SGST = POData.SGST,
+                SGSTAmount = POData.SGSTAmount,
+                IGST = POData.IGST,
+                IGSTAmount = POData.IGSTAmount,
+                IsLocal = POData.IsLocal,
+                Casar = POData.Casar,
+                TotalAmount = POData.TotalAmount
+            };
+            _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == id).ToList();
+            if (_iNV_PurchaseOrderViewModal == null)
+            {
+                return HttpNotFound();
+            }
+            return View(_iNV_PurchaseOrderViewModal);
+        }
+
     }
 }

@@ -4708,6 +4708,7 @@
     <Content Include="Views\INV_ItemIssueReturn\Return.cshtml" />
     <Content Include="Views\INV_ItemIssueReturn\AddIssueItem.cshtml" />
     <Content Include="Views\INV_ItemIssueReturn\AddReturnItem.cshtml" />
+    <Content Include="Views\INV_PurchaseOrder\POReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
