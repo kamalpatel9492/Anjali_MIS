@@ -1,115 +1,331 @@
-﻿
+﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
+
 @{
-    ViewBag.Title = "POReturn";
+    ViewBag.Title = "Edit";
 }
-
-@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
-@{
-    ViewBag.Title = "Print";
-    //Layout = null;
+@section breadcrumb {
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                                new { controller = "INV_Item" })
+    </li>
 }
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-<div>
-    <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="../../assets/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL STYLES -->
-</div>
-<div class="col-md-12 col-sm-12">
-    <!-- BEGIN PORTLET-->
-    <div class="portlet light ">
-        <div class="portlet-body">
-            <div class="invoice">
-                <div class="row invoice-logo">
-                    <div class="col-xs-6 invoice-logo-space">
-                        <img src="~/Images/Logo.jpeg" class="img-responsive" alt="" />
-                    </div>
-                    <div class="col-xs-6">
-                        <p>
-                            #@Model.PONo / @DateTime.Now.ToShortDateString() <span class="muted">
-                                @Model.PartyIDName
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-xs-12">
-
-                        <table class="table table-bordered table-responsive" id="selected_units">
-                            <thead>
-                                <tr>
-                                    <th>Sr.</th>
-                                    <th>Item Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{ int rowNo = 0; }
-                                @{ Decimal ItemTotal = 0; }
-
-                                @foreach (var item in Model.INV_PurchaseOrderItems)
-                                {
-                                    <tr>
-                                        <td>
-                                            @(rowNo += 1)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.OrderedQuantity)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.PuchasePrice)
-                                        </td>
-                                        <td>
-                                            @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice)
-                                            @{ ItemTotal += @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice); }
-                                            @*@(ItemTotal += @Convert.ToDecimal(item.Quantity * item.PricePerUnit))*@
-                                        </td>
-                                    </tr>
-                                }
-                                <tr>
-                                    <td colspan="4" class="text-right">Item Total</td>
-                                    <td colspan="4" id="tdItemTotal">@ItemTotal</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-right">SGST</td>
-                                    <td colspan="4" id="tdSGST">@Model.SGSTAmount</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-right">CGST</td>
-                                    <td colspan="4" id="tdCGST">@Model.CGSTAmount</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-right">IGST</td>
-                                    <td colspan="4" id="tdIGST">@Model.IGSTAmount</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-right">Final Total</td>
-                                    <td colspan="4" id="tdFinalTotal">@Model.TotalAmount</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-4">
-
-                    </div>
-                    <div class="col-xs-8 invoice-block">
-                        <br />
-                        <a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
-                            Print <i class="fa fa-print"></i>
-                        </a>
-                    </div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Created)
+    @Html.HiddenFor(model => model.PurchaseOrderID)
+    <!--Add-Edit code start-->
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Purchase Order
                 </div>
             </div>
-            <!-- END PAGE CONTENT-->
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="form-section">Purchase Order Details</h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.SellerPartyID, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">Purchase Order Receive Items</h3>
+
+                            <table class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Item
+                                        </th>
+                                        <th>
+                                            Puchase Price
+                                        </th>
+                                        <th>
+                                            Received Quantity
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.INV_PurchaseOrderItems)
+                                    {
+                                        <tr>
+                                            <td class="col-md-2">
+                                                @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                            </td>
+                                            <td class="col-md-2">
+                                                @Html.EditorFor(model => item.PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => item.PuchasePrice, "", new { @class = "text-danger" })
+                                            </td>
+                                            <td class="col-md-2">
+                                                @Html.EditorFor(model => item.ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => item.ReceivedQuantity, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input id="btnSave" type="button" value="Save" class="btn green" />
+                                @*<input type="submit" value="Save" class="btn green" />*@
+                                @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- END FORM-->
+            </div>
+
         </div>
+        <!-- END VALIDATION STATES-->
     </div>
-    <!-- END PORTLET-->
+
+    <!--Add-Edit code end-->
+}
+
+<script>
+	var productList = [];
+	var itemWiseEachStepAddTotalAmount = 0;
+	$(document).ready(function () {
+		$('#btnSave').click(function () {
+			debugger;
+			AddNewPurchaseOrderWithItem();
+		});
+		$("#ItemID").change(function () {
+			debugger;
+			var ddlitemid = $('#ItemID').val();
+			GetItemPrice(ddlitemid);
+		});
+		$("#PaidAmount").change(function () {
+
+			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+			$('#PendingAmount').val(newAmountPending);
+		});
+		$("#Casar").change(function () {
+
+			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+			$('#PendingAmount').val(newAmountPending);
+		});
+		$("#btnModalOK").click(function () {
+			$('#InvoiceMessage').modal('hide');
+			location.reload(true);
+		});
+
+        $('input:radio[name=isLocal]').change(function () {
+            if ($('input[name=isLocal]:checked').val() == "True") {
+                $('#divSGST').show();
+                $('#divCGST').show();
+                $('#divIGST').hide();
+            }
+            else if ($('input[name=isLocal]:checked').val() == "False") {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').show();
+            } else {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').hide();
+            }
+        });
+
+
+		$(".add-row").click(function () {
+
+			debugger;
+			$('#divItemList').show();
+			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
+				debugger;
+				var itemid = $("#ItemID").val();
+				var itemname = $("#ItemID").find('option:selected').text();
+				var priceAmount = $("#txtItemPrice").val();
+				var invoiceID = 1;
+				var quantity = $('#txtQuantity').val();
+				productList.push({
+					//InvoiceItemID: InvoiceItemID,
+					//InvoiceID: invoiceID,
+					ItemID: itemid,
+					Quantity: quantity,
+					//Created: Created,
+					//Modified: Modified,
+					//Remarks:Remarks,
+					PricePerUnit: priceAmount
+				});
+				invoiceID++;
+				var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
+				$("table .list").prepend(markup);
+				itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+				FinalCalculation();
+			}
+		});
+
+
+		$(".delete-row").click(function () {
+			debugger;
+			$("table tbody").find('input[name="record"]').each(function () {
+				if ($(this).is(":checked")) {
+					debugger;
+					var checkId = this.id;
+					$(this).parents("tr").remove();
+					debugger;
+					//$.grep(productList, function (e) {
+					//    debugger;
+					//     e.ItemID == checkId;
+					//});
+					debugger;
+					$.each(productList, function (key, value) {
+						debugger;
+						var checkitemid = value.ItemID;
+						var deductquantity = value.Quantity;
+						var deductpriceperunit = value.PricePerUnit;
+						if (checkId == checkitemid) {
+							//productList.pop(key);
+
+							productList.splice(key, 1);
+							itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
+							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+							FinalCalculation();
+							return false;
+						}
+
+					});
+				}
+			});
+
+		});
+	});
+	function GetItemPrice(ddlitemid) {
+		debugger;
+		$.ajax({
+			type: 'POST',
+			dataType: "json",
+			data: "{ ItemID:'" + ddlitemid + "'}",
+			contentType: "application/json;charset=utf-8",
+			url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
+			success: (function (result) {
+				debugger;
+				$('#txtItemPrice').val(result);
+
+			}),
+			error: function (errormessage) {
+				alert(errormessage.responseText);
+			}
+		});
+	}
+
+	function AddNewPurchaseOrderWithItem() {
+		debugger;
+		var newData = {
+			//InvoiceID: InvoiceID,
+			//CompanyID: $('#CompanyID').val(),
+			SellerPartyID: $('#SellerPartyID').val(),
+			//UserID: $('#ddlupdateInstituteType').val(),
+			Amount: $('#Amount').val(),
+			PaidAmount: $('#PaidAmount').val(),
+			StatusID: $('#StatusID').val(),
+			//Created: Created,
+			//Modified: Modified,
+			Remarks: $('#Remarks').val(),
+			PONo: $('#PONo').val(),
+			PendingAmount: $('#PendingAmount').val(),
+			//FinYearID: $('#FinYearID').val(),
+			CGST: $('#CGST').val(),
+			CGSTAmount: $('#tdCGST').html(),
+			SGST: $('#SGST').val(),
+			SGSTAmount: $('#tdSGST').html(),
+			IGST: $('#IGST').val(),
+			IGSTAmount: $('#tdIGST').html(),
+            IsLocal: $('input[name=isLocal]:checked').val(),
+			IsActive: $('#IsActive').val(),
+			Casar: $('#Casar').val(),
+			TotalAmount: $('#tdFinalTotal').html(),
+			INV_InvoiceItems: productList
+		};
+		debugger;
+		console.log(newData);
+
+		$.ajax({
+			url: '@Url.Action("AddPurchaseOrder", "INV_PurchaseOrder")',
+			data: JSON.stringify(newData),
+			type: "POST",
+			contentType: "application/json;charset=utf-8",
+			dataType: "json",
+			success: function (result) {
+				debugger;
+
+
+				$('#InvoiceMessage').modal('show');
+			},
+			error: function (errormessage) {
+				debugger;
+
+			}
+		});
+	}
+	function FinalCalculation() {
+		var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+		$('#tdIGST').html(igstCalculation);
+		var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+		$('#tdCGST').html(cgstCalculation);
+		var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+		$('#tdSGST').html(sgstCalculation);
+		var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+		$('#tdFinalTotal').html(finaltotal);
+
+		var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
+		$('#PendingAmount').val(newAmountPending);
+	}
+
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="InvoiceMessage" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Succesfully</h4>
+            </div>
+            <div class="modal-body">
+                <p>Succesfully submitted invoice data.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnModalOK" type="button" class="btn btn-default">Close</button>
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
 </div>

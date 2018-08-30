@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_PurchaseOrder
         public ActionResult Index()
         {
-            var iNV_PurchaseOrder = db.INV_PurchaseOrder.Include(i => i.ACC_Tax).Include(i => i.ACC_Tax1).Include(i => i.ACC_Tax2).Include(i => i.SYS_Company).Include(i => i.SYS_FinYear).Include(i => i.MST_Party).Include(i => i.SYS_Status).Include(i => i.SEC_User);
+            var iNV_PurchaseOrder = db.INV_PurchaseOrder.OrderByDescending(o => o.Created).Include(i => i.ACC_Tax).Include(i => i.ACC_Tax1).Include(i => i.ACC_Tax2).Include(i => i.SYS_Company).Include(i => i.SYS_FinYear).Include(i => i.MST_Party).Include(i => i.SYS_Status).Include(i => i.SEC_User);
             return View(iNV_PurchaseOrder.ToList());
         }
 
@@ -378,6 +378,14 @@ namespace AnjaliMIS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
+            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
+            ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
+            ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             return View(_iNV_PurchaseOrderViewModal);
         }
 
