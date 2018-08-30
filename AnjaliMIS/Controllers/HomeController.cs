@@ -32,7 +32,7 @@ namespace AnjaliMIS.Controllers
             {
                 using (DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1())
                 {
-                    var obj = db.SEC_User.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password)).FirstOrDefault();
+                    var obj = db.SEC_User.Where(a => a.UserName.Equals(objUser.UserName) && a.Password.Equals(objUser.Password) && a.IsActive == true).FirstOrDefault();
                     if (obj != null)
                     {
                         Session["UserID"] = obj.UserID.ToString();

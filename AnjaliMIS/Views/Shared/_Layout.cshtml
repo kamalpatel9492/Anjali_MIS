@@ -26,6 +26,10 @@
         thead {
             font-weight: bold;
         }
+        /*.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+            margin-top: 4;
+            margin-left: 0px !important;
+        }*/
     </style>
 </head>
 <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -183,7 +187,12 @@
     @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
-            $('#MyTable').DataTable();
+            //$('#MyTable').DataTable();
+
+            $('#MyTable').dataTable({
+                /* Disable initial sort */
+                "aaSorting": []
+            });
         });
     </script>
     <style>

@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: SEC_User
         public ActionResult Index()
         {
-            var sEC_User = db.SEC_User.Include(s => s.EMP_Employee1).Include(s => s.SEC_User2);
+            var sEC_User = db.SEC_User.Where(u => u.IsActive == true).OrderByDescending(o => o.Created).Include(s => s.EMP_Employee1).Include(s => s.SEC_User2);
             return View(sEC_User.ToList());
         }
 
@@ -51,7 +51,18 @@ namespace AnjaliMIS.Controllers
                                         IsSelected = false
                                     }).ToList();
 
-            ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName");
+
+            var Employees =
+                     db.EMP_Employee
+                       .Where(i => i.IsActive == true)
+                       .Select(s => new
+                       {
+                           EmployeeID = s.EmployeeID,
+                           EmployeeName = s.EMP_Department.DepartmentName + " - " + s.EMP_Designation.Designation + " - " + s.EmployeeName
+                       })
+                       .ToList();
+
+            ViewBag.EmployeeID = new SelectList(Employees, "EmployeeID", "EmployeeName");
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName");
             //ViewBag.SYS_Module_List = new SelectList(db.SYS_Module, "ModuleID", "ModuleName");
 
@@ -77,6 +88,7 @@ namespace AnjaliMIS.Controllers
                 {
                     sEC_UserAddEditModel.sEC_User.Created = DateTime.Now;
                     sEC_UserAddEditModel.sEC_User.Modified = DateTime.Now;
+                    sEC_UserAddEditModel.sEC_User.EmployeeID = sEC_UserAddEditModel.sEC_User.EmployeeID;
                     if (Session["UserID"] != null)
                     {
                         sEC_UserAddEditModel.sEC_User.CreatedByUserID = Convert.ToInt16(Session["UserID"].ToString());
@@ -113,7 +125,19 @@ namespace AnjaliMIS.Controllers
                 }
             }
 
-            ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
+            var Employees =
+                    db.EMP_Employee
+                      .Where(i => i.IsActive == true)
+                      .Select(s => new
+                      {
+                          EmployeeID = s.EmployeeID,
+                          EmployeeName = s.EMP_Department.DepartmentName + " - " + s.EMP_Designation.Designation + " - " + s.EmployeeName
+                      })
+                      .ToList();
+
+            ViewBag.EmployeeID = new SelectList(Employees, "EmployeeID", "EmployeeName");
+
+            //ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName", sEC_UserAddEditModel.sEC_User.CreatedByUserID);
             return View(sEC_UserAddEditModel);
         }
@@ -150,8 +174,18 @@ namespace AnjaliMIS.Controllers
                                                    into sup
                                                    from t3 in sup.DefaultIfEmpty()
                                                    select new SYS_ModuleModel() { ModuleID = t1.ModuleID, ModuleName = t1.ModuleName, IsSelected = (t3.UserPrivilegesID > 0 ? true : false) }).ToList();
+            var Employees =
+                    db.EMP_Employee
+                      .Where(i => i.IsActive == true)
+                      .Select(s => new
+                      {
+                          EmployeeID = s.EmployeeID,
+                          EmployeeName = s.EMP_Department.DepartmentName + " - " + s.EMP_Designation.Designation + " - " + s.EmployeeName
+                      })
+                      .ToList();
 
-            ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
+            ViewBag.EmployeeID = new SelectList(Employees, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
+            //ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName", sEC_UserAddEditModel.sEC_User.CreatedByUserID);
             return View(sEC_UserAddEditModel);
         }
@@ -173,7 +207,7 @@ namespace AnjaliMIS.Controllers
                 if (sEC_UserAddEditModel.sEC_User != null)
                 {
                     var get_SEC_User = db.SEC_User.Where(e => e.UserID == sEC_UserAddEditModel.sEC_User.UserID).FirstOrDefault();
-                    get_SEC_User.EmployeeID = sEC_UserAddEditModel.sEC_User.EmployeeID;
+                    //get_SEC_User.EmployeeID = sEC_UserAddEditModel.sEC_User.EmployeeID;
                     get_SEC_User.UserName = sEC_UserAddEditModel.sEC_User.UserName;
                     get_SEC_User.Password = sEC_UserAddEditModel.sEC_User.Password;
                     get_SEC_User.IsAdmin = sEC_UserAddEditModel.sEC_User.IsAdmin;
@@ -213,7 +247,18 @@ namespace AnjaliMIS.Controllers
                     db.SaveChanges();
                 }
             }
-            ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
+            var Employees =
+                   db.EMP_Employee
+                     .Where(i => i.IsActive == true)
+                     .Select(s => new
+                     {
+                         EmployeeID = s.EmployeeID,
+                         EmployeeName = s.EMP_Department.DepartmentName + " - " + s.EMP_Designation.Designation + " - " + s.EmployeeName
+                     })
+                     .ToList();
+
+            ViewBag.EmployeeID = new SelectList(Employees, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
+            //ViewBag.EmployeeID = new SelectList(db.EMP_Employee, "EmployeeID", "EmployeeName", sEC_UserAddEditModel.sEC_User.EmployeeID);
             ViewBag.CreatedByUserID = new SelectList(db.SEC_User, "UserID", "UserName", sEC_UserAddEditModel.sEC_User.CreatedByUserID);
 
             return RedirectToAction("Index");
@@ -242,9 +287,11 @@ namespace AnjaliMIS.Controllers
             SEC_User sEC_User = db.SEC_User.Find(id);
             try
             {
-                db.SEC_User.Remove(sEC_User);
                 List<SEC_UserPrivileges> sEC_UserPrivileges_List = db.SEC_UserPrivileges.Where(e => e.UserID == sEC_User.UserID).ToList();
                 db.SEC_UserPrivileges.RemoveRange(sEC_UserPrivileges_List);
+                db.SEC_User.Remove(sEC_User);
+                db.Entry(sEC_User).State = EntityState.Modified;
+                sEC_User.IsActive = false;
                 db.SaveChanges();
             }
             catch (Exception ex)
