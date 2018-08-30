@@ -19,7 +19,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_StockHistory
         public ActionResult Index()
         {
-            var iNV_StockHistory = db.INV_StockHistory.Include(i => i.INV_Item).Include(i => i.SYS_FinYear).Include(i => i.SYS_OperationType).Include(i => i.SEC_User).OrderByDescending(O => O.Modified);
+            var iNV_StockHistory = db.INV_StockHistory.OrderByDescending(o=>o.Modified).Include(i => i.INV_Item).Include(i => i.SYS_FinYear).Include(i => i.SYS_OperationType).Include(i => i.SEC_User).OrderByDescending(O => O.Modified);
             return View(iNV_StockHistory.ToList());
         }
 

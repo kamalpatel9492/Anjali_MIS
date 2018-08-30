@@ -19,7 +19,7 @@ namespace AnjaliMIS.Controllers
         // GET: SEC_LoginHistory
         public ActionResult Index()
         {
-            var sEC_LoginHistory = db.SEC_LoginHistory.OrderByDescending(o=>o.Modified).Include(s => s.SEC_User);
+            var sEC_LoginHistory = db.SEC_LoginHistory.OrderByDescending(o => o.LoginTime).OrderByDescending(o => o.LogoutTime).Include(s => s.SEC_User);
             return View(sEC_LoginHistory.ToList());
         }
 

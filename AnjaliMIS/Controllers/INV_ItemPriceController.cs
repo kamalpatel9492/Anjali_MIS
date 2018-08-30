@@ -19,7 +19,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_ItemPrice
         public ActionResult Index()
         {
-            var iNV_ItemPrice = db.INV_ItemPrice.Include(i => i.INV_Item).Include(i => i.SYS_FinYear).Include(i => i.SEC_User);
+            var iNV_ItemPrice = db.INV_ItemPrice.OrderByDescending(o=>o.Created).Include(i => i.INV_Item).Include(i => i.SYS_FinYear).Include(i => i.SEC_User);
             return View(iNV_ItemPrice.ToList());
         }
 
