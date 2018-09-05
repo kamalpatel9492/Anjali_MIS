@@ -45,7 +45,7 @@ namespace AnjaliMIS.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<decimal> Casar { get; set; }
         public decimal TotalAmount { get; set; }
-    
+        public int NewAmountReceived { get; set; }
         public virtual ACC_Tax ACC_Tax { get; set; }
         public virtual ACC_Tax ACC_Tax1 { get; set; }
         public virtual ACC_Tax ACC_Tax2 { get; set; }
@@ -56,6 +56,5 @@ namespace AnjaliMIS.Models
         public virtual SEC_User SEC_User { get; set; }
         public virtual ICollection<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
         public virtual ICollection<INV_InvoiceItem> INV_InvoiceItem { get; set; }
-        public int NewAmountReceived { get; set; }
     }
 }

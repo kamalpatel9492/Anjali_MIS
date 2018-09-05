@@ -24,12 +24,12 @@ namespace AnjaliMIS.Models
         public Nullable<System.DateTime> Modified { get; set; }
         public string Remarks { get; set; }
         public int FinYearID { get; set; }
+        public string IssueNumber { get; set; }
+        public string ReturnNumber { get; set; }
     
         public virtual INV_Item INV_Item { get; set; }
         public virtual SYS_FinYear SYS_FinYear { get; set; }
         public virtual SYS_OperationType SYS_OperationType { get; set; }
         public virtual SEC_User SEC_User { get; set; }
-        public string IssueNumber { get; set; }
-        public string ReturnNumber { get; set; }
     }
 }

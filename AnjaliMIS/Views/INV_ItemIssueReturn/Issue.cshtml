@@ -34,7 +34,8 @@
             <table class="table table-striped table-bordered table-advance table-hover" id="MyTable">
                 <thead>
                     <tr>
-                        <th>no</th>
+                        <th>Sr.</th>
+                        <th>Issue No.</th>
                         <th>ItemName</th>
                         <th>OprationType</th>
                         <th>Quantity</th>
@@ -49,6 +50,7 @@
                         {
                             <tr>
                                 <td>@i</td>
+                                <td>@item.IssueNumber</td>
                                 <td>@item.INV_Item.ItemName</td>
                                 <td>@item.SYS_OperationType.OperationType</td>
                                 <td>@item.Quantity</td>

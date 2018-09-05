@@ -46,6 +46,7 @@ namespace AnjaliMIS.Models
         public Nullable<int> UserID { get; set; }
         public string Remarks { get; set; }
         public bool IsActive { get; set; }
+        public string TaxType { get; set; }
     
         public virtual ICollection<DIA_Jangad> DIA_Jangad { get; set; }
         public virtual ICollection<DIA_Jangad> DIA_Jangad1 { get; set; }

@@ -22,11 +22,10 @@ namespace AnjaliMIS.Models
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string Remarks { get; set; }
-    
+        public List<INV_ItemConfiguration> INV_Items { get; set; }
         public virtual INV_Item INV_Item { get; set; }
         public virtual INV_Item INV_Item1 { get; set; }
         public virtual SEC_User SEC_User { get; set; }
         public bool RetrieveType { get; set; }
-        public List<INV_ItemConfiguration> INV_Items { get; set; }
     }
 }

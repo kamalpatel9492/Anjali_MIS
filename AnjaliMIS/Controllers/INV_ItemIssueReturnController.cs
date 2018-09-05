@@ -26,8 +26,8 @@ namespace AnjaliMIS.Controllers
         public ActionResult Issue()
         {
             List<INV_StockHistory> model = new List<INV_StockHistory>();
-            model = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(o=>o.Modified).ToList();
-           
+            model = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(o => o.Modified).ToList();
+
             return View(model);
         }
 
@@ -138,29 +138,31 @@ namespace AnjaliMIS.Controllers
                     string getIssueLastNumber;
                     if (inv_Item != null)
                     {
-                        
+
                         var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
                         if (getIssueLast == null)
                         {
-                            getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                            getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                         }
                         else
                         {
-                            var a= getIssueLast.IssueNumber;
-                            if (a == null) {
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01"; 
+                            var a = getIssueLast.IssueNumber;
+                            if (a == null)
+                            {
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                             }
-                            else {
+                            else
+                            {
                                 //a = "278201801";
                                 a = a.ToString();
-                                string delimiters = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                                string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
                                 //bool aaa = a.Contains(delimiters);
-                                string[] newstring= a.Split(new[] { delimiters }, StringSplitOptions.None);
+                                string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + (Convert.ToInt32(newstring[1])+1);
-                            }                            
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                            }
                         }
-                        
+
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                         new_INV_StockHistory.ItemID = inv_Item.ItemID;
                         new_INV_StockHistory.OperationTypeID = 6;
@@ -171,7 +173,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.Modified = DateTime.Now;
                         new_INV_StockHistory.Remarks = "Issue";
                         new_INV_StockHistory.FinYearID = 2;
-                        
+
                         new_INV_StockHistory.IssueNumber = getIssueLastNumber;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
                         db.SaveChanges();
@@ -215,24 +217,24 @@ namespace AnjaliMIS.Controllers
                             var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
                             if (getIssueLast == null)
                             {
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                             }
                             else
                             {
                                 var a = getIssueLast.IssueNumber;
                                 if (a == null)
                                 {
-                                    getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                                 }
                                 else
                                 {
                                     //a = "278201801";
                                     a = a.ToString();
-                                    string delimiters = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                                    string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
                                     //bool aaa = a.Contains(delimiters);
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
-                                    getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
                                 }
                             }
 
@@ -255,7 +257,7 @@ namespace AnjaliMIS.Controllers
                             db.SaveChanges();
                         }
                     }
-                    
+
                 }
 
             }
@@ -290,24 +292,24 @@ namespace AnjaliMIS.Controllers
                         var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Return").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
                         if (getIssueLast == null)
                         {
-                            getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                            getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                         }
                         else
                         {
                             var a = getIssueLast.IssueNumber;
                             if (a == null)
                             {
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                             }
                             else
                             {
                                 //a = "278201801";
                                 a = a.ToString();
-                                string delimiters = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                                string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
                                 //bool aaa = a.Contains(delimiters);
                                 string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
                             }
                         }
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
@@ -365,24 +367,24 @@ namespace AnjaliMIS.Controllers
                             var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Return").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
                             if (getIssueLast == null)
                             {
-                                getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                             }
                             else
                             {
                                 var a = getIssueLast.IssueNumber;
                                 if (a == null)
                                 {
-                                    getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + "01";
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                                 }
                                 else
                                 {
                                     //a = "278201801";
                                     a = a.ToString();
-                                    string delimiters = DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                                    string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
                                     //bool aaa = a.Contains(delimiters);
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
-                                    getIssueLastNumber = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
                                 }
                             }
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
