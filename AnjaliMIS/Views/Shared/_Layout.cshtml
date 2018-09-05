@@ -45,7 +45,7 @@
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />
+                            @*<img alt="" class="img-circle" src="../../assets/admin/layout/img/avatar3_small.jpg" />*@
                             <span class="username username-hide-on-mobile">
                                 @{
                                     if (Session["UserName"] != null)
@@ -193,6 +193,9 @@
                 /* Disable initial sort */
                 "aaSorting": []
             });
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy'
+            });
         });
     </script>
     <style>
@@ -203,5 +206,6 @@
             color: #666;
         }
     </style>
+
 </body>
 </html>

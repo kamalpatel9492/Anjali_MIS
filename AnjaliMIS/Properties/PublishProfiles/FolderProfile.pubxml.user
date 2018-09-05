@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>08/27/2018 10:17:26</publishTime>
+      <publishTime>09/01/2018 10:10:37</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>08/27/2018 10:17:26</publishTime>
+      <publishTime>09/01/2018 10:10:37</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>10/07/2018 01:02:03</publishTime>
@@ -12814,7 +12814,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
-      <publishTime>08/23/2018 03:01:10</publishTime>
+      <publishTime>08/31/2018 01:15:10</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Index.cshtml">
       <publishTime>08/21/2018 02:52:38</publishTime>
@@ -12829,10 +12829,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2018 08:44:24</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Issue.cshtml">
-      <publishTime>08/27/2018 09:57:09</publishTime>
+      <publishTime>08/31/2018 01:40:36</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Return.cshtml">
-      <publishTime>08/27/2018 10:02:09</publishTime>
+      <publishTime>08/31/2018 01:41:07</publishTime>
     </File>
     <File Include="Views/INV_ItemPrice/Delete.cshtml">
       <publishTime>08/01/2018 01:57:22</publishTime>
@@ -12847,7 +12847,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:43</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/CreatePurchaseOrder.cshtml">
-      <publishTime>08/14/2018 02:32:11</publishTime>
+      <publishTime>08/31/2018 01:26:53</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Delete.cshtml">
       <publishTime>08/21/2018 03:12:30</publishTime>
@@ -12859,10 +12859,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/04/2018 10:03:14</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Index.cshtml">
-      <publishTime>08/27/2018 10:13:10</publishTime>
+      <publishTime>08/31/2018 01:07:07</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/POReturn.cshtml">
-      <publishTime>08/27/2018 10:13:14</publishTime>
+      <publishTime>08/31/2018 01:56:58</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Print.cshtml">
       <publishTime>08/27/2018 10:07:39</publishTime>
@@ -12970,7 +12970,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/23/2018 00:22:08</publishTime>
     </File>
     <File Include="Views/SEC_LoginHistory/Index.cshtml">
-      <publishTime>08/23/2018 00:48:07</publishTime>
+      <publishTime>08/31/2018 02:02:42</publishTime>
     </File>
     <File Include="Views/SEC_User/Delete.cshtml">
       <publishTime>08/21/2018 02:06:57</publishTime>
@@ -12979,16 +12979,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2018 01:17:24</publishTime>
     </File>
     <File Include="Views/SEC_User/Edit.cshtml">
-      <publishTime>08/21/2018 00:42:40</publishTime>
+      <publishTime>08/31/2018 00:56:14</publishTime>
     </File>
     <File Include="Views/SEC_User/Index.cshtml">
-      <publishTime>08/21/2018 02:49:27</publishTime>
+      <publishTime>08/31/2018 00:09:16</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/21/2018 02:56:39</publishTime>
+      <publishTime>08/31/2018 00:18:21</publishTime>
     </File>
     <File Include="Views/SYS_PartyType/Delete.cshtml">
       <publishTime>07/12/2018 09:38:44</publishTime>

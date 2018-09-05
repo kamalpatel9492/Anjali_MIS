@@ -10,124 +10,123 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.sEC_User.Created)
     @Html.HiddenFor(model => model.sEC_User.UserID)
-    <body>
-        <!--Add-Edit code start-->
-
-        <div class="col-md-12">
-            <!-- BEGIN VALIDATION STATES-->
-            <div class="portlet box blue">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="fa fa-gift"></i>User Edit
-                    </div>
-                </div>
-                <div class="portlet-body form">
-                    <!-- BEGIN FORM-->
-                    <div class="form-horizontal">
-
-                        <div class="form-body">
-                            <h3 class="form-section">User Details</h3>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.sEC_User.EmployeeID, "Employee", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @if (Model.sEC_User != null)
-                                    {
-                                        if (Model.sEC_User.UserID > 0)
-                                        {
-                                            @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
-                                            @Html.ValidationMessageFor(model => model.sEC_User.EmployeeID, "", new { @class = "text-danger", @disabled = "disabled" })
-                                        }
-                                    }
-                                    else
-                                    {
-
-                                        @Html.DropDownList("EmployeeID",
-                                                               (IEnumerable<SelectListItem>)ViewData["Menu"],
-                                                                "-- Select Employee --", htmlAttributes: new { @class = "form-control" })
-                                        @*@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })*@
-                                        @Html.ValidationMessageFor(model => model.sEC_User.EmployeeID, "", new { @class = "text-danger" })
-                                    }
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.sEC_User.UserName, "User Name", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.sEC_User.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.sEC_User.UserName, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.LabelFor(model => model.sEC_User.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.sEC_User.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.sEC_User.Password, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.sEC_User.IsAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.sEC_User.IsAdmin)
-                                        @Html.ValidationMessageFor(model => model.sEC_User.IsAdmin, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                @Html.LabelFor(model => model.sEC_User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.sEC_User.IsActive)
-                                        @Html.ValidationMessageFor(model => model.sEC_User.IsActive, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.sEC_User.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.sEC_User.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.sEC_User.Remarks, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div id="divPrevilledge">
-                                <h3 class="form-section">Module List</h3>
-                                <div class="form-group">
-                                    @*@Html.LabelFor(model => model.sEC_User.SEC_UserPrivileges, "User Privileges", htmlAttributes: new { @class = "control-label col-md-2" })*@
-
-                                    @for (int i = 0; i < Model.sYS_ModuleList.Count; i++)
-                                    {
-                                        <div class="col-md-4">
-                                            <div class="checkbox">
-                                                @Html.CheckBoxFor(model => model.sYS_ModuleList[i].IsSelected)
-                                                @Html.DisplayFor(model => model.sYS_ModuleList[i].ModuleName)
-                                                @Html.HiddenFor(model => model.sYS_ModuleList[i].ModuleID)
-                                            </div>
-                                        </div>
-                                    }
-
-                                    @*@foreach (var item in ViewBag.sys_module_list)
-                                        {
-                                            <div class="checkbox">
-                                                <input class="control-label col-md-2" name="sys_module_list" type="checkbox" value="@item.Text" id="@item.Value" /> @item.Text<br />
-                                            </div>
-                                        }*@
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" value="Save" class="btn green" />
-                                    @Html.ActionLink("Back to List", "index", "SEC_User", new { @class = "btn default" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END FORM-->
+<body>
+    <!--Add-Edit code start-->
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>User Edit
                 </div>
             </div>
-            <!-- END VALIDATION STATES-->
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+
+                    <div class="form-body">
+                        <h3 class="form-section">User Details</h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sEC_User.EmployeeID, "Employee", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @if (Model.sEC_User != null)
+                                {
+                                    if (Model.sEC_User.UserID > 0)
+                                    {
+                                        @Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                        @Html.ValidationMessageFor(model => model.sEC_User.EmployeeID, "", new { @class = "text-danger", @disabled = "disabled" })
+                                    }
+                                }
+                                else
+                                {
+
+                                    @Html.DropDownList("EmployeeID",
+                                                           (IEnumerable<SelectListItem>)ViewData["Menu"],
+                                                            "-- Select Employee --", htmlAttributes: new { @class = "form-control" })
+                                    @*@Html.DropDownList("EmployeeID", null, htmlAttributes: new { @class = "form-control" })*@
+                                    @Html.ValidationMessageFor(model => model.sEC_User.EmployeeID, "", new { @class = "text-danger" })
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sEC_User.UserName, "User Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.sEC_User.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sEC_User.UserName, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.sEC_User.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.sEC_User.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sEC_User.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sEC_User.IsAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.sEC_User.IsAdmin)
+                                    @Html.ValidationMessageFor(model => model.sEC_User.IsAdmin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @Html.LabelFor(model => model.sEC_User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.sEC_User.IsActive)
+                                    @Html.ValidationMessageFor(model => model.sEC_User.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.sEC_User.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.sEC_User.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.sEC_User.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div id="divPrevilledge">
+                            <h3 class="form-section">Module List</h3>
+                            <div class="form-group">
+                                @*@Html.LabelFor(model => model.sEC_User.SEC_UserPrivileges, "User Privileges", htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                                @for (int i = 0; i < Model.sYS_ModuleList.Count; i++)
+                                {
+                                    <div class="col-md-4">
+                                        <label class="checkbox-inline">
+                                            @Html.CheckBoxFor(model => model.sYS_ModuleList[i].IsSelected)
+                                            @Html.DisplayFor(model => model.sYS_ModuleList[i].ModuleName)
+                                            @Html.HiddenFor(model => model.sYS_ModuleList[i].ModuleID)
+                                        </label>
+                                    </div>
+                                }
+
+                                @*@foreach (var item in ViewBag.sys_module_list)
+                                    {
+                                        <div class="checkbox">
+                                            <input class="control-label col-md-2" name="sys_module_list" type="checkbox" value="@item.Text" id="@item.Value" /> @item.Text<br />
+                                        </div>
+                                    }*@
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Save" class="btn green" />
+                                @Html.ActionLink("Back to List", "index", "SEC_User", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END FORM-->
+            </div>
         </div>
-        <!--Add-Edit code end-->
-    </body>
+        <!-- END VALIDATION STATES-->
+    </div>
+    <!--Add-Edit code end-->
+</body>
 
 }
 
@@ -135,7 +134,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -154,20 +153,6 @@
                 $('#divPrevilledge').show();
             }
         });
-
-
-        //$('input:checkbox[name=sEC_User_IsAdmin]').change(function () {
-        //    if ($('input[name=sEC_User.IsAdmin]:checked').val() == "True") {
-        //        $('#divPrevilledge').hide();
-        //    }
-        //    else if ($('input[name=sEC_User.IsAdmin]:checked').val() == "False") {
-        //        $('#divPrevilledge').show();
-        //    } else {
-        //        $('#divPrevilledge').show();
-        //    }
-        //    //var ddlitemid = $('#ItemID').val();
-        //    //GetItemPrice(ddlitemid);
-        //});
 
     });
 </script>

@@ -30,10 +30,10 @@
                             @Html.DisplayNameFor(model => model.EmployeeName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Gender)
+                            Photo
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.DOB)
+                            @Html.DisplayNameFor(model => model.Gender)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Age)
@@ -46,9 +46,6 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.EMP_Designation.Designation)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.SEC_User.UserName)
@@ -66,10 +63,10 @@
                                 @Html.DisplayFor(modelItem => item.EmployeeName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Gender)
+                                <img src="@Url.Content(item.PhotoPath)" width="100px" />
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DOB)
+                                @Html.DisplayFor(modelItem => item.Gender)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Age)
@@ -82,9 +79,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.EMP_Designation.Designation)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.SEC_User.UserName)

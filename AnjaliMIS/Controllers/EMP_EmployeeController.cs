@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: EMP_Employee
         public ActionResult Index()
         {
-            var eMP_Employee = db.EMP_Employee.Include(e => e.ACC_Bank).Include(e => e.EMP_Department).Include(e => e.EMP_Designation).Include(e => e.LOC_City).Include(e => e.SYS_Company).Include(e => e.SYS_FinYear).Include(e => e.LOC_State).Include(e => e.SEC_User);
+            var eMP_Employee = db.EMP_Employee.OrderByDescending(o => o.JoiningDate).Include(e => e.ACC_Bank).Include(e => e.EMP_Department).Include(e => e.EMP_Designation).Include(e => e.LOC_City).Include(e => e.SYS_Company).Include(e => e.SYS_FinYear).Include(e => e.LOC_State).Include(e => e.SEC_User);
             return View(eMP_Employee.ToList());
         }
 
@@ -42,6 +42,7 @@ namespace AnjaliMIS.Controllers
         // GET: EMP_Employee/Create
         public ActionResult Create()
         {
+
             ViewBag.BankID = new SelectList(db.ACC_Bank, "BankID", "BankName");
             ViewBag.DepartmentID = new SelectList(db.EMP_Department, "DepartmentID", "DepartmentName");
             ViewBag.DesignationID = new SelectList(db.EMP_Designation, "DesignationID", "Designation");
@@ -53,7 +54,11 @@ namespace AnjaliMIS.Controllers
             EMP_Employee _eMP_Employee = new EMP_Employee();
             return View("Edit", _eMP_Employee);
         }
-
+        public enum Gender
+        {
+            Male,
+            Female
+        }
         // POST: EMP_Employee/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -67,25 +72,25 @@ namespace AnjaliMIS.Controllers
                 eMP_Employee.CompanyID = 4;
                 eMP_Employee.FinYearID = 2;
                 HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
-				if (photoProof != null && photoProof.FileName != "")
-				{
-					//create path to store in database
-					eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
+                if (photoProof != null && photoProof.FileName != "")
+                {
+                    //create path to store in database
+                    eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
 
-					//store image in folder
-					photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
-				}
-				HttpPostedFileBase photo = Request.Files["PhotoPath"];
-				if (photo!=null && photo.FileName!="")
-				{
-					//create path to store in database
-					eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
+                    //store image in folder
+                    photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
+                }
+                HttpPostedFileBase photo = Request.Files["PhotoPath"];
+                if (photo != null && photo.FileName != "")
+                {
+                    //create path to store in database
+                    eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
 
-					//store image in folder
-					photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
-				}
-				
-				if (Session["UserID"] != null)
+                    //store image in folder
+                    photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
+                }
+
+                if (Session["UserID"] != null)
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
@@ -142,24 +147,24 @@ namespace AnjaliMIS.Controllers
                 eMP_Employee.CompanyID = 4;
                 eMP_Employee.FinYearID = 2;
                 HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
-				if (photoProof != null && photoProof.FileName != "")
-				{
-					//create path to store in database
-					eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
+                if (photoProof != null && photoProof.FileName != "")
+                {
+                    //create path to store in database
+                    eMP_Employee.IDProofPhotoPath = "~/Images/" + photoProof.FileName;
 
-					//store image in folder
-					photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
-				}
-				HttpPostedFileBase photo = Request.Files["PhotoPath"];
-				if (photo != null && photo.FileName != "")
-				{
-					//create path to store in database
-					eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
+                    //store image in folder
+                    photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
+                }
+                HttpPostedFileBase photo = Request.Files["PhotoPath"];
+                if (photo != null && photo.FileName != "")
+                {
+                    //create path to store in database
+                    eMP_Employee.PhotoPath = "~/Images/" + photo.FileName;
 
-					//store image in folder
-					photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
-				}
-				if (Session["UserID"] != null)
+                    //store image in folder
+                    photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
+                }
+                if (Session["UserID"] != null)
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }

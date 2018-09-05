@@ -77,6 +77,7 @@
                                         <tr>
                                             <td class="col-md-2">
                                                 @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                                @Html.HiddenFor(modelItem => item.PurchaseOrderItemID)
                                             </td>
                                             <td class="col-md-2">
                                                 @Html.EditorFor(model => item.PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
@@ -187,88 +188,17 @@
 				FinalCalculation();
 			}
 		});
-
-
-		$(".delete-row").click(function () {
-			debugger;
-			$("table tbody").find('input[name="record"]').each(function () {
-				if ($(this).is(":checked")) {
-					debugger;
-					var checkId = this.id;
-					$(this).parents("tr").remove();
-					debugger;
-					//$.grep(productList, function (e) {
-					//    debugger;
-					//     e.ItemID == checkId;
-					//});
-					debugger;
-					$.each(productList, function (key, value) {
-						debugger;
-						var checkitemid = value.ItemID;
-						var deductquantity = value.Quantity;
-						var deductpriceperunit = value.PricePerUnit;
-						if (checkId == checkitemid) {
-							//productList.pop(key);
-
-							productList.splice(key, 1);
-							itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
-							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-							FinalCalculation();
-							return false;
-						}
-
-					});
-				}
-			});
-
-		});
+		
 	});
-	function GetItemPrice(ddlitemid) {
-		debugger;
-		$.ajax({
-			type: 'POST',
-			dataType: "json",
-			data: "{ ItemID:'" + ddlitemid + "'}",
-			contentType: "application/json;charset=utf-8",
-			url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
-			success: (function (result) {
-				debugger;
-				$('#txtItemPrice').val(result);
-
-			}),
-			error: function (errormessage) {
-				alert(errormessage.responseText);
-			}
-		});
-	}
+	
 
 	function AddNewPurchaseOrderWithItem() {
 		debugger;
 		var newData = {
-			//InvoiceID: InvoiceID,
-			//CompanyID: $('#CompanyID').val(),
-			SellerPartyID: $('#SellerPartyID').val(),
-			//UserID: $('#ddlupdateInstituteType').val(),
-			Amount: $('#Amount').val(),
-			PaidAmount: $('#PaidAmount').val(),
-			StatusID: $('#StatusID').val(),
-			//Created: Created,
-			//Modified: Modified,
-			Remarks: $('#Remarks').val(),
-			PONo: $('#PONo').val(),
-			PendingAmount: $('#PendingAmount').val(),
-			//FinYearID: $('#FinYearID').val(),
-			CGST: $('#CGST').val(),
-			CGSTAmount: $('#tdCGST').html(),
-			SGST: $('#SGST').val(),
-			SGSTAmount: $('#tdSGST').html(),
-			IGST: $('#IGST').val(),
-			IGSTAmount: $('#tdIGST').html(),
-            IsLocal: $('input[name=isLocal]:checked').val(),
-			IsActive: $('#IsActive').val(),
-			Casar: $('#Casar').val(),
-			TotalAmount: $('#tdFinalTotal').html(),
-			INV_InvoiceItems: productList
+            PuchasePrice: $('#PuchasePrice').val(),
+            ReceivedQuantity: $('#ReceivedQuantity').val(),
+            PurchaseOrderItemID: $('#PurchaseOrderItemID').val(),
+            PurchaseOrderID: $('#PurchaseOrderID').val(),
 		};
 		debugger;
 		console.log(newData);
@@ -281,8 +211,6 @@
 			dataType: "json",
 			success: function (result) {
 				debugger;
-
-
 				$('#InvoiceMessage').modal('show');
 			},
 			error: function (errormessage) {
@@ -290,19 +218,6 @@
 
 			}
 		});
-	}
-	function FinalCalculation() {
-		var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdIGST').html(igstCalculation);
-		var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdCGST').html(cgstCalculation);
-		var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdSGST').html(sgstCalculation);
-		var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
-		$('#tdFinalTotal').html(finaltotal);
-
-		var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
-		$('#PendingAmount').val(newAmountPending);
 	}
 
 </script>
@@ -319,7 +234,7 @@
                 <h4 class="modal-title">Succesfully</h4>
             </div>
             <div class="modal-body">
-                <p>Succesfully submitted invoice data.</p>
+                <p>Succesfully submitted PO Return data.</p>
             </div>
             <div class="modal-footer">
                 <button id="btnModalOK" type="button" class="btn btn-default">Close</button>

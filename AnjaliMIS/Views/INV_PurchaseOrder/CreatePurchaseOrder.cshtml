@@ -42,18 +42,13 @@
 								@Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
 							</div>
 						</div>
-						<div class="form-group">
-							@*@Html.LabelFor(model => model.InvoiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
-							</div>*@
+						@*<div class="form-group">
 							@Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
 							<div class="col-md-4">
 								@Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })
 								@Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
 							</div>
-						</div>
+						</div>*@
 
 						<div class="form-group">
 							@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -68,7 +63,7 @@
                             @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4 radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" name="isLocal" value="True">Yes
+                                    <input type="radio" name="isLocal" value="True" checked="checked">Yes
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="isLocal" value="False">No
@@ -241,6 +236,10 @@
 		});
 
         $('input:radio[name=isLocal]').change(function () {
+            CheckIsLocal(); 
+        });
+        CheckIsLocal();
+        function CheckIsLocal() {
             if ($('input[name=isLocal]:checked').val() == "True") {
                 $('#divSGST').show();
                 $('#divCGST').show();
@@ -255,8 +254,7 @@
                 $('#divSGST').hide();
                 $('#divIGST').hide();
             }
-        });
-
+		};
 
 		$(".add-row").click(function () {
 
@@ -284,7 +282,8 @@
 				$("table .list").prepend(markup);
 				itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
 				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-				FinalCalculation();
+                FinalCalculation();
+                
 			}
 		});
 
@@ -402,7 +401,10 @@
 		$('#tdFinalTotal').html(finaltotal);
 
 		var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
-		$('#PendingAmount').val(newAmountPending);
+        $('#PendingAmount').val(newAmountPending);
+        $('html, body').animate({
+            scrollTop: $("#divItemList").offset().top
+        }, 2000);
 	}
 
 </script>
