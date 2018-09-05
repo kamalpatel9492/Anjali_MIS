@@ -11,9 +11,10 @@
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("POReturn", "INV_PurchaseOrder", FormMethod.Post, new {id="POReturn" }))
 {
-    @Html.AntiForgeryToken()
+    @*@Html.AntiForgeryToken()*@
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.PurchaseOrderID)
     <!--Add-Edit code start-->
@@ -57,45 +58,45 @@
 
                         <h3 class="form-section">Purchase Order Receive Items</h3>
 
-                            <table class="table table-striped table-bordered table-advance table-hover">
-                                <thead>
+                        <table class="table table-striped table-bordered table-advance table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Item
+                                    </th>
+                                    <th>
+                                        Puchase Price
+                                    </th>
+                                    <th>
+                                        Received Quantity
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.INV_PurchaseOrderItems)
+                                {
                                     <tr>
-                                        <th>
-                                            Item
-                                        </th>
-                                        <th>
-                                            Puchase Price
-                                        </th>
-                                        <th>
-                                            Received Quantity
-                                        </th>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                            @Html.HiddenFor(modelItem => item.PurchaseOrderItemID)
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.EditorFor(model => item.PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => item.PuchasePrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.EditorFor(model => item.ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => item.ReceivedQuantity, "", new { @class = "text-danger" })
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.INV_PurchaseOrderItems)
-                                    {
-                                        <tr>
-                                            <td class="col-md-2">
-                                                @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
-                                                @Html.HiddenFor(modelItem => item.PurchaseOrderItemID)
-                                            </td>
-                                            <td class="col-md-2">
-                                                @Html.EditorFor(model => item.PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => item.PuchasePrice, "", new { @class = "text-danger" })
-                                            </td>
-                                            <td class="col-md-2">
-                                                @Html.EditorFor(model => item.ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => item.ReceivedQuantity, "", new { @class = "text-danger" })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <input id="btnSave" type="button" value="Save" class="btn green" />
+                                <input id="btnSave" type="submit" value="Save" class="btn green" />
                                 @*<input type="submit" value="Save" class="btn green" />*@
                                 @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
                             </div>
@@ -118,9 +119,13 @@
 	var itemWiseEachStepAddTotalAmount = 0;
 	$(document).ready(function () {
 		$('#btnSave').click(function () {
-			debugger;
-			AddNewPurchaseOrderWithItem();
-		});
+			//AddNewPurchaseOrderWithItem();
+            debugger;
+            debugger;
+            //$("#POReturn").submit();
+            document.POReturn.submit();
+        });
+
 		$("#ItemID").change(function () {
 			debugger;
 			var ddlitemid = $('#ItemID').val();
@@ -188,9 +193,9 @@
 				FinalCalculation();
 			}
 		});
-		
+
 	});
-	
+
 
 	function AddNewPurchaseOrderWithItem() {
 		debugger;

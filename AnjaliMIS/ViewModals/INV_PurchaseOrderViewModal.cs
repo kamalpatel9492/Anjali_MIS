@@ -8,10 +8,10 @@ namespace AnjaliMIS.ViewModals
 {
     public class INV_PurchaseOrderViewModal
     {
-        public INV_PurchaseOrderViewModal()
-        {
-            INV_PurchaseOrderItems = new List<INV_PurchaseOrderItem>();
-        }
+        //public INV_PurchaseOrderViewModal()
+        //{
+        //    INV_PurchaseOrderItems = new List<INV_PurchaseOrderItem>();
+        //}
 
         public int PurchaseOrderID { get; set; }
         public int CompanyID { get; set; }
