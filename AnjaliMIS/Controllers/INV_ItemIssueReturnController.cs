@@ -26,7 +26,7 @@ namespace AnjaliMIS.Controllers
         public ActionResult Issue()
         {
             List<INV_StockHistory> model = new List<INV_StockHistory>();
-            model = db.INV_StockHistory.Where(e => e.Remarks == "Issue").ToList();
+            model = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(o=>o.Modified).ToList();
            
             return View(model);
         }
@@ -40,7 +40,7 @@ namespace AnjaliMIS.Controllers
         public ActionResult Return()
         {
             List<INV_StockHistory> model = new List<INV_StockHistory>();
-            model = db.INV_StockHistory.Where(e => e.Remarks == "Return").ToList();
+            model = db.INV_StockHistory.Where(e => e.Remarks == "Return").OrderByDescending(o => o.Modified).ToList();
             return View(model);
         }
 

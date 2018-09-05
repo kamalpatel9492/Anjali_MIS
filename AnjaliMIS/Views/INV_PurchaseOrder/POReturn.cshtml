@@ -73,20 +73,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.INV_PurchaseOrderItems)
+                                @for (int i = 0; i < Model.INV_PurchaseOrderItems.Count; i++)
                                 {
                                     <tr>
                                         <td class="col-md-2">
-                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
-                                            @Html.HiddenFor(modelItem => item.PurchaseOrderItemID)
+                                            @Html.DisplayFor(modelItem => Model.INV_PurchaseOrderItems[i].INV_Item.ItemName)
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PurchaseOrderItemID)
                                         </td>
                                         <td class="col-md-2">
-                                            @Html.EditorFor(model => item.PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => item.PuchasePrice, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, "", new { @class = "text-danger" })
                                         </td>
                                         <td class="col-md-2">
-                                            @Html.EditorFor(model => item.ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => item.ReceivedQuantity, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
                                 }

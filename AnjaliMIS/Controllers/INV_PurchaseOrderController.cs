@@ -392,52 +392,68 @@ namespace AnjaliMIS.Controllers
         [HttpPost]
         public ActionResult POReturn(INV_PurchaseOrderViewModal iNV_PurchaseOrderViewModal)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal();
+            try
+            {
+                if (iNV_PurchaseOrderViewModal == null)
+                {
+                    return RedirectToAction("Index");
+                    //error meesage or expception handle
+                }
+                else if (iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems == null)
+                {
+                    //error meesage or expception handle
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    INV_PurchaseOrder new_INV_PurchaseOrder = new INV_PurchaseOrder();
 
-            //var POData = db.INV_PurchaseOrder.Find(id);
-            //_iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
-            //{
-            //    PurchaseOrderID = POData.PurchaseOrderID,
-            //    CompanyID = POData.CompanyID,
-            //    SellerPartyID = POData.SellerPartyID,
-            //    PartyIDName = POData.MST_Party.PartyName,
-            //    UserID = POData.UserID,
-            //    Amount = POData.Amount,
-            //    StatusID = POData.StatusID,
-            //    Created = POData.Created,
-            //    Modified = POData.Modified,
-            //    Remarks = POData.Remarks,
-            //    PODate = POData.PODate,
-            //    PONo = POData.PONo,
-            //    FinYearID = POData.FinYearID,
-            //    CGST = POData.CGST,
-            //    CGSTAmount = POData.CGSTAmount,
-            //    SGST = POData.SGST,
-            //    SGSTAmount = POData.SGSTAmount,
-            //    IGST = POData.IGST,
-            //    IGSTAmount = POData.IGSTAmount,
-            //    IsLocal = POData.IsLocal,
-            //    Casar = POData.Casar,
-            //    TotalAmount = POData.TotalAmount
-            //};
-            //_iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == id).ToList();
-            //if (_iNV_PurchaseOrderViewModal == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
-            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
-            ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
-            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
-            ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
-            return View(_iNV_PurchaseOrderViewModal);
+                    if (Session["UserID"] != null)
+                    {
+                        new_INV_PurchaseOrder.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    }
+
+                    foreach (var item in iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems)
+                    {
+                        INV_PurchaseOrderItem new_INV_PurchaseOrderItem = db.INV_PurchaseOrderItem.Find(item.PurchaseOrderItemID);
+                        db.Entry(new_INV_PurchaseOrderItem).State = EntityState.Modified;
+                        new_INV_PurchaseOrderItem.PurchaseOrderItemID = item.PurchaseOrderItemID;
+                        new_INV_PurchaseOrderItem.ReceivedQuantity = item.ReceivedQuantity;
+                        new_INV_PurchaseOrderItem.Modified = DateTime.Now;
+                        new_INV_PurchaseOrderItem.Remarks = item.Remarks;
+                        new_INV_PurchaseOrderItem.PuchasePrice = item.PuchasePrice;
+                        db.SaveChanges();
+
+                        #region INV_ItemPrice
+                        INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
+                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PuchasePrice).OrderByDescending(o => o.Created).FirstOrDefault();
+                        if (_iNV_ItemPrice == null)
+                        {
+                            _iNV_ItemPrice = new INV_ItemPrice();
+                            _iNV_ItemPrice.ItemID = item.ItemID;
+                            _iNV_ItemPrice.PurchasePrice = Convert.ToDecimal(item.PuchasePrice);
+                            _iNV_ItemPrice.Created = DateTime.Now;
+                            _iNV_ItemPrice.Modified = DateTime.Now;
+                            _iNV_ItemPrice.FinYearID = new_INV_PurchaseOrder.FinYearID;
+                            if (Session["UserID"] != null)
+                            {
+                                _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                            }
+                            db.INV_ItemPrice.Add(_iNV_ItemPrice);
+                            db.SaveChanges();
+                        }
+                        #endregion INV_ItemPrice
+
+                    }
+                }
+
+                //return Json("Sucess", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
         }
 
     }
