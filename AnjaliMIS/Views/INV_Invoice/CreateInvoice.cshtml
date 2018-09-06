@@ -52,14 +52,9 @@
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker" } })
                                 @*<span class="input-group-btn">
-                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                </span>*@
+                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                    </span>*@
                                 @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.InvoiceNo, "Invoice No", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.EditorFor(model => model.InvoiceNo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.InvoiceNo, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -76,7 +71,7 @@
                             @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4 radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" name="isLocal" value="True">Yes
+                                    <input type="radio" name="isLocal" value="True" checked="checked">Yes
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="isLocal" value="False">No
@@ -108,7 +103,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" id="divSGST"  hidden>
                             @Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 <select id="ddlIGST" class="form-control"></select>
@@ -224,6 +219,29 @@
 <script>
     var productList = [];
     var itemWiseEachStepAddTotalAmount = 0;
+
+    @if (Model.INV_InvoiceItems != null)
+    {
+         @:$('#divItemList').show();
+        foreach (var @item in Model.INV_InvoiceItems)
+        {
+
+            @:  productList.push({ SubItemID: @item.InvoiceItemID, Qunatity: @item.Quantity            });
+
+            @:var itemid = @item.ItemID;
+            @:var itemname ='@item.INV_Item.ItemName';
+            @:var Remarks;
+            if (@item.Remarks != "") {
+                @: Remarks='@item.Remarks';
+            }
+            @:var quantity = @item.Quantity;
+            @:var priceAmount = @item.PricePerUnit;
+            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) +"</td></tr>";
+
+            @:$("table .list").prepend(markup);
+        }
+        @:FinalCalculation();
+    }
     $(document).ready(function () {
         RetrieveSGST();
         RetrieveCGST();
@@ -273,20 +291,28 @@
         //});
 
         $('input:radio[name=isLocal]').change(function () {
-            if ($('input[name=isLocal]:checked').val() == "True") {
-                $('#divSGST').show();
-                $('#divCGST').hide();
-            }
-            else if ($('input[name=isLocal]:checked').val() == "False") {
-                $('#divCGST').show();
-                $('#divSGST').hide();
-            } else {
-                $('#divCGST').hide();
-                $('#divSGST').hide();
-            }
+            CheckIsLocal();
             //var ddlitemid = $('#ItemID').val();
             //GetItemPrice(ddlitemid);
         });
+
+        CheckIsLocal();
+        function CheckIsLocal() {
+            if ($('input[name=isLocal]:checked').val() == "True") {
+                $('#divSGST').show();
+                $('#divCGST').show();
+                $('#divIGST').hide();
+            }
+            else if ($('input[name=isLocal]:checked').val() == "False") {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').show();
+            } else {
+                $('#divCGST').hide();
+                $('#divSGST').hide();
+                $('#divIGST').hide();
+            }
+        };
 
         $(".add-row").click(function () {
 

@@ -62,6 +62,24 @@
                     new { @class = "more" })
         </div>
     </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="dashboard-stat blue-madison">
+            <div class="visual">
+                <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="details">
+                <div class="number">
+                    @*@Model.POCount.ToString()*@
+                </div>
+                <div class="desc">
+                    Issue / Return
+                </div>
+            </div>
+            @Html.ActionLink("View more", "Index",
+                    new { controller = "INV_ItemIssueReturn" },
+                    new { @class = "more" })
+        </div>
+    </div>
     @*<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="dashboard-stat purple-plum">
                 <div class="visual">

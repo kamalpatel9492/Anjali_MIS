@@ -42,9 +42,9 @@ namespace AnjaliMIS.Controllers
         // GET: INV_Invoice/Create
         public ActionResult Create()
         {
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
@@ -74,9 +74,9 @@ namespace AnjaliMIS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.SGST);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_Invoice.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_Invoice.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_Invoice.SGST);
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Invoice.CompanyID);
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_Invoice.FinYearID);
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_Invoice.PartyID);
@@ -92,20 +92,50 @@ namespace AnjaliMIS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INV_Invoice iNV_Invoice = db.INV_Invoice.Find(id);
-            if (iNV_Invoice == null)
+            INV_InvoiceViewModal iNV_InvoiceViewModal = new INV_InvoiceViewModal();
+            var inv_Invoice = db.INV_Invoice.Find(id);
+            iNV_InvoiceViewModal = new INV_InvoiceViewModal()
+            {
+                InvoiceID = inv_Invoice.InvoiceID,
+                CompanyID = inv_Invoice.CompanyID,
+                PartyID = inv_Invoice.PartyID,
+                UserID = inv_Invoice.UserID,
+                Amount = inv_Invoice.Amount,
+                AmountReceived = inv_Invoice.AmountReceived,
+                StatusID = inv_Invoice.StatusID,
+                Created = inv_Invoice.Created,
+                Modified = inv_Invoice.Modified,
+                Remarks = inv_Invoice.Remarks,
+                InvoiceDate = inv_Invoice.InvoiceDate,
+                InvoiceNo = inv_Invoice.InvoiceNo,
+                PONo = inv_Invoice.PONo,
+                AmountPending = inv_Invoice.AmountPending,
+                FinYearID = inv_Invoice.FinYearID,
+                CGST = inv_Invoice.CGST,
+                CGSTAmount = inv_Invoice.CGSTAmount,
+                SGST = inv_Invoice.SGST,
+                SGSTAmount = inv_Invoice.SGSTAmount,
+                IGST = inv_Invoice.IGST,
+                IGSTAmount = inv_Invoice.IGSTAmount,
+                IsLocal = inv_Invoice.IsLocal,
+                IsActive = inv_Invoice.IsActive,
+                Casar = inv_Invoice.Casar,
+                TotalAmount = inv_Invoice.TotalAmount
+            };
+            iNV_InvoiceViewModal.INV_InvoiceItems = db.INV_InvoiceItem.Where(i => i.InvoiceID == id).ToList();
+            if (iNV_InvoiceViewModal == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.SGST);
-            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Invoice.CompanyID);
-            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_Invoice.FinYearID);
-            ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_Invoice.PartyID);
-            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", iNV_Invoice.StatusID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Invoice.UserID);
-            return View(iNV_Invoice);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_InvoiceViewModal.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_InvoiceViewModal.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_InvoiceViewModal.SGST);
+            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_InvoiceViewModal.CompanyID);
+            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_InvoiceViewModal.FinYearID);
+            ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_InvoiceViewModal.PartyID);
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", iNV_InvoiceViewModal.StatusID);
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_InvoiceViewModal.UserID);
+            return View("CreateInvoice", iNV_InvoiceViewModal);
         }
 
         // POST: INV_Invoice/Edit/5
@@ -161,9 +191,9 @@ namespace AnjaliMIS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_Invoice.SGST);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_Invoice.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_Invoice.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_Invoice.SGST);
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Invoice.CompanyID);
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_Invoice.FinYearID);
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_Invoice.PartyID);
@@ -211,9 +241,9 @@ namespace AnjaliMIS.Controllers
         public ActionResult CreateInvoice()
         {
             var model = new INV_InvoiceViewModal();
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
@@ -243,7 +273,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var sgst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                var sgst = db.ACC_Tax.Where(e => e.IsActive == true && e.TaxType == "SGST").Select(e => new
                 {
                     TaxID = e.TaxID,
                     Tax = e.Tax,
@@ -266,7 +296,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var cgst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                var cgst = db.ACC_Tax.Where(e => e.IsActive == true && e.TaxType == "CGST").Select(e => new
                 {
                     TaxID = e.TaxID,
                     Tax = e.Tax,
@@ -289,7 +319,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var igst = db.ACC_Tax.Where(e => e.IsActive == true).Select(e => new
+                var igst = db.ACC_Tax.Where(e => e.IsActive == true && e.TaxType == "IGST").Select(e => new
                 {
                     TaxID = e.TaxID,
                     Tax = e.Tax,
@@ -362,6 +392,12 @@ namespace AnjaliMIS.Controllers
                     new_INV_Invoice.Modified = DateTime.Now;
                     new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;
                     new_INV_Invoice.InvoiceDate = DateTime.Now;
+
+                    Int32 TotalForMonth = db.INV_Invoice.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                    Int32 NextCount = TotalForMonth + 1;
+                    Int32 _NewInvoiceNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    new_INV_Invoice.InvoiceNo = _NewInvoiceNo;
+
                     new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
                     new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
                     new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;

@@ -42,9 +42,9 @@ namespace AnjaliMIS.Controllers
         // GET: INV_PurchaseOrder/Create
         public ActionResult Create()
         {
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
@@ -90,9 +90,9 @@ namespace AnjaliMIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.SGST);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_PurchaseOrder.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_PurchaseOrder.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_PurchaseOrder.SGST);
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_PurchaseOrder.CompanyID);
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_PurchaseOrder.FinYearID);
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_PurchaseOrder.SellerPartyID);
@@ -114,9 +114,9 @@ namespace AnjaliMIS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.SGST);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_PurchaseOrder.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_PurchaseOrder.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_PurchaseOrder.SGST);
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_PurchaseOrder.CompanyID);
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_PurchaseOrder.FinYearID);
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_PurchaseOrder.SellerPartyID);
@@ -172,9 +172,9 @@ namespace AnjaliMIS.Controllers
         public ActionResult CreatePurchaseOrder()
         {
             var model = new INV_PurchaseOrderViewModal();
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
@@ -229,7 +229,11 @@ namespace AnjaliMIS.Controllers
                     new_INV_PurchaseOrder.Modified = DateTime.Now;
                     new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
                     new_INV_PurchaseOrder.PODate = DateTime.Now;
-                    new_INV_PurchaseOrder.PONo = iNV_PurchaseOrderViewModal.PONo;
+
+                    Int32 TotalForMonth = db.INV_PurchaseOrder.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                    Int32 NextCount = TotalForMonth + 1;
+                    Int32 _NewPONOtCount =  Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    new_INV_PurchaseOrder.PONo = _NewPONOtCount;
                     new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
                     new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                     new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
@@ -378,9 +382,9 @@ namespace AnjaliMIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
-            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax");
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
             ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName");
             ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");

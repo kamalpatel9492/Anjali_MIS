@@ -10,5 +10,7 @@ namespace AnjaliMIS.ViewModals
         public int ItemCount { get; set; }
         public int InvoiceCount { get; set; }
         public int POCount { get; set; }
+        public int IssueCount { get; set; }
+        public int ReturnCount { get; set; }
     }
 }

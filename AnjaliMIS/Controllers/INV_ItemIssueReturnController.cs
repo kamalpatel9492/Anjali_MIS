@@ -166,7 +166,7 @@ namespace AnjaliMIS.Controllers
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                         new_INV_StockHistory.ItemID = inv_Item.ItemID;
                         new_INV_StockHistory.OperationTypeID = 6;
-                        new_INV_StockHistory.ReferenceID = null;
+                        new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber); 
                         new_INV_StockHistory.Quantity = inv_Item.Quantity;
                         new_INV_StockHistory.UserID = iNV_ItemConfiguration.UserID;
                         new_INV_StockHistory.Created = DateTime.Now;
@@ -241,7 +241,7 @@ namespace AnjaliMIS.Controllers
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
                             new_INV_StockHistory.OperationTypeID = 3;
-                            new_INV_StockHistory.ReferenceID = null;
+                            new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
                             new_INV_StockHistory.Quantity = inv_Item.Quantity;
                             new_INV_StockHistory.UserID = item.UserID;
                             new_INV_StockHistory.Created = DateTime.Now;
@@ -315,7 +315,7 @@ namespace AnjaliMIS.Controllers
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                         new_INV_StockHistory.ItemID = inv_Item.ItemID;
                         new_INV_StockHistory.OperationTypeID = 7;
-                        new_INV_StockHistory.ReferenceID = null;
+                        new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
                         new_INV_StockHistory.Quantity = inv_Item.Quantity;
                         new_INV_StockHistory.UserID = iNV_ItemConfiguration.UserID;
                         new_INV_StockHistory.Created = DateTime.Now;
@@ -323,7 +323,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.Remarks = "Return";
                         new_INV_StockHistory.FinYearID = 2;
 
-                        new_INV_StockHistory.IssueNumber = getIssueLastNumber;
+                        new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
                         db.SaveChanges();
 
@@ -390,7 +390,7 @@ namespace AnjaliMIS.Controllers
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
                             new_INV_StockHistory.OperationTypeID = 7;
-                            new_INV_StockHistory.ReferenceID = null;
+                            new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
                             new_INV_StockHistory.Quantity = inv_Item.Quantity;
                             new_INV_StockHistory.UserID = item.UserID;
                             new_INV_StockHistory.Created = DateTime.Now;
@@ -398,7 +398,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.Remarks = "Return";
                             new_INV_StockHistory.FinYearID = 2;
 
-                            new_INV_StockHistory.IssueNumber = getIssueLastNumber;
+                            new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                             db.INV_StockHistory.Add(new_INV_StockHistory);
                             db.SaveChanges();
 
