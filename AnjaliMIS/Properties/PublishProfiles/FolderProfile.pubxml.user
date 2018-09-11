@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>09/01/2018 10:10:37</publishTime>
+      <publishTime>09/07/2018 01:50:29</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>09/01/2018 10:10:37</publishTime>
+      <publishTime>09/07/2018 01:50:29</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>10/07/2018 01:02:03</publishTime>
@@ -12253,70 +12253,70 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2018 13:00:14</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/de/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/de/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>03/02/2015 09:32:26</publishTime>
+      <publishTime>10/23/2017 13:15:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>03/02/2015 09:32:26</publishTime>
+      <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/es/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/es/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/fr/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/fr/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/it/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/it/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/it/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/ja/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:11</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/ko/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:08</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/ko/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.Edm.dll">
-      <publishTime>07/03/2018 21:05:12</publishTime>
+      <publishTime>08/13/2018 23:22:10</publishTime>
     </File>
     <File Include="bin/Microsoft.Data.OData.dll">
-      <publishTime>07/03/2018 21:05:09</publishTime>
+      <publishTime>08/13/2018 23:22:22</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>07/01/2018 16:48:26</publishTime>
@@ -12325,19 +12325,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2018 21:05:18</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:12</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:09</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/ru/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>07/03/2018 21:05:04</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/System.ValueTuple.dll">
       <publishTime>07/03/2018 20:56:17</publishTime>
@@ -12382,22 +12382,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2018 21:05:18</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:12</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/zh-Hans/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:09</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="bin/zh-Hant/Microsoft.Data.Edm.resources.dll">
-      <publishTime>07/03/2018 21:05:12</publishTime>
+      <publishTime>08/13/2018 23:22:12</publishTime>
     </File>
     <File Include="bin/zh-Hant/Microsoft.Data.OData.resources.dll">
-      <publishTime>07/03/2018 21:05:09</publishTime>
+      <publishTime>08/13/2018 23:22:24</publishTime>
     </File>
     <File Include="bin/zh-Hant/System.Spatial.resources.dll">
-      <publishTime>07/03/2018 21:05:07</publishTime>
+      <publishTime>08/13/2018 23:22:38</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>07/01/2018 16:47:49</publishTime>
@@ -12577,10 +12577,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2018 09:56:54</publishTime>
     </File>
     <File Include="Models/AnjaliMISEntities.edmx.diagram">
-      <publishTime>08/16/2018 00:21:49</publishTime>
+      <publishTime>09/06/2018 03:04:04</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/12/2018 22:07:55</publishTime>
+      <publishTime>09/06/2018 02:49:15</publishTime>
     </File>
     <File Include="Scripts/jquery-3.3.1.js">
       <publishTime>07/03/2018 20:50:28</publishTime>
@@ -12736,7 +12736,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:11</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Create.cshtml">
-      <publishTime>08/23/2018 03:06:51</publishTime>
+      <publishTime>09/03/2018 19:43:52</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Delete.cshtml">
       <publishTime>08/21/2018 03:02:53</publishTime>
@@ -12745,10 +12745,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2018 23:58:00</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Edit.cshtml">
-      <publishTime>08/23/2018 03:14:21</publishTime>
+      <publishTime>09/05/2018 13:27:51</publishTime>
     </File>
     <File Include="Views/EMP_Employee/Index.cshtml">
-      <publishTime>08/21/2018 02:59:16</publishTime>
+      <publishTime>09/05/2018 13:31:40</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>07/13/2018 01:26:18</publishTime>
@@ -12775,7 +12775,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:21</publishTime>
     </File>
     <File Include="Views/INV_Invoice/CreateInvoice.cshtml">
-      <publishTime>08/14/2018 02:30:12</publishTime>
+      <publishTime>09/07/2018 01:23:03</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Delete.cshtml">
       <publishTime>07/24/2018 23:38:06</publishTime>
@@ -12787,13 +12787,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/06/2018 13:10:39</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Index.cshtml">
-      <publishTime>08/21/2018 02:52:27</publishTime>
+      <publishTime>09/07/2018 00:53:07</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Print.cshtml">
       <publishTime>08/03/2018 00:27:49</publishTime>
     </File>
     <File Include="Views/INV_Item/Dashboard.cshtml">
-      <publishTime>08/01/2018 01:49:17</publishTime>
+      <publishTime>09/07/2018 01:47:14</publishTime>
     </File>
     <File Include="Views/INV_Item/Delete.cshtml">
       <publishTime>08/16/2018 01:01:57</publishTime>
@@ -12820,19 +12820,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:38</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddIssueItem.cshtml">
-      <publishTime>08/27/2018 08:36:03</publishTime>
+      <publishTime>09/07/2018 01:35:10</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddReturnItem.cshtml">
-      <publishTime>08/27/2018 08:36:03</publishTime>
+      <publishTime>09/07/2018 01:38:09</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Index.cshtml">
       <publishTime>08/27/2018 08:44:24</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Issue.cshtml">
-      <publishTime>08/31/2018 01:40:36</publishTime>
+      <publishTime>09/06/2018 03:12:47</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Return.cshtml">
-      <publishTime>08/31/2018 01:41:07</publishTime>
+      <publishTime>09/06/2018 23:55:37</publishTime>
     </File>
     <File Include="Views/INV_ItemPrice/Delete.cshtml">
       <publishTime>08/01/2018 01:57:22</publishTime>
@@ -12847,7 +12847,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:43</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/CreatePurchaseOrder.cshtml">
-      <publishTime>08/31/2018 01:26:53</publishTime>
+      <publishTime>09/06/2018 01:10:26</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Delete.cshtml">
       <publishTime>08/21/2018 03:12:30</publishTime>
@@ -12862,7 +12862,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2018 01:07:07</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/POReturn.cshtml">
-      <publishTime>08/31/2018 01:56:58</publishTime>
+      <publishTime>09/06/2018 00:46:36</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Print.cshtml">
       <publishTime>08/27/2018 10:07:39</publishTime>
@@ -12979,7 +12979,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2018 01:17:24</publishTime>
     </File>
     <File Include="Views/SEC_User/Edit.cshtml">
-      <publishTime>08/31/2018 00:56:14</publishTime>
+      <publishTime>09/03/2018 17:20:11</publishTime>
     </File>
     <File Include="Views/SEC_User/Index.cshtml">
       <publishTime>08/31/2018 00:09:16</publishTime>
@@ -12988,7 +12988,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/31/2018 00:18:21</publishTime>
+      <publishTime>09/03/2018 18:32:38</publishTime>
     </File>
     <File Include="Views/SYS_PartyType/Delete.cshtml">
       <publishTime>07/12/2018 09:38:44</publishTime>
@@ -13009,7 +13009,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/01/2018 16:47:49</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/27/2018 10:17:31</publishTime>
+      <publishTime>09/07/2018 01:49:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -63,7 +63,10 @@
                                 @Html.DisplayFor(modelItem => item.EmployeeName)
                             </td>
                             <td>
-                                <img src="@Url.Content(item.PhotoPath)" width="100px" />
+                                @if (item.PhotoPath != null)
+                                {
+                                    <img src="@Url.Content(item.PhotoPath)" width="100px" />
+                                }
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Gender)

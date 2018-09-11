@@ -183,6 +183,10 @@
             $('#divItemList').show();
 
             var subItemID = $("#ddlItemListSubItem").val();
+            if (subItemID == "Select Sub Item") {
+                alert("Select Item");
+                return;
+            }
             var MainItemID = $("#MainItemID").find('option:selected').text();
             var itemname = $("#ddlItemListSubItem").find('option:selected').text();
             var Remarks = $('#Remarks').val();
