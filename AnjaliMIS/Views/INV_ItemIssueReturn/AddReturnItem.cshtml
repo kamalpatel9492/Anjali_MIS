@@ -23,26 +23,50 @@
             <!-- BEGIN FORM-->
             <div class="form-horizontal">
                 <div class="form-body">
-                    @*<h3 class="form-section">Return tab details</h3>*@
+
                     <div class="form-group">
 
-                        <label class="control-label col-md-2">User</label>
+                        <label class="control-label col-md-2">Issue Number</label>
                         <div class="col-md-2">
-                            <select id="ddlUserList" class="form-control"></select>
+                            <input id="txtIssueNumber" type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnIssueCheck" class="form-control">Submit</button>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2">Item</label>
+                    @*<div class="form-group">
+
+                            <label class="control-label col-md-2">User</label>
+                            <div class="col-md-2">
+                                <select id="ddlUserList" class="form-control"></select>
+                            </div>
+                        </div>*@
+                    <div class="form-group" id="radioButtonDiv" hidden>
+                        <label class="control-label col-md-2"></label>
                         <div class="col-md-4 radio-list">
                             <label class="radio-inline">
-                                <input type="radio" name="rbtnItem" value="True">Main Item
+                                <input type="radio" name="rbtnItem" value="New">New
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="rbtnItem" value="False">Sub Item
+                                <input type="radio" name="rbtnItem" value="Rejected">Rejected
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="rbtnItem" value="Extra">Extra
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
+                            <label class="control-label col-md-2">Item</label>
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="rbtnItem" value="True">Main Item
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="rbtnItem" value="False">Sub Item
+                                </label>
+                            </div>
+                        </div>*@
+                    <div class="form-group" id="divDDLItemList" hidden>
 
                         <label class="control-label col-md-2">Item</label>
                         <div class="col-md-2">
@@ -50,10 +74,47 @@
                         </div>
 
                     </div>
+                    <div class="form-group" id="divDDLItemQuantity" hidden>
 
+                        <label class="control-label col-md-2">Quantity</label>
+                        <div class="col-md-2">
+                            <input id="txtReturnItemQuantity" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="divDDLItemRemarks" hidden>
 
+                        <label class="control-label col-md-2">Remarks</label>
 
+                        <div class="col-md-2">
+                            <input id="txtReturnItemRemarks" type="text" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnReturnItemAdd" class="form-control">Add</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="divReturnAddItem" hidden>
+                        <label class="control-label col-md-2">Item List</label>
+                        <div class="col-md-10">
+                            <table class="table table-bordered table-responsive" id="tableSubItem">
+                                <thead>
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyReturnAddItemList" id="tbodyReturnAddItemList"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
 
+                        
+                        <div class="col-md-2">
+                            <button id="btnFinalSubmit" class="form-control">Final Submit</button>
+                        </div>
+                    </div>
                     <div class="form-group" id="tableMainItem" hidden>
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-2">
@@ -99,10 +160,98 @@
 </div>
 
 <script>
+    var addReturnListArray = [];
     $(document).ready(function () {
-
+        
         RetrieveitemList();
         RetrieveUserList();
+
+        //11-9-2018
+
+        $("#btnIssueCheck").click(function () {
+            var issuenumber = $('#txtIssueNumber').val();
+            //alert("The paragraph was clicked." + issuenumber);
+            checkIssueNumber(issuenumber);
+        });
+        
+        $('input:radio[name=rbtnItem]').change(function () {
+             
+            if ($('input[name=rbtnItem]:checked').val() == "New") {
+                $('#divDDLItemList').show();
+                $('#divDDLItemRemarks').show();
+                $('#divDDLItemQuantity').show();
+                $('#tableMainItem').show();
+
+            }
+            else if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
+                $('#divDDLItemList').hide();
+                $('#divDDLItemRemarks').hide();
+                $('#divDDLItemQuantity').hide();
+                $('#tableMainItem').hide();
+
+            }
+            else if ($('input[name=rbtnItem]:checked').val() == "Extra") {
+                $('#divDDLItemList').hide();
+                $('#divDDLItemRemarks').hide();
+                $('#divDDLItemQuantity').hide();
+                $('#tableMainItem').hide();
+
+            }
+        });
+
+
+
+        $("#btnReturnItemAdd").click(function () {
+             
+            var itemid = $('#ddlItemList').val();
+            var quantity = $('#txtReturnItemQuantity').val();
+            var remarks = $('#txtReturnItemRemarks').val();
+            var issueNumber = $('#txtIssueNumber').val();
+            $('#divReturnAddItem').show();
+            addReturnListArray.push({
+
+                ItemID: itemid,
+                Quantity: quantity,
+                Remarks: remarks,
+                IssueNumber: issueNumber
+            });
+            var html = '';
+            html += '<tr id="">';
+            //html += '<td><input type="checkbox" name="chkForAssmeble" value="' + result[key].SubItemID + '"></td>';
+            //html += '<td>' + result[key].ItemName + '</td>';
+            html += '<td>select</td>';
+            html += '<td>' +$("#ddlItemList option[value='"+itemid+"']").text()  +'</td>';
+            html += '<td>' + quantity + '</td>';
+            html += '<td>' + remarks + '</td>';
+            //html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
+            html += '</tr>';
+
+            $('#tbodyReturnAddItemList').append(html);
+        });
+
+
+        $("#btnFinalSubmit").click(function () {
+            var itemList = {
+                iNV_StockHistory_List: addReturnListArray
+            };
+
+            $.ajax({
+                url: "/INV_ItemIssueReturn/RertunNewItem",
+                data: JSON.stringify(itemList),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
+                   
+                },
+                error: function (errormessage) {
+
+
+                }
+            });
+        });
+        
         //assign radio button change event
         $('input:radio[name=assign]').change(function () {
             if ($('input[name=assign]:checked').val() == "True") {
@@ -190,6 +339,30 @@
 
         });
     });
+
+    function checkIssueNumber(issuenumber) {
+        $.ajax({
+            url: "/INV_ItemIssueReturn/CheckIssueNumber",
+            data: JSON.stringify({ "issuenumber": issuenumber }),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+                if (result == true) {
+                    $("#radioButtonDiv").show();
+                }
+                else {
+                    alert("not exist");
+                    $("#radioButtonDiv").hide();
+                }
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
     function RetrieveitemList() {
         $.ajax({
             url: "/INV_Invoice/RetrieveItemList",
@@ -332,70 +505,6 @@
             }
         });
     }
-    @*function SaveItemForUse() {
-
-        var postData = {
-            MainItemID: $('#ddlItemList').val(),
-            Qunatity: $('#txtQuantity').val()
-
-            //UserID: $('#ddlUserList').val(),
-            //RetrieveType: $('input[name=assign]:checked').val()
-        };
-
-
-        $.ajax({
-            url: "/INV_ItemIssueReturn/SaveForUse",
-            data: JSON.stringify(postData),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
-                //location.reload();
-                //alert(result);
-            },
-            error: function (errormessage) {
-
-
-            }
-        });
-    }
-    function SaveItemForAssmeble() {
-
-        var itemList = [];
-        $('#tableForAssmeble input:checked').each(function () {
-            var checkbboxid = $(this).val();
-
-            var tablerowid = $(this).closest('tr').attr('id');
-            var quantityValue = $("#quantity" + tablerowid).val();
-            itemList.push({
-
-                SubItemID: checkbboxid,
-                Qunatity: quantityValue
-            });
-        });
-
-
-
-
-        $.ajax({
-            url: "/INV_ItemIssueReturn/SaveForAssmeble",
-            data: JSON.stringify(itemList),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
-                //location.reload();
-                //itemList = [];
-                //alert(result);
-            },
-            error: function (errormessage) {
-
-
-            }
-        });
-    }*@
 
     function SaveMainItem() {
 

@@ -26,7 +26,7 @@ namespace AnjaliMIS.Controllers
         public ActionResult Issue()
         {
             List<INV_StockHistory> model = new List<INV_StockHistory>();
-            model = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(o => o.Modified).ToList();
+            model = db.INV_StockHistory.Where(e => e.OperationTypeID == 8).OrderByDescending(o => o.Modified).ToList();
 
             return View(model);
         }
@@ -40,7 +40,7 @@ namespace AnjaliMIS.Controllers
         public ActionResult Return()
         {
             List<INV_StockHistory> model = new List<INV_StockHistory>();
-            model = db.INV_StockHistory.Where(e => e.Remarks == "Return").OrderByDescending(o => o.Modified).ToList();
+            model = db.INV_StockHistory.Where(e => e.OperationTypeID == 9).OrderByDescending(o => o.Modified).ToList();
             return View(model);
         }
 
@@ -73,6 +73,24 @@ namespace AnjaliMIS.Controllers
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult CheckIssueNumber(string issuenumber)
+        {
+            try
+            {
+                bool existOrNot = db.INV_StockHistory.Where(e=>e.IssueNumber== issuenumber).Any();
+
+                return Json(existOrNot, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+       
         [HttpPost]
         public JsonResult Retrieve_INV_ItemConfiguration_List(INV_ItemConfiguration iNV_ItemConfiguration)
         {
@@ -165,7 +183,7 @@ namespace AnjaliMIS.Controllers
 
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                         new_INV_StockHistory.ItemID = inv_Item.ItemID;
-                        new_INV_StockHistory.OperationTypeID = 6;
+                        new_INV_StockHistory.OperationTypeID = 8;
                         new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber); 
                         new_INV_StockHistory.Quantity = inv_Item.Quantity;
                         new_INV_StockHistory.UserID = iNV_ItemConfiguration.UserID;
@@ -240,7 +258,7 @@ namespace AnjaliMIS.Controllers
 
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
-                            new_INV_StockHistory.OperationTypeID = 3;
+                            new_INV_StockHistory.OperationTypeID = 8;
                             new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
                             new_INV_StockHistory.Quantity = inv_Item.Quantity;
                             new_INV_StockHistory.UserID = item.UserID;
@@ -416,6 +434,86 @@ namespace AnjaliMIS.Controllers
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
+
+
+
+        [HttpPost]
+        public JsonResult RertunNewItem(List<INV_StockHistory> iNV_StockHistory_List)
+        {
+            try
+            {
+                if (iNV_StockHistory_List != null)
+                {
+                    //erroor handle
+                }
+                if (iNV_StockHistory_List != null)
+                {
+                    foreach (var item in iNV_StockHistory_List)
+                    {
+                        if (Session["UserID"] != null)
+                        {
+                            item.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        }
+
+                        var inv_Item = db.INV_Item.Where(e => e.ItemID == item.ItemID).FirstOrDefault();
+
+                        string getIssueLastNumber;
+
+                        if (inv_Item != null)
+                        {
+                            var getIssueLast = db.INV_StockHistory.Where(e => e.OperationTypeID == 8).OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
+                            if (getIssueLast == null)
+                            {
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                            }
+                            else
+                            {
+                                var a = getIssueLast.ReturnNumber;
+                                if (a == null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                }
+                                else
+                                {
+                                    //a = "278201801";
+                                    a = a.ToString();
+                                    string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
+                                    //bool aaa = a.Contains(delimiters);
+                                    string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
+
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                }
+                            }
+                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                            new_INV_StockHistory.ItemID = inv_Item.ItemID;
+                            new_INV_StockHistory.OperationTypeID = 9;
+                            new_INV_StockHistory.ReferenceID = Convert.ToInt32(item.IssueNumber);
+                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                            new_INV_StockHistory.UserID = item.UserID;
+                            new_INV_StockHistory.Created = DateTime.Now;
+                            new_INV_StockHistory.Modified = DateTime.Now;
+                            new_INV_StockHistory.Remarks = item.Remarks;
+                            new_INV_StockHistory.FinYearID = 2;
+
+                            new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
+                            db.INV_StockHistory.Add(new_INV_StockHistory);
+                            db.SaveChanges();
+
+                            inv_Item.Quantity = inv_Item.Quantity + item.Quantity;
+                            db.SaveChanges();
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+        
 
     }
 
