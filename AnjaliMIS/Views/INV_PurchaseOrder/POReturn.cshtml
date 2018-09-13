@@ -1,6 +1,8 @@
 ﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
 
 @{
+    /**/
+
     ViewBag.Title = "Edit";
 }
 @section breadcrumb {
@@ -11,14 +13,55 @@
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-
-@using (Html.BeginForm("POReturn", "INV_PurchaseOrder", FormMethod.Post, new {id="POReturn" }))
+<style>
+    .form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+        /* padding-top: 7px; */
+        padding-top: 0px !important;
+        padding-top: 0px !important;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+</style>
+@using (Html.BeginForm("POReturn", "INV_PurchaseOrder", FormMethod.Post, new { id = "POReturn" }))
 {
     @*@Html.AntiForgeryToken()*@
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.PurchaseOrderID)
+    if (Model.PurchaseOrderID <= 0)
+    {
+        <div class="col-md-12" id="SearchPO">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i>Search Purchase Order To Receive
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <div class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-4">
+                                    @*<input class="form-control text-box single-line" data-val="true" data-val-number="The field PONo must be a number." id="PONo" name="PONo" type="number" value="">*@
+                                    <input id="txtPONumber" name="txtPONumber" type="number" data-val="true" data-val-number="The field PONo must be a number." class="form-control text-box single-line" />
+                                    @*@Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })*@
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="javascript:null" class="btn btn-block blue glyphicon  PONoSearch "> Search</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- BEGIN FORM-->
     <!--Add-Edit code start-->
-    <div class="col-md-12">
+    <div class="col-md-12" id="divPODetails">
         <!-- BEGIN VALIDATION STATES-->
         <div class="portlet box blue">
             <div class="portlet-title">
@@ -58,7 +101,35 @@
 
                         <h3 class="form-section">Purchase Order Receive Items</h3>
 
-                        <table class="table table-striped table-bordered table-advance table-hover">
+
+                        <div class="col-md-4 radio-list">
+                            <label class="radio-inline">
+                                <input type="radio" name="ReceivePO" value="Complete" checked="checked">Complete Receive
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="ReceivePO" value="Partial">Partial Receive
+                            </label>
+                        </div>
+
+
+                        @*<label class="radio-inline">
+                                <input checked="checked"
+                                       id="Complete"
+                                       name="ReceivePO"
+                                       type="radio"
+                                       value="Complete" class="radio" /> Complete Receive
+                            </label>
+                            <label class="radio-inline">
+                                <input id="Partial"
+                                       name="ReceivePO"
+                                       type="radio"
+                                       value="Partial" class="radio" />Partial Receive
+                            </label>*@
+
+                        <br />
+                        <br />
+
+                        <table class="table table-striped table-bordered table-advance table-hover" id="tblItems">
                             <thead>
                                 <tr>
                                     <th>
@@ -79,6 +150,7 @@
                                         <td class="col-md-2">
                                             @Html.DisplayFor(modelItem => Model.INV_PurchaseOrderItems[i].INV_Item.ItemName)
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PurchaseOrderItemID)
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].ItemID)
                                         </td>
                                         <td class="col-md-2">
                                             @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
@@ -223,7 +295,68 @@
 
 			}
 		});
-	}
+    }
+
+    $(".PONoSearch").click(function () {
+
+
+        $('#divPODetails').show();
+        if ($('#txtPONumber').val() != "") {
+
+            var PONumber = $("#txtPONumber").val();
+            var newData = {
+                PONumber: $('#txtPONumber').val(),
+            };
+            $.ajax({
+                url: '@Url.Action("POSearch", "INV_PurchaseOrder")',
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: "{ PONumber:'" + PONumber + "'}",
+
+                success: function (result) {
+                    if (result > 0) {
+                        //var a = result.val();
+                        var FinalURL = '@Url.Action("POReturn", "INV_PurchaseOrder")' + '/' + result;
+                        //var _result = result;
+                        window.location.href = FinalURL;
+
+                    //$("#ddlItemList").append('<option value="0">Select Item</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                        $("#ddlItemList").append(option);
+                    }
+                }
+			},
+			error: function (errormessage) {
+			}
+		});
+
+        }
+        else {
+            alert("Enter PO Number");
+        }
+    });
+    $('input:radio[name=ReceivePO]').change(function () {
+
+        CheckReceivePO();
+        //var ddlitemid = $('#ItemID').val();
+        //GetItemPrice(ddlitemid);
+    });
+
+    CheckReceivePO();
+    function CheckReceivePO() {
+        if ($('input[name=ReceivePO]:checked').val() == "Complete") {
+            $("#tblItems").find("input,button,textarea,select").attr("disabled", "disabled");
+        }
+        else if ($('input[name=ReceivePO]:checked').val() == "Partial") {
+            $("#tblItems").find("input,button,textarea,select").removeAttr("disabled", "");
+        } else {
+            $("#tblItems").find("input,button,textarea,select").attr("disabled", "disabled");
+        }
+    };
+
 
 </script>
 

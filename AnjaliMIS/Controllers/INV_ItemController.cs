@@ -110,7 +110,7 @@ namespace AnjaliMIS.Controllers
                 _iNV_StockHistory.OperationTypeID = 6;
                 _iNV_StockHistory.Quantity = iNV_Item.Quantity;
                 _iNV_StockHistory.UserID = iNV_Item.UserID;
-                _iNV_StockHistory.FinYearID = 2;
+                _iNV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
                 _iNV_StockHistory.Created = DateTime.Now;
                 _iNV_StockHistory.Modified = DateTime.Now;
                 db.INV_StockHistory.Add(_iNV_StockHistory);
@@ -204,7 +204,7 @@ namespace AnjaliMIS.Controllers
                     _iNV_StockHistoryOld.OperationTypeID = 6;
                     _iNV_StockHistoryOld.Quantity = iNV_Item.Quantity;
                     _iNV_StockHistoryOld.UserID = iNV_Item.UserID;
-                    _iNV_StockHistoryOld.FinYearID = 2;
+                    _iNV_StockHistoryOld.FinYearID = CommonConfig.GetFinYearID();
                     _iNV_StockHistoryOld.Modified = DateTime.Now;
                     db.Entry(_iNV_StockHistoryOld).State = EntityState.Modified;
                     db.SaveChanges();

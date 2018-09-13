@@ -70,7 +70,7 @@ namespace AnjaliMIS.Controllers
                 eMP_Employee.Created = DateTime.Now;
                 eMP_Employee.Modified = DateTime.Now;
                 eMP_Employee.CompanyID = 4;
-                eMP_Employee.FinYearID = 2;
+                eMP_Employee.FinYearID = CommonConfig.GetFinYearID();
                 HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
                 if (photoProof != null && photoProof.FileName != "")
                 {
@@ -145,7 +145,7 @@ namespace AnjaliMIS.Controllers
                 db.Entry(eMP_Employee).State = EntityState.Modified;
                 eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
                 eMP_Employee.CompanyID = 4;
-                eMP_Employee.FinYearID = 2;
+                eMP_Employee.FinYearID = CommonConfig.GetFinYearID();
                 HttpPostedFileBase photoProof = Request.Files["IDProofPhotoPath"];
                 if (photoProof != null && photoProof.FileName != "")
                 {

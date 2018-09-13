@@ -25,6 +25,10 @@
                     @Html.ActionLink("Create New", "CreatePurchaseOrder",
                     new { controller = "INV_PurchaseOrder" },
                     new { @class = "btn btn-transparent green btn-circle btn-sm active" })
+                    &nbsp;
+                    @Html.ActionLink("PO Return", "POReturn",
+                  new { controller = "INV_PurchaseOrder" },
+                  new { @class = "btn btn-transparent blue btn-circle btn-sm active text-right" })
                 </div>
             </div>
         </div>
@@ -63,8 +67,8 @@
                             @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
                         </th>
                         <th>
-                                Action
-                            </th>
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,10 +107,12 @@
                                 @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
                             </td>
                             <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.PurchaseOrderID }, new { target = "_blank" }) |
+
                                 @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseOrderID }) |
-                                @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" }) 
+                                @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" })
                                 |
-                                @Html.ActionLink("Return", "POReturn", new { id = item.PurchaseOrderID }, new { target = "_blank" }) 
+                                @Html.ActionLink("Return", "POReturn", new { id = item.PurchaseOrderID }, new { target = "_blank" })
 
                             </td>
                         </tr>

@@ -52,5 +52,10 @@ namespace AnjaliMIS
                 base.OnActionExecuting(filterContext);
             }
         }
+
+        public static int GetFinYearID()
+        {
+            return 2;
+        }
     }
 }

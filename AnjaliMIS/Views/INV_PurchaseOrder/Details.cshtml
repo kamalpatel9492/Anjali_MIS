@@ -1,194 +1,86 @@
-﻿@model AnjaliMIS.Models.INV_PurchaseOrder
-
+﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Print";
+    //Layout = null;
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>PurchaseOrder</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaidAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PaidAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Modified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Modified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Remarks)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PendingAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PendingAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Casar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Casar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PONo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PONo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PODate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PODate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsLocal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsLocal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CGSTAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CGSTAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SGSTAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SGSTAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IGSTAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IGSTAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalAmount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalAmount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ACC_Tax.Tax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ACC_Tax.Tax)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ACC_Tax1.Tax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ACC_Tax1.Tax)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ACC_Tax2.Tax)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ACC_Tax2.Tax)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SYS_Company.CompanyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SYS_FinYear.FinYear)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SYS_FinYear.FinYear)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MST_Party.PartyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MST_Party.PartyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SYS_Status.StatusName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SEC_User.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SEC_User.UserName)
-        </dd>
-
-    </dl>
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../assets/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseOrderID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="invoice">
+                Items In PO
+                <hr />
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-bordered table-responsive" id="selected_units">
+                            <thead>
+                                <tr>
+                                    <th>Sr.</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @{ Decimal ItemTotal = 0; }
+
+                                @foreach (var item in Model.INV_PurchaseOrderItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            @(rowNo += 1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.OrderedQuantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PuchasePrice)
+                                        </td>
+                                        <td>
+                                            @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice)
+                                            @{ ItemTotal += @Convert.ToDecimal(item.OrderedQuantity * item.PuchasePrice); }
+                                            @*@(ItemTotal += @Convert.ToDecimal(item.Quantity * item.PricePerUnit))*@
+                                        </td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td colspan="4" class="text-right">Item Total</td>
+                                    <td colspan="4" id="tdItemTotal">@ItemTotal</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">SGST</td>
+                                    <td colspan="4" id="tdSGST">@Model.SGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">CGST</td>
+                                    <td colspan="4" id="tdCGST">@Model.CGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">IGST</td>
+                                    <td colspan="4" id="tdIGST">@Model.IGSTAmount</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="text-right">Final Total</td>
+                                    <td colspan="4" id="tdFinalTotal">@Model.TotalAmount</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+    </div>
+    <!-- END PORTLET-->
+</div>

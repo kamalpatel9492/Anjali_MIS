@@ -110,8 +110,8 @@ namespace AnjaliMIS.Controllers
                 InvoiceNo = inv_Invoice.InvoiceNo,
                 PONo = inv_Invoice.PONo,
                 AmountPending = inv_Invoice.AmountPending,
-                FinYearID = inv_Invoice.FinYearID,
-                CGST = inv_Invoice.CGST,
+                FinYearID = CommonConfig.GetFinYearID(),
+            CGST = inv_Invoice.CGST,
                 CGSTAmount = inv_Invoice.CGSTAmount,
                 SGST = inv_Invoice.SGST,
                 SGSTAmount = inv_Invoice.SGSTAmount,
@@ -162,7 +162,7 @@ namespace AnjaliMIS.Controllers
                 add_INV_InvoiceHistory.InvoiceNo = getInvoiceData.InvoiceNo;
                 add_INV_InvoiceHistory.PONo = getInvoiceData.PONo;
                 add_INV_InvoiceHistory.AmountPending = getInvoiceData.AmountPending;
-                add_INV_InvoiceHistory.FinYearID = getInvoiceData.FinYearID;
+                add_INV_InvoiceHistory.FinYearID = CommonConfig.GetFinYearID();
                 add_INV_InvoiceHistory.CGST = getInvoiceData.CGST;
                 add_INV_InvoiceHistory.CGSTAmount = getInvoiceData.CGSTAmount;
                 add_INV_InvoiceHistory.SGST = getInvoiceData.SGST;
@@ -401,7 +401,7 @@ namespace AnjaliMIS.Controllers
                     new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
                     new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
                     new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
-                    new_INV_Invoice.FinYearID = inv_InvoiceViewModal.FinYearID;
+                    new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();
                     new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
                     new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
                     new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGST;
@@ -440,7 +440,7 @@ namespace AnjaliMIS.Controllers
                             _iNV_ItemPrice.PurchasePrice = item.PricePerUnit;
                             _iNV_ItemPrice.Created = DateTime.Now;
                             _iNV_ItemPrice.Modified = DateTime.Now;
-                            _iNV_ItemPrice.FinYearID = inv_InvoiceViewModal.FinYearID;
+                            _iNV_ItemPrice.FinYearID = CommonConfig.GetFinYearID();
                             if (Session["UserID"] != null)
                             {
                                 _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
@@ -501,8 +501,8 @@ namespace AnjaliMIS.Controllers
                 InvoiceNo = InvoiceData.InvoiceNo,
                 PONo = InvoiceData.PONo,
                 AmountPending = InvoiceData.AmountPending,
-                FinYearID = InvoiceData.FinYearID,
-                CGST = InvoiceData.CGST,
+                FinYearID = CommonConfig.GetFinYearID(),
+            CGST = InvoiceData.CGST,
                 CGSTAmount = InvoiceData.CGSTAmount,
                 SGST = InvoiceData.SGST,
                 SGSTAmount = InvoiceData.SGSTAmount,

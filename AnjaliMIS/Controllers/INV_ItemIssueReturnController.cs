@@ -190,7 +190,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.Created = DateTime.Now;
                         new_INV_StockHistory.Modified = DateTime.Now;
                         new_INV_StockHistory.Remarks = "Issue";
-                        new_INV_StockHistory.FinYearID = 2;
+                        new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
                         new_INV_StockHistory.IssueNumber = getIssueLastNumber;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
@@ -265,7 +265,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.Created = DateTime.Now;
                             new_INV_StockHistory.Modified = DateTime.Now;
                             new_INV_StockHistory.Remarks = "Issue";
-                            new_INV_StockHistory.FinYearID = 2;
+                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
                             new_INV_StockHistory.IssueNumber = getIssueLastNumber;
                             db.INV_StockHistory.Add(new_INV_StockHistory);
@@ -339,7 +339,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.Created = DateTime.Now;
                         new_INV_StockHistory.Modified = DateTime.Now;
                         new_INV_StockHistory.Remarks = "Return";
-                        new_INV_StockHistory.FinYearID = 2;
+                        new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
                         new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
@@ -414,7 +414,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.Created = DateTime.Now;
                             new_INV_StockHistory.Modified = DateTime.Now;
                             new_INV_StockHistory.Remarks = "Return";
-                            new_INV_StockHistory.FinYearID = 2;
+                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
                             new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                             db.INV_StockHistory.Add(new_INV_StockHistory);
@@ -493,7 +493,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.Created = DateTime.Now;
                             new_INV_StockHistory.Modified = DateTime.Now;
                             new_INV_StockHistory.Remarks = item.Remarks;
-                            new_INV_StockHistory.FinYearID = 2;
+                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
                             new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                             db.INV_StockHistory.Add(new_INV_StockHistory);
