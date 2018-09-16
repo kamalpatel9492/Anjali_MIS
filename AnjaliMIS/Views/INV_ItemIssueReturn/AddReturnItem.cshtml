@@ -34,13 +34,7 @@
                             <button id="btnIssueCheck" class="form-control btn green">Show</button>
                         </div>
                     </div>
-                    @*<div class="form-group">
-
-                            <label class="control-label col-md-2">User</label>
-                            <div class="col-md-2">
-                                <select id="ddlUserList" class="form-control"></select>
-                            </div>
-                        </div>*@
+                  
                     <div class="form-group" id="radioButtonDiv" hidden>
                         <label class="control-label col-md-2"></label>
                         <div class="col-md-4 radio-list">
@@ -55,17 +49,7 @@
                             </label>
                         </div>
                     </div>
-                    @*<div class="form-group">
-                            <label class="control-label col-md-2">Item</label>
-                            <div class="col-md-4 radio-list">
-                                <label class="radio-inline">
-                                    <input type="radio" name="rbtnItem" value="True">Main Item
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="rbtnItem" value="False">Sub Item
-                                </label>
-                            </div>
-                        </div>*@
+                  
                     <div class="form-group" id="divDDLItemList" hidden>
 
                         <label class="control-label col-md-2">Item</label>
@@ -105,41 +89,30 @@
                             </table>
                         </div>
                     </div>
-                    <div class="form-group">
 
-                        
-                        <div class="col-md-2">
-                            <button id="btnFinalSubmit" class="form-control">Final Submit</button>
-                        </div>
-                    </div>
-                    <div class="form-group" id="tableMainItem" hidden>
-                        <label class="control-label col-md-2">Item List</label>
-                        <div class="col-md-2">
-                            <input id="txtReturnItemName" type="text" class="form-control" readonly />
-                        </div>
-
-                        <label class="control-label col-md-2">Quantity</label>
-                        <div class="col-md-2">
-                            <input id="txtReturnQuantity" type="text" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="divSubItem" hidden>
+                    
+                   
+                    <div class="form-group" id="divRejectedAndExtraItem" hidden >
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-10">
-                            <table class="table table-bordered table-responsive" id="tableSubItem">
+                            <table class="table table-bordered table-responsive" id="tableRejectedAndExtraItem">
                                 <thead>
                                     <tr>
                                         <th>Select</th>
                                         <th>Item Name</th>
                                         <th>Quantity</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </thead>
-                                <tbody class="tbodySubItem" id="tbodySubItem"></tbody>
+                                <tbody class="tbodyRejectedAndExtraItem" id="tbodyRejectedAndExtraItem"></tbody>
                             </table>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <button id="btnFinalSubmit" class="form-control">Final Submit</button>
+                        </div>
+                    </div>
                     <div class="form-group" id="btnMainItem" hidden>
                         <div class="col-md-2">
                             <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
@@ -158,8 +131,40 @@
 
 <script>
     var addReturnListArray = [];
-    $(document).ready(function () {
+    var RejectedItemList = [];
+    var ExtraItemList = [];
+
+    //$(document).on("change", "input[name='chkForRejected']", function () {
+    //    debugger;
+    //    alert("chkForRejected");
+
+    //        RejectedItemList.push({
+
+    //            ItemID: itemid,
+    //            Quantity: quantity,
+    //            Remarks: remarks,
+    //            IssueNumber: issueNumber
+    //        });
         
+    //});
+    //$(document).on("change", "input[name='chkForExtra']", function () {
+    //    debugger;
+    //    alert("chkForExtra");
+    //    var itemid = $('#ddlItemList').val();
+    //    var quantity = $('#txtReturnItemQuantity').val();
+    //    var remarks = $('#txtReturnItemRemarks').val();
+    //    var issueNumber = $('#txtIssueNumber').val();
+    //    ExtraItemList.push({
+
+    //        ItemID: itemid,
+    //        Quantity: quantity,
+    //        Remarks: remarks,
+    //        IssueNumber: issueNumber
+    //    });
+    //});
+
+    $(document).ready(function () {
+
         RetrieveitemList();
         RetrieveUserList();
 
@@ -178,20 +183,30 @@
                 $('#divDDLItemRemarks').show();
                 $('#divDDLItemQuantity').show();
                 $('#tableMainItem').show();
-
+                $('#tableRejectedAndExtra').hide(); 
+                $('#divRejectedAndExtraItem').hide();
+                $('#btnFinalSubmit').show();
             }
             else if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
                 $('#divDDLItemList').hide();
                 $('#divDDLItemRemarks').hide();
                 $('#divDDLItemQuantity').hide();
                 $('#tableMainItem').hide();
+                $('#tableRejectedAndExtra').show();
+                $('#divRejectedAndExtraItem').show();
+                $('#btnFinalSubmit').show();
+                RetrieveItemFromIssueNumber();
 
             }
             else if ($('input[name=rbtnItem]:checked').val() == "Extra") {
                 $('#divDDLItemList').hide();
                 $('#divDDLItemRemarks').hide();
                 $('#divDDLItemQuantity').hide();
+                $('#tableRejectedAndExtra').show();
+                $('#divRejectedAndExtraItem').show();
                 $('#tableMainItem').hide();
+                $('#btnFinalSubmit').show();
+                RetrieveItemFromIssueNumber();
 
             }
         });
@@ -228,10 +243,66 @@
 
 
         $("#btnFinalSubmit").click(function () {
-            var itemList = {
-                iNV_StockHistory_List: addReturnListArray
-            };
 
+            debugger;
+            //var itemList = {
+            //    iNV_StockHistory_List: addReturnListArray
+            //};
+            var itemList;
+            if ($('input[name=rbtnItem]:checked').val() == "New") {
+                itemList = {
+
+                    iNV_StockHistory_List: addReturnListArray
+
+                }
+            }
+            else if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
+
+                $('#tableRejectedAndExtraItem input:checked').each(function () {
+                    var item = $(this).val();
+                    var issueNumber = $('#txtIssueNumber').val();
+                    var tablerowid = $(this).closest('tr').attr('id');
+                    var quantityValue = $("#quantity" + tablerowid).val();
+                    var remarks = $("#remarks" + tablerowid).val();
+                    RejectedItemList.push({
+
+                        ItemID: item,
+                        Quantity: quantityValue,
+                        Remarks: remarks,
+                        IssueNumber: issueNumber
+                    });
+                });
+
+
+                itemList = {
+
+                    iNV_StockHistory_List:RejectedItemList
+                }
+            }
+            else if ($('input[name=rbtnItem]:checked').val() == "Extra") {
+
+                $('#tableRejectedAndExtraItem input:checked').each(function () {
+                    var item = $(this).val();
+                    var issueNumber = $('#txtIssueNumber').val();
+                    var tablerowid = $(this).closest('tr').attr('id');
+                    var quantityValue = $("#quantity" + tablerowid).val();
+                    var remarks = $("#remarks" + tablerowid).val();
+                    ExtraItemList.push({
+
+                        ItemID: item,
+                        Quantity: quantityValue,
+                        Remarks: remarks,
+                        IssueNumber: issueNumber
+                    });
+                });
+
+                itemList = {
+                     
+                    iNV_StockHistory_List: ExtraItemList
+                }
+            }
+
+            debugger;
             $.ajax({
                 url: "/INV_ItemIssueReturn/RertunNewItem",
                 data: JSON.stringify(itemList),
@@ -279,35 +350,7 @@
             }
         });
 
-        //rbtnItem radio button change event
-        $('input:radio[name=rbtnItem]').change(function () {
-            if ($('input[name=rbtnItem]:checked').val() == "True") {
-
-                GetForReturnItem();
-                $('#tableMainItem').show();
-                $('#btnMainItem').show();
-                $('#divSubItem').hide();
-                $('#btnSubItem').hide();
-
-
-
-            }
-            else if ($('input[name=rbtnItem]:checked').val() == "False") {
-
-                GetForReturnItem();
-                $('#tableMainItem').hide();
-                $('#btnMainItem').hide();
-                $('#divSubItem').show();
-                $('#btnSubItem').show();
-
-            } else {
-
-                $('#tableMainItem').hide();
-                $('#btnMainItem').hide();
-                $('#divSubItem').hide();
-                $('#btnSubItem').hide();
-            }
-        });
+        
 
         //btnSaveForUse click event
         $("#btnSaveForUse").click(function () {
@@ -410,6 +453,60 @@
         });
     }
 
+    function RetrieveItemFromIssueNumber() {
+        var postData = {
+            issueNumer: $('#txtIssueNumber').val()
+        };
+        $.ajax({
+            url: "/INV_ItemIssueReturn/RetrieveItemFromIssueNumber",
+            data: JSON.stringify(postData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                if (result.length > 0) {
+                    debugger;
+                    if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
+                        $('#tbodyRejectedAndExtraItem').html('');
+                        var html = '';
+                        var i = 1;
+                        $.each(result, function (key, value) {
+                            debugger;
+                            html += '<tr id=' + i + '>';
+                            html += '<td><input type="checkbox" name="chkForRejected" value="' + result[key].ItemID + '"></td>';
+                            html += '<td>' + result[key].ItemName + '</td>';
+                            html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Quantity + '"/></td>';
+                            html += '<td><input id="remarks' + i + '" type="text" class="form-control" value="' + result[key].Remarks + '"/></td>';
+                            html += '</tr>';
+                            i++;
+                        });
+                        $('#tbodyRejectedAndExtraItem').append(html);
+                    }
+                    else if ($('input[name=rbtnItem]:checked').val() == "Extra") {
+                        $('#tbodyRejectedAndExtraItem').html('');
+                        var html = '';
+                        var i = 1;
+                        $.each(result, function (key, value) {
+                            debugger;
+                            html += '<tr id=' + i + '>';
+                            html += '<td><input type="checkbox" name="chkForExtra" value="' + result[key].ItemID + '"></td>';
+                            html += '<td>' + result[key].ItemName + '</td>';
+                            html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Quantity + '"/></td>';
+                            html += '<td><input id="remarks' + i + '" type="text" class="form-control" value="' + result[key].Remarks + '"/></td>';
+                            html += '</tr>';
+                            i++;
+                        });
+                        $('#tbodyRejectedAndExtraItem').append(html);
+                    }
+                }
+            },
+            error: function (errormessage) {
+                debugger;
+                alert(errormessage.responseText);
+            }
+        });
+    }
 
     function GetForIssueItem() {
 
@@ -456,52 +553,6 @@
         });
     }
 
-    function GetForReturnItem() {
-
-
-
-        var postData = {
-            MainItemID: $('#ddlItemList').val(),
-            //UserID: $('#ddlUserList').val(),
-            RetrieveType: $('input[name=rbtnItem]:checked').val()
-        };
-
-
-        $.ajax({
-            url: "/INV_ItemIssueReturn/Retrieve_INV_ItemConfiguration_List",
-            data: JSON.stringify(postData),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-
-                if ($('input[name=rbtnItem]:checked').val() == "True") {
-                    $('#txtReturnItemName').val(result.ItemName);
-                    $('#txtReturnQuantity').val(result.Qunatity);
-                }
-                else if ($('input[name=rbtnItem]:checked').val() == "False") {
-                    $('#tbodySubItem').html('');
-                    var html = '';
-                    var i = 1;
-                    $.each(result, function (key, value) {
-                        html += '<tr id=' + i + '>';
-                        html += '<td><input type="checkbox" name="chkSubItem" value="' + result[key].SubItemID + '"></td>';
-                        html += '<td>' + result[key].ItemName + '</td>';
-                        html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
-                        html += '</tr>';
-                        i++;
-                    });
-                    $('#tbodySubItem').append(html);
-                }
-
-                //alert(result);
-            },
-            error: function (errormessage) {
-
-
-            }
-        });
-    }
 
     function SaveMainItem() {
 

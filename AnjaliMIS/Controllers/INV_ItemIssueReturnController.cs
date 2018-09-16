@@ -442,7 +442,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                if (iNV_StockHistory_List != null)
+                if (iNV_StockHistory_List == null)
                 {
                     //erroor handle
                 }
@@ -513,7 +513,31 @@ namespace AnjaliMIS.Controllers
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
-        
+
+        [HttpPost]
+        public JsonResult RetrieveItemFromIssueNumber(string issueNumer)
+        {
+            try
+            {
+                var itemList = db.INV_StockHistory.Where(e => e.IssueNumber== issueNumer).Select(e=> new {
+                    ItemID=e.ItemID,
+                    ItemName = e.INV_Item.ItemName,
+                    Quantity =e.Quantity,
+                    Remarks=e.Remarks
+                }).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
 
     }
 
