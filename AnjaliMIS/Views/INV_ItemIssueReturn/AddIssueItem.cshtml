@@ -25,22 +25,6 @@
             <!-- BEGIN FORM-->
             <div class="form-horizontal">
                 <div class="form-body">
-                    @*<h3 class="form-section">Issue tab details</h3>*@
-                    @*<div class="form-group">
-
-                            <label class="control-label col-md-2">Item List</label>
-                            <div class="col-md-2">
-                                <select id="ddlItemList" class="form-control"></select>
-                            </div>
-
-                        </div>*@
-                    @*<div class="form-group">
-
-                            <label class="control-label col-md-2">User List</label>
-                            <div class="col-md-2">
-                                <select id="ddlUserList" class="form-control"></select>
-                            </div>
-                        </div>*@
                     <div class="form-group">
 
                         <label class="control-label col-md-2">User</label>
@@ -60,31 +44,44 @@
                         </div>
                     </div>
                     <div class="form-group">
-
                         <label class="control-label col-md-2">Item</label>
                         <div class="col-md-2">
-                            <select id="ddlItemList" class="form-control"></select>
+                            <select id="ddlItemList" class="form-control" onchange="GetForIssueItem();"></select>
                         </div>
+                        <div id="onlyForUseControls" hidden>
+                            <label class="control-label col-md-1">Quantity</label>
+                            <div class="col-md-2">
+                                <input id="txtForUseQuantity" type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-md-1">Remarks </label>
+                            <div class="col-md-2">
+                                <input id="txtRemarks" type="text" class="form-control" />
+                            </div>
 
+                            <div class="col-md-2">
+                                <a href="#" class="button btn-block btn default glyphicon glyphicon-plus add-For-Use-Item"> Add Item</a>
+                            </div>
+
+                        </div>
                     </div>
-
-
-
-
                     <div class="form-group" id="tableForUse" hidden>
-                        <label class="control-label col-md-2">Item </label>
-                        <div class="col-md-2">
-                            <input id="txtItemName" type="text" class="form-control" readonly />
-                        </div>
-
-                        <label class="control-label col-md-2">Quantity</label>
-                        <div class="col-md-2">
-                            <input id="txtQuantity" type="text" class="form-control" />
+                        <label class="control-label col-md-2">For Use Item List</label>
+                        <div class="col-md-10">
+                            <table class="table table-bordered table-responsive" id="tableForUse">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyForUse" id="tbodyForUse"></tbody>
+                            </table>
                         </div>
                     </div>
 
                     <div class="form-group" id="divForAssmeble" hidden>
-                        <label class="control-label col-md-2">Item List</label>
+                        <label class="control-label col-md-2">for assmeble Item List</label>
                         <div class="col-md-10">
                             <table class="table table-bordered table-responsive" id="tableForAssmeble">
                                 <thead>
@@ -128,6 +125,7 @@
                 $('#btnForUSer').show();
                 $('#divForAssmeble').hide();
                 $('#btnForAssmeble').hide();
+                $('#onlyForUseControls').show();
 
 
 
@@ -139,6 +137,8 @@
                 $('#btnForUSer').hide();
                 $('#divForAssmeble').show();
                 $('#btnForAssmeble').show();
+                $('#onlyForUseControls').hide();
+
 
             } else {
 
@@ -146,6 +146,8 @@
                 $('#btnForUSer').hide();
                 $('#divForAssmeble').hide();
                 $('#btnForAssmeble').hide();
+                $('#onlyForUseControls').hide();
+
             }
         });
 
@@ -204,6 +206,10 @@
 
             SaveSubItem();
 
+        });
+
+        $("ddlItemList").change(function ()   {
+            GetForIssueItem();
         });
     });
     function RetrieveitemList() {
@@ -348,36 +354,7 @@
             }
         });
     }
-    function SaveItemForUse() {
-
-        var postData = {
-            MainItemID: $('#ddlItemList').val(),
-            Qunatity: $('#txtQuantity').val()
-
-            //UserID: $('#ddlUserList').val(),
-            //RetrieveType: $('input[name=assign]:checked').val()
-        };
-
-
-        $.ajax({
-            url: "/INV_ItemIssueReturn/SaveForUse",
-            data: JSON.stringify(postData),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-
-                //location.href('@Url.Action("Issue", "INV_ItemIssueReturn")');
-                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
-                //location.reload();
-                //alert(result);
-            },
-            error: function (errormessage) {
-
-
-            }
-        });
-    }
+    
     function SaveItemForAssmeble() {
 
         var itemList = [];
@@ -401,11 +378,7 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                //location.reload();
                 location.href='@Url.Action("Issue", "INV_ItemIssueReturn")';
-                //itemList = [];
-                //alert(result);
             },
             error: function (errormessage) {
 
@@ -413,66 +386,44 @@
             }
         });
     }
-
-    @*function SaveMainItem() {
-
-        var postData = {
-            MainItemID: $('#ddlItemList').val(),
-            Qunatity: $('#txtReturnQuantity').val()
-
-        };
-        $.ajax({
-            url: "/INV_ItemIssueReturn/SaveMainItem",
-            data: JSON.stringify(postData),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
-                //location.reload();
-                //alert(result);
-            },
-            error: function (errormessage) {
-
-
-            }
-        });
-    }
-    function SaveSubItem() {
-
-        var itemList = [];
-        $('#tableSubItem input:checked').each(function () {
-            var checkbboxid = $(this).val();
-
-            var tablerowid = $(this).closest('tr').attr('id');
-            var quantityValue = $("#quantity" + tablerowid).val();
-            itemList.push({
-
-                SubItemID: checkbboxid,
-                Qunatity: quantityValue
+    var ForUseItemList = [];
+    $(".add-For-Use-Item").click(function () {
+        $('#tableForUse').show();
+        if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
+            var itemid = $("#ddlItemList").val();
+            var itemname = $("#ddlItemList").find('option:selected').text();
+            var quantity = $('#txtForUseQuantity').val();
+            var txtRemarks = $("#txtRemarks").val();
+            ForUseItemList.push({
+                MainItemID: itemid,
+                Qunatity: quantity
             });
-        });
-
+            var html = '';
+            var html = "<tr><td>" + itemname + "</td><td>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
+            $('#tbodyForUse').append(html);
+        }
+    });
+    function SaveItemForUse() {
+        //var postData = {
+        //    MainItemID: $('#ddlItemList').val(),
+        //    Qunatity: $('#txtQuantity').val()
+        //};
         $.ajax({
-            url: "/INV_ItemIssueReturn/SaveSubItem",
-            data: JSON.stringify(itemList),
+            url: "/INV_ItemIssueReturn/SaveForUse",
+            data: JSON.stringify(ForUseItemList),
             type: "POST",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
 
-                //location.reload();
-                location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
-                //itemList = [];
-                //alert(result);
+                location.href = '@Url.Action("Issue", "INV_ItemIssueReturn")';
             },
             error: function (errormessage) {
 
 
             }
         });
-    }*@
-
+    }
 </script>
 
 

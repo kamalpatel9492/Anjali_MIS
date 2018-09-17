@@ -78,7 +78,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                bool existOrNot = db.INV_StockHistory.Where(e=>e.IssueNumber== issuenumber).Any();
+                bool existOrNot = db.INV_StockHistory.Where(e => e.IssueNumber == issuenumber).Any();
 
                 return Json(existOrNot, JsonRequestBehavior.AllowGet);
 
@@ -90,7 +90,7 @@ namespace AnjaliMIS.Controllers
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
-       
+
         [HttpPost]
         public JsonResult Retrieve_INV_ItemConfiguration_List(INV_ItemConfiguration iNV_ItemConfiguration)
         {
@@ -137,67 +137,71 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveForUse(INV_ItemConfiguration iNV_ItemConfiguration)
+        public JsonResult SaveForUse(List<INV_ItemConfiguration> iNV_ItemConfiguration_List)
         {
             try
             {
-                if (iNV_ItemConfiguration != null)
+                if (iNV_ItemConfiguration_List != null)
                 {
                     //erroor handle
                 }
-                if (iNV_ItemConfiguration != null)
+                if (iNV_ItemConfiguration_List != null)
                 {
-                    if (Session["UserID"] != null)
+                    foreach (var item in iNV_ItemConfiguration_List)
                     {
-                        iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                    }
-                    var inv_Item = db.INV_Item.Where(e => e.ItemID == iNV_ItemConfiguration.MainItemID).FirstOrDefault();
-
-                    string getIssueLastNumber;
-                    if (inv_Item != null)
-                    {
-
-                        var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
-                        if (getIssueLast == null)
+                        if (Session["UserID"] != null)
                         {
-                            getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                            item.UserID = Convert.ToInt16(Session["UserID"].ToString());
                         }
-                        else
+
+                        var inv_Item = db.INV_Item.Where(e => e.ItemID == item.SubItemID).FirstOrDefault();
+
+                        string getIssueLastNumber;
+                        if (inv_Item != null)
                         {
-                            var a = getIssueLast.IssueNumber;
-                            if (a == null)
+
+                            var getIssueLast = db.INV_StockHistory.Where(e => e.Remarks == "Issue").OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
+                            if (getIssueLast == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
                             }
                             else
                             {
-                                //a = "278201801";
-                                a = a.ToString();
-                                string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
-                                //bool aaa = a.Contains(delimiters);
-                                string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
+                                var a = getIssueLast.IssueNumber;
+                                if (a == null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                }
+                                else
+                                {
+                                    //a = "278201801";
+                                    a = a.ToString();
+                                    string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
+                                    //bool aaa = a.Contains(delimiters);
+                                    string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
-                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                }
                             }
+
+                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                            new_INV_StockHistory.ItemID = inv_Item.ItemID;
+                            new_INV_StockHistory.OperationTypeID = 8;
+                            new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
+                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                            new_INV_StockHistory.UserID = item.UserID;
+                            new_INV_StockHistory.Created = DateTime.Now;
+                            new_INV_StockHistory.Modified = DateTime.Now;
+                            new_INV_StockHistory.Remarks = "Issue";
+                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
+
+                            new_INV_StockHistory.IssueNumber = getIssueLastNumber;
+                            db.INV_StockHistory.Add(new_INV_StockHistory);
+                            db.SaveChanges();
+
+                            inv_Item.Quantity = inv_Item.Quantity - inv_Item.Quantity;
+                            db.SaveChanges();
                         }
-
-                        INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
-                        new_INV_StockHistory.ItemID = inv_Item.ItemID;
-                        new_INV_StockHistory.OperationTypeID = 8;
-                        new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber); 
-                        new_INV_StockHistory.Quantity = inv_Item.Quantity;
-                        new_INV_StockHistory.UserID = iNV_ItemConfiguration.UserID;
-                        new_INV_StockHistory.Created = DateTime.Now;
-                        new_INV_StockHistory.Modified = DateTime.Now;
-                        new_INV_StockHistory.Remarks = "Issue";
-                        new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
-
-                        new_INV_StockHistory.IssueNumber = getIssueLastNumber;
-                        db.INV_StockHistory.Add(new_INV_StockHistory);
-                        db.SaveChanges();
-
-                        inv_Item.Quantity = inv_Item.Quantity - iNV_ItemConfiguration.Qunatity;
-                        db.SaveChanges();
                     }
                 }
 
@@ -519,11 +523,12 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var itemList = db.INV_StockHistory.Where(e => e.IssueNumber== issueNumer).Select(e=> new {
-                    ItemID=e.ItemID,
+                var itemList = db.INV_StockHistory.Where(e => e.IssueNumber == issueNumer).Select(e => new
+                {
+                    ItemID = e.ItemID,
                     ItemName = e.INV_Item.ItemName,
-                    Quantity =e.Quantity,
-                    Remarks=e.Remarks
+                    Quantity = e.Quantity,
+                    Remarks = e.Remarks
                 }).ToList();
 
                 if (itemList.Count > 0)
