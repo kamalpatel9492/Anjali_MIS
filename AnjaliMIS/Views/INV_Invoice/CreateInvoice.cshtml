@@ -255,12 +255,12 @@
         $("#AmountReceived").change(function () {
 
             var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-            $('#AmountPending').val(newAmountPending);
+            $('#AmountPending').val(parseInt(newAmountPending));
         });
         $("#Casar").change(function () {
 
             var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-            $('#AmountPending').val(newAmountPending);
+            $('#AmountPending').val(parseInt(newAmountPending));
         });
         $("#btnModalOK").click(function () {
             $('#InvoiceMessage').modal('hide');
@@ -477,7 +477,7 @@
         $('#tdFinalTotal').html(finaltotal);
 
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-        $('#AmountPending').val(newAmountPending);
+        $('#AmountPending').val(parseInt(newAmountPending));
         $('html, body').animate({
             scrollTop: $("#divItemList").offset().top
         }, 2000);
