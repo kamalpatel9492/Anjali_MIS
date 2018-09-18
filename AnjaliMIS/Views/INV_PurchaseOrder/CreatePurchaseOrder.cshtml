@@ -1,62 +1,55 @@
 ﻿@model AnjaliMIS.ViewModals.INV_PurchaseOrderViewModal
 
 @{
-	ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit";
 }
 @section breadcrumb {
-	<li>
-		@Html.ActionLink("Inventory Dashboard", "Dashboard",
-								new { controller = "INV_Item" })
-	</li>
+    <li>
+        @Html.ActionLink("Inventory Dashboard", "Dashboard",
+                                new { controller = "INV_Item" })
+    </li>
 }
-	<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
-	@Html.HiddenFor(model => model.Created)
-	@Html.HiddenFor(model => model.PurchaseOrderID)
-	<!--Add-Edit code start-->
-	<div class="col-md-12">
-		<!-- BEGIN VALIDATION STATES-->
-		<div class="portlet box blue">
-			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-gift"></i>Purchase Order
-				</div>
-			</div>
-			<div class="portlet-body form">
-				<!-- BEGIN FORM-->
-				<div class="form-horizontal">
-					<div class="form-body">
-						<h3 class="form-section">Purchase Order Details</h3>
-						<div class="form-group">
-							@Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.SellerPartyID, "", new { @class = "text-danger" })
-							</div>
-							@Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
-							</div>
-						</div>
-						@*<div class="form-group">
-							@Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-4">
-								@Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
-							</div>
-						</div>*@
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Created)
+    @Html.HiddenFor(model => model.PurchaseOrderID)
+    <!--Add-Edit code start-->
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Purchase Order
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="form-section">Purchase Order Details</h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SellerPartyID, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-						<div class="form-group">
-							@Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
 
                         <div class="form-group">
@@ -69,148 +62,137 @@
                                     <input type="radio" name="isLocal" value="False">No
                                 </label>
                             </div>
-                            @*@Html.LabelFor(model => model.IsLocal, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.IsLocal)
-                                    @Html.ValidationMessageFor(model => model.IsLocal, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
                         </div>
 
+                        <div id="divCGST" class="form-group" hidden>
+                            @Html.LabelFor(model => model.CGST, "CGST", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <select id="ddlCGST" class="form-control"></select>
+                            </div>
+                            @Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <select id="ddlSGST" class="form-control"></select>
+                            </div>
+                        </div>
 
-						<div id="divCGST" class="form-group" hidden>
-							@Html.LabelFor(model => model.CGST, "CGST", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("CGST", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.CGST, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                        <div class="form-group" id="divIGST" hidden>
+                            @Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                <select id="ddlIGST" class="form-control"></select>
+                            </div>
+                        </div>
+                        <h3 class="form-section">Purchase Order Items</h3>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ItemID, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="control-label col-md-2">Quantity</label>
+                            <div class="col-md-2">
+                                <input id="txtQuantity" type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-md-2">Item Price</label>
+                            <div class="col-md-2">
+                                <input id="txtItemPrice" type="text" class="form-control" />
+                            </div>
+                        </div>
 
-						<div id="divSGST" class="form-group" hidden>
-							@Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("SGST", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.SGST, "", new { @class = "text-danger" })
-							</div>
-						</div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-md-10">
+                                <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                            </div>
+                        </div>
+                        <div id="divItemList" class="form-group" hidden>
+                            <label class="control-label col-md-2">Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="selected_units">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr>
+                                            <td colspan="4" class="text-right">Item Total</td>
+                                            <td colspan="4" id="tdItemTotal"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></td>
+                                            <td colspan="4" id="tdSGST"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></td>
+                                            <td colspan="4" id="tdCGST"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></td>
+                                            <td colspan="4" id="tdIGST"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right">Final Total</td>
+                                            <td colspan="4" id="tdFinalTotal"></td>
+                                        </tr>
+                                    </tbody>
 
-						<div class="form-group" id="divIGST" hidden>
-							@Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-10">
-								@Html.DropDownList("IGST", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.IGST, "", new { @class = "text-danger" })
-							</div>
-						</div>
-						<h3 class="form-section">Purchase Order Items</h3>
-						<div class="form-group">
-							@Html.LabelFor(model => model.ItemID, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-2">
-								@Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
-								@Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
-							</div>
-							<label class="control-label col-md-2">Quantity</label>
-							<div class="col-md-2">
-								<input id="txtQuantity" type="text" class="form-control" />
-							</div>
-							<label class="control-label col-md-2">Item Price</label>
-							<div class="col-md-2">
-								<input id="txtItemPrice" type="text" class="form-control" />
-							</div>
-						</div>
+                                </table>
+                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                            </div>
+                        </div>
+                        <h3 class="form-section">Payment Details</h3>
 
-						<div class="form-group">
-							<label class="control-label col-md-2"></label>
-							<div class="col-md-10">
-								<a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
-							</div>
-						</div>
-						<div id="divItemList" class="form-group" hidden>
-							<label class="control-label col-md-2">Item List</label>
-							<div class="col-md-10">
-								<table class="table table-bordered table-responsive" id="selected_units">
-									<thead>
-										<tr>
-											<th>Select</th>
-											<th>Item Name</th>
-											<th>Quantity</th>
-											<th>Price</th>
-											<th>Total</th>
-										</tr>
-									</thead>
-									<tbody class="list">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input id="btnSave" type="button" value="Save" class="btn green" />
+                                @*<input type="submit" value="Save" class="btn green" />*@
+                                @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
 
-										<tr>
-											<td colspan="4" class="text-right">Item Total</td>
-											<td colspan="4" id="tdItemTotal"></td>
-										</tr>
-										<tr>
-											<td colspan="4" class="text-right">SGST</td>
-											<td colspan="4" id="tdSGST"></td>
-										</tr>
-										<tr>
-											<td colspan="4" class="text-right">CGST</td>
-											<td colspan="4" id="tdCGST"></td>
-										</tr>
-										<tr>
-											<td colspan="4" class="text-right">IGST</td>
-											<td colspan="4" id="tdIGST"></td>
-										</tr>
-										<tr>
-											<td colspan="4" class="text-right">Final Total</td>
-											<td colspan="4" id="tdFinalTotal"></td>
-										</tr>
-									</tbody>
+                </div>
+                <!-- END FORM-->
+            </div>
 
-								</table>
-								<button type="button" style="float:right;" class="delete-row">Delete Item</button>
-							</div>
-						</div>
-						<h3 class="form-section">Payment Details</h3>
+        </div>
+        <!-- END VALIDATION STATES-->
+    </div>
 
-						<div class="form-group">
-							@Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-2">
-								@Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
-							</div>
-							@Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-2">
-								@Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
-							</div>
-							@Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-							<div class="col-md-2">
-								@Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control" } })
-								@Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
-							</div>
-						</div>
-					</div>
-					<div class="form-actions">
-						<div class="row">
-							<div class="col-md-offset-3 col-md-9">
-								<input id="btnSave" type="button" value="Save" class="btn green" />
-								@*<input type="submit" value="Save" class="btn green" />*@
-								@Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
-							</div>
-						</div>
-					</div>
-
-				</div>
-				<!-- END FORM-->
-			</div>
-
-		</div>
-		<!-- END VALIDATION STATES-->
-	</div>
-
-	<!--Add-Edit code end-->
+    <!--Add-Edit code end-->
 }
 
 <script>
 	var productList = [];
 	var itemWiseEachStepAddTotalAmount = 0;
-	$(document).ready(function () {
+    $(document).ready(function () {
+        RetrieveSGST();
+        RetrieveCGST();
+        RetrieveIGST();
+
 		$('#btnSave').click(function () {
 			debugger;
 			AddNewPurchaseOrderWithItem();
@@ -223,12 +205,12 @@
 		$("#PaidAmount").change(function () {
 
 			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-			$('#PendingAmount').val(newAmountPending);
+            $('#PendingAmount').val(parseInt(newAmountPending));
 		});
 		$("#Casar").change(function () {
 
 			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-			$('#PendingAmount').val(newAmountPending);
+            $('#PendingAmount').val(parseInt(newAmountPending));
 		});
 		$("#btnModalOK").click(function () {
 			$('#InvoiceMessage').modal('hide');
@@ -236,22 +218,25 @@
 		});
 
         $('input:radio[name=isLocal]').change(function () {
-            CheckIsLocal(); 
+            CheckIsLocal();
         });
         CheckIsLocal();
         function CheckIsLocal() {
             if ($('input[name=isLocal]:checked').val() == "True") {
-                $('#divSGST').show();
+                //$('#divSGST').show();
                 $('#divCGST').show();
                 $('#divIGST').hide();
+                $('#ddlIGST').val("0");
             }
             else if ($('input[name=isLocal]:checked').val() == "False") {
                 $('#divCGST').hide();
-                $('#divSGST').hide();
+                //$('#divSGST').hide();
                 $('#divIGST').show();
+                $('#ddlCGST').val("0");
+                $('#ddlSGST').val("0");
             } else {
                 $('#divCGST').hide();
-                $('#divSGST').hide();
+                //$('#divSGST').hide();
                 $('#divIGST').hide();
             }
 		};
@@ -282,7 +267,7 @@
 				itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
 				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
                 FinalCalculation();
-                
+
 			}
 		});
 
@@ -353,15 +338,16 @@
 			//Created: Created,
 			//Modified: Modified,
 			Remarks: $('#Remarks').val(),
-			PONo: $('#PONo').val(),
-			PendingAmount: $('#PendingAmount').val(),
+            PONo: $('#PONo').val(),
+            AmountPending: $('#PendingAmount').val(),
+            PendingAmount : $('#PendingAmount').val(),
 			//FinYearID: $('#FinYearID').val(),
-			CGST: $('#CGST').val(),
-			CGSTAmount: $('#tdCGST').html(),
-			SGST: $('#SGST').val(),
-			SGSTAmount: $('#tdSGST').html(),
-			IGST: $('#IGST').val(),
-			IGSTAmount: $('#tdIGST').html(),
+            CGST: $('#ddlCGST').val(),
+            CGSTAmount: $('#tdCGST').html(),
+            SGST: $('#ddlSGST').val(),
+            SGSTAmount: $('#tdSGST').html(),
+            IGST: $('#ddlIGST').val(),
+            IGSTAmount: $('#tdIGST').html(),
             IsLocal: $('input[name=isLocal]:checked').val(),
 			IsActive: $('#IsActive').val(),
 			Casar: $('#Casar').val(),
@@ -388,47 +374,152 @@
 
 			}
 		});
-	}
-	function FinalCalculation() {
-		var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdIGST').html(igstCalculation);
-		var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdCGST').html(cgstCalculation);
-		var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-		$('#tdSGST').html(sgstCalculation);
-		var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
-		$('#tdFinalTotal').html(finaltotal);
+    }
 
-		var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
-        $('#PendingAmount').val(newAmountPending);
+
+    function FinalCalculation() {
+
+        var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
+        var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
+        $('#tdIGST').html(igstCalculation);
+        $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
+        $('#tdCGST').html(cgstCalculation);
+        $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
+        var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
+        $('#tdSGST').html(sgstCalculation);
+        $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
+        var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+        $('#tdFinalTotal').html(finaltotal);
+
+        var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
+        $('#AmountPending').val(newAmountPending);
         $('html, body').animate({
             scrollTop: $("#divItemList").offset().top
         }, 2000);
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");
-	}
+    }
 
+    //OLD Calculation
+	//function FinalCalculation() {
+	//	var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+	//	$('#tdIGST').html(igstCalculation);
+	//	var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+	//	$('#tdCGST').html(cgstCalculation);
+	//	var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
+	//	$('#tdSGST').html(sgstCalculation);
+	//	var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+	//	$('#tdFinalTotal').html(finaltotal);
+
+	//	var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
+ //       $('#PendingAmount').val(newAmountPending);
+ //       $('html, body').animate({
+ //           scrollTop: $("#divItemList").offset().top
+ //       }, 2000);
+ //       $('#txtQuantity').val("");
+ //       $('#txtItemPrice').val("");
+	//}
+    //Retrive SGST
+    function RetrieveSGST() {
+        $.ajax({
+            url: '@Url.Action("RetrieveSGST", "INV_Invoice")',
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlSGST").empty();
+                    $("#ddlSGST").append('<option value="0" data-id="0">Select SGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);;
+                        $("#ddlSGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    //Retrive CGST
+    function RetrieveCGST() {
+        $.ajax({
+            url: '@Url.Action("RetrieveCGST", "INV_Invoice")',
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlCGST").empty();
+                    $("#ddlCGST").append('<option value="0" data-id="0">Select CGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
+                        $("#ddlCGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+    //Retrive IGST
+    function RetrieveIGST() {
+        $.ajax({
+            url: '@Url.Action("RetrieveIGST", "INV_Invoice")',
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlIGST").empty();
+                    $("#ddlIGST").append('<option value="0" data-id="0">Select IGST</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
+                        $("#ddlIGST").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
 </script>
 
 
 <!-- Modal -->
 <div class="modal fade" id="InvoiceMessage" role="dialog">
-	<div class="modal-dialog">
+    <div class="modal-dialog">
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Succesfully</h4>
-			</div>
-			<div class="modal-body">
-				<p>Succesfully submitted PO data.</p>
-			</div>
-			<div class="modal-footer">
-				<button id="btnModalOK" type="button" class="btn btn-default">Close</button>
-				@*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-			</div>
-		</div>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Succesfully</h4>
+            </div>
+            <div class="modal-body">
+                <p>Succesfully submitted PO data.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnModalOK" type="button" class="btn btn-default">Close</button>
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
 
-	</div>
+    </div>
 </div>

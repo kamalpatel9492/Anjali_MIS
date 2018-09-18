@@ -263,11 +263,14 @@ namespace AnjaliMIS.Controllers
                     Int32 _NewPONOtCount = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
                     new_INV_PurchaseOrder.PONo = _NewPONOtCount;
                     new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
-                    new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
+                    if (iNV_PurchaseOrderViewModal.CGST > 0)
+                        new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                     new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
-                    new_INV_PurchaseOrder.SGST = iNV_PurchaseOrderViewModal.SGST;
+                    if (iNV_PurchaseOrderViewModal.SGST > 0)
+                        new_INV_PurchaseOrder.SGST = iNV_PurchaseOrderViewModal.SGST;
                     new_INV_PurchaseOrder.SGSTAmount = iNV_PurchaseOrderViewModal.SGSTAmount;
-                    new_INV_PurchaseOrder.IGST = iNV_PurchaseOrderViewModal.IGST;
+                    if (iNV_PurchaseOrderViewModal.IGST > 0)
+                        new_INV_PurchaseOrder.IGST = iNV_PurchaseOrderViewModal.IGST;
                     new_INV_PurchaseOrder.IGSTAmount = iNV_PurchaseOrderViewModal.IGSTAmount;
                     new_INV_PurchaseOrder.IsLocal = iNV_PurchaseOrderViewModal.IsLocal;
                     new_INV_PurchaseOrder.Casar = iNV_PurchaseOrderViewModal.Casar;

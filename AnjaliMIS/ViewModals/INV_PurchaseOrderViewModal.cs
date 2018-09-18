@@ -39,5 +39,7 @@ namespace AnjaliMIS.ViewModals
         public Nullable<int> ItemID { get; set; }
         public List<INV_PurchaseOrderItem> INV_PurchaseOrderItems { get; set; }
         public string PartyIDName { get; set; }
+        public bool IsComplete { get; set; }
+
     }
 }

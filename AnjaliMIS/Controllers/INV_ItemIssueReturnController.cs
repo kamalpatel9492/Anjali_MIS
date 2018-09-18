@@ -73,6 +73,29 @@ namespace AnjaliMIS.Controllers
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult RetrieveItemListForAssemble()
+        {
+            try
+            {
+                var itemList = db.INV_Item.Where(w => w.IsLock == true && w.IsConfigurable == true).Select(e => new
+                {
+                    ItemID = e.ItemID,
+                    ItemName = e.ItemName
+                }).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult CheckIssueNumber(string issuenumber)
         {
@@ -188,7 +211,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
                             new_INV_StockHistory.OperationTypeID = 8;
                             new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
-                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                            new_INV_StockHistory.Quantity = item.Qunatity;
                             new_INV_StockHistory.UserID = item.UserID;
                             new_INV_StockHistory.Created = DateTime.Now;
                             new_INV_StockHistory.Modified = DateTime.Now;
@@ -199,7 +222,7 @@ namespace AnjaliMIS.Controllers
                             db.INV_StockHistory.Add(new_INV_StockHistory);
                             db.SaveChanges();
 
-                            inv_Item.Quantity = inv_Item.Quantity - inv_Item.Quantity;
+                            inv_Item.Quantity = inv_Item.Quantity - item.Qunatity;
                             db.SaveChanges();
                         }
                     }
@@ -264,7 +287,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
                             new_INV_StockHistory.OperationTypeID = 8;
                             new_INV_StockHistory.ReferenceID = Convert.ToInt32(getIssueLastNumber);
-                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
+                            new_INV_StockHistory.Quantity = item.Qunatity;
                             new_INV_StockHistory.UserID = item.UserID;
                             new_INV_StockHistory.Created = DateTime.Now;
                             new_INV_StockHistory.Modified = DateTime.Now;

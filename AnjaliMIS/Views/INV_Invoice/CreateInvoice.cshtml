@@ -48,6 +48,10 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            @*@if (Model.InvoiceDate == null)
+                                {
+                                    Model.InvoiceDate = DateTime.Now;
+                                }*@
                             @Html.LabelFor(model => model.InvoiceDate, "Invoice Date", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker" } })
@@ -87,28 +91,20 @@
 
                         <div id="divCGST" class="form-group" hidden>
                             @Html.LabelFor(model => model.CGST, "CGST", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 <select id="ddlCGST" class="form-control"></select>
-                                @*@Html.DropDownList("CGST", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CGST, "", new { @class = "text-danger" })*@
                             </div>
-                        </div>
-
-                        <div id="divSGST" class="form-group" hidden>
                             @Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 <select id="ddlSGST" class="form-control"></select>
-                                @*@Html.DropDownList("SGST", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.SGST, "", new { @class = "text-danger" })*@
+
                             </div>
                         </div>
 
-                        <div class="form-group" id="divSGST"  hidden>
+                        <div class="form-group" id="divIGST" hidden>
                             @Html.LabelFor(model => model.IGST, "IGST", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
+                            <div class="col-md-4">
                                 <select id="ddlIGST" class="form-control"></select>
-                                @*@Html.DropDownList("IGST", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.IGST, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <h3 class="form-section">Invoice Items</h3>
@@ -116,8 +112,6 @@
                             @Html.LabelFor(model => model.ItemID, "Item", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 <select id="ddlItemList" class="form-control"></select>
-                                @*@Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })*@
                             </div>
                             <label class="control-label col-md-2">Quantity</label>
                             <div class="col-md-2">
@@ -299,17 +293,21 @@
         CheckIsLocal();
         function CheckIsLocal() {
             if ($('input[name=isLocal]:checked').val() == "True") {
-                $('#divSGST').show();
+                //$('#divSGST').show();
                 $('#divCGST').show();
                 $('#divIGST').hide();
+                $('#ddlIGST').val("0");
+
             }
             else if ($('input[name=isLocal]:checked').val() == "False") {
                 $('#divCGST').hide();
-                $('#divSGST').hide();
+                //$('#divSGST').hide();
                 $('#divIGST').show();
+                $('#ddlCGST').val("0");
+                $('#ddlSGST').val("0");
             } else {
                 $('#divCGST').hide();
-                $('#divSGST').hide();
+                //$('#divSGST').hide();
                 $('#divIGST').hide();
             }
         };
@@ -480,6 +478,11 @@
 
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(newAmountPending);
+        $('html, body').animate({
+            scrollTop: $("#divItemList").offset().top
+        }, 2000);
+        $('#txtQuantity').val("");
+        $('#txtItemPrice').val("");
     }
 
 
@@ -609,6 +612,11 @@
     $('#InvoiceDate').datepicker({
         format: 'dd/mm/yyyy'
     });
+    var newdate = new Date();
+    var day = newdate.getDate();
+    var month_index = newdate.getMonth() + 1;
+    var year = newdate.getFullYear();
+    $('#InvoiceDate').val(day + "/" + month_index + "/" + year);
 </script>
 <!-- Modal -->
 <div class="modal fade" id="InvoiceMessage" role="dialog">

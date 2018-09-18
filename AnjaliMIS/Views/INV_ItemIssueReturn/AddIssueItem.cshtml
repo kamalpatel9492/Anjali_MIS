@@ -18,7 +18,7 @@
     <div class="portlet box blue">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-gift"></i>Issue tab
+                <i class="fa fa-gift"></i>Issue Item(s)
             </div>
         </div>
         <div class="portlet-body form">
@@ -39,29 +39,32 @@
                                 <input type="radio" name="assign" value="True">for use
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="assign" value="False">for assmeble
+                                <input type="radio" name="assign" value="False">for assemble
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="onlyForUseControls" hidden>
                         <label class="control-label col-md-2">Item</label>
                         <div class="col-md-2">
-                            <select id="ddlItemList" class="form-control" onchange="GetForIssueItem();"></select>
+                            <select id="ddlItemList" class="form-control"></select>
                         </div>
-                        <div id="onlyForUseControls" hidden>
-                            <label class="control-label col-md-1">Quantity</label>
-                            <div class="col-md-2">
-                                <input id="txtForUseQuantity" type="text" class="form-control" />
-                            </div>
-                            <label class="control-label col-md-1">Remarks </label>
-                            <div class="col-md-2">
-                                <input id="txtRemarks" type="text" class="form-control" />
-                            </div>
+                        <label class="control-label col-md-1">Quantity</label>
+                        <div class="col-md-2">
+                            <input id="txtForUseQuantity" type="text" class="form-control" />
+                        </div>
+                        <label class="control-label col-md-1">Remarks </label>
+                        <div class="col-md-2">
+                            <input id="txtRemarks" type="text" class="form-control" />
+                        </div>
 
-                            <div class="col-md-2">
-                                <a href="#" class="button btn-block btn default glyphicon glyphicon-plus add-For-Use-Item"> Add Item</a>
-                            </div>
-
+                        <div class="col-md-2">
+                            <a href="#" class="button btn-block btn default glyphicon glyphicon-plus add-For-Use-Item"> Add Item</a>
+                        </div>
+                    </div>
+                    <div class="form-group" id="onlyForAssembleControls" hidden>
+                        <label class="control-label col-md-2">Item</label>
+                        <div class="col-md-2">
+                            <select id="ddlItemListForAssemble" class="form-control" onchange="GetForIssueItem();"></select>
                         </div>
                     </div>
                     <div class="form-group" id="tableForUse" hidden>
@@ -96,14 +99,18 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="btnForUSer" hidden>
-                        <div class="col-md-2">
-                            <button id="btnSaveForUse" class="form-control">Submit</button>
-                        </div>
-                    </div>
-                    <div class="form-group" id="btnForAssmeble" hidden>
-                        <div class="col-md-2">
-                            <button id="btnSaveForAssmeble" class="form-control">Submit</button>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-9">
+                            <div class="form-group" id="btnForUSer" hidden>
+                                <button id="btnSaveForUse" class="btn green">Issue Item(s)</button>
+                                @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+                            </div>
+                            <div class="form-group" id="btnForAssmeble" hidden>
+                                <button id="btnSaveForAssmeble" class="btn green">Issue Item(s)</button>
+                                @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,6 +123,7 @@
 
         RetrieveitemList();
         RetrieveUserList();
+        RetrieveitemListForAssemble();
         //assign radio button change event
         $('input:radio[name=assign]').change(function () {
             if ($('input[name=assign]:checked').val() == "True") {
@@ -126,6 +134,7 @@
                 $('#divForAssmeble').hide();
                 $('#btnForAssmeble').hide();
                 $('#onlyForUseControls').show();
+                $('#onlyForAssembleControls').hide();
 
 
 
@@ -138,6 +147,7 @@
                 $('#divForAssmeble').show();
                 $('#btnForAssmeble').show();
                 $('#onlyForUseControls').hide();
+                $('#onlyForAssembleControls').show();
 
 
             } else {
@@ -237,6 +247,31 @@
         });
     }
 
+    function RetrieveitemListForAssemble() {
+        $.ajax({
+            url: "/INV_ItemIssueReturn/RetrieveItemListForAssemble",
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: (function (result) {
+
+                if (result.length > 0) {
+
+                    $("#ddlItemListForAssemble").empty();
+                    $("#ddlItemListForAssemble").append('<option value="0">Select Item</option>');
+                    for (var i = 0; i < result.length; i++) {
+                        var option = $("<option/>");
+                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                        $("#ddlItemListForAssemble").append(option);
+                    }
+                }
+            }),
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
     function RetrieveUserList() {
         $.ajax({
             url: "/INV_ItemIssueReturn/RetrieveUserList",
@@ -266,7 +301,7 @@
     function GetForIssueItem() {
 
         var postData = {
-            MainItemID: $('#ddlItemList').val(),
+            MainItemID: $('#ddlItemListForAssemble').val(),
             //UserID: $('#ddlUserList').val(),
             RetrieveType: $('input[name=assign]:checked').val()
         };
@@ -354,7 +389,7 @@
             }
         });
     }
-    
+
     function SaveItemForAssmeble() {
 
         var itemList = [];
@@ -395,7 +430,7 @@
             var quantity = $('#txtForUseQuantity').val();
             var txtRemarks = $("#txtRemarks").val();
             ForUseItemList.push({
-                MainItemID: itemid,
+                SubItemID: itemid,
                 Qunatity: quantity
             });
             var html = '';

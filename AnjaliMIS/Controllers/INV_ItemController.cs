@@ -20,7 +20,7 @@ namespace AnjaliMIS.Controllers
         // GET: INV_Item
         public ActionResult Index()
         {
-            var iNV_Item = db.INV_Item.Where(i => i.IsActive != false).Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User).Include(i => i.INV_Category);
+            var iNV_Item = db.INV_Item.Where(i => i.IsActive != false).Include(i => i.SYS_Company).Include(i => i.INV_Unit).Include(i => i.SEC_User).Include(i => i.INV_Category).OrderByDescending(o => o.Created);
             return View(iNV_Item.ToList());
         }
 

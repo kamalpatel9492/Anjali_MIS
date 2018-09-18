@@ -246,7 +246,8 @@
 				var itemname = $("#ItemID").find('option:selected').text();
 				var priceAmount = $("#txtItemPrice").val();
 				var invoiceID = 1;
-				var quantity = $('#txtQuantity').val();
+                var quantity = $('#txtQuantity').val();
+                IsComplete = $('input[name=ReceivePO]:checked').val(),
 				productList.push({
 					//InvoiceItemID: InvoiceItemID,
 					//InvoiceID: invoiceID,
