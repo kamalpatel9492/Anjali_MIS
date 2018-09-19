@@ -109,6 +109,8 @@
                             <label class="radio-inline">
                                 <input type="radio" name="ReceivePO" value="Partial">Partial Receive
                             </label>
+                            @Html.HiddenFor(model => model.IsComplete)
+                            @*<input type="hidden" id="IsComplete" />*@
                         </div>
 
 
@@ -223,11 +225,16 @@
                 $('#divSGST').show();
                 $('#divCGST').show();
                 $('#divIGST').hide();
+                $('#IsComplete').val(true);
+
+
             }
             else if ($('input[name=isLocal]:checked').val() == "False") {
                 $('#divCGST').hide();
                 $('#divSGST').hide();
                 $('#divIGST').show();
+                $('#IsComplete').val(false);
+
             } else {
                 $('#divCGST').hide();
                 $('#divSGST').hide();
@@ -349,12 +356,16 @@
     CheckReceivePO();
     function CheckReceivePO() {
         if ($('input[name=ReceivePO]:checked').val() == "Complete") {
-            $("#tblItems").find("input,button,textarea,select").attr("disabled", "disabled");
+            $("#tblItems").find("input,button,textarea,select").attr("POReturn", "POReturn");
+            $('#IsComplete').val(true);
+
         }
         else if ($('input[name=ReceivePO]:checked').val() == "Partial") {
-            $("#tblItems").find("input,button,textarea,select").removeAttr("disabled", "");
+            $("#tblItems").find("input,button,textarea,select").removeAttr("POReturn", "");
+            $('#IsComplete').val(false);
+
         } else {
-            $("#tblItems").find("input,button,textarea,select").attr("disabled", "disabled");
+            $("#tblItems").find("input,button,textarea,select").attr("POReturn", "POReturn");
         }
     };
 

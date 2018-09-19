@@ -176,6 +176,11 @@ namespace AnjaliMIS.Controllers
             INV_PurchaseOrder iNV_PurchaseOrder = db.INV_PurchaseOrder.Find(id);
             try
             {
+                var poitem = db.INV_PurchaseOrderItem.Where(poi => poi.PurchaseOrderID == iNV_PurchaseOrder.PurchaseOrderID).ToList();
+                db.INV_PurchaseOrderItem.RemoveRange(poitem);
+                db.SaveChanges();
+
+
                 db.INV_PurchaseOrder.Remove(iNV_PurchaseOrder);
                 db.SaveChanges();
             }
@@ -492,8 +497,14 @@ namespace AnjaliMIS.Controllers
                             db.SaveChanges();
                         }
                         #endregion Item
+                    }
 
-
+                    if (iNV_PurchaseOrderViewModal.IsComplete)
+                    {
+                        INV_PurchaseOrder _INV_PurchaseOrder = db.INV_PurchaseOrder.Find(iNV_PurchaseOrderViewModal.PurchaseOrderID);
+                        db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
+                        _INV_PurchaseOrder.StatusID = 2;
+                        db.SaveChanges();
                     }
                 }
 
