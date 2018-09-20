@@ -99,6 +99,53 @@
                             </div>
                         </div>
 
+                        <h3 class="form-section">Purchase Order Received till now</h3>
+                        <table class="table table-striped table-bordered table-advance table-hover" id="tblItemsPOHistory">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Received Date
+                                    </th>
+                                    <th>
+                                        Item
+                                    </th>
+                                    <th>
+                                        Ordered Qty.
+                                    </th>
+                                    <th>
+                                        Received Qty.
+                                    </th>
+                                    <th>
+                                        Puchase Price
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.INV_PurchaseOrderItems.Count; i++)
+                                {
+                                    <tr>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].ReceviedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(modelItem => Model.INV_PurchaseOrderItems[i].INV_Item.ItemName)
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PurchaseOrderItemID)
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].ItemID)
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].OrderedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
                         <h3 class="form-section">Purchase Order Receive Items</h3>
 
 
@@ -112,25 +159,8 @@
                             @Html.HiddenFor(model => model.IsComplete)
                             @*<input type="hidden" id="IsComplete" />*@
                         </div>
-
-
-                        @*<label class="radio-inline">
-                                <input checked="checked"
-                                       id="Complete"
-                                       name="ReceivePO"
-                                       type="radio"
-                                       value="Complete" class="radio" /> Complete Receive
-                            </label>
-                            <label class="radio-inline">
-                                <input id="Partial"
-                                       name="ReceivePO"
-                                       type="radio"
-                                       value="Partial" class="radio" />Partial Receive
-                            </label>*@
-
                         <br />
                         <br />
-
                         <table class="table table-striped table-bordered table-advance table-hover" id="tblItems">
                             <thead>
                                 <tr>
@@ -159,8 +189,17 @@
                                             @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, "", new { @class = "text-danger" })
                                         </td>
                                         <td class="col-md-2">
-                                            @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
+                                            @{
+                                                Int32 PendingToReceive = 0;
+                                                if (Model.INV_PurchaseOrderItems[i].OrderedQuantity != Model.INV_PurchaseOrderItems[i].ReceivedQuantity)
+                                                {
+                                                    PendingToReceive = Model.INV_PurchaseOrderItems[i].OrderedQuantity - Model.INV_PurchaseOrderItems[i].ReceivedQuantity;
+                                                }
+
+                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, PendingToReceive.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
+                                            }
+
                                         </td>
                                     </tr>
                                 }
@@ -170,9 +209,14 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <input id="btnSave" type="submit" value="Save" class="btn green" />
-                                @*<input type="submit" value="Save" class="btn green" />*@
-                                @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                                @{
+                                    if (Model.StatusID != 2)
+                                    {
+                                        <input id="btnSave" type="submit" value="Save" class="btn green" />
+                                        @*<input type="submit" value="Save" class="btn green" />*@
+                                        @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                                    }
+                                }
                             </div>
                         </div>
                     </div>

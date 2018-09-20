@@ -111,7 +111,7 @@ namespace AnjaliMIS.Controllers
                 PONo = inv_Invoice.PONo,
                 AmountPending = inv_Invoice.AmountPending,
                 FinYearID = CommonConfig.GetFinYearID(),
-            CGST = inv_Invoice.CGST,
+                CGST = inv_Invoice.CGST,
                 CGSTAmount = inv_Invoice.CGSTAmount,
                 SGST = inv_Invoice.SGST,
                 SGSTAmount = inv_Invoice.SGSTAmount,
@@ -454,6 +454,11 @@ namespace AnjaliMIS.Controllers
                         _INV_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
                         if (_INV_Item != null)
                         {
+                            if (_INV_Item.Quantity - item.Quantity < 0)
+                            {
+                                ModelState.AddModelError("", "Check Stock..");
+                                return Json("failure", JsonRequestBehavior.AllowGet);
+                            }
                             _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
                             db.SaveChanges();
                         }
@@ -502,7 +507,7 @@ namespace AnjaliMIS.Controllers
                 PONo = InvoiceData.PONo,
                 AmountPending = InvoiceData.AmountPending,
                 FinYearID = CommonConfig.GetFinYearID(),
-            CGST = InvoiceData.CGST,
+                CGST = InvoiceData.CGST,
                 CGSTAmount = InvoiceData.CGSTAmount,
                 SGST = InvoiceData.SGST,
                 SGSTAmount = InvoiceData.SGSTAmount,

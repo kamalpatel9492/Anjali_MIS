@@ -187,6 +187,14 @@ namespace AnjaliMIS.Controllers
                             if (getIssueLast == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                }
+                                #endregion Check No
                             }
                             else
                             {
@@ -194,6 +202,14 @@ namespace AnjaliMIS.Controllers
                                 if (a == null)
                                 {
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                    }
+                                    #endregion Check No
                                 }
                                 else
                                 {
@@ -204,8 +220,18 @@ namespace AnjaliMIS.Controllers
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
+                                    }
+                                    #endregion Check No
+
                                 }
                             }
+
 
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                             new_INV_StockHistory.ItemID = inv_Item.ItemID;
@@ -222,6 +248,11 @@ namespace AnjaliMIS.Controllers
                             db.INV_StockHistory.Add(new_INV_StockHistory);
                             db.SaveChanges();
 
+                            if (inv_Item.Quantity - item.Qunatity < 0)
+                            {
+                                ModelState.AddModelError("", "Check Stock..");
+                                return Json("failure", JsonRequestBehavior.AllowGet);
+                            }
                             inv_Item.Quantity = inv_Item.Quantity - item.Qunatity;
                             db.SaveChanges();
                         }
@@ -263,6 +294,13 @@ namespace AnjaliMIS.Controllers
                             if (getIssueLast == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                }
+                                #endregion Check No
                             }
                             else
                             {
@@ -270,6 +308,13 @@ namespace AnjaliMIS.Controllers
                                 if (a == null)
                                 {
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                    }
+                                    #endregion Check No
                                 }
                                 else
                                 {
@@ -280,6 +325,13 @@ namespace AnjaliMIS.Controllers
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
+                                    }
+                                    #endregion Check No
                                 }
                             }
 
@@ -297,7 +349,11 @@ namespace AnjaliMIS.Controllers
                             new_INV_StockHistory.IssueNumber = getIssueLastNumber;
                             db.INV_StockHistory.Add(new_INV_StockHistory);
                             db.SaveChanges();
-
+                            if (inv_Item.Quantity - item.Qunatity < 0)
+                            {
+                                ModelState.AddModelError("", "Check Stock..");
+                                return Json("failure", JsonRequestBehavior.AllowGet);
+                            }
                             inv_Item.Quantity = inv_Item.Quantity - item.Qunatity;
                             db.SaveChanges();
                         }
@@ -338,6 +394,13 @@ namespace AnjaliMIS.Controllers
                         if (getIssueLast == null)
                         {
                             getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                            #region Check No
+                            INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                            if (_INV_StockHistoryNo != null)
+                            {
+                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                            }
+                            #endregion Check No
                         }
                         else
                         {
@@ -345,6 +408,13 @@ namespace AnjaliMIS.Controllers
                             if (a == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                }
+                                #endregion Check No
                             }
                             else
                             {
@@ -355,6 +425,13 @@ namespace AnjaliMIS.Controllers
                                 string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
+                                }
+                                #endregion Check No
                             }
                         }
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
@@ -371,7 +448,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
                         db.SaveChanges();
-
+                       
                         inv_Item.Quantity = inv_Item.Quantity + iNV_ItemConfiguration.Qunatity;
                         db.SaveChanges();
                     }
@@ -413,6 +490,13 @@ namespace AnjaliMIS.Controllers
                             if (getIssueLast == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                }
+                                #endregion Check No
                             }
                             else
                             {
@@ -420,6 +504,13 @@ namespace AnjaliMIS.Controllers
                                 if (a == null)
                                 {
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                    }
+                                    #endregion Check No
                                 }
                                 else
                                 {
@@ -430,6 +521,13 @@ namespace AnjaliMIS.Controllers
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
+                                    }
+                                    #endregion Check No
                                 }
                             }
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
@@ -492,6 +590,13 @@ namespace AnjaliMIS.Controllers
                             if (getIssueLast == null)
                             {
                                 getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                #region Check No
+                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                if (_INV_StockHistoryNo != null)
+                                {
+                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                }
+                                #endregion Check No
                             }
                             else
                             {
@@ -499,6 +604,13 @@ namespace AnjaliMIS.Controllers
                                 if (a == null)
                                 {
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
+                                    }
+                                    #endregion Check No
                                 }
                                 else
                                 {
@@ -509,6 +621,13 @@ namespace AnjaliMIS.Controllers
                                     string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
 
                                     getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
+                                    #region Check No
+                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
+                                    if (_INV_StockHistoryNo != null)
+                                    {
+                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
+                                    }
+                                    #endregion Check No
                                 }
                             }
                             INV_StockHistory new_INV_StockHistory = new INV_StockHistory();

@@ -11,6 +11,7 @@ namespace AnjaliMIS.ViewModals
         public INV_PurchaseOrderViewModal()
         {
             INV_PurchaseOrderItems = new List<INV_PurchaseOrderItem>();
+            INV_PurchaseOrderHistory = new List<INV_PurchaseOrderHistory>();
         }
 
         public int PurchaseOrderID { get; set; }
@@ -40,6 +41,7 @@ namespace AnjaliMIS.ViewModals
         public List<INV_PurchaseOrderItem> INV_PurchaseOrderItems { get; set; }
         public string PartyIDName { get; set; }
         public bool IsComplete { get; set; }
+        public List<INV_PurchaseOrderHistory> INV_PurchaseOrderHistory { get; set; }
 
     }
 }
