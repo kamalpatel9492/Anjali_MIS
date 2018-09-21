@@ -12,21 +12,23 @@ namespace AnjaliMIS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class INV_ItemConfiguration
+    public partial class INV_IssueReturn
     {
-        public int ItemConfigurationID { get; set; }
-        public int MainItemID { get; set; }
-        public int SubItemID { get; set; }
-        public int Qunatity { get; set; }
-        public int UserID { get; set; }
+        public int IssueReturnID { get; set; }
+        public int CompanyID { get; set; }
+        public Nullable<int> IssueReturnByUserID { get; set; }
+        public Nullable<int> IssueReturnToUserID { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string Remarks { get; set; }
+        public Nullable<System.DateTime> IssueReturnDate { get; set; }
+        public string IssueReturnNo { get; set; }
+        public int FinYearID { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
-        public virtual INV_Item INV_Item { get; set; }
-        public virtual INV_Item INV_Item1 { get; set; }
         public virtual SEC_User SEC_User { get; set; }
-        public List<INV_ItemConfiguration> INV_Items { get; set; }
-        public bool RetrieveType { get; set; }
+        public virtual SEC_User SEC_User1 { get; set; }
+        public virtual SYS_Company SYS_Company { get; set; }
+        public virtual SYS_FinYear SYS_FinYear { get; set; }
     }
 }

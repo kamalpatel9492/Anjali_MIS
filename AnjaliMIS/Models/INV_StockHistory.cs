@@ -17,7 +17,7 @@ namespace AnjaliMIS.Models
         public int StockHistoryID { get; set; }
         public int ItemID { get; set; }
         public int OperationTypeID { get; set; }
-        public Nullable<int> ReferenceID { get; set; }
+        public string ReferenceID { get; set; }
         public int Quantity { get; set; }
         public int UserID { get; set; }
         public System.DateTime Created { get; set; }

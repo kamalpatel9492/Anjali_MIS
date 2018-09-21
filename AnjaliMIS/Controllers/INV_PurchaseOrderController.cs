@@ -266,7 +266,9 @@ namespace AnjaliMIS.Controllers
                     Int32 TotalForMonth = db.INV_PurchaseOrder.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
                     Int32 NextCount = TotalForMonth + 1;
                     Int32 _NewPONOtCount = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
-                    new_INV_PurchaseOrder.PONo = _NewPONOtCount;
+
+                    //Change PONUmber Add PO-
+                    new_INV_PurchaseOrder.PONo = _NewPONOtCount.ToString();
                     new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
                     if (iNV_PurchaseOrderViewModal.CGST > 0)
                         new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
@@ -299,7 +301,7 @@ namespace AnjaliMIS.Controllers
                         Remarks = new_INV_PurchaseOrder.Remarks,
                         PendingAmount = new_INV_PurchaseOrder.PendingAmount,
                         Casar = new_INV_PurchaseOrder.Casar,
-                        PONo = new_INV_PurchaseOrder.PONo,
+                        PONo = new_INV_PurchaseOrder.PONo.ToString(),
                         PODate = new_INV_PurchaseOrder.PODate,
                         FinYearID = new_INV_PurchaseOrder.FinYearID,
                         IsLocal = new_INV_PurchaseOrder.IsLocal,
@@ -618,11 +620,11 @@ namespace AnjaliMIS.Controllers
 
         [HttpPost]
         // GET: GRN
-        public JsonResult POSearch(int PONumber = -1)
+        public JsonResult POSearch(string PONumber = "")
         {
             Int32 PurchaseOrderID = -1;
             INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal();
-            if (PONumber > 0)
+            if (PONumber != "")
             {
                 var _PurchaseOrder = db.INV_PurchaseOrder.Where(p => p.PONo == PONumber).FirstOrDefault();
                 if (_PurchaseOrder != null)

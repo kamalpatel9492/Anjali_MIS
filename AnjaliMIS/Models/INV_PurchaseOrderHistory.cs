@@ -25,7 +25,7 @@ namespace AnjaliMIS.Models
         public string Remarks { get; set; }
         public Nullable<int> PendingAmount { get; set; }
         public Nullable<int> Casar { get; set; }
-        public Nullable<int> PONo { get; set; }
+        public string PONo { get; set; }
         public Nullable<System.DateTime> PODate { get; set; }
         public int FinYearID { get; set; }
         public bool IsLocal { get; set; }

@@ -437,7 +437,7 @@
           <Property Name="Modified" Type="datetime" />
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
           <Property Name="InvoiceDate" Type="date" />
-          <Property Name="InvoiceNo" Type="int" Nullable="false" />
+          <Property Name="InvoiceNo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PONo" Type="int" Nullable="false" />
           <Property Name="AmountPending" Type="int" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
@@ -466,7 +466,7 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
           <Property Name="InvoiceDate" Type="date" />
-          <Property Name="InvoiceNo" Type="int" Nullable="false" />
+          <Property Name="InvoiceNo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="PONo" Type="int" Nullable="false" />
           <Property Name="AmountPending" Type="int" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
@@ -496,6 +496,22 @@
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="PricePerUnit" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="INV_IssueReturn">
+          <Key>
+            <PropertyRef Name="IssueReturnID" />
+          </Key>
+          <Property Name="IssueReturnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="IssueReturnByUserID" Type="int" />
+          <Property Name="IssueReturnToUserID" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="100" />
+          <Property Name="IssueReturnDate" Type="date" />
+          <Property Name="IssueReturnNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FinYearID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
         <EntityType Name="INV_Item">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -514,7 +530,7 @@
           <Property Name="RejectedQuantity" Type="int" />
           <Property Name="IsLock" Type="bit" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
-          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemCode" Type="varchar" MaxLength="50" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="INV_ItemConfiguration">
@@ -559,7 +575,7 @@
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="PendingAmount" Type="int" />
           <Property Name="Casar" Type="int" />
-          <Property Name="PONo" Type="int" />
+          <Property Name="PONo" Type="varchar" MaxLength="50" />
           <Property Name="PODate" Type="date" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
           <Property Name="IsLocal" Type="bit" Nullable="false" />
@@ -586,7 +602,7 @@
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="PendingAmount" Type="int" />
           <Property Name="Casar" Type="int" />
-          <Property Name="PONo" Type="int" />
+          <Property Name="PONo" Type="varchar" MaxLength="50" />
           <Property Name="PODate" Type="date" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
           <Property Name="IsLocal" Type="bit" Nullable="false" />
@@ -622,15 +638,15 @@
           <Property Name="StockHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemID" Type="int" Nullable="false" />
           <Property Name="OperationTypeID" Type="int" Nullable="false" />
-          <Property Name="ReferenceID" Type="int" />
+          <Property Name="ReferenceID" Type="varchar" MaxLength="100" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
-          <Property Name="IssueNumber" Type="nvarchar" MaxLength="100" />
-          <Property Name="ReturnNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="IssueNumber" Type="varchar" MaxLength="100" />
+          <Property Name="ReturnNumber" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="INV_Unit">
           <Key>
@@ -1975,6 +1991,66 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_INV_IssueReturn_SEC_User">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="0..1" />
+          <End Role="INV_IssueReturn" Type="Self.INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="IssueReturnByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SEC_User1">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="0..1" />
+          <End Role="INV_IssueReturn" Type="Self.INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="IssueReturnToUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SYS_Company">
+          <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
+          <End Role="INV_IssueReturn" Type="Self.INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SYS_FinYear">
+          <End Role="SYS_FinYear" Type="Self.SYS_FinYear" Multiplicity="1" />
+          <End Role="INV_IssueReturn" Type="Self.INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_FinYear">
+              <PropertyRef Name="FinYearID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="FinYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_CompanyID_201806280618PM">
+          <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
+          <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_INV_Item_INV_Category">
           <End Role="INV_Category" Type="Self.INV_Category" Multiplicity="0..1" />
           <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
@@ -1987,7 +2063,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_INV_Unit">
+        <Association Name="FK_INV_Item_UnitID_201806280618PM">
           <End Role="INV_Unit" Type="Self.INV_Unit" Multiplicity="1" />
           <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1999,7 +2075,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_SEC_User">
+        <Association Name="FK_INV_Item_UserID_201806280618PM">
           <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
           <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2008,18 +2084,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Principal>
             <Dependent Role="INV_Item">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INV_Item_SYS_Company">
-          <End Role="SYS_Company" Type="Self.SYS_Company" Multiplicity="1" />
-          <End Role="INV_Item" Type="Self.INV_Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Company">
-              <PropertyRef Name="CompanyID" />
-            </Principal>
-            <Dependent Role="INV_Item">
-              <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2652,6 +2716,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySet Name="INV_Invoice" EntityType="Self.INV_Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_InvoiceHistory" EntityType="Self.INV_InvoiceHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_InvoiceItem" EntityType="Self.INV_InvoiceItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_IssueReturn" EntityType="Self.INV_IssueReturn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_Item" EntityType="Self.INV_Item" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_ItemConfiguration" EntityType="Self.INV_ItemConfiguration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_ItemPrice" EntityType="Self.INV_ItemPrice" Schema="dbo" store:Type="Tables" />
@@ -3057,20 +3122,36 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="INV_Item" EntitySet="INV_Item" />
             <End Role="INV_InvoiceItem" EntitySet="INV_InvoiceItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SEC_User" Association="Self.FK_INV_IssueReturn_SEC_User">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SEC_User1" Association="Self.FK_INV_IssueReturn_SEC_User1">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SYS_Company" Association="Self.FK_INV_IssueReturn_SYS_Company">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SYS_FinYear" Association="Self.FK_INV_IssueReturn_SYS_FinYear">
+            <End Role="SYS_FinYear" EntitySet="SYS_FinYear" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_CompanyID_201806280618PM" Association="Self.FK_INV_Item_CompanyID_201806280618PM">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
           <AssociationSet Name="FK_INV_Item_INV_Category" Association="Self.FK_INV_Item_INV_Category">
             <End Role="INV_Category" EntitySet="INV_Category" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_INV_Unit" Association="Self.FK_INV_Item_INV_Unit">
+          <AssociationSet Name="FK_INV_Item_UnitID_201806280618PM" Association="Self.FK_INV_Item_UnitID_201806280618PM">
             <End Role="INV_Unit" EntitySet="INV_Unit" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SEC_User" Association="Self.FK_INV_Item_SEC_User">
+          <AssociationSet Name="FK_INV_Item_UserID_201806280618PM" Association="Self.FK_INV_Item_UserID_201806280618PM">
             <End Role="SEC_User" EntitySet="SEC_User" />
-            <End Role="INV_Item" EntitySet="INV_Item" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SYS_Company" Association="Self.FK_INV_Item_SYS_Company">
-            <End Role="SYS_Company" EntitySet="SYS_Company" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
           <AssociationSet Name="FK_INV_ItemConfiguration_MainItemID_201806280619PM" Association="Self.FK_INV_ItemConfiguration_MainItemID_201806280619PM">
@@ -3307,6 +3388,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySet Name="INV_Invoice" EntityType="DB_A157D8_AnjaliMISModel.INV_Invoice" />
           <EntitySet Name="INV_InvoiceHistory" EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceHistory" />
           <EntitySet Name="INV_InvoiceItem" EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceItem" />
+          <EntitySet Name="INV_IssueReturn" EntityType="DB_A157D8_AnjaliMISModel.INV_IssueReturn" />
           <EntitySet Name="INV_Item" EntityType="DB_A157D8_AnjaliMISModel.INV_Item" />
           <EntitySet Name="INV_ItemConfiguration" EntityType="DB_A157D8_AnjaliMISModel.INV_ItemConfiguration" />
           <EntitySet Name="INV_ItemPrice" EntityType="DB_A157D8_AnjaliMISModel.INV_ItemPrice" />
@@ -3709,16 +3791,32 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="INV_Item" EntitySet="INV_Item" />
             <End Role="INV_InvoiceItem" EntitySet="INV_InvoiceItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_INV_Unit" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit">
+          <AssociationSet Name="FK_INV_IssueReturn_SEC_User" Association="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SEC_User1" Association="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User1">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SYS_Company" Association="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_Company">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_IssueReturn_SYS_FinYear" Association="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_FinYear">
+            <End Role="SYS_FinYear" EntitySet="SYS_FinYear" />
+            <End Role="INV_IssueReturn" EntitySet="INV_IssueReturn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_CompanyID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM">
+            <End Role="SYS_Company" EntitySet="SYS_Company" />
+            <End Role="INV_Item" EntitySet="INV_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_Item_UnitID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM">
             <End Role="INV_Unit" EntitySet="INV_Unit" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SEC_User" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User">
+          <AssociationSet Name="FK_INV_Item_UserID_201806280618PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM">
             <End Role="SEC_User" EntitySet="SEC_User" />
-            <End Role="INV_Item" EntitySet="INV_Item" />
-          </AssociationSet>
-          <AssociationSet Name="FK_INV_Item_SYS_Company" Association="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company">
-            <End Role="SYS_Company" EntitySet="SYS_Company" />
             <End Role="INV_Item" EntitySet="INV_Item" />
           </AssociationSet>
           <AssociationSet Name="FK_INV_ItemConfiguration_MainItemID_201806280619PM" Association="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM">
@@ -4457,7 +4555,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
-          <Property Name="InvoiceNo" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PONo" Type="Int32" Nullable="false" />
           <Property Name="AmountPending" Type="Int32" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
@@ -4496,7 +4594,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="InvoiceDate" Type="DateTime" Precision="0" />
-          <Property Name="InvoiceNo" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PONo" Type="Int32" Nullable="false" />
           <Property Name="AmountPending" Type="Int32" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
@@ -4537,6 +4635,26 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_InvoiceID_201806280616PM" FromRole="INV_InvoiceItem" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_ItemID_201806280616PM" FromRole="INV_InvoiceItem" ToRole="INV_Item" />
         </EntityType>
+        <EntityType Name="INV_IssueReturn">
+          <Key>
+            <PropertyRef Name="IssueReturnID" />
+          </Key>
+          <Property Name="IssueReturnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="IssueReturnByUserID" Type="Int32" />
+          <Property Name="IssueReturnToUserID" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IssueReturnDate" Type="DateTime" Precision="0" />
+          <Property Name="IssueReturnNo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FinYearID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User" FromRole="INV_IssueReturn" ToRole="SEC_User" />
+          <NavigationProperty Name="SEC_User1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User1" FromRole="INV_IssueReturn" ToRole="SEC_User" />
+          <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_Company" FromRole="INV_IssueReturn" ToRole="SYS_Company" />
+          <NavigationProperty Name="SYS_FinYear" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_FinYear" FromRole="INV_IssueReturn" ToRole="SYS_FinYear" />
+        </EntityType>
         <EntityType Name="INV_Item">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -4555,14 +4673,14 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="RejectedQuantity" Type="Int32" />
           <Property Name="IsLock" Type="Boolean" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="DIA_MachineMaintenance" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_MachineMaintenance_ItemID_201806280507PM" FromRole="INV_Item" ToRole="DIA_MachineMaintenance" />
           <NavigationProperty Name="INV_Category" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Category" FromRole="INV_Item" ToRole="INV_Category" />
           <NavigationProperty Name="INV_InvoiceItem" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceItem_ItemID_201806280616PM" FromRole="INV_Item" ToRole="INV_InvoiceItem" />
-          <NavigationProperty Name="INV_Unit" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit" FromRole="INV_Item" ToRole="INV_Unit" />
-          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User" FromRole="INV_Item" ToRole="SEC_User" />
-          <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company" FromRole="INV_Item" ToRole="SYS_Company" />
+          <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM" FromRole="INV_Item" ToRole="SYS_Company" />
+          <NavigationProperty Name="INV_Unit" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM" FromRole="INV_Item" ToRole="INV_Unit" />
+          <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM" FromRole="INV_Item" ToRole="SEC_User" />
           <NavigationProperty Name="INV_ItemConfiguration" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_MainItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemConfiguration1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_SubItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemPrice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_ItemID_201806280619PM" FromRole="INV_Item" ToRole="INV_ItemPrice" />
@@ -4617,7 +4735,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PendingAmount" Type="Int32" />
           <Property Name="Casar" Type="Int32" />
-          <Property Name="PONo" Type="Int32" />
+          <Property Name="PONo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PODate" Type="DateTime" Precision="0" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
           <Property Name="IsLocal" Type="Boolean" Nullable="false" />
@@ -4654,7 +4772,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PendingAmount" Type="Int32" />
           <Property Name="Casar" Type="Int32" />
-          <Property Name="PONo" Type="Int32" />
+          <Property Name="PONo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PODate" Type="DateTime" Precision="0" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
           <Property Name="IsLocal" Type="Boolean" Nullable="false" />
@@ -4701,15 +4819,15 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="StockHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemID" Type="Int32" Nullable="false" />
           <Property Name="OperationTypeID" Type="Int32" Nullable="false" />
-          <Property Name="ReferenceID" Type="Int32" />
+          <Property Name="ReferenceID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
-          <Property Name="IssueNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ReturnNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IssueNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ReturnNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_ItemID_201806280628PM" FromRole="INV_StockHistory" ToRole="INV_Item" />
           <NavigationProperty Name="SYS_FinYear" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_FinYearID_201806280628PM" FromRole="INV_StockHistory" ToRole="SYS_FinYear" />
           <NavigationProperty Name="SYS_OperationType" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_StockHistory_OperationTypeID_201806280628PM" FromRole="INV_StockHistory" ToRole="SYS_OperationType" />
@@ -4725,7 +4843,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Modified" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_INV_Unit" FromRole="INV_Unit" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UnitID_201806280618PM" FromRole="INV_Unit" ToRole="INV_Item" />
         </EntityType>
         <EntityType Name="LOC_City">
           <Key>
@@ -4917,7 +5035,9 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="INV_Category" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Category_SEC_User" FromRole="SEC_User" ToRole="INV_Category" />
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_UserID_201806280558PM" FromRole="SEC_User" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_InvoiceHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_UserID_201806280604PM" FromRole="SEC_User" ToRole="INV_InvoiceHistory" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SEC_User" FromRole="SEC_User" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_IssueReturn" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User" FromRole="SEC_User" ToRole="INV_IssueReturn" />
+          <NavigationProperty Name="INV_IssueReturn1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User1" FromRole="SEC_User" ToRole="INV_IssueReturn" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_UserID_201806280618PM" FromRole="SEC_User" ToRole="INV_Item" />
           <NavigationProperty Name="INV_ItemConfiguration" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemConfiguration_UserID_201806280619PM" FromRole="SEC_User" ToRole="INV_ItemConfiguration" />
           <NavigationProperty Name="INV_ItemPrice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_UserID_201806280619PM" FromRole="SEC_User" ToRole="INV_ItemPrice" />
           <NavigationProperty Name="INV_PurchaseOrder" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_UserID_201806280621PM" FromRole="SEC_User" ToRole="INV_PurchaseOrder" />
@@ -4980,7 +5100,8 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="EMP_Employee" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_CompanyID_201806280519PM" FromRole="SYS_Company" ToRole="EMP_Employee" />
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_CompanyID_201806280558PM" FromRole="SYS_Company" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_InvoiceHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_CompanyID_201806280604PM" FromRole="SYS_Company" ToRole="INV_InvoiceHistory" />
-          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_SYS_Company" FromRole="SYS_Company" ToRole="INV_Item" />
+          <NavigationProperty Name="INV_IssueReturn" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_Company" FromRole="SYS_Company" ToRole="INV_IssueReturn" />
+          <NavigationProperty Name="INV_Item" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Item_CompanyID_201806280618PM" FromRole="SYS_Company" ToRole="INV_Item" />
           <NavigationProperty Name="INV_PurchaseOrder" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_CompanyID_201806280621PM" FromRole="SYS_Company" ToRole="INV_PurchaseOrder" />
           <NavigationProperty Name="INV_PurchaseOrderHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_CompanyID_201806280623PM" FromRole="SYS_Company" ToRole="INV_PurchaseOrderHistory" />
           <NavigationProperty Name="LOC_City" Relationship="DB_A157D8_AnjaliMISModel.FK_SYS_Company_CityID_201806280643PM" FromRole="SYS_Company" ToRole="LOC_City" />
@@ -5004,6 +5125,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="EMP_Employee" Relationship="DB_A157D8_AnjaliMISModel.FK_EMP_Employee_FinYearID_201806280519PM" FromRole="SYS_FinYear" ToRole="EMP_Employee" />
           <NavigationProperty Name="INV_Invoice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_Invoice_FinYearID_201806280558PM" FromRole="SYS_FinYear" ToRole="INV_Invoice" />
           <NavigationProperty Name="INV_InvoiceHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_InvoiceHistory_FinYearID_201806280604PM" FromRole="SYS_FinYear" ToRole="INV_InvoiceHistory" />
+          <NavigationProperty Name="INV_IssueReturn" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_FinYear" FromRole="SYS_FinYear" ToRole="INV_IssueReturn" />
           <NavigationProperty Name="INV_ItemPrice" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_ItemPrice_FinYearID_201806280619PM" FromRole="SYS_FinYear" ToRole="INV_ItemPrice" />
           <NavigationProperty Name="INV_PurchaseOrder" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_FinYearID_201806280621PM" FromRole="SYS_FinYear" ToRole="INV_PurchaseOrder" />
           <NavigationProperty Name="INV_PurchaseOrderHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrderHistory_FinYearID_201806280623PM" FromRole="SYS_FinYear" ToRole="INV_PurchaseOrderHistory" />
@@ -6252,7 +6374,67 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_INV_Unit">
+        <Association Name="FK_INV_IssueReturn_SEC_User">
+          <End Type="DB_A157D8_AnjaliMISModel.SEC_User" Role="SEC_User" Multiplicity="0..1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Role="INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="IssueReturnByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SEC_User1">
+          <End Type="DB_A157D8_AnjaliMISModel.SEC_User" Role="SEC_User" Multiplicity="0..1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Role="INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="IssueReturnToUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SYS_Company">
+          <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Role="INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_IssueReturn_SYS_FinYear">
+          <End Type="DB_A157D8_AnjaliMISModel.SYS_FinYear" Role="SYS_FinYear" Multiplicity="1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Role="INV_IssueReturn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_FinYear">
+              <PropertyRef Name="FinYearID" />
+            </Principal>
+            <Dependent Role="INV_IssueReturn">
+              <PropertyRef Name="FinYearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_CompanyID_201806280618PM">
+          <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
+          <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="INV_Item">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_Item_UnitID_201806280618PM">
           <End Type="DB_A157D8_AnjaliMISModel.INV_Unit" Role="INV_Unit" Multiplicity="1" />
           <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6264,7 +6446,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_INV_Item_SEC_User">
+        <Association Name="FK_INV_Item_UserID_201806280618PM">
           <End Type="DB_A157D8_AnjaliMISModel.SEC_User" Role="SEC_User" Multiplicity="1" />
           <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
           <ReferentialConstraint>
@@ -6273,18 +6455,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Principal>
             <Dependent Role="INV_Item">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_INV_Item_SYS_Company">
-          <End Type="DB_A157D8_AnjaliMISModel.SYS_Company" Role="SYS_Company" Multiplicity="1" />
-          <End Type="DB_A157D8_AnjaliMISModel.INV_Item" Role="INV_Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SYS_Company">
-              <PropertyRef Name="CompanyID" />
-            </Principal>
-            <Dependent Role="INV_Item">
-              <PropertyRef Name="CompanyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7338,6 +7508,23 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
                 <ScalarProperty Name="InvoiceItemID" ColumnName="InvoiceItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INV_IssueReturn">
+            <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.INV_IssueReturn">
+              <MappingFragment StoreEntitySet="INV_IssueReturn">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
+                <ScalarProperty Name="IssueReturnNo" ColumnName="IssueReturnNo" />
+                <ScalarProperty Name="IssueReturnDate" ColumnName="IssueReturnDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IssueReturnToUserID" ColumnName="IssueReturnToUserID" />
+                <ScalarProperty Name="IssueReturnByUserID" ColumnName="IssueReturnByUserID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="IssueReturnID" ColumnName="IssueReturnID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

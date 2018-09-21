@@ -23,6 +23,7 @@ namespace AnjaliMIS.Models
             this.EMP_Employee = new HashSet<EMP_Employee>();
             this.INV_Invoice = new HashSet<INV_Invoice>();
             this.INV_InvoiceHistory = new HashSet<INV_InvoiceHistory>();
+            this.INV_IssueReturn = new HashSet<INV_IssueReturn>();
             this.INV_ItemPrice = new HashSet<INV_ItemPrice>();
             this.INV_PurchaseOrder = new HashSet<INV_PurchaseOrder>();
             this.INV_PurchaseOrderHistory = new HashSet<INV_PurchaseOrderHistory>();
@@ -43,6 +44,7 @@ namespace AnjaliMIS.Models
         public virtual ICollection<EMP_Employee> EMP_Employee { get; set; }
         public virtual ICollection<INV_Invoice> INV_Invoice { get; set; }
         public virtual ICollection<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
+        public virtual ICollection<INV_IssueReturn> INV_IssueReturn { get; set; }
         public virtual ICollection<INV_ItemPrice> INV_ItemPrice { get; set; }
         public virtual ICollection<INV_PurchaseOrder> INV_PurchaseOrder { get; set; }
         public virtual ICollection<INV_PurchaseOrderHistory> INV_PurchaseOrderHistory { get; set; }

@@ -31,7 +31,7 @@ namespace AnjaliMIS.Models
         public Nullable<System.DateTime> Modified { get; set; }
         public string Remarks { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
-        public int InvoiceNo { get; set; }
+        public string InvoiceNo { get; set; }
         public int PONo { get; set; }
         public Nullable<int> AmountPending { get; set; }
         public int FinYearID { get; set; }
@@ -45,7 +45,7 @@ namespace AnjaliMIS.Models
         public Nullable<bool> IsActive { get; set; }
         public Nullable<decimal> Casar { get; set; }
         public decimal TotalAmount { get; set; }
-        public int NewAmountReceived { get; set; }
+    
         public virtual ACC_Tax ACC_Tax { get; set; }
         public virtual ACC_Tax ACC_Tax1 { get; set; }
         public virtual ACC_Tax ACC_Tax2 { get; set; }
@@ -56,5 +56,6 @@ namespace AnjaliMIS.Models
         public virtual SEC_User SEC_User { get; set; }
         public virtual ICollection<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
         public virtual ICollection<INV_InvoiceItem> INV_InvoiceItem { get; set; }
+        public int NewAmountReceived { get; set; }
     }
 }

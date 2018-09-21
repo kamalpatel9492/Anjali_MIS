@@ -24,7 +24,7 @@ namespace AnjaliMIS.Models
         public System.DateTime Created { get; set; }
         public string Remarks { get; set; }
         public Nullable<System.DateTime> InvoiceDate { get; set; }
-        public int InvoiceNo { get; set; }
+        public string InvoiceNo { get; set; }
         public int PONo { get; set; }
         public Nullable<int> AmountPending { get; set; }
         public int FinYearID { get; set; }

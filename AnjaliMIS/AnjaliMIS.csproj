@@ -307,6 +307,9 @@
     <Compile Include="Models\INV_InvoiceItem.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\INV_IssueReturn.cs">
+      <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\INV_Item.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
@@ -406,8 +409,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModals\DashboardViewModal.cs" />
     <Compile Include="ViewModals\INV_InvoiceViewModal.cs" />
+    <Compile Include="ViewModals\INV_IssueReturnViewModal.cs" />
     <Compile Include="ViewModals\INV_ItemConfigurationViewModal.cs" />
-    <Compile Include="ViewModals\INV_ItemIssueReturnModal.cs" />
     <Compile Include="ViewModals\INV_PurchaseOrderViewModal.cs" />
     <Compile Include="ViewModals\LoginViewModal.cs" />
     <Compile Include="ViewModals\MenuViewModal.cs" />

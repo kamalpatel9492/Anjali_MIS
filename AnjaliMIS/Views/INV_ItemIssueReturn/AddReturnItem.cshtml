@@ -34,7 +34,7 @@
                             <button id="btnIssueCheck" class="form-control btn green">Show</button>
                         </div>
                     </div>
-                  
+
                     <div class="form-group" id="radioButtonDiv" hidden>
                         <label class="control-label col-md-2"></label>
                         <div class="col-md-4 radio-list">
@@ -49,7 +49,7 @@
                             </label>
                         </div>
                     </div>
-                  
+
                     <div class="form-group" id="divDDLItemList" hidden>
 
                         <label class="control-label col-md-2">Item</label>
@@ -70,9 +70,9 @@
                         </div>
                     </div>
                     <div class="form-group" id="divDDLItemQuantity" hidden>
-                       
+
                     </div>
-                    
+
                     <div class="form-group" id="divReturnAddItem" hidden>
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-10">
@@ -90,9 +90,9 @@
                         </div>
                     </div>
 
-                    
-                   
-                    <div class="form-group" id="divRejectedAndExtraItem" hidden >
+
+
+                    <div class="form-group" id="divRejectedAndExtraItem" hidden>
                         <label class="control-label col-md-2">Item List</label>
                         <div class="col-md-10">
                             <table class="table table-bordered table-responsive" id="tableRejectedAndExtraItem">
@@ -145,7 +145,7 @@
     //            Remarks: remarks,
     //            IssueNumber: issueNumber
     //        });
-        
+
     //});
     //$(document).on("change", "input[name='chkForExtra']", function () {
     //    debugger;
@@ -175,15 +175,15 @@
             //alert("The paragraph was clicked." + issuenumber);
             checkIssueNumber(issuenumber);
         });
-        
+
         $('input:radio[name=rbtnItem]').change(function () {
-             
+
             if ($('input[name=rbtnItem]:checked').val() == "New") {
                 $('#divDDLItemList').show();
                 $('#divDDLItemRemarks').show();
                 $('#divDDLItemQuantity').show();
                 $('#tableMainItem').show();
-                $('#tableRejectedAndExtra').hide(); 
+                $('#tableRejectedAndExtra').hide();
                 $('#divRejectedAndExtraItem').hide();
                 $('#btnFinalSubmit').show();
             }
@@ -214,7 +214,7 @@
 
 
         $("#btnReturnItemAdd").click(function () {
-             
+
             var itemid = $('#ddlItemList').val();
             var quantity = $('#txtReturnItemQuantity').val();
             var remarks = $('#txtReturnItemRemarks').val();
@@ -297,7 +297,7 @@
                 });
 
                 itemList = {
-                     
+
                     iNV_StockHistory_List: ExtraItemList
                 }
             }
@@ -311,7 +311,7 @@
                 dataType: "json",
                 success: function (result) {
                     location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
-                   
+
                 },
                 error: function (errormessage) {
 
@@ -319,7 +319,7 @@
                 }
             });
         });
-        
+
         //assign radio button change event
         $('input:radio[name=assign]').change(function () {
             if ($('input[name=assign]:checked').val() == "True") {
@@ -350,7 +350,7 @@
             }
         });
 
-        
+
 
         //btnSaveForUse click event
         $("#btnSaveForUse").click(function () {

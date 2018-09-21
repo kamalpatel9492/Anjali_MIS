@@ -57,5 +57,57 @@ namespace AnjaliMIS
         {
             return 2;
         }
+
+        public static int GetCompanyID()
+        {
+            return 4;
+        }
+
+        public static string GetNextNumber(string _NumberFor)
+        {
+            var db = new DB_A157D8_AnjaliMISEntities1();
+
+            Int32 _NewIssueNo = 0;
+            String _NewIssueReturnNo = "";
+
+            if (_NumberFor == "Issue")
+            {
+                Int32 TotalForMonth = db.INV_IssueReturn.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year && p.IssueReturnNo.Contains("IS")).Count();
+                Int32 NextCount = TotalForMonth + 1;
+                _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                _NewIssueReturnNo = "IS-" + _NewIssueNo;
+
+                #region Check No
+                INV_IssueReturn _INV_IssueReturnNo = db.INV_IssueReturn.Where(w => w.IssueReturnNo == _NewIssueReturnNo).FirstOrDefault();
+                if (_INV_IssueReturnNo != null)
+                {
+                    NextCount = NextCount + 1;
+                    _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    _NewIssueReturnNo = "IS-" + _NewIssueNo;
+                }
+                #endregion Check No
+
+            }
+            if (_NumberFor == "Return")
+            {
+                Int32 TotalForMonth = db.INV_IssueReturn.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year && p.IssueReturnNo.Contains("RN")).Count();
+                Int32 NextCount = TotalForMonth + 1;
+                _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                _NewIssueReturnNo = "RN-" + _NewIssueNo;
+
+                #region Check No
+                INV_IssueReturn _INV_IssueReturnNo = db.INV_IssueReturn.Where(w => w.IssueReturnNo == _NewIssueReturnNo).FirstOrDefault();
+                if (_INV_IssueReturnNo != null)
+                {
+                    NextCount = NextCount + 1;
+                    _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    _NewIssueReturnNo = "RN-" + _NewIssueNo;
+                }
+                #endregion Check No
+
+            }
+
+            return _NewIssueReturnNo;
+        }
     }
 }

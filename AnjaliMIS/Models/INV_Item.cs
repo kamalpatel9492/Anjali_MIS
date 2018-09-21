@@ -45,9 +45,9 @@ namespace AnjaliMIS.Models
         public virtual ICollection<DIA_MachineMaintenance> DIA_MachineMaintenance { get; set; }
         public virtual INV_Category INV_Category { get; set; }
         public virtual ICollection<INV_InvoiceItem> INV_InvoiceItem { get; set; }
+        public virtual SYS_Company SYS_Company { get; set; }
         public virtual INV_Unit INV_Unit { get; set; }
         public virtual SEC_User SEC_User { get; set; }
-        public virtual SYS_Company SYS_Company { get; set; }
         public virtual ICollection<INV_ItemConfiguration> INV_ItemConfiguration { get; set; }
         public virtual ICollection<INV_ItemConfiguration> INV_ItemConfiguration1 { get; set; }
         public virtual ICollection<INV_ItemPrice> INV_ItemPrice { get; set; }

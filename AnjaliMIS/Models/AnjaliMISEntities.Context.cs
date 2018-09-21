@@ -52,6 +52,7 @@ namespace AnjaliMIS.Models
         public DbSet<INV_Invoice> INV_Invoice { get; set; }
         public DbSet<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
         public DbSet<INV_InvoiceItem> INV_InvoiceItem { get; set; }
+        public DbSet<INV_IssueReturn> INV_IssueReturn { get; set; }
         public DbSet<INV_Item> INV_Item { get; set; }
         public DbSet<INV_ItemConfiguration> INV_ItemConfiguration { get; set; }
         public DbSet<INV_ItemPrice> INV_ItemPrice { get; set; }

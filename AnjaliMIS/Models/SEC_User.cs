@@ -33,6 +33,8 @@ namespace AnjaliMIS.Models
             this.INV_Category = new HashSet<INV_Category>();
             this.INV_Invoice = new HashSet<INV_Invoice>();
             this.INV_InvoiceHistory = new HashSet<INV_InvoiceHistory>();
+            this.INV_IssueReturn = new HashSet<INV_IssueReturn>();
+            this.INV_IssueReturn1 = new HashSet<INV_IssueReturn>();
             this.INV_Item = new HashSet<INV_Item>();
             this.INV_ItemConfiguration = new HashSet<INV_ItemConfiguration>();
             this.INV_ItemPrice = new HashSet<INV_ItemPrice>();
@@ -81,6 +83,8 @@ namespace AnjaliMIS.Models
         public virtual ICollection<INV_Category> INV_Category { get; set; }
         public virtual ICollection<INV_Invoice> INV_Invoice { get; set; }
         public virtual ICollection<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
+        public virtual ICollection<INV_IssueReturn> INV_IssueReturn { get; set; }
+        public virtual ICollection<INV_IssueReturn> INV_IssueReturn1 { get; set; }
         public virtual ICollection<INV_Item> INV_Item { get; set; }
         public virtual ICollection<INV_ItemConfiguration> INV_ItemConfiguration { get; set; }
         public virtual ICollection<INV_ItemPrice> INV_ItemPrice { get; set; }

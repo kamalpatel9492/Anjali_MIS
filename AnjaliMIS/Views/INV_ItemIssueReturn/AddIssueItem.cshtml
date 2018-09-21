@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AddIssueItem";
 }
 
@@ -11,105 +10,112 @@
     </li>
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-
-<div class="col-md-12">
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="fa fa-gift"></i>Issue Item(s)
-            </div>
-        </div>
-        <div class="portlet-body form">
-            <!-- BEGIN FORM-->
-            <div class="form-horizontal">
-                <div class="form-body">
-                    <div class="form-group">
-
-                        <label class="control-label col-md-2">User</label>
-                        <div class="col-md-2">
-                            <select id="ddlUserList" class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2">Assign</label>
-                        <div class="col-md-4 radio-list">
-                            <label class="radio-inline">
-                                <input type="radio" name="assign" value="True">for use
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="assign" value="False">for assemble
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group" id="onlyForUseControls" hidden>
-                        <label class="control-label col-md-2">Item</label>
-                        <div class="col-md-2">
-                            <select id="ddlItemList" class="form-control"></select>
-                        </div>
-                        <label class="control-label col-md-1">Quantity</label>
-                        <div class="col-md-2">
-                            <input id="txtForUseQuantity" type="text" class="form-control" />
-                        </div>
-                        <label class="control-label col-md-1">Remarks </label>
-                        <div class="col-md-2">
-                            <input id="txtRemarks" type="text" class="form-control" />
-                        </div>
-
-                        <div class="col-md-2">
-                            <a href="#" class="button btn-block btn default glyphicon glyphicon-plus add-For-Use-Item"> Add Item</a>
-                        </div>
-                    </div>
-                    <div class="form-group" id="onlyForAssembleControls" hidden>
-                        <label class="control-label col-md-2">Item</label>
-                        <div class="col-md-2">
-                            <select id="ddlItemListForAssemble" class="form-control" onchange="GetForIssueItem();"></select>
-                        </div>
-                    </div>
-                    <div class="form-group" id="tableForUse" hidden>
-                        <label class="control-label col-md-2">For Use Item List</label>
-                        <div class="col-md-10">
-                            <table class="table table-bordered table-responsive" id="tableForUse">
-                                <thead>
-                                    <tr>
-                                        <th>Item Name</th>
-                                        <th>Quantity</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbodyForUse" id="tbodyForUse"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="divForAssmeble" hidden>
-                        <label class="control-label col-md-2">for assmeble Item List</label>
-                        <div class="col-md-10">
-                            <table class="table table-bordered table-responsive" id="tableForAssmeble">
-                                <thead>
-                                    <tr>
-                                        <th>Select</th>
-                                        <th>Item Name</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbodyForAssmeble" id="tbodyForAssmeble"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Issue Item(s)
                 </div>
-                <div class="form-actions">
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-9">
-                            <div class="form-group" id="btnForUSer" hidden>
-                                <button id="btnSaveForUse" class="btn green">Issue Item(s)</button>
-                                @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+            </div>
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="text-danger">@ViewData["error"]</div>
+
+                        <div class="form-group">
+
+                            <label class="control-label col-md-2">User</label>
+                            <div class="col-md-2">
+                                @Html.DropDownList("IssueReturnToUserID", null, htmlAttributes: new { @class = "form-control" })
+                                @*<select id="ddlUserList" class="form-control"></select>*@
                             </div>
-                            <div class="form-group" id="btnForAssmeble" hidden>
-                                <button id="btnSaveForAssmeble" class="btn green">Issue Item(s)</button>
-                                @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Assign</label>
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="assign" value="True">for use
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="assign" value="False">for assemble
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" id="onlyForUseControls" hidden>
+                            <label class="control-label col-md-2">Item</label>
+                            <div class="col-md-2">
+                                <select id="ddlItemList" class="form-control"></select>
+                            </div>
+                            <label class="control-label col-md-1">Quantity</label>
+                            <div class="col-md-2">
+                                <input id="txtForUseQuantity" type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-md-1">Remarks </label>
+                            <div class="col-md-2">
+                                <input id="txtRemarks" type="text" class="form-control" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <a href="#" class="button btn-block btn default glyphicon glyphicon-plus add-For-Use-Item"> Add Item</a>
+                            </div>
+                        </div>
+                        <div class="form-group" id="onlyForAssembleControls" hidden>
+                            <label class="control-label col-md-2">Item</label>
+                            <div class="col-md-2">
+                                <select id="ddlItemListForAssemble" class="form-control" onchange="GetForIssueItem();"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="tableForUse" hidden>
+                            <label class="control-label col-md-2">For Use Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="tableForUse">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyForUse" id="tbodyForUse"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divForAssmeble" hidden>
+                            <label class="control-label col-md-2">for assmeble Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="tableForAssmeble">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyForAssmeble" id="tbodyForAssmeble"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-2 col-md-9">
+                                <div class="form-group" id="btnForUSer" hidden>
+                                    <button id="btnSaveForUse" class="btn green">Issue Item(s)</button>
+                                    @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+                                </div>
+                                <div class="form-group" id="btnForAssmeble" hidden>
+                                    <button id="btnSaveForAssmeble" class="btn green">Issue Item(s)</button>
+                                    @Html.ActionLink("Back to List", "Issue", "INV_ItemIssueReturn", new { @class = "btn default" })
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,7 +123,7 @@
             </div>
         </div>
     </div>
-</div>
+}
 <script>
     $(document).ready(function () {
 
@@ -391,24 +397,30 @@
     }
 
     function SaveItemForAssmeble() {
-
-        var itemList = [];
+        var ForUseItemList = [];
+        debugger;
         $('#tableForAssmeble input:checked').each(function () {
+
             var checkbboxid = $(this).val();
 
             var tablerowid = $(this).closest('tr').attr('id');
-            var quantityValue = $("#quantity" + tablerowid).val();
-            itemList.push({
 
-                SubItemID: checkbboxid,
-                Qunatity: quantityValue
+            var quantityValue = $("#quantity" + tablerowid).val();
+
+            ForUseItemList.push({
+                ItemID: checkbboxid,
+                Quantity: quantityValue
             });
+
         });
 
-
+        var newData = {
+            IssueReturnToUserID: $('#IssueReturnToUserID').val(),
+            IssueReturnItems: ForUseItemList
+        };
         $.ajax({
             url: "/INV_ItemIssueReturn/SaveForAssmeble",
-            data: JSON.stringify(itemList),
+            data: JSON.stringify(newData),
             type: "POST",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
@@ -430,8 +442,8 @@
             var quantity = $('#txtForUseQuantity').val();
             var txtRemarks = $("#txtRemarks").val();
             ForUseItemList.push({
-                SubItemID: itemid,
-                Qunatity: quantity
+                ItemID: itemid,
+                Quantity: quantity
             });
             var html = '';
             var html = "<tr><td>" + itemname + "</td><td>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
@@ -439,13 +451,14 @@
         }
     });
     function SaveItemForUse() {
-        //var postData = {
-        //    MainItemID: $('#ddlItemList').val(),
-        //    Qunatity: $('#txtQuantity').val()
-        //};
+        var newData = {
+            IssueReturnToUserID: $('#IssueReturnToUserID').val(),
+            IssueReturnItems: ForUseItemList
+        };
+        debugger;
         $.ajax({
             url: "/INV_ItemIssueReturn/SaveForUse",
-            data: JSON.stringify(ForUseItemList),
+            data: JSON.stringify(newData),
             type: "POST",
             contentType: "application/json;charset=utf-8",
             dataType: "json",

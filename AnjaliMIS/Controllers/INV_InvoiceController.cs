@@ -396,7 +396,8 @@ namespace AnjaliMIS.Controllers
                     Int32 TotalForMonth = db.INV_Invoice.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
                     Int32 NextCount = TotalForMonth + 1;
                     Int32 _NewInvoiceNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
-                    new_INV_Invoice.InvoiceNo = _NewInvoiceNo;
+                    //Change Number Add -INV
+                    new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
 
                     new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
                     new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
