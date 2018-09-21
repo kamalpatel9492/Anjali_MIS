@@ -347,6 +347,29 @@ namespace AnjaliMIS.Controllers
                 {
                     ItemID = e.ItemID,
                     ItemName = e.ItemName
+                }).OrderBy(i=>i.ItemName).ToList();
+
+                if (itemList.Count > 0)
+                {
+                    return Json(itemList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult RetrieveItemListIsConfigurable()
+        {
+            try
+            {
+                var itemList = db.INV_Item.Where(w => w.IsLock == true && w.IsConfigurable == true).Select(e => new
+                {
+                    ItemID = e.ItemID,
+                    ItemName = e.ItemName
                 }).ToList();
 
                 if (itemList.Count > 0)
@@ -361,6 +384,7 @@ namespace AnjaliMIS.Controllers
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
+
 
         [HttpPost]
         public JsonResult AddInvoice(INV_InvoiceViewModal inv_InvoiceViewModal)

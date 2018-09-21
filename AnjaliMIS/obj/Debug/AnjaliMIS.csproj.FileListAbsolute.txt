@@ -241,3 +241,4 @@ E:\AnjaliGroup\Project\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csproj.CoreCompi
 E:\AnjaliGroup\Project\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csproj.CopyComplete
 E:\AnjaliGroup\Project\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.dll
 E:\AnjaliGroup\Project\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.pdb
+E:\AnjaliGroup\Project\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csprojAssemblyReference.cache

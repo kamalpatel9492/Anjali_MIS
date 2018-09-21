@@ -1,0 +1,56 @@
+﻿@model AnjaliMIS.ViewModals.INV_IssueReturnViewModal
+@{
+    ViewBag.Title = "Print";
+    //Layout = null;
+}
+
+<div>
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="../../assets/admin/pages/css/invoice.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+</div>
+<div class="col-md-12 col-sm-12">
+    <!-- BEGIN PORTLET-->
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="invoice">
+               Issue Return Details
+                <hr />
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-bordered table-responsive" id="selected_units">
+                            <thead>
+                                <tr>
+                                    <th>Sr.</th>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int rowNo = 0; }
+                                @{ Decimal ItemTotal = 0; }
+
+                                @foreach (var item in Model.IssueReturnItems)
+                                {
+                                    <tr>
+                                        <td>
+                                            @(rowNo += 1)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.INV_Item.ItemName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT-->
+        </div>
+    </div>
+    <!-- END PORTLET-->
+</div>

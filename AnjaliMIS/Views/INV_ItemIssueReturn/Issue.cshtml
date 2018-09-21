@@ -1,5 +1,4 @@
-﻿@Model List<AnjaliMIS.Models.INV_IssueReturn>
-    @{
+﻿    @{
         ViewBag.Title = "Issue";
     }
 
@@ -38,8 +37,9 @@
                             <th>Issue No.</th>
                             <th>Issue Date</th>
                             <th>Issue To User</th>
+                            <th>Details</th>
                             @*<th>Quantity</th>
-                                <th>Remarks</th>*@
+        <th>Remarks</th>*@
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +52,15 @@
                                     <td>@i</td>
                                     <td>@item.IssueReturnNo</td>
                                     <td>@item.IssueReturnDate</td>
-                                    <td>@item.SEC_User1.UserName</td>
+                                    <td>
+                                        @if (item.SEC_User1 != null)
+                                        {
+                                            @item.SEC_User1.UserName
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", new { id = item.IssueReturnID }) |
+                                    </td>
                                     @*<td>@item.Quantity</td>
                                         <td>@item.Remarks</td>*@
                                 </tr>

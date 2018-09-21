@@ -98,13 +98,12 @@ namespace AnjaliMIS.Controllers
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
         }
-
         [HttpPost]
         public JsonResult CheckIssueNumber(string issuenumber)
         {
             try
             {
-                bool existOrNot = db.INV_StockHistory.Where(e => e.IssueNumber == issuenumber).Any();
+                bool existOrNot = db.INV_IssueReturn.Where(e => e.IssueReturnNo.Contains(issuenumber)).Any();
 
                 return Json(existOrNot, JsonRequestBehavior.AllowGet);
 
@@ -272,7 +271,7 @@ namespace AnjaliMIS.Controllers
                 iNV_IssueReturn.IssueReturnToUserID = iNV_IssueReturnViewModal.IssueReturnToUserID;
                 iNV_IssueReturn.Created = DateTime.Now;
                 iNV_IssueReturn.Modified = DateTime.Now;
-                iNV_IssueReturn.Remarks = "Issue for Assemble for Use";
+                iNV_IssueReturn.Remarks = "Issue for Assemble";
                 iNV_IssueReturn.IssueReturnDate = DateTime.Now;
                 iNV_IssueReturn.IssueReturnNo = _NewIssueReturnNo;
                 iNV_IssueReturn.FinYearID = CommonConfig.GetFinYearID();
@@ -525,93 +524,86 @@ namespace AnjaliMIS.Controllers
 
 
         [HttpPost]
-        public JsonResult RertunNewItem(List<INV_StockHistory> iNV_StockHistory_List)
+        public ActionResult RertunNewItem(INV_IssueReturnViewModal iNV_IssueReturnViewModal)
         {
             try
             {
-                if (iNV_StockHistory_List == null)
+                if (iNV_IssueReturnViewModal.IssueReturnItems.Count <= 0)
                 {
-                    //erroor handle
+                    TempData["error"] = "Select Item.";
+                    return View(iNV_IssueReturnViewModal);
                 }
-                if (iNV_StockHistory_List != null)
+
+                #region Generate IssueReturnNo
+                String _NewIssueReturnNo = CommonConfig.GetNextNumber("Return");
+                #endregion Generate IssueReturnNo
+
+                INV_IssueReturn iNV_IssueReturn = new INV_IssueReturn();
+                iNV_IssueReturn.CompanyID = CommonConfig.GetCompanyID();
+
+                if (Session["UserID"] != null)
                 {
-                    foreach (var item in iNV_StockHistory_List)
+                    iNV_IssueReturn.IssueReturnByUserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                iNV_IssueReturn.IssueReturnToUserID = iNV_IssueReturnViewModal.IssueReturnToUserID;
+                iNV_IssueReturn.Created = DateTime.Now;
+                iNV_IssueReturn.Modified = DateTime.Now;
+                iNV_IssueReturn.Remarks = "Return";
+                iNV_IssueReturn.IssueReturnDate = DateTime.Now;
+                iNV_IssueReturn.IssueReturnNo = _NewIssueReturnNo;
+                iNV_IssueReturn.FinYearID = CommonConfig.GetFinYearID();
+                iNV_IssueReturn.ReturnIssueNo = iNV_IssueReturnViewModal.IssueReturnNo;
+
+                db.INV_IssueReturn.Add(iNV_IssueReturn);
+                //db.SaveChanges();
+
+                string Err = "";
+                if (iNV_IssueReturnViewModal.IssueReturnItems != null)
+                {
+                    foreach (var item in iNV_IssueReturnViewModal.IssueReturnItems)
                     {
+                        INV_Item inv_Item = new INV_Item();
+                        inv_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+
+                        INV_StockHistory _StockHistoryNew = new INV_StockHistory();
+                        _StockHistoryNew = db.INV_StockHistory.Where(w => w.IssueNumber == iNV_IssueReturnViewModal.IssueReturnNo && w.ItemID == item.ItemID).FirstOrDefault();
+
+                        if (_StockHistoryNew.Quantity < item.Quantity)
+                        {
+                            if (Err == "")
+                                Err = Err + "You can not return more than issue. " + inv_Item.ItemName;
+                            else
+                                Err = Err + ", You can not return more than issue. " + inv_Item.ItemName;
+
+                        }
+
                         if (Session["UserID"] != null)
                         {
                             item.UserID = Convert.ToInt16(Session["UserID"].ToString());
                         }
 
-                        var inv_Item = db.INV_Item.Where(e => e.ItemID == item.ItemID).FirstOrDefault();
+                        INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                        new_INV_StockHistory.ItemID = item.ItemID;
+                        new_INV_StockHistory.OperationTypeID = 8;
+                        new_INV_StockHistory.ReferenceID = _NewIssueReturnNo;
+                        new_INV_StockHistory.Quantity = item.Quantity;
+                        new_INV_StockHistory.UserID = item.UserID;
+                        new_INV_StockHistory.Created = DateTime.Now;
+                        new_INV_StockHistory.Modified = DateTime.Now;
+                        new_INV_StockHistory.Remarks = "Return";
+                        new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
 
-                        string getIssueLastNumber;
+                        new_INV_StockHistory.IssueNumber = _NewIssueReturnNo;
+                        db.INV_StockHistory.Add(new_INV_StockHistory);
 
-                        if (inv_Item != null)
-                        {
-                            var getIssueLast = db.INV_StockHistory.Where(e => e.OperationTypeID == 8).OrderByDescending(e => e.StockHistoryID).FirstOrDefault();
-                            if (getIssueLast == null)
-                            {
-                                getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
-                                #region Check No
-                                INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
-                                if (_INV_StockHistoryNo != null)
-                                {
-                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
-                                }
-                                #endregion Check No
-                            }
-                            else
-                            {
-                                var a = getIssueLast.ReturnNumber;
-                                if (a == null)
-                                {
-                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "01";
-                                    #region Check No
-                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
-                                    if (_INV_StockHistoryNo != null)
-                                    {
-                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + "02";
-                                    }
-                                    #endregion Check No
-                                }
-                                else
-                                {
-                                    //a = "278201801";
-                                    a = a.ToString();
-                                    string delimiters = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString();
-                                    //bool aaa = a.Contains(delimiters);
-                                    string[] newstring = a.Split(new[] { delimiters }, StringSplitOptions.None);
-
-                                    getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 1);
-                                    #region Check No
-                                    INV_StockHistory _INV_StockHistoryNo = db.INV_StockHistory.Where(w => w.IssueNumber == getIssueLastNumber).FirstOrDefault();
-                                    if (_INV_StockHistoryNo != null)
-                                    {
-                                        getIssueLastNumber = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + (Convert.ToInt32(newstring[1]) + 2);
-                                    }
-                                    #endregion Check No
-                                }
-                            }
-                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
-                            new_INV_StockHistory.ItemID = inv_Item.ItemID;
-                            new_INV_StockHistory.OperationTypeID = 9;
-                            new_INV_StockHistory.ReferenceID = getIssueLastNumber;
-                            new_INV_StockHistory.Quantity = inv_Item.Quantity;
-                            new_INV_StockHistory.UserID = item.UserID;
-                            new_INV_StockHistory.Created = DateTime.Now;
-                            new_INV_StockHistory.Modified = DateTime.Now;
-                            new_INV_StockHistory.Remarks = item.Remarks;
-                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
-
-                            new_INV_StockHistory.ReturnNumber = getIssueLastNumber;
-                            db.INV_StockHistory.Add(new_INV_StockHistory);
-                            db.SaveChanges();
-
-                            inv_Item.Quantity = inv_Item.Quantity + item.Quantity;
-                            db.SaveChanges();
-                        }
+                        inv_Item.Quantity = inv_Item.Quantity + item.Quantity;
                     }
-
+                    if (Err != "")
+                    {
+                        TempData["error"] = Err;
+                        return View("AddReturnItem", iNV_IssueReturnViewModal);
+                    }
+                    db.SaveChanges();
                 }
 
             }
@@ -646,6 +638,21 @@ namespace AnjaliMIS.Controllers
                 //exception handiling
             }
             return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: INV_PurchaseOrder/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            INV_IssueReturnViewModal _iNV_IssueReturnViewModal = new INV_IssueReturnViewModal();
+            INV_IssueReturn IssueReturnData = db.INV_IssueReturn.Find(id);
+            _iNV_IssueReturnViewModal.IssueReturnNo = IssueReturnData.IssueReturnNo;
+            _iNV_IssueReturnViewModal.IssueReturnItems = db.INV_StockHistory.Where(w => w.IssueNumber == IssueReturnData.IssueReturnNo).ToList();
+
+            return View(_iNV_IssueReturnViewModal);
         }
 
     }
