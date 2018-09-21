@@ -47,9 +47,10 @@ namespace AnjaliMIS.Controllers
 
         public ActionResult AddReturnItem()
         {
-            var model = new INV_InvoiceViewModal();
-
-            return View();
+            var model = new INV_IssueReturnViewModal();
+            ViewBag.IssueReturnByUserID = new SelectList(db.SEC_User, "UserID", "UserName", model.IssueReturnByUserID);
+            ViewData["error"] = TempData["error"];
+            return View(model);
         }
 
         public JsonResult RetrieveUserList()
@@ -178,6 +179,11 @@ namespace AnjaliMIS.Controllers
 
                 INV_IssueReturn iNV_IssueReturn = new INV_IssueReturn();
                 iNV_IssueReturn.CompanyID = CommonConfig.GetCompanyID();
+
+                if (Session["UserID"] != null)
+                {
+                    iNV_IssueReturn.IssueReturnByUserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 iNV_IssueReturn.IssueReturnToUserID = iNV_IssueReturnViewModal.IssueReturnToUserID;
                 iNV_IssueReturn.Created = DateTime.Now;
                 iNV_IssueReturn.Modified = DateTime.Now;
@@ -258,6 +264,10 @@ namespace AnjaliMIS.Controllers
                 #endregion Generate IssueReturnNo
 
                 INV_IssueReturn iNV_IssueReturn = new INV_IssueReturn();
+                if (Session["UserID"] != null)
+                {
+                    iNV_IssueReturn.IssueReturnByUserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
                 iNV_IssueReturn.CompanyID = CommonConfig.GetCompanyID();
                 iNV_IssueReturn.IssueReturnToUserID = iNV_IssueReturnViewModal.IssueReturnToUserID;
                 iNV_IssueReturn.Created = DateTime.Now;

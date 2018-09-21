@@ -10,158 +10,134 @@
     </li>
 }
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 
-<div class="col-md-12">
-    <div class="portlet box blue">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="fa fa-gift"></i>Return tab
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Return tab
+                </div>
             </div>
-        </div>
-        <div class="portlet-body form">
-            <!-- BEGIN FORM-->
-            <div class="form-horizontal">
-                <div class="form-body">
+            <div class="portlet-body form">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <div class="text-danger">@ViewData["error"]</div>
+                        <div class="form-group">
 
-                    <div class="form-group">
-
-                        <label class="control-label col-md-2">Issue Number</label>
-                        <div class="col-md-2">
-                            <input id="txtIssueNumber" type="text" class="form-control" />
+                            <label class="control-label col-md-2">Issue Number</label>
+                            <div class="col-md-2">
+                                <input id="txtIssueNumber" type="text" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnIssueCheck" class="form-control btn green">Show</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <button id="btnIssueCheck" class="form-control btn green">Show</button>
-                        </div>
-                    </div>
 
-                    <div class="form-group" id="radioButtonDiv" hidden>
-                        <label class="control-label col-md-2"></label>
-                        <div class="col-md-4 radio-list">
-                            <label class="radio-inline">
-                                <input type="radio" name="rbtnItem" value="New">New
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="rbtnItem" value="Rejected">Rejected
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="rbtnItem" value="Extra">Extra
-                            </label>
+                        <div class="form-group" id="radioButtonDiv" hidden>
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="rbtnItem" value="New">New
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="rbtnItem" value="Rejected">Rejected
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="rbtnItem" value="Extra">Extra
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group" id="divDDLItemList" hidden>
+                        <div class="form-group" id="divDDLItemList" hidden>
 
-                        <label class="control-label col-md-2">Item</label>
-                        <div class="col-md-2">
-                            <select id="ddlItemList" class="form-control"></select>
+                            <label class="control-label col-md-2">Item</label>
+                            <div class="col-md-2">
+                                <select id="ddlItemList" class="form-control"></select>
+                            </div>
+                            <label class="control-label col-md-1">Quantity</label>
+                            <div class="col-md-2">
+                                <input id="txtReturnItemQuantity" type="text" class="form-control" />
+                            </div>
+                            <label class="control-label col-md-1">Remarks</label>
+
+                            <div class="col-md-2">
+                                <input id="txtReturnItemRemarks" type="text" class="form-control" />
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btnReturnItemAdd" class="form-control green btn">Add</button>
+                            </div>
                         </div>
-                        <label class="control-label col-md-1">Quantity</label>
-                        <div class="col-md-2">
-                            <input id="txtReturnItemQuantity" type="text" class="form-control" />
-                        </div>
-                        <label class="control-label col-md-1">Remarks</label>
+                        <div class="form-group" id="divDDLItemQuantity" hidden>
 
-                        <div class="col-md-2">
-                            <input id="txtReturnItemRemarks" type="text" class="form-control" />
                         </div>
-                        <div class="col-md-2">
-                            <button id="btnReturnItemAdd" class="form-control green btn">Add</button>
+
+                        <div class="form-group" id="divReturnAddItem" hidden>
+                            <label class="control-label col-md-2">Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="tableSubItem">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyReturnAddItemList" id="tbodyReturnAddItemList"></tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="divDDLItemQuantity" hidden>
-
-                    </div>
-
-                    <div class="form-group" id="divReturnAddItem" hidden>
-                        <label class="control-label col-md-2">Item List</label>
-                        <div class="col-md-10">
-                            <table class="table table-bordered table-responsive" id="tableSubItem">
-                                <thead>
-                                    <tr>
-                                        <th>Select</th>
-                                        <th>Item Name</th>
-                                        <th>Quantity</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbodyReturnAddItemList" id="tbodyReturnAddItemList"></tbody>
-                            </table>
-                        </div>
-                    </div>
-
 
 
-                    <div class="form-group" id="divRejectedAndExtraItem" hidden>
-                        <label class="control-label col-md-2">Item List</label>
-                        <div class="col-md-10">
-                            <table class="table table-bordered table-responsive" id="tableRejectedAndExtraItem">
-                                <thead>
-                                    <tr>
-                                        <th>Select</th>
-                                        <th>Item Name</th>
-                                        <th>Quantity</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbodyRejectedAndExtraItem" id="tbodyRejectedAndExtraItem"></tbody>
-                            </table>
+
+                        <div class="form-group" id="divRejectedAndExtraItem" hidden>
+                            <label class="control-label col-md-2">Item List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="tableRejectedAndExtraItem">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th>Item Name</th>
+                                            <th>Quantity</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbodyRejectedAndExtraItem" id="tbodyRejectedAndExtraItem"></tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <button id="btnFinalSubmit" class="form-control">Final Submit</button>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <button id="btnFinalSubmit" class="form-control">Final Submit</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="btnMainItem" hidden>
-                        <div class="col-md-2">
-                            <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
+                        <div class="form-group" id="btnMainItem" hidden>
+                            <div class="col-md-2">
+                                <button id="btnSaveMainItem" class="form-control">MainItem Save</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" id="btnSubItem" hidden>
-                        <div class="col-md-2">
-                            <button id="btnSaveSubItem" class="form-control">SubItem Save</button>
+                        <div class="form-group" id="btnSubItem" hidden>
+                            <div class="col-md-2">
+                                <button id="btnSaveSubItem" class="form-control">SubItem Save</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 <script>
     var addReturnListArray = [];
     var RejectedItemList = [];
     var ExtraItemList = [];
-
-    //$(document).on("change", "input[name='chkForRejected']", function () {
-    //    debugger;
-    //    alert("chkForRejected");
-
-    //        RejectedItemList.push({
-
-    //            ItemID: itemid,
-    //            Quantity: quantity,
-    //            Remarks: remarks,
-    //            IssueNumber: issueNumber
-    //        });
-
-    //});
-    //$(document).on("change", "input[name='chkForExtra']", function () {
-    //    debugger;
-    //    alert("chkForExtra");
-    //    var itemid = $('#ddlItemList').val();
-    //    var quantity = $('#txtReturnItemQuantity').val();
-    //    var remarks = $('#txtReturnItemRemarks').val();
-    //    var issueNumber = $('#txtIssueNumber').val();
-    //    ExtraItemList.push({
-
-    //        ItemID: itemid,
-    //        Quantity: quantity,
-    //        Remarks: remarks,
-    //        IssueNumber: issueNumber
-    //    });
-    //});
 
     $(document).ready(function () {
 

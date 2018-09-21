@@ -511,6 +511,7 @@
           <Property Name="IssueReturnNo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="ReturnIssueNo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="INV_Item">
           <Key>
@@ -4654,6 +4655,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="SEC_User1" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SEC_User1" FromRole="INV_IssueReturn" ToRole="SEC_User" />
           <NavigationProperty Name="SYS_Company" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_Company" FromRole="INV_IssueReturn" ToRole="SYS_Company" />
           <NavigationProperty Name="SYS_FinYear" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_IssueReturn_SYS_FinYear" FromRole="INV_IssueReturn" ToRole="SYS_FinYear" />
+          <Property Name="ReturnIssueNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="INV_Item">
           <Key>
@@ -7514,6 +7516,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="INV_IssueReturn">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.INV_IssueReturn">
               <MappingFragment StoreEntitySet="INV_IssueReturn">
+                <ScalarProperty Name="ReturnIssueNo" ColumnName="ReturnIssueNo" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="FinYearID" ColumnName="FinYearID" />
                 <ScalarProperty Name="IssueReturnNo" ColumnName="IssueReturnNo" />

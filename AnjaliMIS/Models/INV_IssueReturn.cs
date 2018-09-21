@@ -25,6 +25,7 @@ namespace AnjaliMIS.Models
         public string IssueReturnNo { get; set; }
         public int FinYearID { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public string ReturnIssueNo { get; set; }
     
         public virtual SEC_User SEC_User { get; set; }
         public virtual SEC_User SEC_User1 { get; set; }
