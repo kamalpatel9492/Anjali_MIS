@@ -216,6 +216,9 @@
 
     @if (Model.INV_InvoiceItems != null)
     {
+         @:CGSTID = @Model.CGST
+         @:IGSTID = @Model.IGST
+         @:SGSTID = @Model.SGST
          @:$('#divItemList').show();
         foreach (var @item in Model.INV_InvoiceItems)
         {
@@ -504,6 +507,11 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);;
                         $("#ddlSGST").append(option);
                     }
+                    if (SGSTID > 0)
+                        $('#ddlSGST').val(SGSTID);
+                    else
+                        $('#ddlSGST').val(0);
+                    FinalCalculation();
                 }
             }),
             error: function (errormessage) {
@@ -530,6 +538,11 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlCGST").append(option);
                     }
+                    if (CGSTID > 0)
+                        $('#ddlCGST').val(CGSTID);
+                    else
+                        $('#ddlCGST').val(0);
+                    FinalCalculation();
                 }
             }),
             error: function (errormessage) {
@@ -556,6 +569,12 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlIGST").append(option);
                     }
+                    if (IGSTID > 0)
+                        $('#ddlIGST').val(IGSTID);
+                    else
+                        $('#ddlIGST').val(0);
+
+                    FinalCalculation();
                 }
             }),
             error: function (errormessage) {

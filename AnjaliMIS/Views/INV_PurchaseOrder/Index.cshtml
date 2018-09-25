@@ -46,7 +46,7 @@
                             Total Amt
                         </th>
                         <th>
-                          Paid Amt
+                            Paid Amt
                         </th>
                         <th>
                             Pending Amt
@@ -58,13 +58,13 @@
                                 @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
                             </th>*@
                         <th>
-                           Fin yr.
+                            Fin yr.
                         </th>
                         <th>
-                          Party
+                            Party
                         </th>
                         <th>
-                           Status
+                            Status
                         </th>
                         <th>
                             Action
@@ -107,12 +107,21 @@
                                 @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
                             </td>
                             <td>
+                                @if (item.SYS_Status.StatusName != "Completed")
+                                {
+                                    @Html.ActionLink("Edit |", "Edit", new { id = item.PurchaseOrderID })
+                                }
                                 @Html.ActionLink("Details", "Details", new { id = item.PurchaseOrderID }) |
-
-                                @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseOrderID }) |
+                                @if (item.SYS_Status.StatusName != "Completed")
+                                {
+                                    @Html.ActionLink("Delete |", "Delete", new { id = item.PurchaseOrderID })
+                                }
                                 @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" })
                                 |
-                                @Html.ActionLink("Receive", "POReturn", new { id = item.PurchaseOrderID })
+                                @if (item.SYS_Status.StatusName != "Completed")
+                                {
+                                    @Html.ActionLink("Receive", "POReturn", new { id = item.PurchaseOrderID })
+                                }
 
                             </td>
                         </tr>

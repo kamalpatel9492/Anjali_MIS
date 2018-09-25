@@ -113,20 +113,66 @@ namespace AnjaliMIS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INV_PurchaseOrder iNV_PurchaseOrder = db.INV_PurchaseOrder.Find(id);
-            if (iNV_PurchaseOrder == null)
+            INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal;
+
+            var POData = db.INV_PurchaseOrder.Find(id);
+            _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
+            {
+                PurchaseOrderID = POData.PurchaseOrderID,
+                CompanyID = POData.CompanyID,
+                SellerPartyID = POData.SellerPartyID,
+                PartyIDName = POData.MST_Party.PartyName,
+                UserID = POData.UserID,
+                Amount = POData.Amount,
+                StatusID = POData.StatusID,
+                Created = POData.Created,
+                Modified = POData.Modified,
+                Remarks = POData.Remarks,
+                PODate = POData.PODate,
+                PONo = POData.PONo,
+                FinYearID = CommonConfig.GetFinYearID(),
+                CGST = POData.CGST,
+                CGSTAmount = POData.CGSTAmount,
+                SGST = POData.SGST,
+                SGSTAmount = POData.SGSTAmount,
+                IGST = POData.IGST,
+                IGSTAmount = POData.IGSTAmount,
+                IsLocal = POData.IsLocal,
+                Casar = POData.Casar,
+                TotalAmount = POData.TotalAmount
+            };
+            _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == id).ToList();
+
+            Boolean IsAnyReceived = _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems.Where(w => w.ReceivedQuantity > 0).Any();
+            if (IsAnyReceived)
+            {
+                ModelState.AddModelError("", "You can not Edit this PO As Item(s) received.");
+                ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.CGST);
+                ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.IGST);
+                ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.SGST);
+                ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", _iNV_PurchaseOrderViewModal.CompanyID);
+                ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", _iNV_PurchaseOrderViewModal.FinYearID);
+                ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", _iNV_PurchaseOrderViewModal.SellerPartyID);
+                ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", _iNV_PurchaseOrderViewModal.StatusID);
+                ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", _iNV_PurchaseOrderViewModal.UserID);
+                ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName", _iNV_PurchaseOrderViewModal.UserID);
+                return View("CreatePurchaseOrder", _iNV_PurchaseOrderViewModal);
+            }
+
+            if (_iNV_PurchaseOrderViewModal == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_PurchaseOrder.CGST);
-            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_PurchaseOrder.IGST);
-            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_PurchaseOrder.SGST);
-            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_PurchaseOrder.CompanyID);
-            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_PurchaseOrder.FinYearID);
-            ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_PurchaseOrder.SellerPartyID);
-            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", iNV_PurchaseOrder.StatusID);
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_PurchaseOrder.UserID);
-            return View(iNV_PurchaseOrder);
+            ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.CGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.IGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", _iNV_PurchaseOrderViewModal.SGST);
+            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", _iNV_PurchaseOrderViewModal.CompanyID);
+            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", _iNV_PurchaseOrderViewModal.FinYearID);
+            ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", _iNV_PurchaseOrderViewModal.SellerPartyID);
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", _iNV_PurchaseOrderViewModal.StatusID);
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", _iNV_PurchaseOrderViewModal.UserID);
+            ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName", _iNV_PurchaseOrderViewModal.UserID);
+            return View("CreatePurchaseOrder", _iNV_PurchaseOrderViewModal);
         }
 
         // POST: INV_PurchaseOrder/Edit/5

@@ -16,6 +16,7 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.PurchaseOrderID)
+
     <!--Add-Edit code start-->
     <div class="col-md-12">
         <!-- BEGIN VALIDATION STATES-->
@@ -30,6 +31,8 @@
                 <div class="form-horizontal">
                     <div class="form-body">
                         <h3 class="form-section">Purchase Order Details</h3>
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
@@ -167,9 +170,14 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
-                                <input id="btnSave" type="button" value="Save" class="btn green" />
-                                @*<input type="submit" value="Save" class="btn green" />*@
-                                @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                                @if (ViewData.ModelState.IsValid)
+                                {
+                                    <input id="btnSave" type="button" value="Save" class="btn green" />
+                                    @*<input type="submit" value="Save" class="btn green" />*@
+                                    @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
+                                }
+
+
                             </div>
                         </div>
                     </div>
@@ -186,12 +194,46 @@
 }
 
 <script>
-	var productList = [];
-	var itemWiseEachStepAddTotalAmount = 0;
+    var productList = [];
+    var itemWiseEachStepAddTotalAmount = 0;
+    var CGSTID = 0;
+    var IGSTID = 0;
+    var SGSTID = 0;
+
     $(document).ready(function () {
+
+
+
+
         RetrieveSGST();
         RetrieveCGST();
         RetrieveIGST();
+     @if (Model.INV_PurchaseOrderItems != null)
+    {
+         @:CGSTID = @Model.CGST
+         @:IGSTID = @Model.IGST
+         @:SGSTID = @Model.SGST
+         @:$('#divItemList').show();
+        foreach (var @item in Model.INV_PurchaseOrderItems)
+        {
+
+            @:  productList.push({ ItemID: @item.ItemID, OrderedQuantity: @item.OrderedQuantity, ReceivedQuantity: @item.OrderedQuantity, PuchasePrice: @item.PuchasePrice, PricePerUnit:@item.PuchasePrice});
+
+            @:var itemid = @item.ItemID;
+            @:var itemname ='@item.INV_Item.ItemName';
+            @:var Remarks;
+            if (@item.Remarks != "") {
+                @: Remarks='@item.Remarks';
+            }
+            @:var quantity = @item.OrderedQuantity;
+            @:var priceAmount = @item.PuchasePrice;
+            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) +"</td></tr>";
+            @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+            @:$("table .list").prepend(markup);
+        }
+        @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+        @:FinalCalculation();
+    }
 
 		$('#btnSave').click(function () {
 			debugger;
@@ -288,11 +330,11 @@
 					$.each(productList, function (key, value) {
 						debugger;
 						var checkitemid = value.ItemID;
-						var deductquantity = value.Quantity;
-						var deductpriceperunit = value.PricePerUnit;
+                        var deductquantity = value.OrderedQuantity;
+                        var deductpriceperunit = value.PuchasePrice;
 						if (checkId == checkitemid) {
 							//productList.pop(key);
-
+                            debugger;
 							productList.splice(key, 1);
 							itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
 							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
@@ -381,8 +423,14 @@
 
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
-        $('#tdIGST').html(igstCalculation);
-        $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        if (igstCalculation > 0)
+            $('#tdIGST').html(igstCalculation);
+        else
+            $('#tdIGST').html(0);
+        if (igstpercentage > 0)
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        else
+            $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
         var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
         $('#tdCGST').html(cgstCalculation);
@@ -440,6 +488,11 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);;
                         $("#ddlSGST").append(option);
                     }
+                    if (SGSTID > 0)
+                        $('#ddlSGST').val(SGSTID);
+                    else
+                        $('#ddlSGST').val(0);
+                     FinalCalculation();
                 }
             }),
             error: function (errormessage) {
@@ -466,6 +519,12 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlCGST").append(option);
                     }
+                    if (CGSTID > 0)
+                        $('#ddlCGST').val(CGSTID);
+                    else
+                        $('#ddlCGST').val(0);
+                    FinalCalculation();
+
                 }
             }),
             error: function (errormessage) {
@@ -492,6 +551,13 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlIGST").append(option);
                     }
+                    if (IGSTID > 0)
+                        $('#ddlIGST').val(IGSTID);
+                    else
+                        $('#ddlIGST').val(0);
+
+                    FinalCalculation();
+
                 }
             }),
             error: function (errormessage) {
