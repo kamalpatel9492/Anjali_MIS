@@ -6,7 +6,7 @@
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm("Create", "EMP_Employee", FormMethod.Post, new { encType = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "EMP_Employee", FormMethod.Post, new { encType = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Created)
@@ -40,12 +40,14 @@
                                 {
                                     <img src="@Url.Content(Model.PhotoPath)" width="100px" />
                                 }
+                                @Html.HiddenFor(model => model.PhotoPath)
+                                @Html.HiddenFor(model => model.IDProofPhotoPath)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.JoiningDate, "Joining Date", htmlAttributes: new { @class = "control-label col-md-2  date-picker" })
+                            @Html.LabelFor(model => model.JoiningDate, "Joining Date", htmlAttributes: new { @class = "control-label col-md-2  " })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.JoiningDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.JoiningDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { Value = Model.JoiningDate.ToString("dd/MM/yyyy"), @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.DesignationID, "Designation", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -140,7 +142,7 @@
                             </div>
                             @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.DOB, "{0:dd/MM/yyyy}", new { htmlAttributes = new { Value = Model.DOB.ToString("dd/MM/yyyy"), @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -165,7 +167,11 @@
                             </div>
                             @Html.LabelFor(model => model.EndingDate, "Ending Date", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.EndingDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @if(Model.DOB == null)
+                                {
+                                    Model.DOB = DateTime.Now;
+                                }
+                                @Html.EditorFor(model => model.EndingDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { Value = Model.DOB.ToString("dd/MM/yyyy"),  @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.EndingDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -208,15 +214,18 @@
     }
     $('#JoiningDate').datepicker({
         format: 'dd/mm/yyyy',
+        setDate: new Date(),
         autoclose: true
     });
     $('#DOB').datepicker({
 
         format: 'dd/mm/yyyy',
+        setDate: new Date(),
         autoclose: true
     });
     $('#EndingDate').datepicker({
         format: 'dd/mm/yyyy',
+        setDate: new Date(),    
         autoclose: true
     });
 </script>

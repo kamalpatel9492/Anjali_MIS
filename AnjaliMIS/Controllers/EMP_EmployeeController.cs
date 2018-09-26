@@ -52,6 +52,9 @@ namespace AnjaliMIS.Controllers
             ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
             EMP_Employee _eMP_Employee = new EMP_Employee();
+            _eMP_Employee.DOB = DateTime.Now;
+            _eMP_Employee.JoiningDate = DateTime.Now;
+            _eMP_Employee.EndingDate = DateTime.Now;
             return View("Edit", _eMP_Employee);
         }
         public enum Gender
@@ -138,11 +141,14 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeID,UserID,CompanyID,EmployeeName,DesignationID,Address,StateID,CityID,IDProofDocName,IDProofNumber,IDProofPhotoPath,PhotoPath,Gender,DOB,Age,JoiningDate,EndingDate,Salary,IsActive,Created,Modified,Remarks,DepartmentID,FinYearID,PanNo,AadharNo,AccountNo,BankID,IFSCCode")] EMP_Employee eMP_Employee)
+        public ActionResult Edit(EMP_Employee eMP_Employee)
         {
+
+
+            //EMP_Employee OldEMP_Employee = db.EMP_Employee.Find(eMP_Employee.EmployeeID);
+
             if (ModelState.IsValid)
             {
-                db.Entry(eMP_Employee).State = EntityState.Modified;
                 eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
                 eMP_Employee.CompanyID = 4;
                 eMP_Employee.FinYearID = CommonConfig.GetFinYearID();
@@ -155,6 +161,10 @@ namespace AnjaliMIS.Controllers
                     //store image in folder
                     photoProof.SaveAs(Server.MapPath("~/Images") + "/" + photoProof.FileName);
                 }
+                else
+                {
+                    //eMP_Employee.IDProofPhotoPath = OldEMP_Employee.IDProofPhotoPath;
+                }
                 HttpPostedFileBase photo = Request.Files["PhotoPath"];
                 if (photo != null && photo.FileName != "")
                 {
@@ -164,9 +174,27 @@ namespace AnjaliMIS.Controllers
                     //store image in folder
                     photo.SaveAs(Server.MapPath("~/Images") + "/" + photo.FileName);
                 }
+                else
+                {
+                    //eMP_Employee.PhotoPath = OldEMP_Employee.PhotoPath;
+                }
                 if (Session["UserID"] != null)
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                }
+                if(eMP_Employee.EmployeeID > 0)
+                {
+                    db.Entry(eMP_Employee).State = EntityState.Modified;
+                    eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);
+                    EMP_Employee _OldEMP_Employee = db.EMP_Employee.Find(eMP_Employee.EmployeeID);
+                    eMP_Employee.PhotoPath = _OldEMP_Employee.PhotoPath;
+                    eMP_Employee.IDProofPhotoPath = _OldEMP_Employee.IDProofPhotoPath;
+                }
+                else
+                {
+                    eMP_Employee.Created = DateTime.Now;
+                    eMP_Employee.Modified = DateTime.Now;
+                    db.EMP_Employee.Add(eMP_Employee);
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
