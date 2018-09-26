@@ -27,7 +27,7 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                        <div class="text-danger">@ViewData["error"]</div>
+                        <div class="text-danger">@ViewData["errorReturn"]</div>
 
                     }
 
@@ -292,7 +292,7 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
+                    @*location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';*@
 
                 },
                 error: function (errormessage) {

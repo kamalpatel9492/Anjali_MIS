@@ -34,7 +34,7 @@ namespace AnjaliMIS.Controllers
         {
             var model = new INV_IssueReturnViewModal();
             ViewBag.IssueReturnToUserID = new SelectList(db.SEC_User, "UserID", "UserName", model.IssueReturnToUserID);
-            ViewData["error"] = TempData["error"];
+            ViewData["errorIssue"] = TempData["errorIssue"];
             return View(model);
         }
 
@@ -49,7 +49,7 @@ namespace AnjaliMIS.Controllers
         {
             var model = new INV_IssueReturnViewModal();
             ViewBag.IssueReturnByUserID = new SelectList(db.SEC_User, "UserID", "UserName", model.IssueReturnByUserID);
-            ViewData["error"] = TempData["error"];
+            ViewData["errorReturn"] = TempData["errorReturn"];
             return View(model);
         }
 
@@ -168,7 +168,7 @@ namespace AnjaliMIS.Controllers
             {
                 if (iNV_IssueReturnViewModal.IssueReturnItems.Count <= 0)
                 {
-                    TempData["error"] = "Select Item.";
+                    TempData["errorIssue"] = "Select Item.";
                     return View(iNV_IssueReturnViewModal);
                 }
 
@@ -195,6 +195,8 @@ namespace AnjaliMIS.Controllers
                 db.SaveChanges();
 
                 string Err = "";
+                TempData["errorIssue"] = "";
+
                 if (iNV_IssueReturnViewModal.IssueReturnItems != null)
                 {
                     foreach (var item in iNV_IssueReturnViewModal.IssueReturnItems)
@@ -232,7 +234,7 @@ namespace AnjaliMIS.Controllers
                     }
                     if (Err != "")
                     {
-                        TempData["error"] = Err;
+                        TempData["errorIssue"] = Err;
                         return View(iNV_IssueReturnViewModal);
                     }
                     db.SaveChanges();
@@ -254,7 +256,7 @@ namespace AnjaliMIS.Controllers
 
                 if (iNV_IssueReturnViewModal.IssueReturnItems.Count <= 0)
                 {
-                    TempData["error"] = "Select Item.";
+                    TempData["errorIssue"] = "Select Item.";
                     return View(iNV_IssueReturnViewModal);
                 }
 
@@ -280,6 +282,7 @@ namespace AnjaliMIS.Controllers
                 db.SaveChanges();
 
                 string Err = "";
+                TempData["errorIssue"] = "";
                 if (iNV_IssueReturnViewModal.IssueReturnItems != null)
                 {
                     foreach (var item in iNV_IssueReturnViewModal.IssueReturnItems)
@@ -317,7 +320,7 @@ namespace AnjaliMIS.Controllers
                     }
                     if (Err != "")
                     {
-                        TempData["error"] = Err;
+                        TempData["errorIssue"] = Err;
                         return View(iNV_IssueReturnViewModal);
                     }
                     db.SaveChanges();
@@ -530,7 +533,7 @@ namespace AnjaliMIS.Controllers
             {
                 if (iNV_IssueReturnViewModal.IssueReturnItems.Count <= 0)
                 {
-                    TempData["error"] = "Select Item.";
+                    TempData["errorReturn"] = "Select Item.";
                     return View(iNV_IssueReturnViewModal);
                 }
 
@@ -558,6 +561,7 @@ namespace AnjaliMIS.Controllers
                 //db.SaveChanges();
 
                 string Err = "";
+                TempData["errorReturn"] = "";
                 if (iNV_IssueReturnViewModal.IssueReturnItems != null)
                 {
                     foreach (var item in iNV_IssueReturnViewModal.IssueReturnItems)
@@ -600,8 +604,8 @@ namespace AnjaliMIS.Controllers
                     }
                     if (Err != "")
                     {
-                        TempData["error"] = Err;
-                        return View("AddReturnItem", iNV_IssueReturnViewModal);
+                        TempData["errorReturn"] = Err;
+                        return View(iNV_IssueReturnViewModal);
                     }
                     db.SaveChanges();
                 }
