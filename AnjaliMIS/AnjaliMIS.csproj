@@ -361,9 +361,6 @@
     <Compile Include="Models\PR_SEC_UserPrivileges_SelectByUserID_Result.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PR_SEC_UserPrivileges_SelectByUserID_Result1.cs">
-      <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SEC_LoginHistory.cs">
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
@@ -1172,11 +1169,11 @@
     <Content Include="assets\global\plugins\typeahead\README.md" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
+    <Content Include="List.html" />
     <EntityDeploy Include="Models\AnjaliMISEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AnjaliMISEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="List.html" />
     <Content Include="Models\AnjaliMISEntities.edmx.diagram">
       <DependentUpon>AnjaliMISEntities.edmx</DependentUpon>
     </Content>
