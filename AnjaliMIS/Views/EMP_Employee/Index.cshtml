@@ -27,7 +27,7 @@
                     <tr>
 
                         <th>
-                            @Html.DisplayNameFor(model => model.EmployeeName)
+                           Name
                         </th>
                         <th>
                             Photo
@@ -42,13 +42,13 @@
                             @Html.DisplayNameFor(model => model.JoiningDate)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.EMP_Department.DepartmentName)
+                            Department
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.EMP_Designation.Designation)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.SEC_User.UserName)
+                            User
                         </th>
                         <th>
                             Action
@@ -75,7 +75,7 @@
                                 @Html.DisplayFor(modelItem => item.Age)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.JoiningDate)
+                               @item.JoiningDate.ToShortDateString()
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.EMP_Department.DepartmentName)
