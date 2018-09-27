@@ -38,6 +38,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Remarks, new { @class = "control-label col-md-3" })
                             <div class="col-md-4">
+                                @Html.DisplayFor(model => model.Remarks)
                                 @Html.TextAreaFor(model => model.Remarks, new { @class = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Remarks)
                             </div>
@@ -61,4 +62,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#Remarks").val('');
+        });
+    </script>
 }
