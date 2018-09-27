@@ -117,6 +117,23 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "JangadID,CompanyID,PartyID,Quantity,Weight,StatusID,UserID,Amount,RecivedAmount,PendingAmount,JangadNo,Created,Modified,Remarks,PricePerCarat,FinYearID,CGSTAmount,SGSTAmount,IGSTAmount,TDSAmount,IsActive,CGST,SGST,IGST,TDS,IsLocal,Casar,TotalAmount")] DIA_Jangad dIA_Jangad)
         {
+            if (dIA_Jangad.JangadID > 0)
+            {
+                if (dIA_Jangad.Remarks == null || dIA_Jangad.Remarks == "")
+                {
+                    ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", dIA_Jangad.CGST);
+                    ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", dIA_Jangad.IGST);
+                    ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", dIA_Jangad.SGST);
+                    ViewBag.TDS = new SelectList(db.ACC_Tax, "TaxID", "Tax", dIA_Jangad.TDS);
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", dIA_Jangad.CompanyID);
+                    ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", dIA_Jangad.FinYearID);
+                    ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", dIA_Jangad.PartyID);
+                    ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_Jangad.StatusID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_Jangad.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(dIA_Jangad);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(dIA_Jangad).State = EntityState.Modified;

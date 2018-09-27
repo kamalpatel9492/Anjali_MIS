@@ -93,6 +93,15 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CategoryID,CategoryName,CategoryShortName,Created,Modified,Remarks,UserID")] INV_Category iNV_Category)
         {
+            if (iNV_Category.CategoryID > 0)
+            {
+                if (iNV_Category.Remarks == null || iNV_Category.Remarks == "")
+                {
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Category.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_Category);
+                }
+            }
             if (ModelState.IsValid)
             {
 

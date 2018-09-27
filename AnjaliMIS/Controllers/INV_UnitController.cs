@@ -89,6 +89,14 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "UnitID,UserID,Unit,Remarks,Created,Modified")] INV_Unit iNV_Unit)
         {
+            if (iNV_Unit.UnitID > 0)
+            {
+                if (iNV_Unit.Remarks == null || iNV_Unit.Remarks == "")
+                {
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_Unit);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_Unit).State = EntityState.Modified;

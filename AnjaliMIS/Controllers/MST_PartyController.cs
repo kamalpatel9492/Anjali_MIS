@@ -110,6 +110,20 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PartyID,PartyName,Address,CountryID,StateID,CityID,ContactPerson,Mobile,Phone,Email,PartyTypeID,CompanyID,UserID,Description,Created,Modofied,Remarks,IsActive,PanNo,TanNo,AadharNo,GSTIN")] MST_Party mST_Party)
         {
+            if (mST_Party.PartyID > 0)
+            {
+                if (mST_Party.Remarks == null || mST_Party.Remarks == "")
+                {
+                    ViewBag.CityID = new SelectList(db.LOC_City, "CityID", "CityName", mST_Party.CityID);
+                    ViewBag.CountryID = new SelectList(db.LOC_Country, "CountryID", "CountryName", mST_Party.CountryID);
+                    ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName", mST_Party.StateID);
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", mST_Party.CompanyID);
+                    ViewBag.PartyTypeID = new SelectList(db.SYS_PartyType, "PartyTypeID", "PartyType", mST_Party.PartyTypeID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", mST_Party.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(mST_Party);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(mST_Party).State = EntityState.Modified;

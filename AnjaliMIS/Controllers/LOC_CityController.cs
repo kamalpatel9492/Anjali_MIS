@@ -96,6 +96,16 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CityID,StateID,CityName,Remarks,Created,Modified,UserID")] LOC_City lOC_City)
         {
+            if (lOC_City.CityID > 0)
+            {
+                if (lOC_City.Remarks == null || lOC_City.Remarks == "")
+                {
+                    ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName", lOC_City.StateID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", lOC_City.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(lOC_City);
+                }
+            }
             if (ModelState.IsValid)
             {
                 lOC_City.Created = Convert.ToDateTime(lOC_City.Created);

@@ -99,6 +99,17 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CassettsID,CassettsNo,Capacity,CompanyID,UserID,Created,Modified,Remarks,StatusID")] DIA_Cassett dIA_Cassett)
         {
+            if (dIA_Cassett.CassettsID > 0)
+            {
+                if (dIA_Cassett.Remarks == null || dIA_Cassett.Remarks == "")
+                {
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", dIA_Cassett.CompanyID);
+                    ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_Cassett.StatusID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_Cassett.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(dIA_Cassett);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(dIA_Cassett).State = EntityState.Modified;

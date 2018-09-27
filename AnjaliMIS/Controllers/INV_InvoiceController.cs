@@ -145,6 +145,22 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InvoiceID,UserID,Amount,AmountReceived,StatusID,Created,Modified,Remarks,InvoiceDate,InvoiceNo,PONo,AmountPending,FinYearID,CGST,CGSTAmount,SGST,SGSTAmount,IGST,IGSTAmount,IsLocal,IsActive,Casar,TotalAmount,NewAmountPending,NewAmountReceived")] INV_Invoice iNV_Invoice)
         {
+            if (iNV_Invoice.InvoiceID > 0)
+            {
+                if (iNV_Invoice.Remarks == null || iNV_Invoice.Remarks == "")
+                {
+                    ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax", iNV_Invoice.CGST);
+                    ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax", iNV_Invoice.IGST);
+                    ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax", iNV_Invoice.SGST);
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_Invoice.CompanyID);
+                    ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_Invoice.FinYearID);
+                    ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_Invoice.PartyID);
+                    ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", iNV_Invoice.StatusID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_Invoice.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_Invoice);
+                }
+            }
             if (ModelState.IsValid)
             {
                 INV_Invoice getInvoiceData = db.INV_Invoice.Where(e => e.InvoiceID == iNV_Invoice.InvoiceID).FirstOrDefault();

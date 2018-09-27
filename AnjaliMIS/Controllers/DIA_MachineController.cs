@@ -96,6 +96,16 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MachineID,MachineNo,BatchNo,UserID,CompanyID,Created,Modified,Remarks,IsActive")] DIA_Machine dIA_Machine)
         {
+            if (dIA_Machine.MachineID > 0)
+            {
+                if (dIA_Machine.Remarks == null || dIA_Machine.Remarks == "")
+                {
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", dIA_Machine.CompanyID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_Machine.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(dIA_Machine);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(dIA_Machine).State = EntityState.Modified;

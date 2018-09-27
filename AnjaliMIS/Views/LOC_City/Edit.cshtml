@@ -24,6 +24,7 @@
                     <!-- BEGIN FORM-->
                     <div class="form-horizontal">
                         <div class="form-body">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                             @*<h3 class="form-section">Basic validation States</h3>*@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.StateID, "StateID", htmlAttributes: new { @class = "control-label col-md-2" })

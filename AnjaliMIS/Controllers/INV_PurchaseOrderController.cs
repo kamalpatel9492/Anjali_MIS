@@ -182,6 +182,22 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PurchaseOrderID,CompanyID,SellerPartyID,UserID,StatusID,Amount,PaidAmount,Created,Modified,Remarks,PendingAmount,Casar,PONo,PODate,FinYearID,IsLocal,CGST,CGSTAmount,SGST,SGSTAmount,IGST,IGSTAmount,TotalAmount")] INV_PurchaseOrder iNV_PurchaseOrder)
         {
+            if (iNV_PurchaseOrder.PurchaseOrderID > 0)
+            {
+                if (iNV_PurchaseOrder.Remarks == null || iNV_PurchaseOrder.Remarks == "")
+                {
+                    ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.CGST);
+                    ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.IGST);
+                    ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", iNV_PurchaseOrder.SGST);
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", iNV_PurchaseOrder.CompanyID);
+                    ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", iNV_PurchaseOrder.FinYearID);
+                    ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", iNV_PurchaseOrder.SellerPartyID);
+                    ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", iNV_PurchaseOrder.StatusID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_PurchaseOrder.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_PurchaseOrder);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(iNV_PurchaseOrder).State = EntityState.Modified;

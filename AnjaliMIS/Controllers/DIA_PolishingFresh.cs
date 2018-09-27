@@ -107,6 +107,19 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "JangadItemID,JangadID,Weight,Size,PavalionAngle,CrownAngle,CrownWeight,Girdle,Para1,Para2,Para3,CassettsID,PolishingStageID,PavalionORCrown,UserID,StatusID,QCRemarks,Created,Completed,Remarks,PhysicalReceived,PhysicalReceivedDateTime,PhysicalSend,PhysicalSendDateTime,Delivered,DeliveredDateTime")] DIA_JangadItem dIA_JangadItem)
         {
+            if (dIA_JangadItem.JangadItemID > 0)
+            {
+                if (dIA_JangadItem.Remarks == null || dIA_JangadItem.Remarks == "")
+                {
+                    ViewBag.CassettsID = new SelectList(db.DIA_Cassett, "CassettsID", "Remarks", dIA_JangadItem.CassettsID);
+                    ViewBag.JangadID = new SelectList(db.DIA_Jangad, "JangadID", "Remarks", dIA_JangadItem.JangadID);
+                    ViewBag.PolishingStageID = new SelectList(db.SYS_PolishingStage, "PolishingStageID", "SatgeName", dIA_JangadItem.PolishingStageID);
+                    ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_JangadItem.StatusID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_JangadItem.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(dIA_JangadItem);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(dIA_JangadItem).State = EntityState.Modified;

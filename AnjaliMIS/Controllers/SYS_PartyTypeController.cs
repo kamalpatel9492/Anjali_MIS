@@ -89,6 +89,14 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PartyTypeID,PartyType,Remarks,Created,Modified,UserID")] SYS_PartyType sYS_PartyType)
         {
+            if (sYS_PartyType.PartyTypeID > 0)
+            {
+                if (sYS_PartyType.Remarks == null || sYS_PartyType.Remarks == "")
+                {
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(sYS_PartyType);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(sYS_PartyType).State = EntityState.Modified;

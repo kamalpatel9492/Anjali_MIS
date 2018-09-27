@@ -92,6 +92,15 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CountryID,CountryName,Remarks,Created,Modified,UserID")] LOC_Country lOC_Country)
         {
+            if (lOC_Country.CountryID > 0)
+            {
+                if (lOC_Country.Remarks == null || lOC_Country.Remarks == "")
+                {
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", lOC_Country.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(lOC_Country);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(lOC_Country).State = EntityState.Modified;
