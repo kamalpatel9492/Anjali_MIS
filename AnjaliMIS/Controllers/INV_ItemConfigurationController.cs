@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http.ModelBinding;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
 using AnjaliMIS.ViewModals;
@@ -59,6 +60,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
             INV_ItemConfigurationViewModal _iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
+            ViewData["errorConfig"] = TempData["errorConfig"];
             return View("Edit", _iNV_ItemConfigurationViewModal);
         }
 
@@ -80,9 +82,22 @@ namespace AnjaliMIS.Controllers
                     var ToRemovedbINV_ItemConfiguration = db.INV_ItemConfiguration.Where(i => i.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
                     db.INV_ItemConfiguration.RemoveRange(ToRemovedbINV_ItemConfiguration);
                     db.SaveChanges();
+                    String Err = "";
                     List<INV_ItemConfiguration> newINV_ItemConfiguration = new List<INV_ItemConfiguration>();
                     foreach (var item in iNV_ItemConfiguration.INV_Items)
                     {
+                        if (item.Qunatity <= 0)
+                        {
+                            INV_Item _Subitem = db.INV_Item.Find(item.SubItemID);
+                            if (_Subitem != null)
+                            {
+                                if (Err == "")
+                                    Err = "Enter Valid Quantity for " + _Subitem.ItemName;
+                                else
+                                    Err += ", Enter Valid Quantity for " + _Subitem.ItemName;
+                            }
+
+                        }
                         INV_ItemConfiguration new_INV_InvoiceItem = new INV_ItemConfiguration();
                         new_INV_InvoiceItem.MainItemID = iNV_ItemConfiguration.MainItemID;
                         new_INV_InvoiceItem.SubItemID = item.SubItemID;
@@ -93,12 +108,45 @@ namespace AnjaliMIS.Controllers
                         new_INV_InvoiceItem.Remarks = iNV_ItemConfiguration.Remarks;
                         newINV_ItemConfiguration.Add(new_INV_InvoiceItem);
                     }
+                    if (Err != "")
+                    {
+                        var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+
+                        ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
+                        ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                        ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+                        TempData["errorConfig"] = Err;
+                        return View(iNV_ItemConfiguration);
+                    }
+
                     db.INV_ItemConfiguration.AddRange(newINV_ItemConfiguration);
                     db.SaveChanges();
                 }
             }
+            var itemsa =
+                     db.INV_Item
+                       .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                       .Select(s => new
+                       {
+                           ItemID = s.ItemID,
+                           ItemName = s.ItemName + " - " + s.ItemCode
+                       })
+                       .ToList();
 
-            return RedirectToAction("Index");
+            ViewBag.MainItemID = new SelectList(itemsa, "ItemID", "ItemName");
+            ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+            INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
+            ViewData["errorConfig"] = TempData["errorConfig"];
+            return View("Edit", iNV_ItemConfigurationViewModal);
         }
 
         // GET: INV_ItemConfiguration/Edit/5
@@ -183,9 +231,22 @@ namespace AnjaliMIS.Controllers
                     {
                         iNV_ItemConfiguration.UserID = Convert.ToInt16(Session["UserID"].ToString());
                     }
+                    String Err = "";
+                    TempData["errorIssue"] = "";
                     List<INV_ItemConfiguration> newINV_ItemConfiguration = new List<INV_ItemConfiguration>();
                     foreach (var item in iNV_ItemConfiguration.INV_Items)
                     {
+                        if (item.Qunatity <= 0)
+                        {
+                            INV_Item _Subitem = db.INV_Item.Find(item.SubItemID);
+                            if (_Subitem != null)
+                            {
+                                if (Err == "")
+                                    Err = "Enter Valid Quantity for " + _Subitem.ItemName;
+                                else
+                                    Err += ", Enter Valid Quantity for " + _Subitem.ItemName;
+                            }
+                        }
                         INV_ItemConfiguration new_INV_InvoiceItem = new INV_ItemConfiguration();
                         new_INV_InvoiceItem.MainItemID = iNV_ItemConfiguration.MainItemID;
                         new_INV_InvoiceItem.SubItemID = item.SubItemID;
@@ -198,6 +259,24 @@ namespace AnjaliMIS.Controllers
                         {
                             newINV_ItemConfiguration.Add(new_INV_InvoiceItem);
                         }
+                    }
+                    if (Err != "")
+                    {
+                        var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+
+                        ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
+                        ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                        ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
+                        TempData["errorConfig"] = Err;
+                        return View(iNV_ItemConfiguration);
                     }
                     db.INV_ItemConfiguration.AddRange(newINV_ItemConfiguration);
                     db.SaveChanges();
