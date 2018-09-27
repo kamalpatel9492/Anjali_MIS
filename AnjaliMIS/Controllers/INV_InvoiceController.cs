@@ -417,13 +417,18 @@ namespace AnjaliMIS.Controllers
                     new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;
                     new_INV_Invoice.InvoiceDate = DateTime.Now;
 
-                    Int32 TotalForMonth = db.INV_Invoice.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
-                    Int32 NextCount = TotalForMonth + 1;
-                    Int32 _NewInvoiceNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
-                    //Change Number Add -INV
+                    //Int32 TotalForMonth = db.INV_Invoice.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                    //Int32 NextCount = TotalForMonth + 1;
+                    //Int32 _NewInvoiceNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    ////Change Number Add -INV
+                    //new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
+
+                    #region Generate InvoiceNo
+                    String _NewInvoiceNo = CommonConfig.GetNextNumber("Invoice");
+                    #endregion Generate InvoiceNo
                     new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
 
-                    new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
+                    //new_INV_Invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
                     new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
                     new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
                     new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();

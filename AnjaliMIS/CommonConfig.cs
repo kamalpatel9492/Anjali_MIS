@@ -106,6 +106,42 @@ namespace AnjaliMIS
                 #endregion Check No
 
             }
+            if (_NumberFor == "Invoice")
+            {
+                Int32 TotalForMonth = db.INV_Invoice.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                Int32 NextCount = TotalForMonth + 1;
+                _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                _NewIssueReturnNo = "INV-" + _NewIssueNo;
+
+                #region Check No
+                INV_Invoice _INV_IssueReturnNo = db.INV_Invoice.Where(w => w.InvoiceNo == _NewIssueReturnNo).FirstOrDefault();
+                if (_INV_IssueReturnNo != null)
+                {
+                    NextCount = NextCount + 1;
+                    _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    _NewIssueReturnNo = "INV-" + _NewIssueNo;
+                }
+                #endregion Check No
+
+            }
+            if (_NumberFor == "PO")
+            {
+                Int32 TotalForMonth = db.INV_PurchaseOrder.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                Int32 NextCount = TotalForMonth + 1;
+                _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                _NewIssueReturnNo = "PO-" + _NewIssueNo;
+
+                #region Check No
+                INV_PurchaseOrder _INV_IssueReturnNo = db.INV_PurchaseOrder.Where(w => w.PONo == _NewIssueReturnNo).FirstOrDefault();
+                if (_INV_IssueReturnNo != null)
+                {
+                    NextCount = NextCount + 1;
+                    _NewIssueNo = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    _NewIssueReturnNo = "PO-" + _NewIssueNo;
+                }
+                #endregion Check No
+
+            }
 
             return _NewIssueReturnNo;
         }

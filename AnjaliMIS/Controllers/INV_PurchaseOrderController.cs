@@ -309,12 +309,19 @@ namespace AnjaliMIS.Controllers
                     new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
                     new_INV_PurchaseOrder.PODate = DateTime.Now;
 
-                    Int32 TotalForMonth = db.INV_PurchaseOrder.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
-                    Int32 NextCount = TotalForMonth + 1;
-                    Int32 _NewPONOtCount = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
+                    //Int32 TotalForMonth = db.INV_PurchaseOrder.Where(p => p.Created.Month == DateTime.Today.Month && p.Created.Year == DateTime.Today.Year).Count();
+                    //Int32 NextCount = TotalForMonth + 1;
+                    //Int32 _NewPONOtCount = Convert.ToInt32(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + NextCount);
 
-                    //Change PONUmber Add PO-
+                    ////Change PONUmber Add PO-
+                    //new_INV_PurchaseOrder.PONo = _NewPONOtCount.ToString();
+
+                    #region Generate InvoiceNo
+                    String _NewPONOtCount = CommonConfig.GetNextNumber("PO");
+                    #endregion Generate InvoiceNo
                     new_INV_PurchaseOrder.PONo = _NewPONOtCount.ToString();
+
+
                     new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
                     if (iNV_PurchaseOrderViewModal.CGST > 0)
                         new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
