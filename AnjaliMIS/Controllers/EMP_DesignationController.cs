@@ -93,6 +93,16 @@ namespace AnjaliMIS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DesignationID,Designation,Remarks,Created,Modified,UserID")] EMP_Designation eMP_Designation)
         {
+            if (eMP_Designation.DesignationID > 0)
+            {
+                if (eMP_Designation.Remarks == null || eMP_Designation.Remarks == "")
+                {
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", eMP_Designation.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(eMP_Designation);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(eMP_Designation).State = EntityState.Modified;

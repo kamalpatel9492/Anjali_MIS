@@ -144,6 +144,40 @@ namespace AnjaliMIS.Controllers
         public ActionResult Edit(EMP_Employee eMP_Employee)
         {
 
+            if (eMP_Employee.EmployeeID > 0)
+            {
+                if (eMP_Employee.Remarks == null || eMP_Employee.Remarks == "")
+                {
+                    ViewBag.BankID = new SelectList(db.ACC_Bank, "BankID", "BankName", eMP_Employee.BankID);
+                    ViewBag.DepartmentID = new SelectList(db.EMP_Department, "DepartmentID", "DepartmentName", eMP_Employee.DepartmentID);
+                    ViewBag.DesignationID = new SelectList(db.EMP_Designation, "DesignationID", "Designation", eMP_Employee.DesignationID);
+                    ViewBag.CityID = new SelectList(db.LOC_City, "CityID", "CityName", eMP_Employee.CityID);
+                    ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", eMP_Employee.CompanyID);
+                    ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", eMP_Employee.FinYearID);
+                    ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName", eMP_Employee.StateID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", eMP_Employee.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(eMP_Employee);
+                }
+            }
+
+            if (eMP_Employee.EmployeeName != null && eMP_Employee.Address != null)
+            {
+                if (!string.IsNullOrEmpty(eMP_Employee.EmployeeName))
+                {
+                    if (db.EMP_Employee.Where(I => I.EmployeeName == eMP_Employee.EmployeeName && I.Address == eMP_Employee.Address).Count() > 0)
+                    {
+                        var oldemployee = db.EMP_Employee.Where(I => I.EmployeeName == eMP_Employee.EmployeeName && I.Address == eMP_Employee.Address).FirstOrDefault();
+
+                        if (oldemployee.EmployeeID != eMP_Employee.EmployeeID)
+                        {
+                            ModelState.AddModelError("EmployeeNameDuplicate", eMP_Employee.EmployeeName + " Already added.");
+                            return View(eMP_Employee);
+                        }
+                    }
+                }
+            }
+
 
             //EMP_Employee OldEMP_Employee = db.EMP_Employee.Find(eMP_Employee.EmployeeID);
 
@@ -182,7 +216,7 @@ namespace AnjaliMIS.Controllers
                 {
                     eMP_Employee.UserID = Convert.ToInt16(Session["UserID"].ToString());
                 }
-                if(eMP_Employee.EmployeeID > 0)
+                if (eMP_Employee.EmployeeID > 0)
                 {
                     db.Entry(eMP_Employee).State = EntityState.Modified;
                     eMP_Employee.Modified = Convert.ToDateTime(DateTime.Now);

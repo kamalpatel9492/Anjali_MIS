@@ -158,19 +158,22 @@ namespace AnjaliMIS.Controllers
             }
             INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal();
             INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(id);
-            iNV_ItemConfiguration.Remarks = "";
-            iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
+            if (iNV_ItemConfiguration != null)
             {
-                ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
-                MainItemID = iNV_ItemConfiguration.MainItemID,
-                SubItemID = iNV_ItemConfiguration.SubItemID,
-                Qunatity = iNV_ItemConfiguration.Qunatity,
-                UserID = iNV_ItemConfiguration.UserID,
-                Created = iNV_ItemConfiguration.Created,
-                Modified = iNV_ItemConfiguration.Modified,
-                Remarks = iNV_ItemConfiguration.Remarks
-            };
-            iNV_ItemConfigurationViewModal.SubItems = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
+                iNV_ItemConfiguration.Remarks = "";
+                iNV_ItemConfigurationViewModal = new INV_ItemConfigurationViewModal()
+                {
+                    ItemConfigurationID = iNV_ItemConfiguration.ItemConfigurationID,
+                    MainItemID = iNV_ItemConfiguration.MainItemID,
+                    SubItemID = iNV_ItemConfiguration.SubItemID,
+                    Qunatity = iNV_ItemConfiguration.Qunatity,
+                    UserID = iNV_ItemConfiguration.UserID,
+                    Created = iNV_ItemConfiguration.Created,
+                    Modified = iNV_ItemConfiguration.Modified,
+                    Remarks = iNV_ItemConfiguration.Remarks
+                };
+                iNV_ItemConfigurationViewModal.SubItems = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
+            }
 
             if (iNV_ItemConfigurationViewModal == null)
             {
@@ -186,7 +189,7 @@ namespace AnjaliMIS.Controllers
                         })
                         .ToList();
 
-            ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
+            ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
             ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
             return View(iNV_ItemConfigurationViewModal);
@@ -197,11 +200,11 @@ namespace AnjaliMIS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemConfigurationID,MainItemID,SubItemID,Qunatity,UserID,Created,Modified,Remarks")] INV_ItemConfiguration iNV_ItemConfiguration)
+        public ActionResult Edit(INV_ItemConfigurationViewModal iNV_ItemConfigurationViewModal)
         {
-            if (iNV_ItemConfiguration.ItemConfigurationID > 0)
+            if (iNV_ItemConfigurationViewModal.ItemConfigurationID > 0)
             {
-                if (iNV_ItemConfiguration.Remarks == null || iNV_ItemConfiguration.Remarks == "")
+                if (iNV_ItemConfigurationViewModal.Remarks == null || iNV_ItemConfigurationViewModal.Remarks == "")
                 {
                     var items =
                       db.INV_Item
@@ -212,19 +215,21 @@ namespace AnjaliMIS.Controllers
                             ItemName = s.ItemName + " - " + s.ItemCode
                         })
                         .ToList();
-
-                    ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName");
+                    iNV_ItemConfigurationViewModal.SubItems = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfigurationViewModal.MainItemID).ToList();
+                    ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName", iNV_ItemConfigurationViewModal.MainItemID);
                     ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
-                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfigurationViewModal.UserID);
                     ModelState.AddModelError("", "Enter Remarks");
-                    return View(iNV_ItemConfiguration);
+                    return View(iNV_ItemConfigurationViewModal);
                 }
             }
 
-            if (iNV_ItemConfiguration.INV_Items != null)
+            if (iNV_ItemConfigurationViewModal.SubItems.Count > 0)
             {
                 if (ModelState.IsValid)
                 {
+                    INV_ItemConfiguration iNV_ItemConfiguration = db.INV_ItemConfiguration.Find(iNV_ItemConfigurationViewModal.ItemConfigurationID);
+
                     db.Entry(iNV_ItemConfiguration).State = EntityState.Modified;
                     iNV_ItemConfiguration.Modified = DateTime.Now;
                     if (Session["UserID"] != null)
@@ -286,7 +291,7 @@ namespace AnjaliMIS.Controllers
 
             ViewBag.MainItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true && i.IsConfigurable == true), "ItemID", "ItemName");
             ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
-            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfigurationViewModal.UserID);
             return RedirectToAction("Index");
         }
 

@@ -22,6 +22,8 @@
                 </div>
             </div>
             <div class="portlet-body">
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
@@ -167,11 +169,11 @@
                             </div>
                             @Html.LabelFor(model => model.EndingDate, "Ending Date", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @if(Model.DOB == null)
+                                @if (Model.DOB == null)
                                 {
                                     Model.DOB = DateTime.Now;
                                 }
-                                @Html.EditorFor(model => model.EndingDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { Value = Model.DOB.ToString("dd/MM/yyyy"),  @class = "form-control" } })
+                                @Html.EditorFor(model => model.EndingDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { Value = Model.DOB.ToString("dd/MM/yyyy"), @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.EndingDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
