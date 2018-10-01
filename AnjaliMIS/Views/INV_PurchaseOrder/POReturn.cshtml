@@ -73,6 +73,12 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="text-danger">@ViewData["errorPOReceive"]</div>
+                            @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
+                        }
+                        @Html.ValidationSummary(true, string.Empty, new { @class = "help-inline", @style = "color:red" })
                         <h3 class="form-section">Purchase Order Details</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -91,6 +97,7 @@
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                                 @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.PONo)
                             </div>
                             @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">

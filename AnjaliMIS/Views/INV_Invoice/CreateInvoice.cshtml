@@ -406,12 +406,24 @@
 
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
-        $('#tdIGST').html(igstCalculation);
-        $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        if (igstCalculation > 0)
+            $('#tdIGST').html(igstCalculation);
+        else
+            $('#tdIGST').html(0);
+        if (igstpercentage > 0)
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        else
+            $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
         var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
-        $('#tdCGST').html(cgstCalculation);
-        $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        if (cgstCalculation > 0)
+            $('#tdCGST').html(cgstCalculation);
+        else
+            $('#tdCGST').html(0);
+        if (cgstpercentage > 0)
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        else
+            $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
         var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
         $('#tdSGST').html(sgstCalculation);

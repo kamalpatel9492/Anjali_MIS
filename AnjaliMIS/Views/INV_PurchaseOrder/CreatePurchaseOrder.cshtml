@@ -49,7 +49,7 @@
                             @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4 radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" name="isLocal" value="True" checked="checked">Yes
+                                    <input type="radio" name="isLocal" value="True">Yes
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="isLocal" value="False">No
@@ -184,12 +184,18 @@
 }
 
 <script>
+
     var productList = [];
     var itemWiseEachStepAddTotalAmount = 0;
     var CGSTID = 0;
     var IGSTID = 0;
     var SGSTID = 0;
-
+   @if (Model.IsLocal == true) {
+        @: $('input:radio[name="isLocal"][value="True"]').attr('checked', true);
+    }
+    else {
+        @: $('input:radio[name="isLocal"][value="False"]').attr('checked', true);
+    }
     $(document).ready(function () {
         RetrieveSGST();
         RetrieveCGST();
@@ -258,98 +264,102 @@
 			location.reload(true);
 		});
 
+      
+
         $('input:radio[name=isLocal]').change(function () {
             CheckIsLocal();
         });
-        CheckIsLocal();
-        function CheckIsLocal() {
-            if ($('input[name=isLocal]:checked').val() == "True") {
+                CheckIsLocal();
+                function CheckIsLocal() {
+                    if ($('input[name=isLocal]:checked').val() == "True") {
                 //$('#divSGST').show();
                 $('#divCGST').show();
                 $('#divIGST').hide();
                 $('#ddlIGST').val("0");
-            }
+                }
             else if ($('input[name=isLocal]:checked').val() == "False") {
                 $('#divCGST').hide();
                 //$('#divSGST').hide();
                 $('#divIGST').show();
                 $('#ddlCGST').val("0");
                 $('#ddlSGST').val("0");
-            } else {
+                } else {
                 $('#divCGST').hide();
                 //$('#divSGST').hide();
                 $('#divIGST').hide();
-            }
-		};
+                }
+            };
 
 		$(".add-row").click(function () {
 
-			debugger;
+                debugger;
 			$('#divItemList').show();
-			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
-				debugger;
-				var itemid = $("#ItemID").val();
-				var itemname = $("#ItemID").find('option:selected').text();
-				var priceAmount = $("#txtItemPrice").val();
-				var invoiceID = 1;
-				var quantity = $('#txtQuantity').val();
-				productList.push({
-					//InvoiceItemID: InvoiceItemID,
-					//InvoiceID: invoiceID,
-					ItemID: itemid,
+                if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
+                    debugger;
+                    var itemid = $("#ItemID").val();
+                    var itemname = $("#ItemID").find('option:selected').text();
+                    var priceAmount = $("#txtItemPrice").val();
+                    var invoiceID = 1;
+                    var quantity = $('#txtQuantity').val();
+                    productList.push({
+                        //InvoiceItemID: InvoiceItemID,
+                        //InvoiceID: invoiceID,
+                        ItemID: itemid,
                     OrderedQuantity: quantity,
                     ReceivedQuantity: quantity,
                     PuchasePrice: priceAmount,
 					PricePerUnit: priceAmount
-				});
-				invoiceID++;
-				var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
-				$("table .list").prepend(markup);
-				itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                FinalCalculation();
 
-            }
+
+                });
+                    invoiceID++;
+                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
+				$("table .list").prepend(markup);
+                    itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                    FinalCalculation();
+
+                }
             $('html, body').animate({
-                scrollTop: $("#divItemList").offset().top
+                    scrollTop: $("#divItemList").offset().top
             }, 2000);
-		});
+            });
 
 
 		$(".delete-row").click(function () {
-			debugger;
+                debugger;
 			$("table tbody").find('input[name="record"]').each(function () {
-				if ($(this).is(":checked")) {
-					debugger;
-					var checkId = this.id;
+                    if ($(this).is(":checked")) {
+                        debugger;
+                        var checkId = this.id;
 					$(this).parents("tr").remove();
-					debugger;
-					//$.grep(productList, function (e) {
-					//    debugger;
-					//     e.ItemID == checkId;
-					//});
-					debugger;
+                        debugger;
+                        //$.grep(productList, function (e) {
+                        //    debugger;
+                        //     e.ItemID == checkId;
+                        //});
+                        debugger;
 					$.each(productList, function (key, value) {
-						debugger;
-						var checkitemid = value.ItemID;
-                        var deductquantity = value.OrderedQuantity;
-                        var deductpriceperunit = value.PuchasePrice;
-						if (checkId == checkitemid) {
-							//productList.pop(key);
                             debugger;
-							productList.splice(key, 1);
-							itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
+                            var checkitemid = value.ItemID;
+                            var deductquantity = value.OrderedQuantity;
+                            var deductpriceperunit = value.PuchasePrice;
+                            if (checkId == checkitemid) {
+                                //productList.pop(key);
+                                debugger;
+                                productList.splice(key, 1);
+                                itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
 							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-							FinalCalculation();
-							return false;
-						}
+                                FinalCalculation();
+                                return false;
+                            }
 
-					});
-				}
-			});
+                        });
+                    }
+                });
 
-		});
-	});
+            });
+        });
 	function GetItemPrice(ddlitemid) {
 		debugger;
 		$.ajax({
@@ -435,8 +445,14 @@
             $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
         var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
-        $('#tdCGST').html(cgstCalculation);
-        $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        if (cgstCalculation > 0)
+            $('#tdCGST').html(cgstCalculation);
+        else
+            $('#tdCGST').html(0);
+        if (cgstpercentage > 0)
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        else
+            $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
         var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
         $('#tdSGST').html(sgstCalculation);

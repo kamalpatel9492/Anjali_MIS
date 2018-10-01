@@ -192,7 +192,6 @@ namespace AnjaliMIS.Controllers
                 iNV_IssueReturn.FinYearID = CommonConfig.GetFinYearID();
 
                 db.INV_IssueReturn.Add(iNV_IssueReturn);
-                db.SaveChanges();
 
                 string Err = "";
                 TempData["errorIssue"] = "";
@@ -237,9 +236,8 @@ namespace AnjaliMIS.Controllers
                         TempData["errorIssue"] = Err;
                         return View(iNV_IssueReturnViewModal);
                     }
-                    db.SaveChanges();
                 }
-
+                db.SaveChanges();
             }
             catch (Exception exception)
             {

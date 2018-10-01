@@ -309,7 +309,6 @@ namespace AnjaliMIS.Controllers
 
                     new_INV_PurchaseOrder.Amount = iNV_PurchaseOrderViewModal.Amount;
                     new_INV_PurchaseOrder.PaidAmount = iNV_PurchaseOrderViewModal.PaidAmount;
-                    new_INV_PurchaseOrder.StatusID = Convert.ToInt32(iNV_PurchaseOrderViewModal.StatusID);
                     new_INV_PurchaseOrder.Created = DateTime.Now;
                     new_INV_PurchaseOrder.Modified = DateTime.Now;
                     new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
@@ -533,6 +532,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
             ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
             ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+            ViewData["errorPOReceive"] = TempData["errorPOReceive"];
             return View(_iNV_PurchaseOrderViewModal);
         }
 
@@ -561,23 +561,35 @@ namespace AnjaliMIS.Controllers
                     }
 
                     INV_PurchaseOrder _INV_PurchaseOrder = db.INV_PurchaseOrder.Find(iNV_PurchaseOrderViewModal.PurchaseOrderID);
+                    string Err = "";
+                    TempData["errorPOReceive"] = "";
 
                     foreach (var item in iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems)
                     {
                         INV_PurchaseOrderItem new_INV_PurchaseOrderItem = db.INV_PurchaseOrderItem.Find(item.PurchaseOrderItemID);
                         db.Entry(new_INV_PurchaseOrderItem).State = EntityState.Modified;
                         new_INV_PurchaseOrderItem.PurchaseOrderItemID = item.PurchaseOrderItemID;
-                        if (new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity >= new_INV_PurchaseOrderItem.OrderedQuantity)
+                        if (new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity > new_INV_PurchaseOrderItem.OrderedQuantity)
+                        {
+                            INV_Item inv_Item = new INV_Item();
+                            inv_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+
+                            if (Err == "")
+                                Err = Err + "You can not receive more than ordered. " + inv_Item.ItemName;
+                            else
+                                Err = Err + ", You can not receive more than ordered. " + inv_Item.ItemName;
+
+                          
+                        }
+                        if ((new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity) == new_INV_PurchaseOrderItem.OrderedQuantity)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
                             _INV_PurchaseOrder.StatusID = 2;
-                            db.SaveChanges();
                         }
                         new_INV_PurchaseOrderItem.ReceivedQuantity = new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity;
                         new_INV_PurchaseOrderItem.Modified = DateTime.Now;
                         new_INV_PurchaseOrderItem.Remarks = item.Remarks;
                         new_INV_PurchaseOrderItem.PuchasePrice = item.PuchasePrice;
-                        db.SaveChanges();
 
                         #region INV_ItemPrice
                         INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
@@ -595,19 +607,49 @@ namespace AnjaliMIS.Controllers
                                 _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
                             }
                             db.INV_ItemPrice.Add(_iNV_ItemPrice);
-                            db.SaveChanges();
                         }
                         #endregion INV_ItemPrice
 
                         #region Item
                         INV_Item _INV_Item = new INV_Item();
                         _INV_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+
+                        INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                        new_INV_StockHistory.ItemID = item.ItemID;
+                        new_INV_StockHistory.OperationTypeID = 8;
+                        new_INV_StockHistory.ReferenceID = iNV_PurchaseOrderViewModal.PONo;
+                        new_INV_StockHistory.Quantity = item.ReceivedQuantity;
+                        if (Session["UserID"] != null)
+                        {
+                            new_INV_StockHistory.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        }
+                        new_INV_StockHistory.Created = DateTime.Now;
+                        new_INV_StockHistory.Modified = DateTime.Now;
+                        new_INV_StockHistory.Remarks = "Return";
+                        new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
+
+                        new_INV_StockHistory.IssueNumber = iNV_PurchaseOrderViewModal.PONo;
+                        db.INV_StockHistory.Add(new_INV_StockHistory);
+
                         if (_INV_Item != null)
                         {
                             _INV_Item.Quantity = _INV_Item.Quantity + item.ReceivedQuantity;
-                            db.SaveChanges();
                         }
                         #endregion Item
+                    }
+                    if (Err != "")
+                    {
+                        ModelState.AddModelError("errorPOReceive", Err);
+                        TempData["errorPOReceive"] = Err;
+                        ViewData["errorPOReceive"] = TempData["errorPOReceive"];
+                        ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
+                        ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
+                        ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
+                        ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear");
+                        ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
+                        ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
+                        ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                        return View(iNV_PurchaseOrderViewModal);
                     }
 
                     if (_INV_PurchaseOrder != null)
@@ -664,9 +706,9 @@ namespace AnjaliMIS.Controllers
 
                         }
                         db.INV_PurchaseOrderHistory.Add(new_INV_PurchaseOrderHistory);
-                        db.SaveChanges();
                         #endregion INV_PurchaseOrderHistory
                     }
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
