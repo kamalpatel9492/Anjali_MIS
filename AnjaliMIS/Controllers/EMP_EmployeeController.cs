@@ -172,6 +172,14 @@ namespace AnjaliMIS.Controllers
                         if (oldemployee.EmployeeID != eMP_Employee.EmployeeID)
                         {
                             ModelState.AddModelError("EmployeeNameDuplicate", eMP_Employee.EmployeeName + " Already added.");
+                            ViewBag.BankID = new SelectList(db.ACC_Bank, "BankID", "BankName", eMP_Employee.BankID);
+                            ViewBag.DepartmentID = new SelectList(db.EMP_Department, "DepartmentID", "DepartmentName", eMP_Employee.DepartmentID);
+                            ViewBag.DesignationID = new SelectList(db.EMP_Designation, "DesignationID", "Designation", eMP_Employee.DesignationID);
+                            ViewBag.CityID = new SelectList(db.LOC_City, "CityID", "CityName", eMP_Employee.CityID);
+                            ViewBag.CompanyID = new SelectList(db.SYS_Company, "CompanyID", "CompanyName", eMP_Employee.CompanyID);
+                            ViewBag.FinYearID = new SelectList(db.SYS_FinYear, "FinYearID", "FinYear", eMP_Employee.FinYearID);
+                            ViewBag.StateID = new SelectList(db.LOC_State, "StateID", "StateName", eMP_Employee.StateID);
+                            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", eMP_Employee.UserID);
                             return View(eMP_Employee);
                         }
                     }

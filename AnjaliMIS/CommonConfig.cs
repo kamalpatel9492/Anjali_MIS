@@ -145,5 +145,10 @@ namespace AnjaliMIS
 
             return _NewIssueReturnNo;
         }
+
+        public static int GetStatusPending()
+        {
+            return 1;
+        }
     }
 }

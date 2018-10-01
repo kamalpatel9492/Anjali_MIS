@@ -23,45 +23,18 @@
                 <div class="form-horizontal">
                     <div class="form-body">
                         <h3 class="form-section">Invoice Details</h3>
-                        @*<div class="form-group">
-                                @Html.LabelFor(model => model.CompanyID, "Company", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.DropDownList("CompanyID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.LabelFor(model => model.FinYearID, "Fin Year", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.DropDownList("FinYearID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.FinYearID, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.DropDownList("PartyID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.PartyID, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                @Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @*@if (Model.InvoiceDate == null)
-                                {
-                                    Model.InvoiceDate = DateTime.Now;
-                                }*@
                             @Html.LabelFor(model => model.InvoiceDate, "Invoice Date", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker" } })
-                                @*<span class="input-group-btn">
-                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                    </span>*@
                                 @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
                             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -69,7 +42,6 @@
                                 @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -245,6 +217,16 @@
         RetrieveIGST();
         RetrieveitemList();
 
+        $("#ddlCGST").change(function () {
+            FinalCalculation();
+        });
+        $("#ddlSGST").change(function () {
+            FinalCalculation();
+        });
+
+        $("#ddlIGST").change(function () {
+            FinalCalculation();
+        });
         $('#btnSave').click(function () {
 
             AddNewInvoiceWithItem();
@@ -269,23 +251,6 @@
             $('#InvoiceMessage').modal('hide');
             location.reload(true);
         });
-
-        //$("#IsLocal").change(function () {
-
-        //    if ($("#IsLocal").val() == "true") {
-        //        $('#divSGST').show();
-        //        $('#divCGST').hide();
-        //    }
-        //    else if ($("#IsLocal").val() == "false") {
-        //        $('#divCGST').show();
-        //        $('#divSGST').hide();
-        //    } else {
-        //        $('#divCGST').hide();
-        //        $('#divSGST').hide();
-        //    }
-        //    //var ddlitemid = $('#ItemID').val();
-        //    //GetItemPrice(ddlitemid);
-        //});
 
         $('input:radio[name=isLocal]').change(function () {
             CheckIsLocal();
@@ -327,13 +292,8 @@
                 var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
                 productList.push({
-                    //InvoiceItemID: InvoiceItemID,
-                    //InvoiceID: invoiceID,
                     ItemID: itemid,
                     Quantity: quantity,
-                    //Created: Created,
-                    //Modified: Modified,
-                    //Remarks:Remarks,
                     PricePerUnit: priceAmount
                 });
                 invoiceID++;
@@ -343,6 +303,9 @@
                 $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
                 FinalCalculation();
             }
+            $('html, body').animate({
+                scrollTop: $("#divItemList").offset().top
+            }, 2000);
         });
 
 
@@ -353,11 +316,6 @@
 
                     var checkId = this.id;
                     $(this).parents("tr").remove();
-
-                    //$.grep(productList, function (e) {
-                    //
-                    //     e.ItemID == checkId;
-                    //});
 
                     $.each(productList, function (key, value) {
 
@@ -402,15 +360,10 @@
     function AddNewInvoiceWithItem() {
 
         var newData = {
-            //InvoiceID: InvoiceID,
-            //CompanyID: $('#CompanyID').val(),
             PartyID: $('#PartyID').val(),
-            //UserID: $('#ddlupdateInstituteType').val(),
             Amount: $('#tdItemTotal').html(),
             AmountReceived: $('#AmountReceived').val(),
             StatusID: $('#StatusID').val(),
-            //Created: Created,
-            //Modified: Modified,
             Remarks: $('#Remarks').val(),
             InvoiceDate: $('#InvoiceDate').val(),
             InvoiceNo: $('#InvoiceNo').val(),
@@ -449,19 +402,6 @@
             }
         });
     }
-    //function FinalCalculation() {
-    //    var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-    //    $('#tdIGST').html(igstCalculation);
-    //    var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-    //    $('#tdCGST').html(cgstCalculation);
-    //    var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * 5 / 100);
-    //    $('#tdSGST').html(sgstCalculation);
-    //    var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
-    //    $('#tdFinalTotal').html(finaltotal);
-
-    //    var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-    //    $('#AmountPending').val(newAmountPending);
-    //}
     function FinalCalculation() {
 
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
@@ -481,9 +421,7 @@
 
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(parseInt(newAmountPending));
-        $('html, body').animate({
-            scrollTop: $("#divItemList").offset().top
-        }, 2000);
+    
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");
     }
