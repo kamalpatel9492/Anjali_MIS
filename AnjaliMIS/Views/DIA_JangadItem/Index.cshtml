@@ -153,7 +153,7 @@
                 //      "My TR is:" +);
                 $('#txtJangadNo').attr("data-id", $(this).parent("tr").attr("id"));
                 $('#txtJangadNo').val($(this).parent("tr").attr("data-name"));
-                debugger;
+                 
                 $("table tr").removeClass("greenTR");
                 $(this).parent("tr").addClass("greenTR");
             });
@@ -184,7 +184,7 @@
             }
 
             function SaveJANGADFORWARD(jangadItemID, polishingStageID, remarks) {
-                debugger;
+
                 $.ajax({
                     url: "/DIA_JangadItem/SaveJangadForward",
                     data: JSON.stringify({ "jangadItemID": jangadItemID, "polishingStageID": polishingStageID, "remarks": remarks }),
@@ -193,12 +193,13 @@
                     dataType: "json",
                     success: function (result) {
                         if (result == "Success") {
-                            debugger;
+                           
                             alert(result);
+                            location.reload(true);
                         }
                         else {
-                            debugger;
-                            alert("not exist");
+                             
+                            alert("not exist some error thrown.");
                            
                         }
                         $('#txtJangadNo').val('');
