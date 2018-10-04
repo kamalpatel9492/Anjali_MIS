@@ -107,7 +107,9 @@
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.JangadItemID }) |
                                 @*@Html.ActionLink("Details", "Details", new { id = item.JangadItemID }) |*@
-                                @Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) | <span id="JangadItemID" class="JangadItemID">Forward</span>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) | 
+                                <span id="JangadItemID" class="JangadItemID">Forward List Demo</span> | 
+                                <label id="JangadItemIDForward" class="JangadItemID">Modal Demo</label>
                                 @*@Html.ActionLink("Forward", "Forward", new { id = item.JangadItemID })*@
                             </td>
                         </tr>
@@ -135,7 +137,47 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalJangadForword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="">JANGAD FORWARD</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal form">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">JANGAD No</label>
+                                <div class="col-md-4">
+                                    <input id="txtModalJangadNo" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">PolishingStageID</label>
 
+                                <div class="col-md-4">
+                                    <select id="ddlModalPolishingStageID" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Remarks</label>
+                                <div class="col-md-4">
+                                    <input id="txtRemarks" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            @*<input id="btnSaveJANGADFORWARD" type="button" value="Save" class="btn green" />*@
+                            <button id="btnSaveModalJANGADFORWARD" type="button" class="btn green">Save</button>
+                            @*<button type="button" class="btn btn-danger">Delete</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @section scripts {
@@ -147,7 +189,10 @@
             });
 
            
-
+            
+            $('#JangadItemIDForward').click(function () {
+                $('#modalJangadForword').modal('show');
+            });
             $("div table td").click(function () {
                 //alert("You clicked my <td>!" + $(this).html() +
                 //      "My TR is:" +);
@@ -156,6 +201,10 @@
                  
                 $("table tr").removeClass("greenTR");
                 $(this).parent("tr").addClass("greenTR");
+
+                $('#txtModalJangadNo').attr("data-id", $(this).parent("tr").attr("id"));
+                $('#txtModalJangadNo').val($(this).parent("tr").attr("data-name"));
+
             });
            
             function RetrievePolishingStageList() {
@@ -174,6 +223,17 @@
                                 var option = $("<option/>");
                                 option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
                                 $("#ddlPolishingStageID").append(option);
+                            }
+                        }
+
+                        if (result.length > 0) {
+
+                            $("#ddlModalPolishingStageID").empty();
+                            $("#ddlModalPolishingStageID").append('<option value="0">Select Item</option>');
+                            for (var i = 0; i < result.length; i++) {
+                                var option = $("<option/>");
+                                option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
+                                $("#ddlModalPolishingStageID").append(option);
                             }
                         }
                     }),
@@ -202,9 +262,14 @@
                             alert("not exist some error thrown.");
                            
                         }
+                        
                         $('#txtJangadNo').val('');
                         $('#ddlPolishingStageID').val(0);
                         $('#txtRemarks').val('');
+                        //ForModal
+                        $('#txtModalJangadNo').val('');
+                        $('#ddlModalPolishingStageID').val(0);
+                        $('#txtModalRemarks').val('');
                     },
                     error: function (errormessage) {
                         alert(errormessage.responseText);
@@ -218,6 +283,15 @@
                     var jangadItemID = $('#txtJangadNo').attr('data-id');
                     var polishingStageID = $('#ddlPolishingStageID').val();
                     var remarks = $('#txtRemarks').val();
+                    //alert("The paragraph was clicked." + issuenumber);
+                    SaveJANGADFORWARD(jangadItemID, polishingStageID, remarks);
+                });
+
+                
+                $("#btnSaveModalJANGADFORWARD").click(function () {
+                    var jangadItemID = $('#txtModalJangadNo').attr('data-id');
+                    var polishingStageID = $('#ddlModalPolishingStageID').val();
+                    var remarks = $('#txtModalRemarks').val();
                     //alert("The paragraph was clicked." + issuenumber);
                     SaveJANGADFORWARD(jangadItemID, polishingStageID, remarks);
                 });
