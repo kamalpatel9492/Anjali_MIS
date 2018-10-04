@@ -179,9 +179,10 @@
                                                 if (Model.INV_PurchaseOrderItems[i].OrderedQuantity != Model.INV_PurchaseOrderItems[i].ReceivedQuantity)
                                                 {
                                                     PendingToReceive2 = Model.INV_PurchaseOrderItems[i].OrderedQuantity - Model.INV_PurchaseOrderItems[i].ReceivedQuantity;
+                                                    Model.INV_PurchaseOrderItems[i].ReceivedQuantity = PendingToReceive2;
                                                 }
 
-                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, PendingToReceive2.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
                                             }
                                         </td>
@@ -196,7 +197,7 @@
                                 @{
                                     if (Model.StatusID != 2)
                                     {
-                                        <input id="btnSave" type="button" value="Save" class="btn green" />
+                                        <input id="btnSave" type="submit" value="Save" class="btn green" />
                                         @*<input type="submit" value="Save" class="btn green" />*@
                                         @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
                                     }
