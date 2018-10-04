@@ -156,7 +156,7 @@ input[type=number]::-webkit-outer-spin-button {
                             </div>
                             @Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control",@type="number" } })
+                                @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -219,6 +219,8 @@ input[type=number]::-webkit-outer-spin-button {
         RetrieveIGST();
 
         $("#ddlCGST").change(function () {
+            var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");  
+            $('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
         $("#ddlSGST").change(function () {
