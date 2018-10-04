@@ -45,7 +45,7 @@
                                 @Html.LabelFor(model => model.PONo, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
                                     @*<input class="form-control text-box single-line" data-val="true" data-val-number="The field PONo must be a number." id="PONo" name="PONo" type="number" value="">*@
-                                    <input id="txtPONumber" name="txtPONumber" type="number" data-val="true" data-val-number="The field PONo must be a number." class="form-control text-box single-line" />
+                                    <input id="txtPONumber" name="txtPONumber" type="text" data-val="true" data-val-number="The field PONo must be a number." class="form-control text-box single-line" />
                                     @*@Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })*@
                                 </div>
                                 <div class="col-md-1">
@@ -219,7 +219,7 @@
                                 @{
                                     if (Model.StatusID != 2)
                                     {
-                                        <input id="btnSave" type="submit" value="Save" class="btn green" />
+                                        <input id="btnSave" type="button" value="Save" class="btn green" />
                                         @*<input type="submit" value="Save" class="btn green" />*@
                                         @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", new { @class = "btn default" })
                                     }
