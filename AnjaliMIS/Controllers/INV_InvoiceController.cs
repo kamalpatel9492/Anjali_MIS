@@ -428,7 +428,7 @@ namespace AnjaliMIS.Controllers
 
                     new_INV_Invoice.Amount = inv_InvoiceViewModal.Amount;
                     new_INV_Invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
-                    new_INV_Invoice.StatusID = inv_InvoiceViewModal.StatusID;
+                    new_INV_Invoice.StatusID = CommonConfig.GetStatusPending();
                     new_INV_Invoice.Created = DateTime.Now;
                     new_INV_Invoice.Modified = DateTime.Now;
                     new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;

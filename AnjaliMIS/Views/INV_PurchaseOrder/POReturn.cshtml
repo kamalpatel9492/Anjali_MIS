@@ -106,53 +106,6 @@
                             </div>
                         </div>
 
-                        <h3 class="form-section">Purchase Order Received till now</h3>
-                        <table class="table table-striped table-bordered table-advance table-hover" id="tblItemsPOHistory">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Received Date
-                                    </th>
-                                    <th>
-                                        Item
-                                    </th>
-                                    <th>
-                                        Ordered Qty.
-                                    </th>
-                                    <th>
-                                        Received Qty.
-                                    </th>
-                                    <th>
-                                        Puchase Price
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < Model.INV_PurchaseOrderItems.Count; i++)
-                                {
-                                    <tr>
-                                        <td class="col-md-2">
-                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].ReceviedDate, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td class="col-md-2">
-                                            @Html.DisplayFor(modelItem => Model.INV_PurchaseOrderItems[i].INV_Item.ItemName)
-                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PurchaseOrderItemID)
-                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].ItemID)
-                                        </td>
-                                        <td class="col-md-2">
-                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].OrderedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td class="col-md-2">
-                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                        <td class="col-md-2">
-                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-
                         <h3 class="form-section">Purchase Order Receive Items</h3>
 
 
@@ -178,7 +131,13 @@
                                         Puchase Price
                                     </th>
                                     <th>
+                                        Ordered Quantity
+                                    </th>
+                                    <th>
                                         Received Quantity
+                                    </th>
+                                    <th>
+                                        Receivable
                                     </th>
                                 </tr>
                             </thead>
@@ -192,8 +151,14 @@
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].ItemID)
                                         </td>
                                         <td class="col-md-2">
-                                            @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PuchasePrice)
                                             @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td class="col-md-2">
+                                            @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].OrderedQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].OrderedQuantity)
+
                                         </td>
                                         <td class="col-md-2">
                                             @{
@@ -203,10 +168,22 @@
                                                     PendingToReceive = Model.INV_PurchaseOrderItems[i].OrderedQuantity - Model.INV_PurchaseOrderItems[i].ReceivedQuantity;
                                                 }
 
-                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, PendingToReceive.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, PendingToReceive.ToString(), new { htmlAttributes = new { @class = "form-control" } })
                                                 @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
                                             }
 
+                                        </td>
+                                        <td class="col-md-2">
+                                            @{
+                                                Int32 PendingToReceive2 = 0;
+                                                if (Model.INV_PurchaseOrderItems[i].OrderedQuantity != Model.INV_PurchaseOrderItems[i].ReceivedQuantity)
+                                                {
+                                                    PendingToReceive2 = Model.INV_PurchaseOrderItems[i].OrderedQuantity - Model.INV_PurchaseOrderItems[i].ReceivedQuantity;
+                                                }
+
+                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, PendingToReceive2.ToString(), new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
+                                            }
                                         </td>
                                     </tr>
                                 }
