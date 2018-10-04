@@ -222,14 +222,13 @@
 	$(document).ready(function () {
 		$('#btnSave').click(function () {
 			//AddNewPurchaseOrderWithItem();
-            debugger;
-            debugger;
+          
             //$("#POReturn").submit();
             document.POReturn.submit();
         });
 
 		$("#ItemID").change(function () {
-			debugger;
+			
 			var ddlitemid = $('#ItemID').val();
 			GetItemPrice(ddlitemid);
 		});
@@ -273,10 +272,9 @@
 
 		$(".add-row").click(function () {
 
-			debugger;
 			$('#divItemList').show();
 			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
-				debugger;
+				
 				var itemid = $("#ItemID").val();
 				var itemname = $("#ItemID").find('option:selected').text();
 				var priceAmount = $("#txtItemPrice").val();
@@ -306,14 +304,12 @@
 
 
 	function AddNewPurchaseOrderWithItem() {
-		debugger;
 		var newData = {
             PuchasePrice: $('#PuchasePrice').val(),
             ReceivedQuantity: $('#ReceivedQuantity').val(),
             PurchaseOrderItemID: $('#PurchaseOrderItemID').val(),
             PurchaseOrderID: $('#PurchaseOrderID').val(),
 		};
-		debugger;
 		console.log(newData);
 
 		$.ajax({
@@ -323,11 +319,11 @@
 			contentType: "application/json;charset=utf-8",
 			dataType: "json",
 			success: function (result) {
-				debugger;
+				
 				$('#InvoiceMessage').modal('show');
 			},
 			error: function (errormessage) {
-				debugger;
+				
 
 			}
 		});

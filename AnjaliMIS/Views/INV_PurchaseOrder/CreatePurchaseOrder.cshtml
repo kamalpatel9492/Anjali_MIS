@@ -260,11 +260,9 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
 		$('#btnSave').click(function () {
-			debugger;
 			AddNewPurchaseOrderWithItem();
 		});
 		$("#ItemID").change(function () {
-			debugger;
 			var ddlitemid = $('#ItemID').val();
 			GetItemPrice(ddlitemid);
 		});
@@ -311,10 +309,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 		$(".add-row").click(function () {
 
-                debugger;
 			$('#divItemList').show();
                 if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
-                    debugger;
                     var itemid = $("#ItemID").val();
                     var itemname = $("#ItemID").find('option:selected').text();
                     var priceAmount = $("#txtItemPrice").val();
@@ -346,26 +342,24 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 		$(".delete-row").click(function () {
-                debugger;
 			$("table tbody").find('input[name="record"]').each(function () {
                     if ($(this).is(":checked")) {
-                        debugger;
+                      
                         var checkId = this.id;
 					$(this).parents("tr").remove();
-                        debugger;
+                    
                         //$.grep(productList, function (e) {
-                        //    debugger;
+                        
                         //     e.ItemID == checkId;
                         //});
-                        debugger;
+                        
 					$.each(productList, function (key, value) {
-                            debugger;
+                       
                             var checkitemid = value.ItemID;
                             var deductquantity = value.OrderedQuantity;
                             var deductpriceperunit = value.PuchasePrice;
                             if (checkId == checkitemid) {
                                 //productList.pop(key);
-                                debugger;
                                 productList.splice(key, 1);
                                 itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
 							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
@@ -380,7 +374,6 @@ input[type=number]::-webkit-outer-spin-button {
             });
         });
 	function GetItemPrice(ddlitemid) {
-		debugger;
 		$.ajax({
 			type: 'POST',
 			dataType: "json",
@@ -388,7 +381,7 @@ input[type=number]::-webkit-outer-spin-button {
 			contentType: "application/json;charset=utf-8",
 			url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
 			success: (function (result) {
-				debugger;
+				
 				$('#txtItemPrice').val(result);
 
 			}),
@@ -399,7 +392,6 @@ input[type=number]::-webkit-outer-spin-button {
 	}
 
 	function AddNewPurchaseOrderWithItem() {
-		debugger;
 		var newData = {
 			//InvoiceID: InvoiceID,
 			PurchaseOrderID: $('#PurchaseOrderID').val(),
@@ -427,7 +419,6 @@ input[type=number]::-webkit-outer-spin-button {
 			TotalAmount: $('#tdFinalTotal').html(),
             INV_PurchaseOrderItems: productList
 		};
-		debugger;
 		console.log(newData);
 
 		$.ajax({
@@ -437,13 +428,11 @@ input[type=number]::-webkit-outer-spin-button {
 			contentType: "application/json;charset=utf-8",
 			dataType: "json",
 			success: function (result) {
-				debugger;
 
 
 				$('#InvoiceMessage').modal('show');
 			},
 			error: function (errormessage) {
-				debugger;
 
 			}
 		});

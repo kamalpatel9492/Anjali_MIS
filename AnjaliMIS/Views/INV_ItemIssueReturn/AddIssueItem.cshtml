@@ -398,7 +398,7 @@
 
     function SaveItemForAssmeble() {
         var ForUseItemList = [];
-        debugger;
+        
         $('#tableForAssmeble input:checked').each(function () {
 
             var checkbboxid = $(this).val();
@@ -455,7 +455,6 @@
             IssueReturnToUserID: $('#IssueReturnToUserID').val(),
             IssueReturnItems: ForUseItemList
         };
-        debugger;
         $.ajax({
             url: "/INV_ItemIssueReturn/SaveForUse",
             data: JSON.stringify(newData),

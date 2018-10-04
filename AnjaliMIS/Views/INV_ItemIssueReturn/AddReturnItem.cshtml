@@ -226,7 +226,6 @@
 
         $("#btnFinalSubmit").click(function () {
 
-            debugger;
             //var itemList = {
             //    iNV_StockHistory_List: addReturnListArray
             //};
@@ -284,7 +283,6 @@
                 }
             }
 
-            debugger;
             $.ajax({
                 url: "/INV_ItemIssueReturn/RertunNewItem",
                 data: JSON.stringify(itemList),
@@ -447,15 +445,14 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                debugger;
+                
                 if (result.length > 0) {
-                    debugger;
+                    
                     if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
                         $('#tbodyRejectedAndExtraItem').html('');
                         var html = '';
                         var i = 1;
                         $.each(result, function (key, value) {
-                            debugger;
                             html += '<tr id=' + i + '>';
                             html += '<td><input type="checkbox" name="chkForRejected" value="' + result[key].ItemID + '"></td>';
                             html += '<td>' + result[key].ItemName + '</td>';
@@ -471,7 +468,6 @@
                         var html = '';
                         var i = 1;
                         $.each(result, function (key, value) {
-                            debugger;
                             html += '<tr id=' + i + '>';
                             html += '<td><input type="checkbox" name="chkForExtra" value="' + result[key].ItemID + '"></td>';
                             html += '<td>' + result[key].ItemName + '</td>';
@@ -485,7 +481,6 @@
                 }
             },
             error: function (errormessage) {
-                debugger;
                 alert(errormessage.responseText);
             }
         });
