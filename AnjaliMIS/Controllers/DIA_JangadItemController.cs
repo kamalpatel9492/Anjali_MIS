@@ -208,6 +208,49 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
+        public JsonResult RetrievePolishingStageList()
+        {
+            try
+            {
+                var polishingStageList = db.SYS_PolishingStage.Select(e => new
+                {
+                    PolishingStageID = e.PolishingStageID,
+                    SatgeName = e.SatgeName
+                }).ToList();
+
+                if (polishingStageList.Count > 0)
+                {
+                    return Json(polishingStageList, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveJangadForward(int jangadItemID, int polishingStageID, string remarks)
+        {
+            try
+            {
+                DIA_JangadItem _OldDIA_JangadItem = db.DIA_JangadItem.Find(jangadItemID);
+                _OldDIA_JangadItem.PolishingStageID = polishingStageID;
+                _OldDIA_JangadItem.StatusID = 1;
+                db.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception exception)
+            {
+                //exception handiling
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
+
+
         // POST: DIA_JangadItem/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
