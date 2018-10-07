@@ -49,13 +49,13 @@
                             @Html.LabelFor(model => model.Qunatity, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-3">
                                 @Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control" , @onkeypress = "return isNumberKey(event)" } })
-                                @Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-10">
-                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                <a href="javascript:null" class="btn default btn-sm add-row"><i class="fa fa-plus" aria-hidden="true"></i> Add Item</a>
                             </div>
                         </div>
                         <div id="divItemList" class="form-group" hidden>
@@ -67,7 +67,7 @@
                                             <th>Select</th>
                                             <th>Main Item</th>
                                             <th>Sub Item</th>
-                                            <th>Quantity</th>
+                                            <th class="text-right">Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
@@ -87,7 +87,7 @@
                                     </tbody>
 
                                 </table>
-                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                <button type="button" style="float:right;" class="delete-row btn default btn-sm"><i class="fa fa-minus" aria-hidden="true"></i> Delete Item</button>
                             </div>
                         </div>
 
@@ -95,7 +95,7 @@
                             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                     </div>
@@ -122,10 +122,11 @@
 
     @if (Model.SubItems != null)
     {
+        
          @:$('#divItemList').show();
         foreach (var @item in Model.SubItems)
         {
-
+          @:debugger;
             @:  productList.push({ SubItemID: @item.SubItemID, Qunatity: @item.Qunatity            });
 
             @:var subItemID = @item.SubItemID;
@@ -136,9 +137,10 @@
                 @: Remarks='@item.Remarks';
             }
             @:var quantity = @item.Qunatity;
-            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
+            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
             @:$("table .list").prepend(markup);
         }
+        
     }
     //var productList = [];
     $(document).ready(function () {
@@ -199,7 +201,7 @@
                 Qunatity: quantity,
             });
             invoiceID++;
-            var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
+            var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
             $("table .list").prepend(markup);
 
 
