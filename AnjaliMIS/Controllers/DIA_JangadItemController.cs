@@ -259,7 +259,7 @@ namespace AnjaliMIS.Controllers
                         var a = jangadItemList.Where(e => e.JangadItemID == item.JangadItemID).FirstOrDefault();
                         if (a != null)
                         {
-                            item.PolishingStageID = a.PolishingStageID;
+                            item.PolishingStageID = a.PolishingStageID==0?item.PolishingStageID:a.PolishingStageID;
                             item.StatusID = 1;
                             item.Remarks = a.Remarks;
                         }
