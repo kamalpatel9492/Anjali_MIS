@@ -239,7 +239,7 @@ namespace AnjaliMIS.Controllers
             try
             {
                 List<DIA_JangadItem> _OldDIA_JangadItem = new List<DIA_JangadItem>();
-                _OldDIA_JangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID.Value && e.PolishingStageID != 1).ToList();
+                _OldDIA_JangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID.Value && e.PolishingStageID == 1).ToList();
 
                 if (jangadForwordTypeCompleteOrPartial == "Complete")
                 {
@@ -315,7 +315,7 @@ namespace AnjaliMIS.Controllers
             {
                 if (jangadID != 0)
                 {
-                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID != 1).Select(e=> new
+                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID == 1).Select(e=> new
                     {
                         JangadID=e.JangadID,
                         JangadItemID = e.JangadItemID

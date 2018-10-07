@@ -221,9 +221,8 @@
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     success: function (result) {
-                        debugger;
                         if (result == "Success") {
-                            debugger;
+                            
                             alert(result);
                             location.reload(true);
                         }
@@ -295,7 +294,7 @@
                 $("#btnSaveJangadForward").click(function () {
                     
                     if ($('input[name=Jangad]:checked').val() == "Complete") {
-                        debugger;
+                        
                         var jangadID = $('#txtJangadNo').attr('data-id');
                         var polishingStageID = $('#ddlPolishingStageID').val();
                         var remarks = $('#txtRemarks').val();
@@ -304,7 +303,6 @@
                     }
                     else if ($('input[name=Jangad]:checked').val() == "Partial") {
                         
-                        debugger;
                         var jangadID = $('#txtJangadNo').attr('data-id');
                         SubmitArrayJangadItemList = [];
                         for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++)
@@ -315,8 +313,7 @@
                                 remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
                             });
                         }
-                        debugger;
-                        console.log(SubmitArrayJangadItemList);
+                        //console.log(SubmitArrayJangadItemList);
                         SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
                         
                     }
