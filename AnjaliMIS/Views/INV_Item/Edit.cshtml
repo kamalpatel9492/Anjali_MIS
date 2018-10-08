@@ -10,6 +10,7 @@
                     new { controller = "INV_Item" })
     </li>
 }
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -42,12 +43,12 @@
 
                                 @if (Model.ItemID > 0)
                                 {
-                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control select2me", @readonly = "readonly", disabled = "disabled" })
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger", @readonly = "readonly" })
                                 }
                                 else
                                 {
-                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control select2me" })
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
                                 }
 
@@ -63,7 +64,7 @@
                             <div class="col-md-4">
                                 @if (Model.IsLock == true)
                                 {
-                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
                                 }
                                 else
                                 {
@@ -78,12 +79,12 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal" } })
                                     @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                                 </div>
                                 @Html.LabelFor(model => model.MinStockLimit, "Min. Stock ", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.MinStockLimit, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.MinStockLimit, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal" } })
                                     @Html.ValidationMessageFor(model => model.MinStockLimit, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -93,12 +94,12 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2", @readonly = "readonly" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                                 </div>
                                 @Html.LabelFor(model => model.MinStockLimit, "Min. Stock ", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-4">
-                                    @Html.EditorFor(model => model.MinStockLimit, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.EditorFor(model => model.MinStockLimit, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.MinStockLimit, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -108,14 +109,12 @@
                             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                             </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.RejectedQuantity, "Rejected Qty.", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.RejectedQuantity, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.RejectedQuantity, "", new { @class = "text-danger" })
-                                </div>
+                            @Html.LabelFor(model => model.RejectedQuantity, "Rejected Qty.", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.RejectedQuantity, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal" } })
+                                @Html.ValidationMessageFor(model => model.RejectedQuantity, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -165,3 +164,15 @@
     <!--Add-Edit code end-->
 
 }
+
+<script>
+    $(document).ready(function () {
+        $(".allownumericwithdecimal").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>

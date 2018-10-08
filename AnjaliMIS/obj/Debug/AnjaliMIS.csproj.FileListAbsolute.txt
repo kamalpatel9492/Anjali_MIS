@@ -242,3 +242,163 @@ G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csproj.CopyCo
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.dll
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.pdb
 G:\Project\Anjali MIS\AM1\Anjali_MIS\AnjaliMIS\obj\Debug\AnjaliMIS.csprojAssemblyReference.cache
+D:\Kamal\AnjaliMIS\bin\AnjaliMIS.dll.config
+D:\Kamal\AnjaliMIS\bin\AnjaliMIS.dll
+D:\Kamal\AnjaliMIS\bin\AnjaliMIS.pdb
+D:\Kamal\AnjaliMIS\bin\Antlr3.Runtime.dll
+D:\Kamal\AnjaliMIS\bin\AutoMapper.dll
+D:\Kamal\AnjaliMIS\bin\EntityFramework.dll
+D:\Kamal\AnjaliMIS\bin\EntityFramework.SqlServer.dll
+D:\Kamal\AnjaliMIS\bin\Microsoft.Data.Edm.dll
+D:\Kamal\AnjaliMIS\bin\Microsoft.Data.OData.dll
+D:\Kamal\AnjaliMIS\bin\Microsoft.Web.Infrastructure.dll
+D:\Kamal\AnjaliMIS\bin\Newtonsoft.Json.dll
+D:\Kamal\AnjaliMIS\bin\System.Net.Http.Formatting.dll
+D:\Kamal\AnjaliMIS\bin\System.Spatial.dll
+D:\Kamal\AnjaliMIS\bin\System.ValueTuple.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Helpers.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.OData.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.Tracing.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.WebHost.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Mvc.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Optimization.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Providers.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.Razor.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.Deployment.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.dll
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.Razor.dll
+D:\Kamal\AnjaliMIS\bin\WebGrease.dll
+D:\Kamal\AnjaliMIS\bin\Antlr3.Runtime.pdb
+D:\Kamal\AnjaliMIS\bin\AutoMapper.pdb
+D:\Kamal\AnjaliMIS\bin\AutoMapper.xml
+D:\Kamal\AnjaliMIS\bin\EntityFramework.xml
+D:\Kamal\AnjaliMIS\bin\EntityFramework.SqlServer.xml
+D:\Kamal\AnjaliMIS\bin\Microsoft.Data.Edm.xml
+D:\Kamal\AnjaliMIS\bin\Microsoft.Data.OData.xml
+D:\Kamal\AnjaliMIS\bin\Newtonsoft.Json.xml
+D:\Kamal\AnjaliMIS\bin\System.Net.Http.Formatting.xml
+D:\Kamal\AnjaliMIS\bin\System.Spatial.xml
+D:\Kamal\AnjaliMIS\bin\System.ValueTuple.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Helpers.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.OData.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.Tracing.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Http.WebHost.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Mvc.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Optimization.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Providers.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.Razor.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.Deployment.xml
+D:\Kamal\AnjaliMIS\bin\System.Web.WebPages.Razor.xml
+D:\Kamal\AnjaliMIS\bin\de\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\es\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\fr\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\it\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\ja\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\ko\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\ru\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+D:\Kamal\AnjaliMIS\bin\de\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\es\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\fr\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\it\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\ja\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\ko\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\ru\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+D:\Kamal\AnjaliMIS\bin\de\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\es\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\fr\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\it\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\ja\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\ko\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\ru\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hans\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\bin\zh-Hant\System.Spatial.resources.dll
+D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.csprojResolveAssemblyReference.cache
+D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.dll
+D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.pdb
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AnjaliMIS.dll.config
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AnjaliMIS.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AnjaliMIS.pdb
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Antlr3.Runtime.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AutoMapper.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\EntityFramework.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\EntityFramework.SqlServer.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Microsoft.Data.Edm.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Microsoft.Data.OData.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Microsoft.Web.Infrastructure.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Newtonsoft.Json.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Net.Http.Formatting.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Spatial.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.ValueTuple.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Helpers.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.OData.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.Tracing.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.WebHost.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Mvc.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Optimization.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Providers.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Razor.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.Deployment.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.Razor.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\WebGrease.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Antlr3.Runtime.pdb
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AutoMapper.pdb
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AutoMapper.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\EntityFramework.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\EntityFramework.SqlServer.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Microsoft.Data.Edm.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Microsoft.Data.OData.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\Newtonsoft.Json.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Net.Http.Formatting.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Spatial.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.ValueTuple.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Helpers.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.OData.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.Tracing.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Http.WebHost.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Mvc.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Optimization.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Providers.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.Razor.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.Deployment.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\System.Web.WebPages.Razor.xml
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\de\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\es\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\fr\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\it\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ja\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ko\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ru\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hans\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hant\Microsoft.Data.Edm.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\de\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\es\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\fr\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\it\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ja\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ko\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ru\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hans\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hant\Microsoft.Data.OData.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\de\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\es\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\fr\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\it\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ja\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ko\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\ru\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hans\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hant\System.Spatial.resources.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.csprojResolveAssemblyReference.cache
+N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.dll
+N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.pdb

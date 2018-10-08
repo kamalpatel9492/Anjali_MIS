@@ -27,18 +27,25 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.MainItemID, "Main Item", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control" })
+                                @if (Model.ItemConfigurationID > 0)
+                                {
+                                    @Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownList("MainItemID", null, htmlAttributes: new { @class = "form-control" })
+                                }
                                 @Html.ValidationMessageFor(model => model.MainItemID, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                         @*<div class="form-group">
-                @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                        @Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
-                </div>
-        </div>*@
+                                    @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                            @Html.DropDownList("SubItemID", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SubItemID, "", new { @class = "text-danger" })
+                                    </div>
+                            </div>*@
                         <h3 class="form-section">Sub Items</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.SubItemID, "Sub Item", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -48,14 +55,14 @@
 
                             @Html.LabelFor(model => model.Qunatity, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-3">
-                                @Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control" , @onkeypress = "return isNumberKey(event)" } })
-                                @Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Qunatity, new { htmlAttributes = new { @class = "form-control", @onkeypress = "return isNumberKey(event)" } })
+                                @*@Html.ValidationMessageFor(model => model.Qunatity, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-10">
-                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                <a href="javascript:null" class="btn default btn-sm add-row"><i class="fa fa-plus" aria-hidden="true"></i> Add Item</a>
                             </div>
                         </div>
                         <div id="divItemList" class="form-group" hidden>
@@ -67,27 +74,27 @@
                                             <th>Select</th>
                                             <th>Main Item</th>
                                             <th>Sub Item</th>
-                                            <th>Quantity</th>
+                                            <th class="text-right">Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
 
                                         @*<tr>
-                            <td colspan="4" class="text-right">Main Item</td>
-                            <td colspan="4" id="tdMainItem"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="text-right">Sub Item</td>
-                            <td colspan="4" id="tdSubItem"></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="text-right">Quantity</td>
-                            <td colspan="4" id="tdQuantity"></td>
-                        </tr>*@
+                                                <td colspan="4" class="text-right">Main Item</td>
+                                                <td colspan="4" id="tdMainItem"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-right">Sub Item</td>
+                                                <td colspan="4" id="tdSubItem"></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-right">Quantity</td>
+                                                <td colspan="4" id="tdQuantity"></td>
+                                            </tr>*@
                                     </tbody>
 
                                 </table>
-                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                <button type="button" style="float:right;" class="delete-row btn default btn-sm"><i class="fa fa-minus" aria-hidden="true"></i> Delete Item</button>
                             </div>
                         </div>
 
@@ -95,7 +102,7 @@
                             @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                @*@Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })*@
                             </div>
                         </div>
                     </div>
@@ -122,23 +129,23 @@
 
     @if (Model.SubItems != null)
     {
-         @:$('#divItemList').show();
-        foreach (var @item in Model.SubItems)
-        {
 
+         @:$('#divItemList').show();
+                            foreach (var @item in Model.SubItems)
+        {
             @:  productList.push({ SubItemID: @item.SubItemID, Qunatity: @item.Qunatity            });
 
             @:var subItemID = @item.SubItemID;
-            @:var MainItemID ='@item.INV_Item.ItemName';
-            @:var itemname ='@item.INV_Item1.ItemName';
-            @:var Remarks;
-            if (@item.Remarks != "") {
+                                @:var MainItemID ='@item.INV_Item.ItemName';
+                                @:var itemname ='@item.INV_Item1.ItemName';
+                                @:var Remarks;
+                                if (@item.Remarks != "") {
                 @: Remarks='@item.Remarks';
-            }
+                                }
             @:var quantity = @item.Qunatity;
-            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
-            @:$("table .list").prepend(markup);
-        }
+                                    @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
+                                    @:$("table .list").prepend(markup);
+                            }
     }
     //var productList = [];
     $(document).ready(function () {
@@ -152,29 +159,29 @@
 
         function GetSubItem(mainItemID) {
 
-        $.ajax({
-            type: 'POST',
-            dataType: "json",
-            data: "{ MainItemID:'" + mainItemID + "'}",
-            contentType: "application/json;charset=utf-8",
-            url: '@Url.Action("RetrieveItemSubList", "INV_ItemConfiguration")',
-            success: (function (result) {
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                data: "{ MainItemID:'" + mainItemID + "'}",
+                contentType: "application/json;charset=utf-8",
+                url: '@Url.Action("RetrieveItemSubList", "INV_ItemConfiguration")',
+                success: (function (result) {
 
-                if (result.length > 0) {
-                    $("#ddlItemListSubItem").empty();
-                    $("#ddlItemListSubItem").append('<option value="0">Select Sub Item</option>');
-                    for (var i = 0; i < result.length; i++) {
-                        var option = $("<option/>");
-                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
-                        $("#ddlItemListSubItem").append(option);
+                    if (result.length > 0) {
+                        $("#ddlItemListSubItem").empty();
+                        $("#ddlItemListSubItem").append('<option value="0">Select Sub Item</option>');
+                        for (var i = 0; i < result.length; i++) {
+                            var option = $("<option/>");
+                            option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                            $("#ddlItemListSubItem").append(option);
+                        }
                     }
+                }),
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
                 }
-            }),
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
-        });
-    }
+            });
+        }
 
         $('#btnSave').click(function () {
             AddNewItemConfigurationWithItem();
@@ -182,10 +189,10 @@
         $(".add-row").click(function () {
 
             $('#divItemList').show();
-
+            debugger;
             var subItemID = $("#ddlItemListSubItem").val();
-            if (subItemID == "Select Sub Item") {
-                alert("Select Item");
+            if (subItemID == "0") {
+                alert("Select Sub Item.");
                 return;
             }
             var MainItemID = $("#MainItemID").find('option:selected').text();
@@ -194,15 +201,20 @@
 
             var invoiceID = 1;
             var quantity = $('#Qunatity').val();
+            if (quantity == "0" || quantity == "") {
+                alert("Enter Valid Quantity.");
+                return;
+            }
+
             productList.push({
                 SubItemID: subItemID,
                 Qunatity: quantity,
             });
             invoiceID++;
-            var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td>" + quantity + "</td></tr>";
+            var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
             $("table .list").prepend(markup);
-
-
+            $('#Qunatity').val("0");
+            $("#ddlItemListSubItem").val("0");
         });
         $(".delete-row").click(function () {
 

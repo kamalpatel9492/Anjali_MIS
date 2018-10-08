@@ -19,11 +19,13 @@ namespace AnjaliMIS.Controllers
         // GET: DIA_JangadItem
         public ActionResult Index()
         {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
+            //var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
+            var _DIA_Jangad = db.DIA_Jangad.ToList();
             ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
 
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 1).ToList());
+            //var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
+            //return View(dIA_JangadItem.Where(w => w.PolishingStageID == 1).ToList());
+            return View(_DIA_Jangad);
         }
 
         // GET: DIA_JangadItem/Details/5
@@ -232,16 +234,40 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveJangadForward(int jangadItemID, int polishingStageID, string remarks)
+        public JsonResult SaveJangadForward(int? jangadID, int? polishingStageID, string remarks, List<DIA_JangadItem> jangadItemList,string jangadForwordTypeCompleteOrPartial)
         {
             try
             {
-                DIA_JangadItem _OldDIA_JangadItem = db.DIA_JangadItem.Find(jangadItemID);
-                _OldDIA_JangadItem.PolishingStageID = polishingStageID;
-                _OldDIA_JangadItem.StatusID = 1;
-                db.SaveChanges();
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                List<DIA_JangadItem> _OldDIA_JangadItem = new List<DIA_JangadItem>();
+                _OldDIA_JangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID.Value && e.PolishingStageID == 1).ToList();
 
+                if (jangadForwordTypeCompleteOrPartial == "Complete")
+                {
+                    foreach (var item in _OldDIA_JangadItem)
+                    {
+                        item.PolishingStageID = polishingStageID.Value;
+                        item.StatusID = 1;
+                        item.Remarks = remarks;
+                    }
+                    db.SaveChanges();
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                else if (jangadForwordTypeCompleteOrPartial == "Partial")
+                {
+                    foreach (var item in _OldDIA_JangadItem)
+                    {
+                        var a = jangadItemList.Where(e => e.JangadItemID == item.JangadItemID).FirstOrDefault();
+                        if (a != null)
+                        {
+                            item.PolishingStageID = a.PolishingStageID==0?item.PolishingStageID:a.PolishingStageID;
+                            item.StatusID = 1;
+                            item.Remarks = a.Remarks;
+                        }
+                    }
+                    
+                    db.SaveChanges();
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception exception)
             {
@@ -281,6 +307,32 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem);
         }
 
+        [HttpPost]
+        // GET: GRN
+        public JsonResult RetrieveJangadItemList(int jangadID)
+        {
+            try
+            {
+                if (jangadID != 0)
+                {
+                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID == 1).Select(e=> new
+                    {
+                        JangadID=e.JangadID,
+                        JangadItemID = e.JangadItemID
+                    }).ToList();
+                    if (jangadItemList.Count > 0)
+                    {
+                        return Json(jangadItemList, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
+        }
 
         #region Planning
         // GET: DIA_JangadItem/IndexPlanning

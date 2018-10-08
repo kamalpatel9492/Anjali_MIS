@@ -41,13 +41,13 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ItemName)
                         </th>
-                        <th>
+                        <th class="text-right">
                          Min.Stock
                         </th>
-                        <th>
+                        <th class="text-right">
                            Qty
                         </th>
-                        <th>
+                        <th class="text-right">
                            Rej. Quantity
                         </th>
                         <th>
@@ -73,13 +73,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemName)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.MinStockLimit)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.Quantity)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.RejectedQuantity)
                             </td>
                             <td>
