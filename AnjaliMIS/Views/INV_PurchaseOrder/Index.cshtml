@@ -76,21 +76,21 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PODate)
+                                @Convert.ToDateTime(item.PODate).ToString("dd-MM-yyyy")
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PONo)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.TotalAmount)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.PaidAmount)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.PendingAmount)
                             </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.Casar)
                             </td>
 
