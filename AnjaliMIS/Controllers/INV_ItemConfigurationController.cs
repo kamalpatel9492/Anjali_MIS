@@ -70,6 +70,11 @@ namespace AnjaliMIS.Controllers
         [HttpPost]
         public ActionResult Create(INV_ItemConfiguration iNV_ItemConfiguration)
         {
+            if (db.INV_ItemConfiguration.Where(I => I.MainItemID == iNV_ItemConfiguration.MainItemID).Count() > 0)
+            {
+                ModelState.AddModelError("ItemNameDuplicate", "Selected item is already configured.");
+            }
+
             if (iNV_ItemConfiguration.INV_Items != null)
             {
                 if (ModelState.IsValid)

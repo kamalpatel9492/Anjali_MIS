@@ -131,21 +131,21 @@
     {
 
          @:$('#divItemList').show();
-                            foreach (var @item in Model.SubItems)
+                                    foreach (var @item in Model.SubItems)
         {
             @:  productList.push({ SubItemID: @item.SubItemID, Qunatity: @item.Qunatity            });
 
             @:var subItemID = @item.SubItemID;
-                                @:var MainItemID ='@item.INV_Item.ItemName';
-                                @:var itemname ='@item.INV_Item1.ItemName';
-                                @:var Remarks;
-                                if (@item.Remarks != "") {
+                                        @:var MainItemID ='@item.INV_Item.ItemName';
+                                        @:var itemname ='@item.INV_Item1.ItemName';
+                                        @:var Remarks;
+                                        if (@item.Remarks != "") {
                 @: Remarks='@item.Remarks';
-                                }
+                                        }
             @:var quantity = @item.Qunatity;
-                                    @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
-                                    @:$("table .list").prepend(markup);
-                            }
+                                            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
+                                            @:$("table .list").prepend(markup);
+                                    }
     }
     //var productList = [];
     $(document).ready(function () {
@@ -187,7 +187,7 @@
             AddNewItemConfigurationWithItem();
         });
         $(".add-row").click(function () {
-
+            var isItemEntered = false;
             $('#divItemList').show();
             debugger;
             var subItemID = $("#ddlItemListSubItem").val();
@@ -206,15 +206,28 @@
                 return;
             }
 
+            $.each(productList, function (key, value) {
+                if(value.SubItemID == subItemID)
+                {
+                    isItemEntered=true;
+                }
+            });
+
             productList.push({
                 SubItemID: subItemID,
                 Qunatity: quantity,
             });
             invoiceID++;
-            var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
-            $("table .list").prepend(markup);
-            $('#Qunatity').val("0");
-            $("#ddlItemListSubItem").val("0");
+            if(!isItemEntered)
+            {
+                var markup = "<tr><td><input type='checkbox' name='record' id='" + subItemID + "'></td><td>" + MainItemID + "</td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td></tr>";
+                $("table .list").prepend(markup);
+                $('#Qunatity').val("0");
+                $("#ddlItemListSubItem").val("0");
+            }
+            else{
+                alert("Sub Item already entered.");
+            }
         });
         $(".delete-row").click(function () {
 
