@@ -569,14 +569,16 @@ namespace AnjaliMIS.Controllers
 
                         INV_StockHistory _StockHistoryNew = new INV_StockHistory();
                         _StockHistoryNew = db.INV_StockHistory.Where(w => w.IssueNumber == iNV_IssueReturnViewModal.IssueReturnNo && w.ItemID == item.ItemID).FirstOrDefault();
-
-                        if (_StockHistoryNew.Quantity < item.Quantity)
+                        if (_StockHistoryNew != null)
                         {
-                            if (Err == "")
-                                Err = Err + "You can not return more than issue. " + inv_Item.ItemName;
-                            else
-                                Err = Err + ", You can not return more than issue. " + inv_Item.ItemName;
+                            if (_StockHistoryNew.Quantity < item.Quantity)
+                            {
+                                if (Err == "")
+                                    Err = Err + "You can not return more than issue. " + inv_Item.ItemName;
+                                else
+                                    Err = Err + ", You can not return more than issue. " + inv_Item.ItemName;
 
+                            }
                         }
 
                         if (Session["UserID"] != null)

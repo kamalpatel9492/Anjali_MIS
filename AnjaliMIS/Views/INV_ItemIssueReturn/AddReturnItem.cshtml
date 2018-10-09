@@ -5,7 +5,7 @@
 
 @section breadcrumb {
     <li>
-        @Html.ActionLink("Inventory Dashboard", "Index",
+        @Html.ActionLink("Issue/Return", "Index",
                     new { controller = "INV_ItemIssueReturn" })
     </li>
 }
@@ -65,7 +65,7 @@
                         </div>
                         <label class="control-label col-md-1">Quantity</label>
                         <div class="col-md-2">
-                            <input id="txtReturnItemQuantity" type="text" class="form-control" />
+                            <input id="txtReturnItemQuantity" type="text" class="form-control allownumericwithdecimal" />
                         </div>
                         <label class="control-label col-md-1">Remarks</label>
 
@@ -290,7 +290,7 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    @*location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';*@
+                    location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
 
                 },
                 error: function (errormessage) {

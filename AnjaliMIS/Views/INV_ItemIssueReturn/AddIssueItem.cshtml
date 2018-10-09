@@ -79,7 +79,7 @@
                                     <thead>
                                         <tr>
                                             <th>Item Name</th>
-                                            <th>Quantity</th>
+                                            <th class="text-right">Quantity</th>
                                             <th>Remarks</th>
                                         </tr>
                                     </thead>
@@ -96,7 +96,7 @@
                                         <tr>
                                             <th>Select</th>
                                             <th>Item Name</th>
-                                            <th>Quantity</th>
+                                            <th class="text-right">Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbodyForAssmeble" id="tbodyForAssmeble"></tbody>
@@ -333,7 +333,7 @@
                         html += '<tr id=' + i + '>';
                         html += '<td><input type="checkbox" name="chkForAssmeble" value="' + result[key].SubItemID + '"></td>';
                         html += '<td>' + result[key].ItemName + '</td>';
-                        html += '<td><input id="quantity' + i + '" type="text" class="form-control allownumericwithdecimal" value="' + result[key].Qunatity + '"/></td>';
+                        html += '<td><input id="quantity' + i + '" type="text" class="form-control allownumericwithdecimal text-right" value="' + result[key].Qunatity + '"/></td>';
                         html += '</tr>';
                         i++;
                     });
@@ -380,7 +380,7 @@
                         html += '<tr id=' + i + '>';
                         html += '<td><input type="checkbox" name="chkSubItem" value="' + result[key].SubItemID + '"></td>';
                         html += '<td>' + result[key].ItemName + '</td>';
-                        html += '<td><input id="quantity' + i + '" type="text" class="form-control" value="' + result[key].Qunatity + '"/></td>';
+                        html += '<td><input id="quantity' + i + '" type="text" class="form-control text-right" value="' + result[key].Qunatity + '"/></td>';
                         html += '</tr>';
                         i++;
                     });
@@ -446,7 +446,7 @@
                 Quantity: quantity
             });
             var html = '';
-            var html = "<tr><td>" + itemname + "</td><td>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
+            var html = "<tr><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
             $('#tbodyForUse').append(html);
         }
     });
