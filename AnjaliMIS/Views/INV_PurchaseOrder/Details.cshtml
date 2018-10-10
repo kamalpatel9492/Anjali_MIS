@@ -12,10 +12,17 @@
 <div class="col-md-12 col-sm-12">
     <!-- BEGIN PORTLET-->
     <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-dark bold uppercase">Items In PO</span>
+            </div>
+            <div class="actions">
+
+                @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", null, new { @class = "btn btn-circle green btn-outline btn-sm" })
+            </div>
+        </div>
         <div class="portlet-body">
             <div class="invoice">
-                Items In PO
-                <hr />
                 <div class="row">
                     <div class="col-xs-12">
                         <table class="table table-bordered table-responsive" id="selected_units">
@@ -53,7 +60,7 @@
                                             @*@(ItemTotal += @Convert.ToDecimal(item.Quantity * item.PricePerUnit))*@
                                         </td>
                                     </tr>
-                                }
+                                                }
                                 <tr>
                                     <td colspan="4" class="text-right">Item Total</td>
                                     <td colspan="4" id="tdItemTotal">@ItemTotal</td>

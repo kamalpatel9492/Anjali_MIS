@@ -155,12 +155,12 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal" } })
+                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
                                 @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2 allownumericwithdecimal" })
+                            @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
                                 @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2 allownumericwithdecimal" })
@@ -175,7 +175,7 @@
                             <div class="col-md-offset-3 col-md-9">
                                 <input id="btnSave" type="button" value="Save" class="btn green" />
                                 @*<input type="submit" value="Save" class="btn green" />*@
-                                @Html.ActionLink("Back to List", "index", "INV_Invoice", new { @class = "btn default" })
+                                @Html.ActionLink("Back to List", "index", "INV_Invoice",null, new { @class = "btn default" })
                             </div>
                         </div>
                     </div>
@@ -201,30 +201,40 @@
          @:IGSTID = @Model.IGST
          @:SGSTID = @Model.SGST
          @:$('#divItemList').show();
-        foreach (var @item in Model.INV_InvoiceItems)
+                foreach (var @item in Model.INV_InvoiceItems)
         {
 
             @:  productList.push({ SubItemID: @item.InvoiceItemID, Qunatity: @item.Quantity            });
 
             @:var itemid = @item.ItemID;
-            @:var itemname ='@item.INV_Item.ItemName';
-            @:var Remarks;
-            if (@item.Remarks != "") {
+                    @:var itemname ='@item.INV_Item.ItemName';
+                    @:var Remarks;
+                    if (@item.Remarks != "") {
                 @: Remarks='@item.Remarks';
-            }
+                    }
             @:var quantity = @item.Quantity;
-            @:var priceAmount = @item.PricePerUnit;
-            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
-
+                    @:var priceAmount = @item.PricePerUnit;
+                    @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
+                @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
             @:$("table .list").prepend(markup);
+                }
+
+        @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+            @:FinalCalculation();
         }
-        @:FinalCalculation();
-    }
     $(document).ready(function () {
 
-        $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+        $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {
             $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
         });
@@ -235,7 +245,7 @@
         RetrieveitemList();
 
         $("#ddlCGST").change(function () {
-            var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");  
+            var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");
             $('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
@@ -376,7 +386,8 @@
         });
     }
 
-    function AddNewInvoiceWithItem() {
+    function AddNewInvoiceWithItem()
+    {
 
         var newData = {
             PartyID: $('#PartyID').val(),
@@ -422,7 +433,7 @@
         });
     }
     function FinalCalculation() {
-
+        debugger;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         if (igstCalculation > 0)
@@ -452,7 +463,7 @@
 
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(parseInt(newAmountPending));
-    
+
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");
     }

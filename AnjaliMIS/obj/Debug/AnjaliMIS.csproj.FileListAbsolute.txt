@@ -319,7 +319,6 @@ D:\Kamal\AnjaliMIS\bin\ko\System.Spatial.resources.dll
 D:\Kamal\AnjaliMIS\bin\ru\System.Spatial.resources.dll
 D:\Kamal\AnjaliMIS\bin\zh-Hans\System.Spatial.resources.dll
 D:\Kamal\AnjaliMIS\bin\zh-Hant\System.Spatial.resources.dll
-D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.csprojResolveAssemblyReference.cache
 D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.dll
 D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.pdb
 N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\AnjaliMIS.dll.config
@@ -402,3 +401,4 @@ N:\Prj\Anjali MIS\Project\AnjaliMIS\bin\zh-Hant\System.Spatial.resources.dll
 N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.csprojResolveAssemblyReference.cache
 N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.dll
 N:\Prj\Anjali MIS\Project\AnjaliMIS\obj\Debug\AnjaliMIS.pdb
+D:\Kamal\AnjaliMIS\obj\Debug\AnjaliMIS.csprojResolveAssemblyReference.cache

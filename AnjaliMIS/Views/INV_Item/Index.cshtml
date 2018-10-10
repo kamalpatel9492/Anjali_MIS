@@ -42,13 +42,13 @@
                             @Html.DisplayNameFor(model => model.ItemName)
                         </th>
                         <th class="text-right">
-                         Min.Stock
+                            Qty
                         </th>
                         <th class="text-right">
-                           Qty
+                            Min.Stock
                         </th>
                         <th class="text-right">
-                           Rej. Quantity
+                            Rejected Qty.
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.INV_Unit.Unit)
@@ -74,10 +74,10 @@
                                 @Html.DisplayFor(modelItem => item.ItemName)
                             </td>
                             <td class="text-right">
-                                @Html.DisplayFor(modelItem => item.MinStockLimit)
+                                @Html.DisplayFor(modelItem => item.Quantity)
                             </td>
                             <td class="text-right">
-                                @Html.DisplayFor(modelItem => item.Quantity)
+                                @Html.DisplayFor(modelItem => item.MinStockLimit)
                             </td>
                             <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.RejectedQuantity)
@@ -94,7 +94,7 @@
                                 @Html.ActionLink("| Delete", "Delete", new { id = item.ItemID })
                             </td>
                         </tr>
-                    }
+                                }
                 </tbody>
             </table>
         </div>
