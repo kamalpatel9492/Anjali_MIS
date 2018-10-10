@@ -41,14 +41,14 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ItemName)
                         </th>
-                        <th>
-                         Min.Stock
+                        <th class="text-right">
+                            Qty
                         </th>
-                        <th>
-                           Qty
+                        <th class="text-right">
+                            Min.Stock
                         </th>
-                        <th>
-                           Rej. Quantity
+                        <th class="text-right">
+                            Rejected Qty.
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.INV_Unit.Unit)
@@ -73,13 +73,13 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemName)
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MinStockLimit)
-                            </td>
-                            <td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.Quantity)
                             </td>
-                            <td>
+                            <td class="text-right">
+                                @Html.DisplayFor(modelItem => item.MinStockLimit)
+                            </td>
+                            <td class="text-right">
                                 @Html.DisplayFor(modelItem => item.RejectedQuantity)
                             </td>
                             <td>
@@ -94,7 +94,7 @@
                                 @Html.ActionLink("| Delete", "Delete", new { id = item.ItemID })
                             </td>
                         </tr>
-                    }
+                                }
                 </tbody>
             </table>
         </div>

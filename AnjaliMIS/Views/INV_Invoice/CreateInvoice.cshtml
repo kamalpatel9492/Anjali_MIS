@@ -100,7 +100,7 @@
                             </div>
                             <label class="control-label col-md-2">Item Price</label>
                             <div class="col-md-2">
-                                <input id="txtItemPrice" type="text" class="form-control" />
+                                <input id="txtItemPrice" type="text" class="form-control allownumericwithdecimal" />
                             </div>
                         </div>
 
@@ -118,31 +118,31 @@
                                         <tr>
                                             <th>Select</th>
                                             <th>Item Name</th>
-                                            <th>Quantity</th>
-                                            <th>Price</th>
-                                            <th>Total</th>
+                                            <th class="text-right">Quantity</th>
+                                            <th class="text-right">Price</th>
+                                            <th class="text-right">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody class="list">
                                         <tr>
                                             <td colspan="4" class="text-right">Item Total</td>
-                                            <td colspan="4" id="tdItemTotal"></td>
+                                            <td colspan="4" id="tdItemTotal" class="text-right"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></td>
-                                            <td colspan="4" id="tdSGST"></td>
+                                            <td colspan="4" id="tdSGST" class="text-right"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></td>
-                                            <td colspan="4" id="tdCGST"></td>
+                                            <td colspan="4" id="tdCGST" class="text-right"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></td>
-                                            <td colspan="4" id="tdIGST"></td>
+                                            <td colspan="4" id="tdIGST" class="text-right"></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="text-right">Final Total</td>
-                                            <td colspan="4" id="tdFinalTotal"></td>
+                                            <td colspan="4" id="tdFinalTotal" class="text-right"></td>
                                         </tr>
                                     </tbody>
 
@@ -155,15 +155,15 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithdecimal" } })
                                 @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2 allownumericwithdecimal" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2" })
+                            @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2 allownumericwithdecimal" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.AmountPending, "", new { @class = "text-danger" })
@@ -214,7 +214,7 @@
             }
             @:var quantity = @item.Quantity;
             @:var priceAmount = @item.PricePerUnit;
-            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) +"</td></tr>";
+            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
 
             @:$("table .list").prepend(markup);
         }
@@ -316,7 +316,7 @@
                     PricePerUnit: priceAmount
                 });
                 invoiceID++;
-                var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
+                var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
                 $("table .list").prepend(markup);
                 itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
                 $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);

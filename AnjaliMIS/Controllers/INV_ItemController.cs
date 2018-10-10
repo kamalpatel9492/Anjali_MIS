@@ -66,7 +66,7 @@ namespace AnjaliMIS.Controllers
             }
             if (!string.IsNullOrEmpty(iNV_Item.ItemName))
             {
-                if (db.INV_Item.Where(I => I.ItemName == iNV_Item.ItemName).Count() > 0)
+                if (db.INV_Item.Where(I => I.ItemName == iNV_Item.ItemName && I.CategoryID == iNV_Item.CategoryID).Count() > 0)
                 {
                     ModelState.AddModelError("ItemNameDuplicate", iNV_Item.ItemName + " Already added.");
                 }

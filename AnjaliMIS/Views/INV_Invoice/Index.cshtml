@@ -37,19 +37,19 @@
                         <th>
                             Inv. No.
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayNameFor(model => model.TotalAmount)
                         </th>
                         @*<th>
                             @Html.DisplayNameFor(model => model.Amount)
                         </th>*@
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayNameFor(model => model.AmountReceived)
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayNameFor(model => model.AmountPending)
                         </th>
-                        <th>
+                        <th class="text-right">
                             @Html.DisplayNameFor(model => model.Casar)
                         </th>
                         @*<th>
@@ -69,42 +69,43 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.InvoiceDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.InvoiceNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TotalAmount)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.Amount)
-                            </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AmountReceived)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AmountPending)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Casar)
-                            </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-                            </td>*@
-                            <td>
-                                @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.InvoiceID }) |
-                                @Html.ActionLink("Print", "Print", new { id = item.InvoiceID }, new { target = "_blank" }) |
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.InvoiceDate)*@
+                         @Convert.ToDateTime(item.InvoiceDate).ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceNo)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.TotalAmount)
+                        </td>
+                        @*<td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>*@
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.AmountReceived)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.AmountPending)
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.Casar)
+                        </td>
+                        @*<td>
+            @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
+        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SYS_FinYear.FinYear)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MST_Party.PartyName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.InvoiceID }) |
+                            @Html.ActionLink("Print", "Print", new { id = item.InvoiceID }, new { target = "_blank" }) |
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
