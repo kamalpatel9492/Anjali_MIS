@@ -236,6 +236,9 @@ namespace AnjaliMIS.Controllers
                 db.INV_PurchaseOrderItem.RemoveRange(poitem);
                 db.SaveChanges();
 
+                var poHistory = db.INV_PurchaseOrderHistory.Where(poi => poi.PurchaseOrderID == iNV_PurchaseOrder.PurchaseOrderID).ToList();
+                db.INV_PurchaseOrderHistory.RemoveRange(poHistory);
+                db.SaveChanges();
 
                 db.INV_PurchaseOrder.Remove(iNV_PurchaseOrder);
                 db.SaveChanges();

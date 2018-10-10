@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>10/01/2018 18:24:52</publishTime>
+      <publishTime>10/10/2018 22:21:31</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>10/01/2018 18:24:52</publishTime>
+      <publishTime>10/10/2018 22:21:31</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>10/07/2018 01:02:03</publishTime>
@@ -12607,22 +12607,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2018 20:51:23</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.js">
-      <publishTime>07/03/2018 21:06:19</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
-      <publishTime>07/03/2018 21:06:19</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
-      <publishTime>07/03/2018 21:05:25</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
       <publishTime>07/03/2018 21:05:25</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
-      <publishTime>07/03/2018 21:06:20</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>07/03/2018 21:06:20</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Scripts/knockout-3.4.2.debug.js">
       <publishTime>07/03/2018 21:05:26</publishTime>
@@ -12673,7 +12673,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/19/2018 00:59:40</publishTime>
     </File>
     <File Include="Views/DIA_JangadItem/Index.cshtml">
-      <publishTime>08/21/2018 02:51:32</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Views/DIA_JangadItem/IndexFixing.cshtml">
       <publishTime>08/21/2018 02:51:37</publishTime>
@@ -12751,7 +12751,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/26/2018 08:36:40</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/13/2018 01:26:18</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Views/Home/Login.cshtml">
       <publishTime>08/19/2018 02:09:53</publishTime>
@@ -12775,7 +12775,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:21</publishTime>
     </File>
     <File Include="Views/INV_Invoice/CreateInvoice.cshtml">
-      <publishTime>10/01/2018 15:53:14</publishTime>
+      <publishTime>10/10/2018 22:09:34</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Delete.cshtml">
       <publishTime>07/24/2018 23:38:06</publishTime>
@@ -12787,7 +12787,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2018 08:00:29</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Index.cshtml">
-      <publishTime>09/07/2018 00:53:07</publishTime>
+      <publishTime>10/09/2018 08:40:17</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Print.cshtml">
       <publishTime>08/03/2018 00:27:49</publishTime>
@@ -12802,10 +12802,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_Item/Edit.cshtml">
-      <publishTime>09/27/2018 07:42:56</publishTime>
+      <publishTime>10/10/2018 22:09:34</publishTime>
     </File>
     <File Include="Views/INV_Item/Index.cshtml">
-      <publishTime>09/11/2018 01:28:00</publishTime>
+      <publishTime>10/10/2018 22:09:34</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Delete.cshtml">
       <publishTime>08/21/2018 03:15:05</publishTime>
@@ -12814,16 +12814,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
-      <publishTime>09/27/2018 09:47:42</publishTime>
+      <publishTime>10/10/2018 22:09:34</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Index.cshtml">
       <publishTime>08/21/2018 02:52:38</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddIssueItem.cshtml">
-      <publishTime>09/27/2018 00:05:40</publishTime>
+      <publishTime>10/10/2018 02:14:17</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddReturnItem.cshtml">
-      <publishTime>09/27/2018 00:07:48</publishTime>
+      <publishTime>10/10/2018 02:50:20</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Details.cshtml">
       <publishTime>09/24/2018 23:47:02</publishTime>
@@ -12832,7 +12832,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2018 08:44:24</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Issue.cshtml">
-      <publishTime>09/24/2018 23:47:02</publishTime>
+      <publishTime>10/09/2018 01:15:07</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Return.cshtml">
       <publishTime>09/24/2018 23:47:02</publishTime>
@@ -12850,22 +12850,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:43</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/CreatePurchaseOrder.cshtml">
-      <publishTime>10/01/2018 17:46:15</publishTime>
+      <publishTime>10/10/2018 22:09:35</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Delete.cshtml">
       <publishTime>08/21/2018 03:12:30</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Details.cshtml">
-      <publishTime>09/14/2018 03:01:39</publishTime>
+      <publishTime>10/10/2018 22:09:35</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Edit.cshtml">
       <publishTime>10/01/2018 12:58:59</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Index.cshtml">
-      <publishTime>09/25/2018 08:54:39</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/POReturn.cshtml">
-      <publishTime>10/01/2018 17:37:19</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Print.cshtml">
       <publishTime>08/27/2018 10:07:39</publishTime>
@@ -12883,7 +12883,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2018 02:22:31</publishTime>
     </File>
     <File Include="Views/INV_StockHistory/Index.cshtml">
-      <publishTime>08/23/2018 03:04:43</publishTime>
+      <publishTime>10/07/2018 01:29:03</publishTime>
     </File>
     <File Include="Views/INV_Unit/Delete.cshtml">
       <publishTime>07/12/2018 09:19:20</publishTime>
@@ -12913,13 +12913,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/02/2018 19:36:52</publishTime>
     </File>
     <File Include="Views/LOC_Country/Delete.cshtml">
-      <publishTime>07/12/2018 00:35:04</publishTime>
+      <publishTime>10/09/2018 00:00:32</publishTime>
     </File>
     <File Include="Views/LOC_Country/Details.cshtml">
-      <publishTime>07/10/2018 19:49:54</publishTime>
+      <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Views/LOC_Country/Edit.cshtml">
-      <publishTime>09/27/2018 08:26:53</publishTime>
+      <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Views/LOC_Country/Index.cshtml">
       <publishTime>08/21/2018 02:57:04</publishTime>
@@ -12988,10 +12988,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2018 00:09:16</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>07/01/2018 16:47:49</publishTime>
+      <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/26/2018 07:34:15</publishTime>
+      <publishTime>10/09/2018 08:32:31</publishTime>
     </File>
     <File Include="Views/SYS_PartyType/Delete.cshtml">
       <publishTime>07/12/2018 09:38:44</publishTime>
@@ -13006,13 +13006,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:53:27</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>07/01/2018 16:47:49</publishTime>
+      <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>07/01/2018 16:47:49</publishTime>
+      <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/27/2018 10:00:42</publishTime>
+      <publishTime>10/10/2018 22:21:41</publishTime>
     </File>
   </ItemGroup>
 </Project>

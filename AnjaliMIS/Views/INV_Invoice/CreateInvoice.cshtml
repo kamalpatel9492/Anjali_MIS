@@ -64,7 +64,7 @@
                             </div>
                             @Html.LabelFor(model => model.PONo, "PO. No. ", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.PONo, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                 @Html.ValidationMessageFor(model => model.PONo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                             </div>
                             @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2 allownumericwithdecimal" })
                             <div class="col-md-2">
-                                @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                 @Html.ValidationMessageFor(model => model.AmountPending, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                             <div class="col-md-offset-3 col-md-9">
                                 <input id="btnSave" type="button" value="Save" class="btn green" />
                                 @*<input type="submit" value="Save" class="btn green" />*@
-                                @Html.ActionLink("Back to List", "index", "INV_Invoice",null, new { @class = "btn default" })
+                                @Html.ActionLink("Back to List", "index", "INV_Invoice", null, new { @class = "btn default" })
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
          @:$('#divItemList').show();
                 foreach (var @item in Model.INV_InvoiceItems)
         {
-            @:  productList.push({ SubItemID: @item.InvoiceItemID, Qunatity: @item.Quantity            });
+            @:  productList.push({ ItemID: @item.InvoiceItemID, Quantity: @item.Quantity , PricePerUnit: @item.PricePerUnit        });
 
             @:var itemid = @item.ItemID;
                     @:var itemname ='@item.INV_Item.ItemName';
@@ -322,7 +322,7 @@
 
 
             $('#divItemList').show();
-            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") 
+            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "")
             {
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
@@ -346,9 +346,9 @@
                         scrollTop: $("#divItemList").offset().top
                     }, 2000);
                 }
-               
+
             }
-            
+
         });
 
 
@@ -384,7 +384,7 @@
 
 
     function ValidationRemarks()
-    {    
+    {
         var isValid = true;
         if ($('#Remarks').val().trim() == "")
         {
