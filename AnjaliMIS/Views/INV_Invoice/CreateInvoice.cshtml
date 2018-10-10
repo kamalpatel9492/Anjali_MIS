@@ -77,8 +77,8 @@
                             </div>
                             @Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                <select id="ddlSGST" class="form-control"></select>
-
+                                @*<select id="ddlSGST" class="form-control"></select>*@
+                                <input id="txtSGSTValue" type="text" class="form-control" readonly="readonly" />
                             </div>
                         </div>
 
@@ -203,7 +203,6 @@
          @:$('#divItemList').show();
                 foreach (var @item in Model.INV_InvoiceItems)
         {
-
             @:  productList.push({ SubItemID: @item.InvoiceItemID, Qunatity: @item.Quantity            });
 
             @:var itemid = @item.ItemID;
@@ -239,26 +238,36 @@
             }
         });
 
-        RetrieveSGST();
+        //RetrieveSGST();
         RetrieveCGST();
         RetrieveIGST();
         RetrieveitemList();
 
         $("#ddlCGST").change(function () {
             var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");
+            $("#txtSGSTValue").val("SGST-"+changeSGSTValueDependOnCGST);
             $('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
-        $("#ddlSGST").change(function () {
-            FinalCalculation();
-        });
+        //$("#ddlSGST").change(function () {
+        //    FinalCalculation();
+        //});
 
         $("#ddlIGST").change(function () {
             FinalCalculation();
         });
         $('#btnSave').click(function () {
-
-            AddNewInvoiceWithItem();
+            var response = true;
+            response = ValidationRemarks(false);
+            if (response == false)
+            {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+            else
+            {
+                AddNewInvoiceWithItem();
+            }
         });
         $("#ddlItemList").change(function () {
 
@@ -313,28 +322,33 @@
 
 
             $('#divItemList').show();
-            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
-
+            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") 
+            {
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
                 var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
-                productList.push({
-                    ItemID: itemid,
-                    Quantity: quantity,
-                    PricePerUnit: priceAmount
-                });
-                invoiceID++;
-                var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
-                $("table .list").prepend(markup);
-                itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-                $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                FinalCalculation();
+                if(parseInt($('#txtQuantity').val()) != 0 && quantity !="")
+                {
+                    productList.push({
+                        ItemID: itemid,
+                        Quantity: quantity,
+                        PricePerUnit: priceAmount
+                    });
+                    invoiceID++;
+                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
+                    $("table .list").prepend(markup);
+                    itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+                    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                    FinalCalculation();
+                    $('html, body').animate({
+                        scrollTop: $("#divItemList").offset().top
+                    }, 2000);
+                }
+               
             }
-            $('html, body').animate({
-                scrollTop: $("#divItemList").offset().top
-            }, 2000);
+            
         });
 
 
@@ -367,6 +381,22 @@
 
         });
     });
+
+
+    function ValidationRemarks()
+    {    
+        var isValid = true;
+        if ($('#Remarks').val().trim() == "")
+        {
+            $('#Remarks').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Remarks').css('border-color', '#ccc');
+        }
+        return isValid;
+    }
+
     function GetItemPrice(ddlitemid) {
 
         $.ajax({
@@ -402,7 +432,7 @@
             FinYearID: $('#FinYearID').val(),
             CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
-            SGST: $('#ddlSGST').val(),
+            SGST: $('#ddlCGST').val(),//cgst and sgst both are same so
             SGSTAmount: $('#tdSGST').html(),
             IGST: $('#ddlIGST').val(),
             IGSTAmount: $('#tdIGST').html(),
@@ -433,7 +463,6 @@
         });
     }
     function FinalCalculation() {
-        debugger;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         if (igstCalculation > 0)
@@ -454,7 +483,7 @@
             $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
-        var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
+        var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
         var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
         $('#tdSGST').html(sgstCalculation);
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
@@ -518,10 +547,14 @@
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlCGST").append(option);
                     }
-                    if (CGSTID > 0)
+                    if (CGSTID > 0){
                         $('#ddlCGST').val(CGSTID);
-                    else
+                        $('#txtSGSTValue').val("SGST-"+$("option:selected","#ddlCGST").attr("data-id"));
+                    }
+                    else{
                         $('#ddlCGST').val(0);
+                        $('#txtSGSTValue').val(0);
+                    }
                     FinalCalculation();
                 }
             }),
