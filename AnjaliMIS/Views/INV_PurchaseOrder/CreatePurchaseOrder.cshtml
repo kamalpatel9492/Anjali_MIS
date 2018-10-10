@@ -588,10 +588,15 @@ input[type=number]::-webkit-outer-spin-button {
                         option.attr("value", result[i].TaxID).text(result[i].Tax).attr("data-id", result[i].Percentage);
                         $("#ddlCGST").append(option);
                     }
-                    if (CGSTID > 0)
+                    if (CGSTID > 0){
                         $('#ddlCGST').val(CGSTID);
+                        $('#txtSGSTValue').val("SGST-"+$("option:selected","#ddlCGST").attr("data-id"));
+                    }
                     else
+                    {
                         $('#ddlCGST').val(0);
+                        $('#txtSGSTValue').val(0);
+                    }
                     FinalCalculation();
 
                 }
