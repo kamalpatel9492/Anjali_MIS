@@ -266,8 +266,20 @@ input[type=number]::-webkit-outer-spin-button {
         @:FinalCalculation();
     }
 
-		$('#btnSave').click(function () {
-			AddNewPurchaseOrderWithItem();
+        $('#btnSave').click(function () {
+
+            var response = true;
+            response = ValidationRemarks(false);
+            if (response == false)
+            {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+            else
+            {
+                AddNewPurchaseOrderWithItem();
+            }
+
 		});
 		$("#ItemID").change(function () {
 			var ddlitemid = $('#ItemID').val();
@@ -318,35 +330,38 @@ input[type=number]::-webkit-outer-spin-button {
 		$(".add-row").click(function () {
 
 			$('#divItemList').show();
-                if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
-                    var itemid = $("#ItemID").val();
-                    var itemname = $("#ItemID").find('option:selected').text();
-                    var priceAmount = $("#txtItemPrice").val();
-                    var invoiceID = 1;
-                    var quantity = $('#txtQuantity').val();
-                    productList.push({
-                        //InvoiceItemID: InvoiceItemID,
-                        //InvoiceID: invoiceID,
-                        ItemID: itemid,
-                    OrderedQuantity: quantity,
-                    ReceivedQuantity: quantity,
-                    PuchasePrice: priceAmount,
-					PricePerUnit: priceAmount
-
-
-                });
-                    invoiceID++;
-                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
-                    $("table .list").prepend(markup);
-                    itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-                    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                    FinalCalculation();
-
-                }
-            $('html, body').animate({
-                    scrollTop: $("#divItemList").offset().top
-            }, 2000);
-            });
+			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") 
+			{
+			    var itemid = $("#ItemID").val();
+			    var itemname = $("#ItemID").find('option:selected').text();
+			    var priceAmount = $("#txtItemPrice").val();
+			    var invoiceID = 1;
+			    var quantity = $('#txtQuantity').val();
+			    if(parseInt($('#txtQuantity').val()) != 0 && quantity !="")
+			    {
+			        productList.push({
+			            //InvoiceItemID: InvoiceItemID,
+			            //InvoiceID: invoiceID,
+			            ItemID: itemid,
+			            OrderedQuantity: quantity,
+			            ReceivedQuantity: quantity,
+			            PuchasePrice: priceAmount,
+			            PricePerUnit: priceAmount
+			        });
+			    
+			        invoiceID++;
+			        var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
+			        $("table .list").prepend(markup);
+			        itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+			        $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+			        FinalCalculation();
+			        $('html, body').animate({
+			            scrollTop: $("#divItemList").offset().top
+			        }, 2000);
+			    }
+			} 
+		});
+            
 
 
 		$(".delete-row").click(function () {
@@ -452,7 +467,19 @@ input[type=number]::-webkit-outer-spin-button {
 			}
 		});
     }
-
+    function ValidationRemarks()
+    {    
+        var isValid = true;
+        if ($('#Remarks').val().trim() == "")
+        {
+            $('#Remarks').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Remarks').css('border-color', '#ccc');
+        }
+        return isValid;
+    }
 
     function FinalCalculation() {
 

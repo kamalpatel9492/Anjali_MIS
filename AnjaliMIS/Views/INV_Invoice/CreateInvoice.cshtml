@@ -257,8 +257,17 @@
             FinalCalculation();
         });
         $('#btnSave').click(function () {
-
-            AddNewInvoiceWithItem();
+            var response = true;
+            response = ValidationRemarks(false);
+            if (response == false)
+            {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+            else
+            {
+                AddNewInvoiceWithItem();
+            }
         });
         $("#ddlItemList").change(function () {
 
@@ -313,28 +322,34 @@
 
 
             $('#divItemList').show();
-            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
-
+            if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") 
+            {
+                debugger;
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
                 var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
-                productList.push({
-                    ItemID: itemid,
-                    Quantity: quantity,
-                    PricePerUnit: priceAmount
-                });
-                invoiceID++;
-                var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
-                $("table .list").prepend(markup);
-                itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-                $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                FinalCalculation();
+                if(parseInt($('#txtQuantity').val()) != 0 && quantity !="")
+                {
+                    productList.push({
+                        ItemID: itemid,
+                        Quantity: quantity,
+                        PricePerUnit: priceAmount
+                    });
+                    invoiceID++;
+                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
+                    $("table .list").prepend(markup);
+                    itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+                    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                    FinalCalculation();
+                    $('html, body').animate({
+                        scrollTop: $("#divItemList").offset().top
+                    }, 2000);
+                }
+               
             }
-            $('html, body').animate({
-                scrollTop: $("#divItemList").offset().top
-            }, 2000);
+            
         });
 
 
@@ -367,6 +382,22 @@
 
         });
     });
+
+
+    function ValidationRemarks()
+    {    
+        var isValid = true;
+        if ($('#Remarks').val().trim() == "")
+        {
+            $('#Remarks').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#Remarks').css('border-color', '#ccc');
+        }
+        return isValid;
+    }
+
     function GetItemPrice(ddlitemid) {
 
         $.ajax({
