@@ -24,6 +24,7 @@ namespace AnjaliMIS.ViewModals
         public string IssueReturnNo { get; set; }
         public int FinYearID { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public bool IsRejected { get; set; }
 
         public List<INV_StockHistory> IssueReturnItems { get; set; }
 

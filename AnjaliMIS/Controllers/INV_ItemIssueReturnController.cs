@@ -599,8 +599,14 @@ namespace AnjaliMIS.Controllers
 
                         new_INV_StockHistory.IssueNumber = _NewIssueReturnNo;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
-
-                        inv_Item.Quantity = inv_Item.Quantity + item.Quantity;
+                        if (iNV_IssueReturnViewModal.IsRejected)
+                        {
+                            inv_Item.Quantity = Convert.ToInt32(inv_Item.RejectedQuantity) + item.Quantity;
+                        }
+                        else
+                        {
+                            inv_Item.Quantity = inv_Item.Quantity + item.Quantity;
+                        }
                     }
                     if (Err != "")
                     {
