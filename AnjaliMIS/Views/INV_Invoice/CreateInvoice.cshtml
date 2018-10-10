@@ -203,7 +203,6 @@
          @:$('#divItemList').show();
                 foreach (var @item in Model.INV_InvoiceItems)
         {
-
             @:  productList.push({ SubItemID: @item.InvoiceItemID, Qunatity: @item.Quantity            });
 
             @:var itemid = @item.ItemID;
@@ -324,7 +323,6 @@
             $('#divItemList').show();
             if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") 
             {
-                debugger;
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
@@ -464,7 +462,6 @@
         });
     }
     function FinalCalculation() {
-        debugger;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         if (igstCalculation > 0)

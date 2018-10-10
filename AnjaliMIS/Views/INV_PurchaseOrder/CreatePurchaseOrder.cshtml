@@ -73,7 +73,8 @@ input[type=number]::-webkit-outer-spin-button {
                             </div>
                             @Html.LabelFor(model => model.SGST, "SGST", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                <select id="ddlSGST" class="form-control"></select>
+                                @*<select id="ddlSGST" class="form-control"></select>*@
+                                <input id="txtSGSTValue" type="text" class="form-control" readonly="readonly" />
                             </div>
                         </div>
 
@@ -221,18 +222,20 @@ input[type=number]::-webkit-outer-spin-button {
                 event.preventDefault();
             }
         });
-        RetrieveSGST();
+        //RetrieveSGST();
         RetrieveCGST();
         RetrieveIGST();
 
         $("#ddlCGST").change(function () {
+
             var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");  
-            $('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
+            $("#txtSGSTValue").val("SGST-"+changeSGSTValueDependOnCGST);
+            $('#ddlCGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
-        $("#ddlSGST").change(function () {
-            FinalCalculation();
-        });
+        //$("#ddlSGST").change(function () {
+        //    FinalCalculation();
+        //});
 
         $("#ddlIGST").change(function () {
             FinalCalculation();
@@ -247,7 +250,6 @@ input[type=number]::-webkit-outer-spin-button {
          @:$('#divItemList').show();
         foreach (var @item in Model.INV_PurchaseOrderItems)
         {
-
             @:  productList.push({ ItemID: @item.ItemID, OrderedQuantity: @item.OrderedQuantity, ReceivedQuantity: @item.OrderedQuantity, PuchasePrice: @item.PuchasePrice, PricePerUnit:@item.PuchasePrice});
 
             @:var itemid = @item.ItemID;
@@ -439,7 +441,7 @@ input[type=number]::-webkit-outer-spin-button {
 			//FinYearID: $('#FinYearID').val(),
             CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
-            SGST: $('#ddlSGST').val(),
+            SGST: $('#ddlCGST').val(),
             SGSTAmount: $('#tdSGST').html(),
             IGST: $('#ddlIGST').val(),
             IGSTAmount: $('#tdIGST').html(),
@@ -503,7 +505,7 @@ input[type=number]::-webkit-outer-spin-button {
             $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
-        var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
+        var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
         var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
         $('#tdSGST').html(sgstCalculation);
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
@@ -511,7 +513,7 @@ input[type=number]::-webkit-outer-spin-button {
         $('#tdFinalTotal').html(finaltotal);
         
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-        var newAmountPending = finaltotal - $('#PaidAmount').val() - $('#Casar').val();
+        var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
         $('#PendingAmount').val(newAmountPending);
 
         $('#txtQuantity').val("");
