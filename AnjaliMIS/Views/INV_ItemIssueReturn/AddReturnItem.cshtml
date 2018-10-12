@@ -171,6 +171,9 @@
                 $('#tableRejectedAndExtra').hide();
                 $('#divRejectedAndExtraItem').hide();
                 $('#btnFinalSubmit').show();
+                $('#tableSubItem').show();
+                $('#divReturnAddItem').show();
+                
             }
             else if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
                 $('#divDDLItemList').hide();
@@ -180,6 +183,9 @@
                 $('#tableRejectedAndExtra').show();
                 $('#divRejectedAndExtraItem').show();
                 $('#btnFinalSubmit').show();
+                $('#tableSubItem').hide();
+                $('#divReturnAddItem').hide();
+
                 RetrieveItemFromIssueNumber();
 
             }
@@ -191,6 +197,10 @@
                 $('#divRejectedAndExtraItem').show();
                 $('#tableMainItem').hide();
                 $('#btnFinalSubmit').show();
+                $('#tableSubItem').hide();
+                $('#divReturnAddItem').hide();
+
+
                 RetrieveItemFromIssueNumber();
 
             }
@@ -369,13 +379,17 @@
             dataType: "json",
             success: function (result) {
                 if (result == true) {
-
+                    $('#tbodyRejectedAndExtraItem').html('');
+                    $('#tbodyRejectedAndExtraItem').html('');
+                    $('input:radio[name="rbtnItem"][value="New"]').prop('checked', true);
                     $("#radioButtonDiv").show();
                 }
                 else {
                     alert("not exist");
                     $("#radioButtonDiv").hide();
                     $("#divDDLItemList").hide();
+                    $('#tbodyRejectedAndExtraItem').html('');
+                    $('#tbodyRejectedAndExtraItem').html('');
 
                 }
             },

@@ -126,7 +126,7 @@
 }
 <script>
     $(document).ready(function () {
-      
+
         RetrieveitemList();
         RetrieveUserList();
         RetrieveitemListForAssemble();
@@ -209,7 +209,6 @@
             SaveItemForAssmeble();
 
         });
-
 
         //btnSaveMainItem click event
         $("#btnSaveMainItem").click(function () {
@@ -395,9 +394,9 @@
             }
         });
     }
-
+    var ForAssmebleItemList = [];
     function SaveItemForAssmeble() {
-        var ForUseItemList = [];
+
 
         $('#tableForAssmeble input:checked').each(function () {
 
@@ -406,48 +405,122 @@
             var tablerowid = $(this).closest('tr').attr('id');
 
             var quantityValue = $("#quantity" + tablerowid).val();
-
-            ForUseItemList.push({
-                ItemID: checkbboxid,
-                Quantity: quantityValue
-            });
-
+            var responseItemValidate = true;
+            responseItemValidate = ValidationForAssmebleItems(quantityValue, $("#quantity" + tablerowid));
+            if (responseItemValidate == false) {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+            else {
+                ForAssmebleItemList.push({
+                    ItemID: checkbboxid,
+                    Quantity: quantityValue
+                });
+            }
         });
 
         var newData = {
             IssueReturnToUserID: $('#IssueReturnToUserID').val(),
-            IssueReturnItems: ForUseItemList
+            IssueReturnItems: ForAssmebleItemList
         };
-        $.ajax({
-            url: "/INV_ItemIssueReturn/SaveForAssmeble",
-            data: JSON.stringify(newData),
-            type: "POST",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (result) {
-                location.href='@Url.Action("Issue", "INV_ItemIssueReturn")';
-            },
-            error: function (errormessage) {
+
+        var response = true;
+        response = ValidationForAssmebleSave(false);
+        if (response == false) {
+            alert('Please fill all the compulsory field(s).');
+            return false;
+        }
+        else {
+                $.ajax({
+                url: "/INV_ItemIssueReturn/SaveForAssmeble",
+                data: JSON.stringify(newData),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    location.href='@Url.Action("Issue", "INV_ItemIssueReturn")';
+                },
+                error: function (errormessage) {
 
 
-            }
-        });
+                }
+            });
+        }
     }
+
+
+
+    function ValidationForAssmebleSave() {
+        var isValid = true;
+        if (ForAssmebleItemList.length <= 0) {
+            $('#tableForAssmeble').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#tableForAssmeble').css('border-color', '#ccc');
+        }
+        return isValid;
+    }
+
+
+    function ValidationForAssmebleItems(qty,tr) {
+        var isValid = true;
+        if (qty <= 0) {
+            $(tr).css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $(tr).css('border-color', '#ccc');
+        }
+        return isValid;
+    }
+
+
+    function ValidationForUseAddItem() {
+        var isValid = true;
+        if ($('#txtForUseQuantity').val().trim() == "") {
+            $('#txtForUseQuantity').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#txtForUseQuantity').css('border-color', '#ccc');
+        }
+        if ($('#ddlItemList').val().trim() == "0") {
+            $('#ddlItemList').css('border-color', 'Red');
+            isValid = false;
+        }
+        else {
+            $('#ddlItemList').css('border-color', '#ccc');
+        }
+
+        return isValid;
+    }
+
+
     var ForUseItemList = [];
     $(".add-For-Use-Item").click(function () {
-        $('#tableForUse').show();
-        if ($('#ddlItemList').val() != null && $('#txtItemPrice').val() != "") {
-            var itemid = $("#ddlItemList").val();
-            var itemname = $("#ddlItemList").find('option:selected').text();
-            var quantity = $('#txtForUseQuantity').val();
-            var txtRemarks = $("#txtRemarks").val();
-            ForUseItemList.push({
-                ItemID: itemid,
-                Quantity: quantity
-            });
-            var html = '';
-            var html = "<tr><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
-            $('#tbodyForUse').append(html);
+
+        var response = true;
+        response = ValidationForUseAddItem(false);
+        if (response == false) {
+            alert('Please fill all the compulsory field(s).');
+            return false;
+        }
+        else {
+            $('#tableForUse').show();
+            if ($('#ddlItemList').val() != null && $('#txtForUseQuantity').val() != "") {
+                var itemid = $("#ddlItemList").val();
+                var itemname = $("#ddlItemList").find('option:selected').text();
+                var quantity = $('#txtForUseQuantity').val();
+                var txtRemarks = $("#txtRemarks").val();
+                ForUseItemList.push({
+                    ItemID: itemid,
+                    Quantity: quantity
+                });
+                var html = '';
+                var html = "<tr><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td>" + txtRemarks + "</td></tr>";
+                $('#tbodyForUse').append(html);
+            }
         }
     });
     function SaveItemForUse() {

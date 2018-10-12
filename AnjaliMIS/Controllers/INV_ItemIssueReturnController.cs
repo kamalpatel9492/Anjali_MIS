@@ -611,6 +611,7 @@ namespace AnjaliMIS.Controllers
                     if (Err != "")
                     {
                         TempData["errorReturn"] = Err;
+                        ViewData["errorReturn"] = TempData["errorReturn"];
                         return View(iNV_IssueReturnViewModal);
                     }
                     db.SaveChanges();
