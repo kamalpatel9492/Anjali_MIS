@@ -500,6 +500,24 @@ namespace AnjaliMIS.Controllers
                                 return Json("failure", JsonRequestBehavior.AllowGet);
                             }
                             _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
+
+
+                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                            new_INV_StockHistory.ItemID = item.ItemID;
+                            new_INV_StockHistory.OperationTypeID = 8;
+                            new_INV_StockHistory.ReferenceID = _NewInvoiceNo.ToString();
+                            new_INV_StockHistory.Quantity = item.Quantity;
+                            if (Session["UserID"] != null)
+                            {
+                                new_INV_StockHistory.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                            }
+                            new_INV_StockHistory.Created = DateTime.Now;
+                            new_INV_StockHistory.Modified = DateTime.Now;
+                            new_INV_StockHistory.Remarks = "Issue";
+                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
+
+                            new_INV_StockHistory.IssueNumber = _NewInvoiceNo;
+                            db.INV_StockHistory.Add(new_INV_StockHistory);
                             db.SaveChanges();
                         }
 
