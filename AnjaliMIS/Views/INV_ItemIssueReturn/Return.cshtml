@@ -49,7 +49,7 @@
                             <td>@i</td>
                             <td>@item.ReturnIssueNo</td>
                             <td>@item.IssueReturnNo</td>
-                            <td>@item.IssueReturnDate</td>
+                            <td> @Convert.ToDateTime(item.IssueReturnDate).ToString("MM/dd/yyyy")</td>
 
                             <td>
                                 @if (item.SEC_User != null)
