@@ -246,7 +246,7 @@
         $("#ddlCGST").change(function () {
             var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");
             $("#txtSGSTValue").val("SGST-"+changeSGSTValueDependOnCGST);
-            $('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
+            //$('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
         //$("#ddlSGST").change(function () {
@@ -310,7 +310,7 @@
                 //$('#divSGST').hide();
                 $('#divIGST').show();
                 $('#ddlCGST').val("0");
-                $('#ddlSGST').val("0");
+                $('#txtSGSTValue').val("0");
             } else {
                 $('#divCGST').hide();
                 //$('#divSGST').hide();
@@ -463,6 +463,7 @@
         });
     }
     function FinalCalculation() {
+        debugger;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         if (igstCalculation > 0)
@@ -488,7 +489,8 @@
         $('#tdSGST').html(sgstCalculation);
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
-        $('#tdFinalTotal').html(finaltotal);
+        //finaltotal=parseInt(parseFloat(finaltotal));
+        $('#tdFinalTotal').html(Math.round(finaltotal,2));
 
         var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         $('#AmountPending').val(parseInt(newAmountPending));
@@ -499,7 +501,7 @@
 
 
     //Retrive SGST
-    function RetrieveSGST() {
+    @*function RetrieveSGST() {
         $.ajax({
             url: '@Url.Action("RetrieveSGST", "INV_Invoice")',
             type: "GET",
@@ -527,7 +529,7 @@
                 alert(errormessage.responseText);
             }
         });
-    }
+    }*@
 
     //Retrive CGST
     function RetrieveCGST() {
@@ -597,7 +599,7 @@
     }
 
 
-    //Retrive SGST
+    //Retrive item list
     function RetrieveitemList() {
         $.ajax({
             url: '@Url.Action("RetrieveItemList", "INV_Invoice")',
