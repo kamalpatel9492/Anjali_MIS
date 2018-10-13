@@ -510,7 +510,7 @@ input[type=number]::-webkit-outer-spin-button {
         $('#tdSGST').html(sgstCalculation);
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
-        $('#tdFinalTotal').html(finaltotal.toPrecision(2));
+        $('#tdFinalTotal').html(Math.round(finaltotal,2));
         
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
