@@ -493,14 +493,13 @@ namespace AnjaliMIS.Controllers
                         
                         get_invoice.Amount = inv_InvoiceViewModal.Amount;
                         get_invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
-                        get_invoice.StatusID = 1;//ask to kamal
+                        get_invoice.StatusID = 1;
                         get_invoice.Modified = DateTime.Now;
                         get_invoice.Remarks = inv_InvoiceViewModal.Remarks;
                         get_invoice.InvoiceDate = inv_InvoiceViewModal.InvoiceDate;//ask to kamal
-                        get_invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
+                        get_invoice.InvoiceNo = get_invoice.InvoiceNo;
                         get_invoice.PONo = inv_InvoiceViewModal.PONo;
                         get_invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
-                        get_invoice.PONo = inv_InvoiceViewModal.PONo;
                         get_invoice.CGST = inv_InvoiceViewModal.CGST;
                         get_invoice.CGSTAmount = inv_InvoiceViewModal.CGSTAmount;
                         get_invoice.SGST = inv_InvoiceViewModal.SGST;

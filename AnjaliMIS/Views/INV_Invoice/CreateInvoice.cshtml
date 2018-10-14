@@ -281,7 +281,7 @@
             $('#AmountPending').val(parseInt(newAmountPending));
         });
         $("#Casar").change(function () {
-
+           
             var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
             $('#AmountPending').val(parseInt(newAmountPending));
         });
@@ -418,6 +418,12 @@
 
     function AddNewInvoiceWithItem()
     {
+        if(productList.length==0)
+        {
+            alert("please insert item");
+            return false;
+        }
+
 
         var newData = {
             InvoiceID:$('#InvoiceID').val(),
@@ -445,7 +451,6 @@
             INV_InvoiceItems: productList
         };
 
-
         $.ajax({
             url: '@Url.Action("AddInvoice", "INV_Invoice")',
             data: JSON.stringify(newData),
@@ -464,7 +469,6 @@
         });
     }
     function FinalCalculation() {
-        debugger;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
         if (igstCalculation > 0)

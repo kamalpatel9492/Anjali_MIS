@@ -391,7 +391,6 @@ namespace AnjaliMIS.Controllers
                         get_purchaseOrder.Modified = DateTime.Now;
                         get_purchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
                         get_purchaseOrder.Casar = iNV_PurchaseOrderViewModal.Casar;
-                        //get_purchaseOrder.PODate = DateTime.Now;//ask to kamal
                         get_purchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                         get_purchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
                         get_purchaseOrder.SGST = iNV_PurchaseOrderViewModal.SGST;
