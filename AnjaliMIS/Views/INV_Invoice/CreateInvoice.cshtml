@@ -201,26 +201,26 @@
          @:IGSTID = @Model.IGST
          @:SGSTID = @Model.SGST
          @:$('#divItemList').show();
-                foreach (var @item in Model.INV_InvoiceItems)
+                    foreach (var @item in Model.INV_InvoiceItems)
         {
-            @:  productList.push({ ItemID: @item.InvoiceItemID, Quantity: @item.Quantity , PricePerUnit: @item.PricePerUnit        });
+            @:  productList.push({ ItemID: @item.ItemID , Quantity: @item.Quantity , PricePerUnit: @item.PricePerUnit        });
 
             @:var itemid = @item.ItemID;
-                    @:var itemname ='@item.INV_Item.ItemName';
-                    @:var Remarks;
-                    if (@item.Remarks != "") {
+                        @:var itemname ='@item.INV_Item.ItemName';
+                        @:var Remarks;
+                        if (@item.Remarks != "") {
                 @: Remarks='@item.Remarks';
-                    }
+                        }
             @:var quantity = @item.Quantity;
-                    @:var priceAmount = @item.PricePerUnit;
-                    @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
-                @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-            @:$("table .list").prepend(markup);
-                }
+                        @:var priceAmount = @item.PricePerUnit;
+                        @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
+                    @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+                @:$("table .list").prepend(markup);
+                    }
 
         @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-            @:FinalCalculation();
-        }
+                @:FinalCalculation();
+            }
     $(document).ready(function () {
 
         $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {
@@ -327,7 +327,7 @@
                 var itemid = $("#ddlItemList").val();
                 var itemname = $("#ddlItemList").find('option:selected').text();
                 var priceAmount = $("#txtItemPrice").val();
-                var invoiceID = 1;
+                //var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
                 if(parseInt($('#txtQuantity').val()) != 0 && quantity !="")
                 {
@@ -336,7 +336,7 @@
                         Quantity: quantity,
                         PricePerUnit: priceAmount
                     });
-                    invoiceID++;
+                    //invoiceID++;
                     var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
                     $("table .list").prepend(markup);
                     itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
@@ -420,6 +420,7 @@
     {
 
         var newData = {
+            InvoiceID:$('#InvoiceID').val(),
             PartyID: $('#PartyID').val(),
             Amount: $('#tdItemTotal').html(),
             AmountReceived: $('#AmountReceived').val(),

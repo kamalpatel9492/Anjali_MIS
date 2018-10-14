@@ -417,117 +417,215 @@ namespace AnjaliMIS.Controllers
                 }
                 else
                 {
-                    INV_Invoice new_INV_Invoice = new INV_Invoice();
-                    new_INV_Invoice.CompanyID = CommonConfig.GetCompanyID();
-                    new_INV_Invoice.StatusID = CommonConfig.GetStatusPending();
-                    new_INV_Invoice.PartyID = inv_InvoiceViewModal.PartyID;
-                    if (Session["UserID"] != null)
+                    if (inv_InvoiceViewModal.InvoiceID > 0)
                     {
-                        new_INV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                    }
-
-                    new_INV_Invoice.Amount = inv_InvoiceViewModal.Amount;
-                    new_INV_Invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
-                    new_INV_Invoice.StatusID = CommonConfig.GetStatusPending();
-                    new_INV_Invoice.Created = DateTime.Now;
-                    new_INV_Invoice.Modified = DateTime.Now;
-                    new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;
-                    new_INV_Invoice.InvoiceDate = DateTime.Now;
-                  
-                    #region Generate InvoiceNo
-                    String _NewInvoiceNo = CommonConfig.GetNextNumber("Invoice");
-                    #endregion Generate InvoiceNo
-                    new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
-
-                    new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
-                    new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
-                    new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();
-                    new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
-                    new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
-                    new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGST;
-                    new_INV_Invoice.SGSTAmount = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGSTAmount;
-                    new_INV_Invoice.IGST = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGST;
-                    new_INV_Invoice.IGSTAmount = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGSTAmount;
-                    new_INV_Invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
-                    new_INV_Invoice.IsActive = true;
-                    new_INV_Invoice.Casar = inv_InvoiceViewModal.Casar;
-                    new_INV_Invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
-
-                    db.INV_Invoice.Add(new_INV_Invoice);
-                    db.SaveChanges();
-
-                    int newInvoiceId = new_INV_Invoice.InvoiceID;
-                    List<INV_InvoiceItem> newList_INV_InvoiceItem = new List<INV_InvoiceItem>();
-                    foreach (var item in inv_InvoiceViewModal.INV_InvoiceItems)
-                    {
-                        INV_InvoiceItem new_INV_InvoiceItem = new INV_InvoiceItem();
-                        new_INV_InvoiceItem.InvoiceItemID = item.InvoiceItemID;
-                        new_INV_InvoiceItem.InvoiceID = newInvoiceId;
-                        new_INV_InvoiceItem.ItemID = item.ItemID;
-                        new_INV_InvoiceItem.Quantity = item.Quantity;
-                        new_INV_InvoiceItem.Created = DateTime.Now;
-                        new_INV_InvoiceItem.Modified = DateTime.Now;
-                        new_INV_InvoiceItem.Remarks = item.Remarks;
-                        new_INV_InvoiceItem.PricePerUnit = item.PricePerUnit;
-
-                        #region INV_ItemPrice
-                        INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
-                        _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).OrderByDescending(o => o.Created).FirstOrDefault();
-                        if (_iNV_ItemPrice == null)
+                        int invoiceId = inv_InvoiceViewModal.InvoiceID;
+                        foreach (var item in inv_InvoiceViewModal.INV_InvoiceItems)
                         {
-                            _iNV_ItemPrice = new INV_ItemPrice();
-                            _iNV_ItemPrice.ItemID = item.ItemID;
-                            _iNV_ItemPrice.PurchasePrice = item.PricePerUnit;
-                            _iNV_ItemPrice.Created = DateTime.Now;
-                            _iNV_ItemPrice.Modified = DateTime.Now;
-                            _iNV_ItemPrice.FinYearID = CommonConfig.GetFinYearID();
-                            if (Session["UserID"] != null)
+                            var checkExist = db.INV_InvoiceItem.Any(e => e.InvoiceID == invoiceId
+                                                && e.ItemID == item.ItemID
+                                                && e.Quantity == item.Quantity);
+                            if (checkExist == false)
                             {
-                                _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                                var newINV_InvoiceItemAdd = new INV_InvoiceItem()
+                                {
+                                    InvoiceID = invoiceId,
+                                    ItemID = item.ItemID,
+                                    Quantity = item.Quantity,
+                                    Created = DateTime.Now,
+                                    Modified = DateTime.Now,
+                                    Remarks = item.Remarks,
+                                    PricePerUnit = item.PricePerUnit
+                                };
+                                db.INV_InvoiceItem.Add(newINV_InvoiceItemAdd);
+                                db.SaveChanges();
                             }
-                            db.INV_ItemPrice.Add(_iNV_ItemPrice);
-                            db.SaveChanges();
                         }
-                        #endregion INV_ItemPrice
-
-                        INV_Item _INV_Item = new INV_Item();
-                        _INV_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
-                        if (_INV_Item != null)
+                        inv_InvoiceViewModal.INV_InvoiceItems.ForEach(e =>
                         {
-                            if (_INV_Item.Quantity - item.Quantity < 0)
-                            {
-                                ModelState.AddModelError("", "Check Stock..");
-                                return Json("failure", JsonRequestBehavior.AllowGet);
-                            }
-                            _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
+                            e.InvoiceID = invoiceId;
+                            e.InvoiceItemID = db.INV_InvoiceItem.Where(t => t.InvoiceID == invoiceId && t.ItemID == e.ItemID && t.Quantity == e.Quantity).FirstOrDefault().InvoiceItemID;
+                        });
+                        List<int> getAllList = inv_InvoiceViewModal.INV_InvoiceItems.Select(e => e.InvoiceItemID).ToList();
+                        List<INV_InvoiceItem> removeRange = db.INV_InvoiceItem.Where(t => t.InvoiceID == invoiceId && !getAllList.Contains(t.InvoiceItemID)).Select(t => t).ToList();
 
+                        db.INV_InvoiceItem.RemoveRange(removeRange);
+                        db.SaveChanges();
 
-                            INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
-                            new_INV_StockHistory.ItemID = item.ItemID;
-                            new_INV_StockHistory.OperationTypeID = 8;
-                            new_INV_StockHistory.ReferenceID = _NewInvoiceNo.ToString();
-                            new_INV_StockHistory.Quantity = item.Quantity;
-                            if (Session["UserID"] != null)
-                            {
-                                new_INV_StockHistory.UserID = Convert.ToInt16(Session["UserID"].ToString());
-                            }
-                            new_INV_StockHistory.Created = DateTime.Now;
-                            new_INV_StockHistory.Modified = DateTime.Now;
-                            new_INV_StockHistory.Remarks = "Issue";
-                            new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
+                        INV_Invoice get_invoice = db.INV_Invoice.Where(e => e.InvoiceID == invoiceId).FirstOrDefault();
 
-                            new_INV_StockHistory.IssueNumber = _NewInvoiceNo;
-                            db.INV_StockHistory.Add(new_INV_StockHistory);
-                            db.SaveChanges();
+                        INV_InvoiceHistory Add_INV_InvoiceHistory = new INV_InvoiceHistory()
+                        {
+                            CompanyID = get_invoice.CompanyID,
+                            PartyID = get_invoice.PartyID,
+                            UserID = get_invoice.UserID,
+                            Amount = get_invoice.Amount,
+                            AmountReceived = get_invoice.AmountReceived,
+                            StatusID= get_invoice.StatusID,
+                            Created = get_invoice.Created,
+                            Remarks = get_invoice.Remarks,
+                            InvoiceDate = get_invoice.InvoiceDate,
+                            InvoiceNo = get_invoice.InvoiceNo,
+                            PONo = get_invoice.PONo,
+                            AmountPending = get_invoice.AmountPending,
+                            FinYearID = get_invoice.FinYearID,
+                            CGST = get_invoice.CGST,
+                            CGSTAmount = get_invoice.CGSTAmount,
+                            SGST = get_invoice.SGST,
+                            SGSTAmount = get_invoice.SGSTAmount,
+                            IGST = get_invoice.IGST,
+                            IGSTAmount = get_invoice.IGSTAmount,
+                            IsLocal =get_invoice.IsLocal,
+                            //IsActive = get_invoice.IsActive==null? true : get_invoice.IsActive,//ask to kamal
+                            Casar=get_invoice.Casar,
+                            TotalAmount = get_invoice.TotalAmount,
+                            Operation = "Invoice",
+                            InvoiceID = invoiceId
+                        };
+                        db.INV_InvoiceHistory.Add(Add_INV_InvoiceHistory);
+                        db.SaveChanges();
+
+                        if (Session["UserID"] != null)
+                        {
+                            get_invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
                         }
 
-                        newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
-                    }
-                    db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);
-                    db.SaveChanges();
+                        
+                        get_invoice.Amount = inv_InvoiceViewModal.Amount;
+                        get_invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
+                        get_invoice.StatusID = 1;//ask to kamal
+                        get_invoice.Modified = DateTime.Now;
+                        get_invoice.Remarks = inv_InvoiceViewModal.Remarks;
+                        get_invoice.InvoiceDate = inv_InvoiceViewModal.InvoiceDate;//ask to kamal
+                        get_invoice.InvoiceNo = inv_InvoiceViewModal.InvoiceNo;
+                        get_invoice.PONo = inv_InvoiceViewModal.PONo;
+                        get_invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
+                        get_invoice.PONo = inv_InvoiceViewModal.PONo;
+                        get_invoice.CGST = inv_InvoiceViewModal.CGST;
+                        get_invoice.CGSTAmount = inv_InvoiceViewModal.CGSTAmount;
+                        get_invoice.SGST = inv_InvoiceViewModal.SGST;
+                        get_invoice.SGSTAmount = inv_InvoiceViewModal.SGSTAmount;
+                        get_invoice.IGST = inv_InvoiceViewModal.IGST;
+                        get_invoice.IGSTAmount = inv_InvoiceViewModal.IGSTAmount;
+                        get_invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
+                        get_invoice.Casar = inv_InvoiceViewModal.Casar;
+                        get_invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
 
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        INV_Invoice new_INV_Invoice = new INV_Invoice();
+                        new_INV_Invoice.CompanyID = CommonConfig.GetCompanyID();
+                        new_INV_Invoice.StatusID = CommonConfig.GetStatusPending();
+                        new_INV_Invoice.PartyID = inv_InvoiceViewModal.PartyID;
+                        if (Session["UserID"] != null)
+                        {
+                            new_INV_Invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                        }
+
+                        new_INV_Invoice.Amount = inv_InvoiceViewModal.Amount;
+                        new_INV_Invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
+                        new_INV_Invoice.StatusID = CommonConfig.GetStatusPending();
+                        new_INV_Invoice.Created = DateTime.Now;
+                        new_INV_Invoice.Modified = DateTime.Now;
+                        new_INV_Invoice.Remarks = inv_InvoiceViewModal.Remarks;
+                        new_INV_Invoice.InvoiceDate = DateTime.Now;
+
+                        #region Generate InvoiceNo
+                        String _NewInvoiceNo = CommonConfig.GetNextNumber("Invoice");
+                        #endregion Generate InvoiceNo
+                        new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
+
+                        new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
+                        new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
+                        new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();
+                        new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
+                        new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
+                        new_INV_Invoice.SGST = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGST;
+                        new_INV_Invoice.SGSTAmount = inv_InvoiceViewModal.SGST == 0 ? null : inv_InvoiceViewModal.SGSTAmount;
+                        new_INV_Invoice.IGST = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGST;
+                        new_INV_Invoice.IGSTAmount = inv_InvoiceViewModal.IGST == 0 ? null : inv_InvoiceViewModal.IGSTAmount;
+                        new_INV_Invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
+                        new_INV_Invoice.IsActive = true;
+                        new_INV_Invoice.Casar = inv_InvoiceViewModal.Casar;
+                        new_INV_Invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
+
+                        db.INV_Invoice.Add(new_INV_Invoice);
+                        db.SaveChanges();
+
+                        int newInvoiceId = new_INV_Invoice.InvoiceID;
+                        List<INV_InvoiceItem> newList_INV_InvoiceItem = new List<INV_InvoiceItem>();
+                        foreach (var item in inv_InvoiceViewModal.INV_InvoiceItems)
+                        {
+                            INV_InvoiceItem new_INV_InvoiceItem = new INV_InvoiceItem();
+                            new_INV_InvoiceItem.InvoiceItemID = item.InvoiceItemID;
+                            new_INV_InvoiceItem.InvoiceID = newInvoiceId;
+                            new_INV_InvoiceItem.ItemID = item.ItemID;
+                            new_INV_InvoiceItem.Quantity = item.Quantity;
+                            new_INV_InvoiceItem.Created = DateTime.Now;
+                            new_INV_InvoiceItem.Modified = DateTime.Now;
+                            new_INV_InvoiceItem.Remarks = item.Remarks;
+                            new_INV_InvoiceItem.PricePerUnit = item.PricePerUnit;
+
+                            #region INV_ItemPrice
+                            INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
+                            _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).OrderByDescending(o => o.Created).FirstOrDefault();
+                            if (_iNV_ItemPrice == null)
+                            {
+                                _iNV_ItemPrice = new INV_ItemPrice();
+                                _iNV_ItemPrice.ItemID = item.ItemID;
+                                _iNV_ItemPrice.PurchasePrice = item.PricePerUnit;
+                                _iNV_ItemPrice.Created = DateTime.Now;
+                                _iNV_ItemPrice.Modified = DateTime.Now;
+                                _iNV_ItemPrice.FinYearID = CommonConfig.GetFinYearID();
+                                if (Session["UserID"] != null)
+                                {
+                                    _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                                }
+                                db.INV_ItemPrice.Add(_iNV_ItemPrice);
+                                db.SaveChanges();
+                            }
+                            #endregion INV_ItemPrice
+
+                            INV_Item _INV_Item = new INV_Item();
+                            _INV_Item = db.INV_Item.Where(i => i.ItemID == item.ItemID).FirstOrDefault();
+                            if (_INV_Item != null)
+                            {
+                                if (_INV_Item.Quantity - item.Quantity < 0)
+                                {
+                                    ModelState.AddModelError("", "Check Stock..");
+                                    return Json("failure", JsonRequestBehavior.AllowGet);
+                                }
+                                _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
+
+
+                                INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
+                                new_INV_StockHistory.ItemID = item.ItemID;
+                                new_INV_StockHistory.OperationTypeID = 8;
+                                new_INV_StockHistory.ReferenceID = _NewInvoiceNo.ToString();
+                                new_INV_StockHistory.Quantity = item.Quantity;
+                                if (Session["UserID"] != null)
+                                {
+                                    new_INV_StockHistory.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                                }
+                                new_INV_StockHistory.Created = DateTime.Now;
+                                new_INV_StockHistory.Modified = DateTime.Now;
+                                new_INV_StockHistory.Remarks = "Issue";
+                                new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
+
+                                new_INV_StockHistory.IssueNumber = _NewInvoiceNo;
+                                db.INV_StockHistory.Add(new_INV_StockHistory);
+                                db.SaveChanges();
+                            }
+
+                            newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
+                        }
+                        db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);
+                        db.SaveChanges();
+
+                    }
                 }
-
                 return Json("Sucess", JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
