@@ -72,7 +72,7 @@
                     <tr>
                         <td>
                             @*@Html.DisplayFor(modelItem => item.InvoiceDate)*@
-                         @Convert.ToDateTime(item.InvoiceDate).ToString("MM/dd/yyyy")
+                         @Convert.ToDateTime(item.InvoiceDate).ToString("dd/MM/yyyy")
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.InvoiceNo)

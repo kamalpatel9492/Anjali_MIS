@@ -339,7 +339,7 @@ input[type=number]::-webkit-outer-spin-button {
 			    var priceAmount = $("#txtItemPrice").val();
 			    var invoiceID = 1;
 			    var quantity = $('#txtQuantity').val();
-			    if(parseInt($('#txtQuantity').val()) != 0 && quantity !="")
+			    if((parseInt($('#txtQuantity').val()) != 0 && quantity !="") && (parseInt($('#txtItemPrice').val()) != 0 && priceAmount !=""))
 			    {
 			        productList.push({
 			            //InvoiceItemID: InvoiceItemID,
