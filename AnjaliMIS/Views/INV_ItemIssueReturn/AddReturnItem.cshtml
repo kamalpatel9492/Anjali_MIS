@@ -173,7 +173,7 @@
                 $('#btnFinalSubmit').show();
                 $('#tableSubItem').show();
                 $('#divReturnAddItem').show();
-                
+
             }
             else if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
                 $('#divDDLItemList').hide();
@@ -295,17 +295,18 @@
             }
 
             $.ajax({
-                url: "/INV_ItemIssueReturn/RertunNewItem",
+                //url: "/INV_ItemIssueReturn/RertunNewItem",
+                url: '@Url.Action("RertunNewItem", "INV_ItemIssueReturn")',
                 data: JSON.stringify(itemList),
                 type: "POST",
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    location.href = '@Url.Action("Return", "INV_ItemIssueReturn")';
+                    location.href = '@Url.Action("AddReturnItem", "INV_ItemIssueReturn")';
 
                 },
                 error: function (errormessage) {
-
+                    location.href = '@Url.Action("AddReturnItem", "INV_ItemIssueReturn")';
                 }
             });
         });
@@ -372,7 +373,8 @@
 
     function checkIssueNumber(issuenumber) {
         $.ajax({
-            url: "/INV_ItemIssueReturn/CheckIssueNumber",
+            //url: "/INV_ItemIssueReturn/CheckIssueNumber",
+            url: '@Url.Action("CheckIssueNumber", "INV_ItemIssueReturn")',
             data: JSON.stringify({ "issuenumber": issuenumber }),
             type: "POST",
             contentType: "application/json;charset=utf-8",
@@ -401,7 +403,8 @@
 
     function RetrieveitemList() {
         $.ajax({
-            url: "/INV_Invoice/RetrieveItemListIsConfigurable",
+            //url: "/INV_Invoice/RetrieveItemListIsConfigurable",
+            url: '@Url.Action("RetrieveItemListIsConfigurable", "INV_Invoice")',
             type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
@@ -460,9 +463,9 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-                
+
                 if (result.length > 0) {
-                    
+
                     if ($('input[name=rbtnItem]:checked').val() == "Rejected") {
                         $('#tbodyRejectedAndExtraItem').html('');
                         var html = '';
