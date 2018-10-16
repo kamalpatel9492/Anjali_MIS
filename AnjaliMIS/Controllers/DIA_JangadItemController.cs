@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AnjaliMIS.Models;
+using AnjaliMIS.ViewModals;
 using static AnjaliMIS.CommonConfig;
 
 namespace AnjaliMIS.Controllers
@@ -53,6 +54,127 @@ namespace AnjaliMIS.Controllers
             ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName");
             DIA_JangadItem _dIA_JangadItem = new DIA_JangadItem();
             return View("Edit", _dIA_JangadItem);
+        }
+
+        public ActionResult CreateNew()
+        {
+            //var _DIA_Jangad = db.DIA_Jangad.ToList();
+            DIA_Jangad modal = new DIA_Jangad();
+            ViewBag.PartyID = new SelectList(db.MST_Party, "PartyID", "PartyName", modal.PartyID);
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", modal.StatusID);
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", modal.UserID);
+            ViewBag.CGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", modal.CGST);
+            ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", modal.SGST);
+            ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", modal.IGST);
+            //ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
+            return View(modal);
+        }
+
+        [HttpPost]
+        public JsonResult AddJangad(DIA_JangadViewModal dIA_JangadViewModal)
+        {
+            try
+            {
+                if (dIA_JangadViewModal == null)
+                {
+                    //error meesage or expception handle
+                }
+                else if (dIA_JangadViewModal.DIA_JangadItems == null)
+                {
+                    //error meesage or expception handle
+                }
+                else
+                {
+                    if (Session["UserID"] != null)
+                    {
+                        dIA_JangadViewModal.UserID = Convert.ToInt16(Session["UserID"].ToString());
+                    }
+                    //dIA_JangadViewModal;
+                    if (dIA_JangadViewModal.JangadID > 0)
+                    {
+                        //edit time logic
+                    }
+                    else
+                    {
+                        DIA_Jangad new_DIA_Jangad = new DIA_Jangad();
+                        new_DIA_Jangad.CompanyID = 1;//ask to kamal
+                        new_DIA_Jangad.PartyID = dIA_JangadViewModal.PartyID;
+                        new_DIA_Jangad.Quantity = dIA_JangadViewModal.Quantity;
+                        new_DIA_Jangad.Weight = dIA_JangadViewModal.Weight;
+                        new_DIA_Jangad.StatusID = 1;//ask to kamal
+                        new_DIA_Jangad.UserID = dIA_JangadViewModal.UserID;
+                        new_DIA_Jangad.Amount = 1;//ask to kamal
+                        new_DIA_Jangad.RecivedAmount = 1;//ask to kamal
+                        new_DIA_Jangad.PendingAmount = 1;//ask to kamal
+                        new_DIA_Jangad.JangadNo = 1;//ask to kamal
+                        new_DIA_Jangad.Created = DateTime.Now;
+                        new_DIA_Jangad.Modified = DateTime.Now;
+                        new_DIA_Jangad.Remarks = dIA_JangadViewModal.Remarks;
+                        new_DIA_Jangad.PricePerCarat = dIA_JangadViewModal.PricePerCarat;
+                        new_DIA_Jangad.FinYearID = 1;//ask to kamal
+                        new_DIA_Jangad.CGSTAmount = dIA_JangadViewModal.CGSTAmount;//ask to kamal
+                        new_DIA_Jangad.SGSTAmount = dIA_JangadViewModal.SGSTAmount;//ask to kamal
+                        new_DIA_Jangad.IGSTAmount = dIA_JangadViewModal.IGSTAmount;//ask to kamal
+                        new_DIA_Jangad.TDSAmount = dIA_JangadViewModal.TDSAmount;//ask to kamal
+                        new_DIA_Jangad.IsActive = true;
+                        new_DIA_Jangad.CGST = dIA_JangadViewModal.CGST;//ask to kamal
+                        new_DIA_Jangad.SGST = dIA_JangadViewModal.SGST;//ask to kamal
+                        new_DIA_Jangad.IGST = dIA_JangadViewModal.IGST;//ask to kamal
+                        new_DIA_Jangad.TDS = dIA_JangadViewModal.TDS;//ask to kamal
+                        new_DIA_Jangad.IsLocal = dIA_JangadViewModal.IsLocal;
+                        new_DIA_Jangad.Casar = dIA_JangadViewModal.Casar;//ask to kamal
+                        new_DIA_Jangad.TotalAmount = dIA_JangadViewModal.TotalAmount;//ask to kamal
+                        
+                        db.DIA_Jangad.Add(new_DIA_Jangad);
+                        db.SaveChanges();
+
+                        if (dIA_JangadViewModal.DIA_JangadItems.Count() > 0)
+                        {
+                            List<DIA_JangadItem> newList_DIA_JangadItems = new List<DIA_JangadItem>;
+                            DIA_JangadItem new_DIA_JangadItem;
+                            foreach (var item in dIA_JangadViewModal.DIA_JangadItems)
+                            {
+                                new_DIA_JangadItem = new DIA_JangadItem();
+                                new_DIA_JangadItem.JangadID = new_DIA_Jangad.JangadID;
+                                new_DIA_JangadItem.Weight = item.Weight;
+                                new_DIA_JangadItem.Size = item.Size;
+                                new_DIA_JangadItem.PavalionAngle = item.PavalionAngle;
+                                new_DIA_JangadItem.CrownAngle = item.CrownAngle;
+                                new_DIA_JangadItem.CrownWeight = item.CrownWeight;
+                                new_DIA_JangadItem.Girdle = item.Girdle;
+                                new_DIA_JangadItem.Para1 = item.Para1;
+                                new_DIA_JangadItem.Para2 = item.Para2;
+                                new_DIA_JangadItem.Para3 = item.Para3;
+                                new_DIA_JangadItem.CassettsID = 1;//ask to kamal
+                                new_DIA_JangadItem.PolishingStageID = 1;//ask to kamal
+                                new_DIA_JangadItem.PavalionORCrown = "1";//ask to kamal
+                                new_DIA_JangadItem.UserID = dIA_JangadViewModal.UserID;
+                                new_DIA_JangadItem.StatusID = item.StatusID;//ask to kamal
+                                new_DIA_JangadItem.QCRemarks = item.QCRemarks;//ask to kamal
+                                new_DIA_JangadItem.Created = DateTime.Now;
+                                new_DIA_JangadItem.Completed = item.Completed;//ask to kamal
+                                new_DIA_JangadItem.Remarks = item.Remarks;
+                                new_DIA_JangadItem.PhysicalReceived = item.PhysicalReceived;//ask to kamal
+                                new_DIA_JangadItem.PhysicalReceivedDateTime = DateTime.Now;//ask to kamal
+                                new_DIA_JangadItem.PhysicalSend = item.PhysicalSend;//ask to kamal
+                                new_DIA_JangadItem.PhysicalSendDateTime = DateTime.Now;//ask to kamal
+                                new_DIA_JangadItem.Delivered = item.Delivered;//ask to kamal
+                                new_DIA_JangadItem.DeliveredDateTime = DateTime.Now;//ask to kamal
+
+                                newList_DIA_JangadItems.Add(new_DIA_JangadItem);
+                            }
+                            //db.DIA_JangadItem.AddRange(newList_DIA_JangadItems);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+                return Json("Sucess", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
         // POST: DIA_JangadItem/Create
@@ -234,7 +356,7 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveJangadForward(int? jangadID, int? polishingStageID, string remarks, List<DIA_JangadItem> jangadItemList,string jangadForwordTypeCompleteOrPartial)
+        public JsonResult SaveJangadForward(int? jangadID, int? polishingStageID, string remarks, List<DIA_JangadItem> jangadItemList, string jangadForwordTypeCompleteOrPartial)
         {
             try
             {
@@ -259,12 +381,12 @@ namespace AnjaliMIS.Controllers
                         var a = jangadItemList.Where(e => e.JangadItemID == item.JangadItemID).FirstOrDefault();
                         if (a != null)
                         {
-                            item.PolishingStageID = a.PolishingStageID==0?item.PolishingStageID:a.PolishingStageID;
+                            item.PolishingStageID = a.PolishingStageID == 0 ? item.PolishingStageID : a.PolishingStageID;
                             item.StatusID = 1;
                             item.Remarks = a.Remarks;
                         }
                     }
-                    
+
                     db.SaveChanges();
                     return Json("Success", JsonRequestBehavior.AllowGet);
                 }
@@ -315,9 +437,9 @@ namespace AnjaliMIS.Controllers
             {
                 if (jangadID != 0)
                 {
-                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID == 1).Select(e=> new
+                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID == 1).Select(e => new
                     {
-                        JangadID=e.JangadID,
+                        JangadID = e.JangadID,
                         JangadItemID = e.JangadItemID
                     }).ToList();
                     if (jangadItemList.Count > 0)
