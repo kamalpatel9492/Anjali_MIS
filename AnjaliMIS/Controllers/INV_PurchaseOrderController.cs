@@ -664,7 +664,7 @@ namespace AnjaliMIS.Controllers
                 else
                 {
                     INV_PurchaseOrder new_INV_PurchaseOrder = new INV_PurchaseOrder();
-
+                    List<INV_PurchaseOrderItem> itemsFromDB = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
                     if (Session["UserID"] != null)
                     {
                         new_INV_PurchaseOrder.UserID = Convert.ToInt16(Session["UserID"].ToString());
@@ -749,9 +749,11 @@ namespace AnjaliMIS.Controllers
                     }
                     if (Err != "")
                     {
-                        ModelState.AddModelError("errorPOReceive", Err);
-                        TempData["errorPOReceive"] = Err;
-                        ViewData["errorPOReceive"] = TempData["errorPOReceive"];
+
+                        
+                        #region GET PO Data
+                        db.Dispose();
+                        db = new DB_A157D8_AnjaliMISEntities1();
                         ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
                         ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
                         ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
@@ -759,9 +761,13 @@ namespace AnjaliMIS.Controllers
                         ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
                         ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
                         ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
-                        #region GET PO Data
+                        ModelState.AddModelError("errorPOReceive", Err);
+                        TempData["errorPOReceive"] = Err;
+                        ViewData["errorPOReceive"] = TempData["errorPOReceive"];
+                        INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal();
+
                         var POData = db.INV_PurchaseOrder.Find(iNV_PurchaseOrderViewModal.PurchaseOrderID);
-                        iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
+                        _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
                         {
                             PurchaseOrderID = POData.PurchaseOrderID,
                             CompanyID = POData.CompanyID,
@@ -787,12 +793,11 @@ namespace AnjaliMIS.Controllers
                             Casar = POData.Casar,
                             TotalAmount = POData.TotalAmount
                         };
-                        //Isssu is Get from local modal as added before.
-                        iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
-                        iNV_PurchaseOrderViewModal.INV_PurchaseOrderHistory = db.INV_PurchaseOrderHistory.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
+                        _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == POData.PurchaseOrderID).ToList();
+                        _iNV_PurchaseOrderViewModal.INV_PurchaseOrderHistory = db.INV_PurchaseOrderHistory.Where(I => I.PurchaseOrderID == POData.PurchaseOrderID).ToList();
                         #endregion GET PO Data
 
-                        return View(iNV_PurchaseOrderViewModal);
+                        return View(_iNV_PurchaseOrderViewModal);
                     }
 
                     if (_INV_PurchaseOrder != null)
