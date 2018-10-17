@@ -31,6 +31,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         <h3 class="form-section">Invoice Details</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -150,9 +151,9 @@
                                 <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
                         </div>
-                        <h3 class="form-section">Payment Details</h3>
+                        @*<h3 class="form-section">Payment Details</h3>*@
 
-                        <div class="form-group">
+                        @*<div class="form-group">
                             @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
@@ -168,7 +169,7 @@
                                 @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                 @Html.ValidationMessageFor(model => model.AmountPending, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="form-actions">
                         <div class="row">
@@ -275,16 +276,16 @@
             var ddlitemid = $('#ddlItemList').val();
             GetItemPrice(ddlitemid);
         });
-        $("#AmountReceived").change(function () {
+        //$("#AmountReceived").change(function () {
 
-            var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-            $('#AmountPending').val(parseInt(newAmountPending));
-        });
-        $("#Casar").change(function () {
+        //    var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
+        //    $('#AmountPending').val(parseInt(newAmountPending));
+        //});
+        //$("#Casar").change(function () {
            
-            var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
-            $('#AmountPending').val(parseInt(newAmountPending));
-        });
+        //    var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
+        //    $('#AmountPending').val(parseInt(newAmountPending));
+        //});
         $("#btnModalOK").click(function () {
             $('#InvoiceMessage').modal('hide');
             location.reload(true);
@@ -386,13 +387,15 @@
     function ValidationRemarks()
     {
         var isValid = true;
-        if ($('#Remarks').val().trim() == "")
-        {
-            $('#Remarks').css('border-color', 'Red');
-            isValid = false;
-        }
-        else {
-            $('#Remarks').css('border-color', '#ccc');
+        if($('#InvoiceID').val()!=0){
+            if ($('#Remarks').val().trim() == "")
+            {
+                $('#Remarks').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#Remarks').css('border-color', '#ccc');
+            }
         }
         return isValid;
     }
@@ -429,13 +432,13 @@
             InvoiceID:$('#InvoiceID').val(),
             PartyID: $('#PartyID').val(),
             Amount: $('#tdItemTotal').html(),
-            AmountReceived: $('#AmountReceived').val(),
+            //AmountReceived: $('#AmountReceived').val(),
             StatusID: $('#StatusID').val(),
             Remarks: $('#Remarks').val(),
             InvoiceDate: $('#InvoiceDate').val(),
             InvoiceNo: $('#InvoiceNo').val(),
             PONo: $('#PONo').val(),
-            AmountPending: $('#AmountPending').val(),
+            //AmountPending: $('#AmountPending').val(),
             FinYearID: $('#FinYearID').val(),
             CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
@@ -446,7 +449,7 @@
             //IsLocal: $('#IsLocal').val(),
             IsLocal: $('input[name=isLocal]:checked').val(),
             IsActive: $('#IsActive').val(),
-            Casar: $('#Casar').val(),
+            //Casar: $('#Casar').val(),
             TotalAmount: $('#tdFinalTotal').html(),
             INV_InvoiceItems: productList
         };
@@ -459,8 +462,12 @@
             dataType: "json",
             success: function (result) {
 
-
-                $('#InvoiceMessage').modal('show');
+                if(result=="failure"){
+                    alert('failure');
+                }
+                else{
+                    $('#InvoiceMessage').modal('show');
+                }
             },
             error: function (errormessage) {
 
@@ -495,10 +502,11 @@
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         //finaltotal=parseInt(parseFloat(finaltotal));
-        $('#tdFinalTotal').html(Math.round(finaltotal,2));
+        //$('#tdFinalTotal').html(Math.round(finaltotal,2));
+        $('#tdFinalTotal').html(parseFloat((finaltotal).toFixed(2)));
 
-        var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-        $('#AmountPending').val(parseInt(newAmountPending));
+        //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
+        //$('#AmountPending').val(parseInt(newAmountPending));
 
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");

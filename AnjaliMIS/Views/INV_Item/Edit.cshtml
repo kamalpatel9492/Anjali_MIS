@@ -43,7 +43,7 @@
 
                                 @if (Model.ItemID > 0)
                                 {
-                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                                    @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                                     @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger", @readonly = "readonly" })
                                 }
                                 else
@@ -57,14 +57,21 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.ItemName, "Item Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                                @if (Model.IsLock == true)
+                                {
+                                    @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ItemName, "", new { @class = "text-danger" })
+                                }
                             </div>
                             @Html.LabelFor(model => model.UnitID, "Unit", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
                                 @if (Model.IsLock == true)
                                 {
-                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", disabled = "disabled" })
+                                    @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                                 }
                                 else
                                 {

@@ -49,10 +49,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -405,6 +407,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModals\DashboardViewModal.cs" />
+    <Compile Include="ViewModals\DIA_JangadViewModal.cs" />
     <Compile Include="ViewModals\INV_InvoiceViewModal.cs" />
     <Compile Include="ViewModals\INV_IssueReturnViewModal.cs" />
     <Compile Include="ViewModals\INV_ItemConfigurationViewModal.cs" />
@@ -4706,6 +4709,7 @@
     <Content Include="Views\INV_ItemIssueReturn\AddReturnItem.cshtml" />
     <Content Include="Views\INV_PurchaseOrder\POReturn.cshtml" />
     <Content Include="Views\INV_ItemIssueReturn\Details.cshtml" />
+    <Content Include="Views\DIA_JangadItem\CreateNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

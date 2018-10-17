@@ -17,7 +17,7 @@
             </div>
             <div class="actions">
                 <div class="btn-group">
-                    @Html.ActionLink("Create New", "Create",
+                    @Html.ActionLink("Create New", "CreateNew",
                     new { controller = "DIA_JangadItem" },
                     new { @class = "btn btn-transparent green btn-circle btn-sm active" })
                 </div>
@@ -118,7 +118,7 @@
                             </td>
                             <td>
                                 @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadItemID }) |*@
-                                @Html.ActionLink("Edit", "Edit", new { id = item.JangadID }) |
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadID }) |*@
                                 @*@Html.ActionLink("Details", "Details", new { id = item.JangadItemID }) |*@
                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) |*@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.JangadID }) |

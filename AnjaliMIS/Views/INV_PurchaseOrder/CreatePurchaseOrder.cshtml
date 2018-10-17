@@ -10,13 +10,13 @@
     </li>
 }
 <style>
-    input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin: 0; 
-}
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
 </style>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
@@ -147,25 +147,25 @@ input[type=number]::-webkit-outer-spin-button {
                                 <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
                         </div>
-                        <h3 class="form-section">Payment Details</h3>
+                        @*<h3 class="form-section">Payment Details</h3>*@
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
-                                @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
-                                @Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
-                                @Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
+                                    @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.PaidAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.PaidAmount, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
+                                    @Html.ValidationMessageFor(model => model.PaidAmount, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.PendingAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
+                                    @Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                     </div>
                     <div class="form-actions">
                         <div class="row">
@@ -174,7 +174,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 {
                                     <input id="btnSave" type="button" value="Save" class="btn green" />
                                     @*<input type="submit" value="Save" class="btn green" />*@
-                                    @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder",null, new { @class = "btn default" })
+                                    @Html.ActionLink("Back to List", "index", "INV_PurchaseOrder", null, new { @class = "btn default" })
                                 }
 
 
@@ -208,13 +208,13 @@ input[type=number]::-webkit-outer-spin-button {
     }
     $(document).ready(function () {
 
-        $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+        $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {
             $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
         });
-        
+
         $(".allownumericwithdecimal").on("keypress keyup blur",function (event) {
             //this.value = this.value.replace(/[^0-9\.]/g,'');
             $(this).val($(this).val().replace(/[^0-9\.]/g,''));
@@ -228,7 +228,7 @@ input[type=number]::-webkit-outer-spin-button {
 
         $("#ddlCGST").change(function () {
 
-            var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");  
+            var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");
             $("#txtSGSTValue").val("SGST-"+changeSGSTValueDependOnCGST);
             $('#ddlCGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
@@ -287,17 +287,17 @@ input[type=number]::-webkit-outer-spin-button {
 			var ddlitemid = $('#ItemID').val();
 			GetItemPrice(ddlitemid);
 		});
-		$("#PaidAmount").change(function () {
+		//$("#PaidAmount").change(function () {
 
-		    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-		    
-            $('#PendingAmount').val(parseInt(newAmountPending));
-		});
-		$("#Casar").change(function () {
+		//    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
 
-		    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-            $('#PendingAmount').val(parseInt(newAmountPending));
-		});
+  //          $('#PendingAmount').val(parseInt(newAmountPending));
+		//});
+		//$("#Casar").change(function () {
+
+		//    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+  //          $('#PendingAmount').val(parseInt(newAmountPending));
+		//});
 		$("#btnModalOK").click(function () {
 			$('#InvoiceMessage').modal('hide');
 			location.reload(true);
@@ -332,7 +332,7 @@ input[type=number]::-webkit-outer-spin-button {
 		$(".add-row").click(function () {
 
 			$('#divItemList').show();
-			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") 
+			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "")
 			{
 			    var itemid = $("#ItemID").val();
 			    var itemname = $("#ItemID").find('option:selected').text();
@@ -350,7 +350,7 @@ input[type=number]::-webkit-outer-spin-button {
 			            PuchasePrice: priceAmount,
 			            PricePerUnit: priceAmount
 			        });
-			    
+
 			        invoiceID++;
 			        var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
 			        $("table .list").prepend(markup);
@@ -361,25 +361,25 @@ input[type=number]::-webkit-outer-spin-button {
 			            scrollTop: $("#divItemList").offset().top
 			        }, 2000);
 			    }
-			} 
+			}
 		});
-            
+
 
 
 		$(".delete-row").click(function () {
 			$("table tbody").find('input[name="record"]').each(function () {
                     if ($(this).is(":checked")) {
-                      
+
                         var checkId = this.id;
 					$(this).parents("tr").remove();
-                    
+
                         //$.grep(productList, function (e) {
-                        
+
                         //     e.ItemID == checkId;
                         //});
-                        
+
 					$.each(productList, function (key, value) {
-                       
+
                             var checkitemid = value.ItemID;
                             var deductquantity = value.OrderedQuantity;
                             var deductpriceperunit = value.PuchasePrice;
@@ -406,7 +406,7 @@ input[type=number]::-webkit-outer-spin-button {
 			contentType: "application/json;charset=utf-8",
 			url: '@Url.Action("DropDownItemPrice", "INV_Invoice")',
 			success: (function (result) {
-				
+
 				$('#txtItemPrice').val(result);
 
 			}),
@@ -417,7 +417,7 @@ input[type=number]::-webkit-outer-spin-button {
 	}
 
     function AddNewPurchaseOrderWithItem() {
-       
+
         if(productList.length==0)
         {
             alert("please insert item");
@@ -430,14 +430,14 @@ input[type=number]::-webkit-outer-spin-button {
 			SellerPartyID: $('#SellerPartyID').val(),
 			//UserID: $('#ddlupdateInstituteType').val(),
 			Amount: $('#Amount').val(),
-			PaidAmount: $('#PaidAmount').val(),
+			//PaidAmount: $('#PaidAmount').val(),
 			StatusID: $('#StatusID').val(),
 			//Created: Created,
 			//Modified: Modified,
 			Remarks: $('#Remarks').val(),
             PONo: $('#PONo').val(),
-            AmountPending: $('#PendingAmount').val(),
-            PendingAmount : $('#PendingAmount').val(),
+            //AmountPending: $('#PendingAmount').val(),
+            //PendingAmount : $('#PendingAmount').val(),
 			//FinYearID: $('#FinYearID').val(),
             CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
@@ -447,11 +447,11 @@ input[type=number]::-webkit-outer-spin-button {
             IGSTAmount: $('#tdIGST').html(),
             IsLocal: $('input[name=isLocal]:checked').val(),
 			IsActive: $('#IsActive').val(),
-			Casar: $('#Casar').val(),
+			//Casar: $('#Casar').val(),
 			TotalAmount: $('#tdFinalTotal').html(),
             INV_PurchaseOrderItems: productList
 		};
-		
+
 
 		$.ajax({
 			url: '@Url.Action("AddPurchaseOrder", "INV_PurchaseOrder")',
@@ -470,16 +470,21 @@ input[type=number]::-webkit-outer-spin-button {
 		});
     }
     function ValidationRemarks()
-    {    
+    {
         var isValid = true;
-        if ($('#Remarks').val().trim() == "")
-        {
-            $('#Remarks').css('border-color', 'Red');
-            isValid = false;
+        if ($('#PurchaseOrderID').val() > 0) {
+
+            if ($('#Remarks').val().trim() == "")
+            {
+                $('#Remarks').css('border-color', 'Red');
+                isValid = false;
+            }
+            else
+            {
+                $('#Remarks').css('border-color', '#ccc');
+            }
         }
-        else {
-            $('#Remarks').css('border-color', '#ccc');
-        }
+
         return isValid;
     }
 
@@ -511,10 +516,10 @@ input[type=number]::-webkit-outer-spin-button {
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         $('#tdFinalTotal').html(Math.round(finaltotal,2));
-        
+
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-        var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
-        $('#PendingAmount').val(newAmountPending);
+        //var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
+        //$('#PendingAmount').val(newAmountPending);
 
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");

@@ -414,7 +414,7 @@ namespace AnjaliMIS.Controllers
                         }
 
                         new_INV_PurchaseOrder.Amount = iNV_PurchaseOrderViewModal.Amount;
-                        new_INV_PurchaseOrder.PaidAmount = iNV_PurchaseOrderViewModal.PaidAmount;
+                        new_INV_PurchaseOrder.PaidAmount = 0;
                         new_INV_PurchaseOrder.Created = DateTime.Now;
                         new_INV_PurchaseOrder.Modified = DateTime.Now;
                         new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
@@ -433,7 +433,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_PurchaseOrder.PONo = _NewPONOtCount.ToString();
 
 
-                        new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
+                        new_INV_PurchaseOrder.PendingAmount = Convert.ToInt32(iNV_PurchaseOrderViewModal.TotalAmount);
                         if (iNV_PurchaseOrderViewModal.CGST > 0)
                             new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                         new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
@@ -444,7 +444,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_PurchaseOrder.IGST = iNV_PurchaseOrderViewModal.IGST;
                         new_INV_PurchaseOrder.IGSTAmount = iNV_PurchaseOrderViewModal.IGSTAmount;
                         new_INV_PurchaseOrder.IsLocal = iNV_PurchaseOrderViewModal.IsLocal;
-                        new_INV_PurchaseOrder.Casar = iNV_PurchaseOrderViewModal.Casar;
+                        new_INV_PurchaseOrder.Casar = 0;
                         new_INV_PurchaseOrder.TotalAmount = iNV_PurchaseOrderViewModal.TotalAmount;
 
                         db.INV_PurchaseOrder.Add(new_INV_PurchaseOrder);
@@ -664,7 +664,7 @@ namespace AnjaliMIS.Controllers
                 else
                 {
                     INV_PurchaseOrder new_INV_PurchaseOrder = new INV_PurchaseOrder();
-
+                    List<INV_PurchaseOrderItem> itemsFromDB = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
                     if (Session["UserID"] != null)
                     {
                         new_INV_PurchaseOrder.UserID = Convert.ToInt16(Session["UserID"].ToString());
@@ -694,7 +694,10 @@ namespace AnjaliMIS.Controllers
                         if ((new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity) == new_INV_PurchaseOrderItem.OrderedQuantity)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            _INV_PurchaseOrder.StatusID = 2;
+                            if(_INV_PurchaseOrder.PendingAmount == 0)
+                            {
+                                _INV_PurchaseOrder.StatusID = 2;
+                            }
                         }
                         new_INV_PurchaseOrderItem.ReceivedQuantity = new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity;
                         new_INV_PurchaseOrderItem.Modified = DateTime.Now;
@@ -749,9 +752,11 @@ namespace AnjaliMIS.Controllers
                     }
                     if (Err != "")
                     {
-                        ModelState.AddModelError("errorPOReceive", Err);
-                        TempData["errorPOReceive"] = Err;
-                        ViewData["errorPOReceive"] = TempData["errorPOReceive"];
+
+                        
+                        #region GET PO Data
+                        db.Dispose();
+                        db = new DB_A157D8_AnjaliMISEntities1();
                         ViewBag.CGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "CGST"), "TaxID", "Tax");
                         ViewBag.IGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "IGST"), "TaxID", "Tax");
                         ViewBag.SGST = new SelectList(db.ACC_Tax.Where(a => a.TaxType == "SGST"), "TaxID", "Tax");
@@ -759,7 +764,43 @@ namespace AnjaliMIS.Controllers
                         ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
                         ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
                         ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
-                        return View(iNV_PurchaseOrderViewModal);
+                        ModelState.AddModelError("errorPOReceive", Err);
+                        TempData["errorPOReceive"] = Err;
+                        ViewData["errorPOReceive"] = TempData["errorPOReceive"];
+                        INV_PurchaseOrderViewModal _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal();
+
+                        var POData = db.INV_PurchaseOrder.Find(iNV_PurchaseOrderViewModal.PurchaseOrderID);
+                        _iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
+                        {
+                            PurchaseOrderID = POData.PurchaseOrderID,
+                            CompanyID = POData.CompanyID,
+                            SellerPartyID = POData.SellerPartyID,
+                            PartyIDName = POData.MST_Party.PartyName,
+                            UserID = POData.UserID,
+                            Amount = POData.Amount,
+                            PaidAmount = POData.PaidAmount,
+                            StatusID = POData.StatusID,
+                            Created = POData.Created,
+                            Modified = POData.Modified,
+                            Remarks = POData.Remarks,
+                            PODate = POData.PODate,
+                            PONo = POData.PONo,
+                            FinYearID = CommonConfig.GetFinYearID(),
+                            CGST = POData.CGST,
+                            CGSTAmount = POData.CGSTAmount,
+                            SGST = POData.SGST,
+                            SGSTAmount = POData.SGSTAmount,
+                            IGST = POData.IGST,
+                            IGSTAmount = POData.IGSTAmount,
+                            IsLocal = POData.IsLocal,
+                            Casar = POData.Casar,
+                            TotalAmount = POData.TotalAmount
+                        };
+                        _iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == POData.PurchaseOrderID).ToList();
+                        _iNV_PurchaseOrderViewModal.INV_PurchaseOrderHistory = db.INV_PurchaseOrderHistory.Where(I => I.PurchaseOrderID == POData.PurchaseOrderID).ToList();
+                        #endregion GET PO Data
+
+                        return View(_iNV_PurchaseOrderViewModal);
                     }
 
                     if (_INV_PurchaseOrder != null)
@@ -767,7 +808,10 @@ namespace AnjaliMIS.Controllers
                         if (iNV_PurchaseOrderViewModal.IsComplete)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            _INV_PurchaseOrder.StatusID = 2;
+                            if (_INV_PurchaseOrder.PendingAmount == 0)
+                            {
+                                _INV_PurchaseOrder.StatusID = 2;
+                            }
                             db.SaveChanges();
                         }
 

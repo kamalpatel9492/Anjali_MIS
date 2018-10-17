@@ -537,7 +537,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
 
                         new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
-                        new_INV_Invoice.AmountPending = inv_InvoiceViewModal.AmountPending;
+                        new_INV_Invoice.AmountPending =0;
                         new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();
                         new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
                         new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
@@ -569,7 +569,7 @@ namespace AnjaliMIS.Controllers
 
                             #region INV_ItemPrice
                             INV_ItemPrice _iNV_ItemPrice = new INV_ItemPrice();
-                            _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID & M.PurchasePrice == item.PricePerUnit).OrderByDescending(o => o.Created).FirstOrDefault();
+                            _iNV_ItemPrice = db.INV_ItemPrice.Where(M => M.ItemID == item.ItemID && M.PurchasePrice == item.PricePerUnit).OrderByDescending(o => o.Created).FirstOrDefault();
                             if (_iNV_ItemPrice == null)
                             {
                                 _iNV_ItemPrice = new INV_ItemPrice();
