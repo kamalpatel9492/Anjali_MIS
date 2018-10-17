@@ -147,9 +147,9 @@ input[type=number]::-webkit-outer-spin-button {
                                 <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
                         </div>
-                        <h3 class="form-section">Payment Details</h3>
+                        @*<h3 class="form-section">Payment Details</h3>*@
 
-                        <div class="form-group">
+                        @*<div class="form-group">
                             @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-2">
                                 @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
@@ -165,7 +165,7 @@ input[type=number]::-webkit-outer-spin-button {
                                 @Html.EditorFor(model => model.PendingAmount, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
                                 @Html.ValidationMessageFor(model => model.PendingAmount, "", new { @class = "text-danger" })
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="form-actions">
                         <div class="row">
@@ -287,17 +287,17 @@ input[type=number]::-webkit-outer-spin-button {
 			var ddlitemid = $('#ItemID').val();
 			GetItemPrice(ddlitemid);
 		});
-		$("#PaidAmount").change(function () {
+		//$("#PaidAmount").change(function () {
 
-		    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+		//    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
 		    
-            $('#PendingAmount').val(parseInt(newAmountPending));
-		});
-		$("#Casar").change(function () {
+  //          $('#PendingAmount').val(parseInt(newAmountPending));
+		//});
+		//$("#Casar").change(function () {
 
-		    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-            $('#PendingAmount').val(parseInt(newAmountPending));
-		});
+		//    var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+  //          $('#PendingAmount').val(parseInt(newAmountPending));
+		//});
 		$("#btnModalOK").click(function () {
 			$('#InvoiceMessage').modal('hide');
 			location.reload(true);
@@ -430,14 +430,14 @@ input[type=number]::-webkit-outer-spin-button {
 			SellerPartyID: $('#SellerPartyID').val(),
 			//UserID: $('#ddlupdateInstituteType').val(),
 			Amount: $('#Amount').val(),
-			PaidAmount: $('#PaidAmount').val(),
+			//PaidAmount: $('#PaidAmount').val(),
 			StatusID: $('#StatusID').val(),
 			//Created: Created,
 			//Modified: Modified,
 			Remarks: $('#Remarks').val(),
             PONo: $('#PONo').val(),
-            AmountPending: $('#PendingAmount').val(),
-            PendingAmount : $('#PendingAmount').val(),
+            //AmountPending: $('#PendingAmount').val(),
+            //PendingAmount : $('#PendingAmount').val(),
 			//FinYearID: $('#FinYearID').val(),
             CGST: $('#ddlCGST').val(),
             CGSTAmount: $('#tdCGST').html(),
@@ -447,7 +447,7 @@ input[type=number]::-webkit-outer-spin-button {
             IGSTAmount: $('#tdIGST').html(),
             IsLocal: $('input[name=isLocal]:checked').val(),
 			IsActive: $('#IsActive').val(),
-			Casar: $('#Casar').val(),
+			//Casar: $('#Casar').val(),
 			TotalAmount: $('#tdFinalTotal').html(),
             INV_PurchaseOrderItems: productList
 		};
@@ -513,8 +513,8 @@ input[type=number]::-webkit-outer-spin-button {
         $('#tdFinalTotal').html(Math.round(finaltotal,2));
         
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
-        var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
-        $('#PendingAmount').val(newAmountPending);
+        //var newAmountPending = parseInt(finaltotal) - $('#PaidAmount').val() - $('#Casar').val();
+        //$('#PendingAmount').val(newAmountPending);
 
         $('#txtQuantity').val("");
         $('#txtItemPrice').val("");

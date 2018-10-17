@@ -12211,10 +12211,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2018 03:40:10</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.dll">
-      <publishTime>10/10/2018 22:21:31</publishTime>
+      <publishTime>10/15/2018 13:14:52</publishTime>
     </File>
     <File Include="bin/AnjaliMIS.pdb">
-      <publishTime>10/10/2018 22:21:31</publishTime>
+      <publishTime>10/15/2018 13:14:52</publishTime>
     </File>
     <File Include="bin/AnjaliMISDAL.dll">
       <publishTime>10/07/2018 01:02:03</publishTime>
@@ -12775,7 +12775,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2018 02:52:21</publishTime>
     </File>
     <File Include="Views/INV_Invoice/CreateInvoice.cshtml">
-      <publishTime>10/10/2018 22:09:34</publishTime>
+      <publishTime>10/15/2018 09:56:37</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Delete.cshtml">
       <publishTime>07/24/2018 23:38:06</publishTime>
@@ -12787,7 +12787,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/27/2018 08:00:29</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Index.cshtml">
-      <publishTime>10/09/2018 08:40:17</publishTime>
+      <publishTime>10/15/2018 09:56:38</publishTime>
     </File>
     <File Include="Views/INV_Invoice/Print.cshtml">
       <publishTime>08/03/2018 00:27:49</publishTime>
@@ -12814,16 +12814,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:38:06</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Edit.cshtml">
-      <publishTime>10/10/2018 22:09:34</publishTime>
+      <publishTime>10/15/2018 09:56:38</publishTime>
     </File>
     <File Include="Views/INV_ItemConfiguration/Index.cshtml">
       <publishTime>08/21/2018 02:52:38</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddIssueItem.cshtml">
-      <publishTime>10/10/2018 02:14:17</publishTime>
+      <publishTime>10/12/2018 08:07:07</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/AddReturnItem.cshtml">
-      <publishTime>10/10/2018 02:50:20</publishTime>
+      <publishTime>10/15/2018 09:56:38</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Details.cshtml">
       <publishTime>09/24/2018 23:47:02</publishTime>
@@ -12835,7 +12835,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2018 01:15:07</publishTime>
     </File>
     <File Include="Views/INV_ItemIssueReturn/Return.cshtml">
-      <publishTime>09/24/2018 23:47:02</publishTime>
+      <publishTime>10/12/2018 07:34:19</publishTime>
     </File>
     <File Include="Views/INV_ItemPrice/Delete.cshtml">
       <publishTime>08/01/2018 01:57:22</publishTime>
@@ -12847,10 +12847,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/24/2018 23:25:26</publishTime>
     </File>
     <File Include="Views/INV_ItemPrice/Index.cshtml">
-      <publishTime>08/21/2018 02:52:43</publishTime>
+      <publishTime>10/11/2018 02:54:30</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/CreatePurchaseOrder.cshtml">
-      <publishTime>10/10/2018 22:09:35</publishTime>
+      <publishTime>10/15/2018 09:56:38</publishTime>
     </File>
     <File Include="Views/INV_PurchaseOrder/Delete.cshtml">
       <publishTime>08/21/2018 03:12:30</publishTime>
@@ -12883,7 +12883,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2018 02:22:31</publishTime>
     </File>
     <File Include="Views/INV_StockHistory/Index.cshtml">
-      <publishTime>10/07/2018 01:29:03</publishTime>
+      <publishTime>10/11/2018 02:52:10</publishTime>
     </File>
     <File Include="Views/INV_Unit/Delete.cshtml">
       <publishTime>07/12/2018 09:19:20</publishTime>
@@ -13012,7 +13012,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/09/2018 00:00:33</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/10/2018 22:21:41</publishTime>
+      <publishTime>10/15/2018 13:14:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

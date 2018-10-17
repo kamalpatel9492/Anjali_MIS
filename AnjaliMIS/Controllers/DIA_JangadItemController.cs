@@ -97,7 +97,7 @@ namespace AnjaliMIS.Controllers
                     else
                     {
                         DIA_Jangad new_DIA_Jangad = new DIA_Jangad();
-                        new_DIA_Jangad.CompanyID = 1;//ask to kamal
+                        new_DIA_Jangad.CompanyID = CommonConfig.GetCompanyID();
                         new_DIA_Jangad.PartyID = dIA_JangadViewModal.PartyID;
                         new_DIA_Jangad.Quantity = dIA_JangadViewModal.Quantity;
                         new_DIA_Jangad.Weight = dIA_JangadViewModal.Weight;
@@ -111,26 +111,43 @@ namespace AnjaliMIS.Controllers
                         new_DIA_Jangad.Modified = DateTime.Now;
                         new_DIA_Jangad.Remarks = dIA_JangadViewModal.Remarks;
                         new_DIA_Jangad.PricePerCarat = dIA_JangadViewModal.PricePerCarat;
-                        new_DIA_Jangad.FinYearID = 1;//ask to kamal
+                        new_DIA_Jangad.FinYearID = CommonConfig.GetFinYearID();
                         new_DIA_Jangad.CGSTAmount = dIA_JangadViewModal.CGSTAmount;//ask to kamal
                         new_DIA_Jangad.SGSTAmount = dIA_JangadViewModal.SGSTAmount;//ask to kamal
                         new_DIA_Jangad.IGSTAmount = dIA_JangadViewModal.IGSTAmount;//ask to kamal
                         new_DIA_Jangad.TDSAmount = dIA_JangadViewModal.TDSAmount;//ask to kamal
                         new_DIA_Jangad.IsActive = true;
-                        new_DIA_Jangad.CGST = dIA_JangadViewModal.CGST;//ask to kamal
-                        new_DIA_Jangad.SGST = dIA_JangadViewModal.SGST;//ask to kamal
-                        new_DIA_Jangad.IGST = dIA_JangadViewModal.IGST;//ask to kamal
-                        new_DIA_Jangad.TDS = dIA_JangadViewModal.TDS;//ask to kamal
+
+                        if (dIA_JangadViewModal.CGST > 0)
+                            new_DIA_Jangad.CGST = dIA_JangadViewModal.CGST;//ask to kamal
+                        else
+                            new_DIA_Jangad.CGST = null;
+
+                        if (dIA_JangadViewModal.SGST > 0)
+                            new_DIA_Jangad.SGST = dIA_JangadViewModal.SGST;//ask to kamal
+                        else
+                            new_DIA_Jangad.SGST = null;
+
+                        if (dIA_JangadViewModal.IGST > 0)
+                            new_DIA_Jangad.IGST = dIA_JangadViewModal.IGST;//ask to kamal
+                        else
+                            new_DIA_Jangad.IGST = null;
+
+                        if (dIA_JangadViewModal.TDS > 0)
+                            new_DIA_Jangad.TDS = dIA_JangadViewModal.TDS;//ask to kamal
+                        else
+                            new_DIA_Jangad.TDS = null;
+
                         new_DIA_Jangad.IsLocal = dIA_JangadViewModal.IsLocal;
                         new_DIA_Jangad.Casar = dIA_JangadViewModal.Casar;//ask to kamal
                         new_DIA_Jangad.TotalAmount = dIA_JangadViewModal.TotalAmount;//ask to kamal
-                        
+
                         db.DIA_Jangad.Add(new_DIA_Jangad);
                         db.SaveChanges();
 
                         if (dIA_JangadViewModal.DIA_JangadItems.Count() > 0)
                         {
-                            List<DIA_JangadItem> newList_DIA_JangadItems = new List<DIA_JangadItem>;
+                            List<DIA_JangadItem> newList_DIA_JangadItems = new List<DIA_JangadItem>();
                             DIA_JangadItem new_DIA_JangadItem;
                             foreach (var item in dIA_JangadViewModal.DIA_JangadItems)
                             {
@@ -149,7 +166,7 @@ namespace AnjaliMIS.Controllers
                                 new_DIA_JangadItem.PolishingStageID = 1;//ask to kamal
                                 new_DIA_JangadItem.PavalionORCrown = "1";//ask to kamal
                                 new_DIA_JangadItem.UserID = dIA_JangadViewModal.UserID;
-                                new_DIA_JangadItem.StatusID = item.StatusID;//ask to kamal
+                                new_DIA_JangadItem.StatusID = CommonConfig.GetStatusPending();
                                 new_DIA_JangadItem.QCRemarks = item.QCRemarks;//ask to kamal
                                 new_DIA_JangadItem.Created = DateTime.Now;
                                 new_DIA_JangadItem.Completed = item.Completed;//ask to kamal
@@ -160,10 +177,10 @@ namespace AnjaliMIS.Controllers
                                 new_DIA_JangadItem.PhysicalSendDateTime = DateTime.Now;//ask to kamal
                                 new_DIA_JangadItem.Delivered = item.Delivered;//ask to kamal
                                 new_DIA_JangadItem.DeliveredDateTime = DateTime.Now;//ask to kamal
-
+                                new_DIA_JangadItem.PolishingStageID = 1;
                                 newList_DIA_JangadItems.Add(new_DIA_JangadItem);
                             }
-                            //db.DIA_JangadItem.AddRange(newList_DIA_JangadItems);
+                            db.DIA_JangadItem.AddRange(newList_DIA_JangadItems);
                             db.SaveChanges();
                         }
                     }
