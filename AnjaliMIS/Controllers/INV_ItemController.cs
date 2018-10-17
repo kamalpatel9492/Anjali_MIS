@@ -197,7 +197,7 @@ namespace AnjaliMIS.Controllers
 
                 db.SaveChanges();
                 #region Update INV_StockHistory 
-                INV_StockHistory _iNV_StockHistoryOld = db.INV_StockHistory.Where(IS => IS.ItemID == iNV_Item.ItemID & iNV_Item.IsLock == false).FirstOrDefault();
+                INV_StockHistory _iNV_StockHistoryOld = db.INV_StockHistory.Where(IS => IS.ItemID == iNV_Item.ItemID).FirstOrDefault();
                 if (_iNV_StockHistoryOld != null)
                 {
                     _iNV_StockHistoryOld.ItemID = iNV_Item.ItemID;
