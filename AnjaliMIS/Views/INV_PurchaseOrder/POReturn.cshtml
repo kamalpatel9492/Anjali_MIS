@@ -221,9 +221,9 @@
 	var productList = [];
 	var itemWiseEachStepAddTotalAmount = 0;
 	$(document).ready(function () {
-		$('#btnSave').click(function () {
+		$('#btnSave').click(function (e) {
 			//AddNewPurchaseOrderWithItem();
-          
+		    e.preventDefault();
             //$("#POReturn").submit();
             document.POReturn.submit();
         });
