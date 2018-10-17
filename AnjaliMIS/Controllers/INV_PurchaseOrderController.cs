@@ -694,7 +694,10 @@ namespace AnjaliMIS.Controllers
                         if ((new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity) == new_INV_PurchaseOrderItem.OrderedQuantity)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            _INV_PurchaseOrder.StatusID = 2;
+                            if(_INV_PurchaseOrder.PendingAmount == 0)
+                            {
+                                _INV_PurchaseOrder.StatusID = 2;
+                            }
                         }
                         new_INV_PurchaseOrderItem.ReceivedQuantity = new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity;
                         new_INV_PurchaseOrderItem.Modified = DateTime.Now;
@@ -805,7 +808,10 @@ namespace AnjaliMIS.Controllers
                         if (iNV_PurchaseOrderViewModal.IsComplete)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            _INV_PurchaseOrder.StatusID = 2;
+                            if (_INV_PurchaseOrder.PendingAmount == 0)
+                            {
+                                _INV_PurchaseOrder.StatusID = 2;
+                            }
                             db.SaveChanges();
                         }
 
