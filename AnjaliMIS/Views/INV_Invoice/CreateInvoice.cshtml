@@ -31,6 +31,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         <h3 class="form-section">Invoice Details</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -150,7 +151,7 @@
                                 <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
                         </div>
-                        <h3 class="form-section">Payment Details</h3>
+                        @*<h3 class="form-section">Payment Details</h3>*@
 
                         @*<div class="form-group">
                             @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -386,13 +387,15 @@
     function ValidationRemarks()
     {
         var isValid = true;
-        if ($('#Remarks').val().trim() == "")
-        {
-            $('#Remarks').css('border-color', 'Red');
-            isValid = false;
-        }
-        else {
-            $('#Remarks').css('border-color', '#ccc');
+        if($('#InvoiceID').val()!=0){
+            if ($('#Remarks').val().trim() == "")
+            {
+                $('#Remarks').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#Remarks').css('border-color', '#ccc');
+            }
         }
         return isValid;
     }
@@ -459,8 +462,12 @@
             dataType: "json",
             success: function (result) {
 
-
-                $('#InvoiceMessage').modal('show');
+                if(result=="failure"){
+                    alert('failure');
+                }
+                else{
+                    $('#InvoiceMessage').modal('show');
+                }
             },
             error: function (errormessage) {
 
@@ -495,7 +502,8 @@
         $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
         //finaltotal=parseInt(parseFloat(finaltotal));
-        $('#tdFinalTotal').html(Math.round(finaltotal,2));
+        //$('#tdFinalTotal').html(Math.round(finaltotal,2));
+        $('#tdFinalTotal').html(parseFloat((finaltotal).toFixed(2)));
 
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         //$('#AmountPending').val(parseInt(newAmountPending));
