@@ -414,7 +414,7 @@ namespace AnjaliMIS.Controllers
                         }
 
                         new_INV_PurchaseOrder.Amount = iNV_PurchaseOrderViewModal.Amount;
-                        new_INV_PurchaseOrder.PaidAmount = iNV_PurchaseOrderViewModal.PaidAmount;
+                        new_INV_PurchaseOrder.PaidAmount = 0;
                         new_INV_PurchaseOrder.Created = DateTime.Now;
                         new_INV_PurchaseOrder.Modified = DateTime.Now;
                         new_INV_PurchaseOrder.Remarks = iNV_PurchaseOrderViewModal.Remarks;
@@ -433,7 +433,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_PurchaseOrder.PONo = _NewPONOtCount.ToString();
 
 
-                        new_INV_PurchaseOrder.PendingAmount = iNV_PurchaseOrderViewModal.PendingAmount;
+                        new_INV_PurchaseOrder.PendingAmount = Convert.ToInt32(iNV_PurchaseOrderViewModal.TotalAmount);
                         if (iNV_PurchaseOrderViewModal.CGST > 0)
                             new_INV_PurchaseOrder.CGST = iNV_PurchaseOrderViewModal.CGST;
                         new_INV_PurchaseOrder.CGSTAmount = iNV_PurchaseOrderViewModal.CGSTAmount;
@@ -444,7 +444,7 @@ namespace AnjaliMIS.Controllers
                             new_INV_PurchaseOrder.IGST = iNV_PurchaseOrderViewModal.IGST;
                         new_INV_PurchaseOrder.IGSTAmount = iNV_PurchaseOrderViewModal.IGSTAmount;
                         new_INV_PurchaseOrder.IsLocal = iNV_PurchaseOrderViewModal.IsLocal;
-                        new_INV_PurchaseOrder.Casar = iNV_PurchaseOrderViewModal.Casar;
+                        new_INV_PurchaseOrder.Casar = 0;
                         new_INV_PurchaseOrder.TotalAmount = iNV_PurchaseOrderViewModal.TotalAmount;
 
                         db.INV_PurchaseOrder.Add(new_INV_PurchaseOrder);
@@ -759,6 +759,39 @@ namespace AnjaliMIS.Controllers
                         ViewBag.SellerPartyID = new SelectList(db.MST_Party, "PartyID", "PartyName");
                         ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName");
                         ViewBag.ItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                        #region GET PO Data
+                        var POData = db.INV_PurchaseOrder.Find(iNV_PurchaseOrderViewModal.PurchaseOrderID);
+                        iNV_PurchaseOrderViewModal = new INV_PurchaseOrderViewModal()
+                        {
+                            PurchaseOrderID = POData.PurchaseOrderID,
+                            CompanyID = POData.CompanyID,
+                            SellerPartyID = POData.SellerPartyID,
+                            PartyIDName = POData.MST_Party.PartyName,
+                            UserID = POData.UserID,
+                            Amount = POData.Amount,
+                            PaidAmount = POData.PaidAmount,
+                            StatusID = POData.StatusID,
+                            Created = POData.Created,
+                            Modified = POData.Modified,
+                            Remarks = POData.Remarks,
+                            PODate = POData.PODate,
+                            PONo = POData.PONo,
+                            FinYearID = CommonConfig.GetFinYearID(),
+                            CGST = POData.CGST,
+                            CGSTAmount = POData.CGSTAmount,
+                            SGST = POData.SGST,
+                            SGSTAmount = POData.SGSTAmount,
+                            IGST = POData.IGST,
+                            IGSTAmount = POData.IGSTAmount,
+                            IsLocal = POData.IsLocal,
+                            Casar = POData.Casar,
+                            TotalAmount = POData.TotalAmount
+                        };
+                        //Isssu is Get from local modal as added before.
+                        iNV_PurchaseOrderViewModal.INV_PurchaseOrderItems = db.INV_PurchaseOrderItem.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
+                        iNV_PurchaseOrderViewModal.INV_PurchaseOrderHistory = db.INV_PurchaseOrderHistory.Where(I => I.PurchaseOrderID == iNV_PurchaseOrderViewModal.PurchaseOrderID).ToList();
+                        #endregion GET PO Data
+
                         return View(iNV_PurchaseOrderViewModal);
                     }
 
