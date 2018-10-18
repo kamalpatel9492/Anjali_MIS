@@ -70,9 +70,31 @@ namespace AnjaliMIS.Controllers
         [HttpPost]
         public ActionResult Create(INV_ItemConfiguration iNV_ItemConfiguration)
         {
-            if (db.INV_ItemConfiguration.Where(I => I.MainItemID == iNV_ItemConfiguration.MainItemID).Count() > 0)
+            //if (db.INV_ItemConfiguration.Where(I => I.MainItemID == iNV_ItemConfiguration.MainItemID).Count() > 0)
+            //{
+            //    ModelState.AddModelError("ItemNameDuplicate", "Selected item is already configured.");
+            //}
+
+            if (iNV_ItemConfiguration.ItemConfigurationID > 0)
             {
-                ModelState.AddModelError("ItemNameDuplicate", "Selected item is already configured.");
+                if (iNV_ItemConfiguration.Remarks == null || iNV_ItemConfiguration.Remarks == "")
+                {
+                    var items =
+                      db.INV_Item
+                        .Where(i => i.IsLock == true && i.IsConfigurable == true)
+                        .Select(s => new
+                        {
+                            ItemID = s.ItemID,
+                            ItemName = s.ItemName + " - " + s.ItemCode
+                        })
+                        .ToList();
+                    iNV_ItemConfiguration.INV_Items = db.INV_ItemConfiguration.Where(ic => ic.MainItemID == iNV_ItemConfiguration.MainItemID).ToList();
+                    ViewBag.MainItemID = new SelectList(items, "ItemID", "ItemName", iNV_ItemConfiguration.MainItemID);
+                    ViewBag.SubItemID = new SelectList(db.INV_Item.Where(i => i.IsLock == true), "ItemID", "ItemName");
+                    ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", iNV_ItemConfiguration.UserID);
+                    ModelState.AddModelError("", "Enter Remarks");
+                    return View(iNV_ItemConfiguration);
+                }
             }
 
             if (iNV_ItemConfiguration.INV_Items != null)
