@@ -149,6 +149,7 @@
     }
     //var productList = [];
     $(document).ready(function () {
+      
         RetrieveitemList();
         $("#MainItemID").change(function () {
 
@@ -184,8 +185,33 @@
         }
 
         $('#btnSave').click(function () {
-            AddNewItemConfigurationWithItem();
+            var response = true;
+            response = ValidationRemarks(false);
+            if (response == false) {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+            else {
+                AddNewItemConfigurationWithItem();
+            }
         });
+
+        function ValidationRemarks() {
+            var isValid = true;
+            if ($('#ItemConfigurationID').val() > 0) {
+
+                if ($('#Remarks').val().trim() == "") {
+                    $('#Remarks').css('border-color', 'Red');
+                    isValid = false;
+                }
+                else {
+                    $('#Remarks').css('border-color', '#ccc');
+                }
+            }
+
+            return isValid;
+        }
+
         $(".add-row").click(function () {
             var isItemEntered = false;
             $('#divItemList').show();
