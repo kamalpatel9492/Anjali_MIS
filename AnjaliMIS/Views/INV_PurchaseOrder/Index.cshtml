@@ -118,11 +118,10 @@
                                 }
                                 @Html.ActionLink("Print", "Print", new { id = item.PurchaseOrderID }, new { target = "_blank" })
                                 |
-                                @if (item.SYS_Status.StatusName != "Completed")
+                                @if (item.SYS_Status.StatusName != "Received")
                                 {
                                     @Html.ActionLink("Receive", "POReturn", new { id = item.PurchaseOrderID })
                                 }
-
                             </td>
                         </tr>
                     }

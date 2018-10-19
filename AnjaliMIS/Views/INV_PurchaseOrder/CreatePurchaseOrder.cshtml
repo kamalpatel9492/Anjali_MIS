@@ -138,8 +138,12 @@
                                             <td colspan="4" id="tdIGST" class="text-right"></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-right">Final Total</td>
-                                            <td colspan="4" id="tdFinalTotal" class="text-right"></td>
+                                            <td colspan="4" class="text-right">Total</td>
+                                            <td colspan="4" id="tdTotal" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right bold">Final Total</td>
+                                            <td colspan="4" id="tdFinalTotal" class="text-right bold"></td>
                                         </tr>
                                     </tbody>
 
@@ -260,8 +264,9 @@
             }
             @:var quantity = @item.OrderedQuantity;
             @:var priceAmount = @item.PuchasePrice;
-            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
-            @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+            @:var totalItemAmount = (quantity * priceAmount).toFixed(2);
+            @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount +"</td></tr>";
+            @:itemWiseEachStepAddTotalAmount +=totalItemAmount;
             @:$("table .list").prepend(markup);
         }
         @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
@@ -330,7 +335,6 @@
             };
 
 		$(".add-row").click(function () {
-
 			$('#divItemList').show();
 			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "")
 			{
@@ -339,6 +343,7 @@
 			    var priceAmount = $("#txtItemPrice").val();
 			    var invoiceID = 1;
 			    var quantity = $('#txtQuantity').val();
+			    var totalItemAmount;
 			    if((parseInt($('#txtQuantity').val()) != 0 && quantity !="") && (parseInt($('#txtItemPrice').val()) != 0 && priceAmount !=""))
 			    {
 			        productList.push({
@@ -350,12 +355,12 @@
 			            PuchasePrice: priceAmount,
 			            PricePerUnit: priceAmount
 			        });
-
+			        totalItemAmount = (priceAmount * quantity).toFixed(2);
 			        invoiceID++;
-			        var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
+			        var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount + "</td></tr>";
 			        $("table .list").prepend(markup);
-			        itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-			        $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+			        itemWiseEachStepAddTotalAmount += totalItemAmount;
+			        $('#tdItemTotal').html(parseFloat(itemWiseEachStepAddTotalAmount));
 			        FinalCalculation();
 			        $('html, body').animate({
 			            scrollTop: $("#divItemList").offset().top
@@ -386,8 +391,12 @@
                             if (checkId == checkitemid) {
                                 //productList.pop(key);
                                 productList.splice(key, 1);
-                                itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
-							$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                                itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - ((deductquantity * deductpriceperunit).toFixed(2));
+                                if(itemWiseEachStepAddTotalAmount > 0)
+                                    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                                else
+                                    $('#tdItemTotal').html("0");
+
                                 FinalCalculation();
                                 return false;
                             }
@@ -489,32 +498,45 @@
     }
 
     function FinalCalculation() {
-
+        var igstCalculation = 0;
+        var cgstCalculation = 0;
+        var sgstCalculation = 0;
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
-        var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
+        igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100).toFixed(2);
         if (igstCalculation > 0)
             $('#tdIGST').html(igstCalculation);
         else
             $('#tdIGST').html(0);
         if (igstpercentage > 0)
-            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage.toFixed(2) + "%)");
         else
             $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
+        cgstpercentage = cgstpercentage/2;
+        cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100).toFixed(2);
         if (cgstCalculation > 0)
             $('#tdCGST').html(cgstCalculation);
         else
             $('#tdCGST').html(0);
         if (cgstpercentage > 0)
-            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage.toFixed(2) + "%)");
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
-        $('#tdSGST').html(sgstCalculation);
-        $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
-        var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+        sgstpercentage = sgstpercentage / 2;
+        sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
+        if (sgstCalculation > 0)
+            $('#tdSGST').html(sgstCalculation);
+        else
+            $('#tdSGST').html(0);
+
+        if (sgstpercentage > 0)
+            $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage.toFixed(2) + "%)");
+        else
+            $('#tdSpanPercentageSGSTValue').html("(" + 0 + "%)");
+        var finaltotal = parseFloat(itemWiseEachStepAddTotalAmount) + parseFloat(igstCalculation) + parseFloat(cgstCalculation) + parseFloat(sgstCalculation);
+        finaltotal = parseFloat(finaltotal).toFixed(2)
+        $('#tdTotal').html(finaltotal);
         $('#tdFinalTotal').html(Math.round(finaltotal,2));
 
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();

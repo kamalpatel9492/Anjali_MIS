@@ -592,7 +592,7 @@ namespace AnjaliMIS.Controllers
         // GET: GRN
         public ActionResult POReturn(int id = -1)
         {
-            if (id == null)
+            if (id == -1)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -688,15 +688,15 @@ namespace AnjaliMIS.Controllers
                                 Err = Err + "You can not receive more than ordered. " + inv_Item.ItemName;
                             else
                                 Err = Err + ", You can not receive more than ordered. " + inv_Item.ItemName;
-
-
                         }
                         if ((new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity) == new_INV_PurchaseOrderItem.OrderedQuantity)
                         {
                             db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            if(_INV_PurchaseOrder.PendingAmount == 0)
+                            _INV_PurchaseOrder.StatusID = CommonConfig.GetStatusReceived();
+                            // below condition is not required now, as we suppose to move payment relate fields in accounting module
+                            if (_INV_PurchaseOrder.PendingAmount == 0)
                             {
-                                _INV_PurchaseOrder.StatusID = 2;
+                                _INV_PurchaseOrder.StatusID = CommonConfig.GetStatusComplete();
                             }
                         }
                         new_INV_PurchaseOrderItem.ReceivedQuantity = new_INV_PurchaseOrderItem.ReceivedQuantity + item.ReceivedQuantity;
@@ -753,7 +753,7 @@ namespace AnjaliMIS.Controllers
                     if (Err != "")
                     {
 
-                        
+
                         #region GET PO Data
                         db.Dispose();
                         db = new DB_A157D8_AnjaliMISEntities1();
@@ -805,16 +805,6 @@ namespace AnjaliMIS.Controllers
 
                     if (_INV_PurchaseOrder != null)
                     {
-                        if (iNV_PurchaseOrderViewModal.IsComplete)
-                        {
-                            db.Entry(_INV_PurchaseOrder).State = EntityState.Modified;
-                            if (_INV_PurchaseOrder.PendingAmount == 0)
-                            {
-                                _INV_PurchaseOrder.StatusID = 2;
-                            }
-                            db.SaveChanges();
-                        }
-
                         #region INV_PurchaseOrderHistory
                         INV_PurchaseOrderHistory new_INV_PurchaseOrderHistory = new INV_PurchaseOrderHistory();
                         new_INV_PurchaseOrderHistory = new INV_PurchaseOrderHistory()

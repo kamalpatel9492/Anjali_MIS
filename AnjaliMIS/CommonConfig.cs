@@ -150,5 +150,15 @@ namespace AnjaliMIS
         {
             return 1;
         }
+
+        public static int GetStatusReceived()
+        {
+            return 7;
+        }
+
+        public static int GetStatusComplete()
+        {
+            return 2;
+        }
     }
 }
