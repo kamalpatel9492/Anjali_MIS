@@ -31,7 +31,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
-                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger",id = "vsValidation" })
                         <h3 class="form-section">Invoice Details</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-10">
-                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                <a href="javascript:null" class="button btn default btn-sm  add-row"><i class="fa fa-plus" aria-hidden="true"></i>  Add Item</a>
                             </div>
                         </div>
                         <div id="divItemList" class="form-group" hidden>
@@ -152,7 +152,7 @@
                                     </tbody>
 
                                 </table>
-                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                <button type="button" style="float:right;" class="btn default btn-sm delete-row">Delete Item</button>
                             </div>
                         </div>
                         @*<h3 class="form-section">Payment Details</h3>*@
@@ -433,7 +433,6 @@
             return false;
         }
 
-
         var newData = {
             InvoiceID:$('#InvoiceID').val(),
             PartyID: $('#PartyID').val(),
@@ -467,9 +466,10 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                if(result=="failure"){
-                    alert('failure');
+                if(result != "Sucess"){
+                    vsValidation
+                    $("#vsValidation").html(result);
+                    $("#vsValidation").css("display", "block");         
                 }
                 else{
                     $('#InvoiceMessage').modal('show');
@@ -498,7 +498,6 @@
             $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
        
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        cgstpercentage = cgstpercentage / 2;
         cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100).toFixed(2);
         if (cgstCalculation > 0)
             $('#tdCGST').html(cgstCalculation);
@@ -510,7 +509,6 @@
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         
         var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        sgstpercentage = sgstpercentage / 2;
         sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
         if (sgstCalculation > 0)
             $('#tdSGST').html(sgstCalculation);

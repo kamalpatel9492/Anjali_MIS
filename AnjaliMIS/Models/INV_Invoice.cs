@@ -36,11 +36,11 @@ namespace AnjaliMIS.Models
         public int PONo { get; set; }
         public Nullable<int> AmountPending { get; set; }
         public int FinYearID { get; set; }
-        public Nullable<int> CGST { get; set; }
+        public Nullable<decimal> CGST { get; set; }
         public Nullable<decimal> CGSTAmount { get; set; }
-        public Nullable<int> SGST { get; set; }
+        public Nullable<decimal> SGST { get; set; }
         public Nullable<decimal> SGSTAmount { get; set; }
-        public Nullable<int> IGST { get; set; }
+        public Nullable<decimal> IGST { get; set; }
         public Nullable<decimal> IGSTAmount { get; set; }
         public Nullable<bool> IsLocal { get; set; }
         public Nullable<bool> IsActive { get; set; }

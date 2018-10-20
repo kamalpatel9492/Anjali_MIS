@@ -363,7 +363,7 @@ namespace AnjaliMIS.Controllers
                 {
                     ItemID = e.ItemID,
                     ItemName = e.ItemName
-                }).OrderBy(i=>i.ItemName).ToList();
+                }).OrderBy(i => i.ItemName).ToList();
 
                 if (itemList.Count > 0)
                 {
@@ -405,6 +405,7 @@ namespace AnjaliMIS.Controllers
         [HttpPost]
         public JsonResult AddInvoice(INV_InvoiceViewModal inv_InvoiceViewModal)
         {
+            string validMsg = "";
             try
             {
                 if (inv_InvoiceViewModal == null)
@@ -438,7 +439,6 @@ namespace AnjaliMIS.Controllers
                                     PricePerUnit = item.PricePerUnit
                                 };
                                 db.INV_InvoiceItem.Add(newINV_InvoiceItemAdd);
-                                db.SaveChanges();
                             }
                         }
                         inv_InvoiceViewModal.INV_InvoiceItems.ForEach(e =>
@@ -450,7 +450,6 @@ namespace AnjaliMIS.Controllers
                         List<INV_InvoiceItem> removeRange = db.INV_InvoiceItem.Where(t => t.InvoiceID == invoiceId && !getAllList.Contains(t.InvoiceItemID)).Select(t => t).ToList();
 
                         db.INV_InvoiceItem.RemoveRange(removeRange);
-                        db.SaveChanges();
 
                         INV_Invoice get_invoice = db.INV_Invoice.Where(e => e.InvoiceID == invoiceId).FirstOrDefault();
 
@@ -461,7 +460,7 @@ namespace AnjaliMIS.Controllers
                             UserID = get_invoice.UserID,
                             Amount = get_invoice.Amount,
                             AmountReceived = get_invoice.AmountReceived,
-                            StatusID= get_invoice.StatusID,
+                            StatusID = get_invoice.StatusID,
                             Created = get_invoice.Created,
                             Remarks = get_invoice.Remarks,
                             InvoiceDate = get_invoice.InvoiceDate,
@@ -475,22 +474,20 @@ namespace AnjaliMIS.Controllers
                             SGSTAmount = get_invoice.SGSTAmount,
                             IGST = get_invoice.IGST,
                             IGSTAmount = get_invoice.IGSTAmount,
-                            IsLocal =get_invoice.IsLocal,
+                            IsLocal = get_invoice.IsLocal,
                             //IsActive = get_invoice.IsActive==null? true : get_invoice.IsActive,//ask to kamal
-                            Casar=get_invoice.Casar,
+                            Casar = get_invoice.Casar,
                             TotalAmount = get_invoice.TotalAmount,
                             Operation = "Invoice",
                             InvoiceID = invoiceId
                         };
                         db.INV_InvoiceHistory.Add(Add_INV_InvoiceHistory);
-                        db.SaveChanges();
 
                         if (Session["UserID"] != null)
                         {
                             get_invoice.UserID = Convert.ToInt16(Session["UserID"].ToString());
                         }
 
-                        
                         get_invoice.Amount = inv_InvoiceViewModal.Amount;
                         get_invoice.AmountReceived = inv_InvoiceViewModal.AmountReceived;
                         get_invoice.StatusID = 1;
@@ -509,8 +506,6 @@ namespace AnjaliMIS.Controllers
                         get_invoice.IsLocal = inv_InvoiceViewModal.IsLocal;
                         get_invoice.Casar = inv_InvoiceViewModal.Casar;
                         get_invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
-
-                        db.SaveChanges();
                     }
                     else
                     {
@@ -537,7 +532,7 @@ namespace AnjaliMIS.Controllers
                         new_INV_Invoice.InvoiceNo = _NewInvoiceNo.ToString();
 
                         new_INV_Invoice.PONo = inv_InvoiceViewModal.PONo;
-                        new_INV_Invoice.AmountPending =0;
+                        new_INV_Invoice.AmountPending = 0;
                         new_INV_Invoice.FinYearID = CommonConfig.GetFinYearID();
                         new_INV_Invoice.CGST = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGST;
                         new_INV_Invoice.CGSTAmount = inv_InvoiceViewModal.CGST == 0 ? null : inv_InvoiceViewModal.CGSTAmount;
@@ -551,7 +546,6 @@ namespace AnjaliMIS.Controllers
                         new_INV_Invoice.TotalAmount = inv_InvoiceViewModal.TotalAmount;
 
                         db.INV_Invoice.Add(new_INV_Invoice);
-                        db.SaveChanges();
 
                         int newInvoiceId = new_INV_Invoice.InvoiceID;
                         List<INV_InvoiceItem> newList_INV_InvoiceItem = new List<INV_InvoiceItem>();
@@ -583,7 +577,6 @@ namespace AnjaliMIS.Controllers
                                     _iNV_ItemPrice.UserID = Convert.ToInt16(Session["UserID"].ToString());
                                 }
                                 db.INV_ItemPrice.Add(_iNV_ItemPrice);
-                                db.SaveChanges();
                             }
                             #endregion INV_ItemPrice
 
@@ -593,8 +586,9 @@ namespace AnjaliMIS.Controllers
                             {
                                 if (_INV_Item.Quantity - item.Quantity < 0)
                                 {
-                                    ModelState.AddModelError("", "Check Stock..");
-                                    return Json("failure", JsonRequestBehavior.AllowGet);
+                                    validMsg += "<br>Insufficient Stock for " + _INV_Item.ItemName;
+                                    ModelState.AddModelError("Insufficient Stock", "Insufficient Stock for " + _INV_Item.ItemName);
+                                    //return Json("failure", JsonRequestBehavior.AllowGet);
                                 }
                                 _INV_Item.Quantity = _INV_Item.Quantity - item.Quantity;
 
@@ -615,23 +609,24 @@ namespace AnjaliMIS.Controllers
 
                                 new_INV_StockHistory.IssueNumber = _NewInvoiceNo;
                                 db.INV_StockHistory.Add(new_INV_StockHistory);
-                                db.SaveChanges();
                             }
-
                             newList_INV_InvoiceItem.Add(new_INV_InvoiceItem);
                         }
                         db.INV_InvoiceItem.AddRange(newList_INV_InvoiceItem);
-                        db.SaveChanges();
-
                     }
                 }
-                return Json("Sucess", JsonRequestBehavior.AllowGet);
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+                    return Json("Sucess", JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json(validMsg, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-
+                return Json("failure", JsonRequestBehavior.AllowGet);
             }
-            return Json("failure", JsonRequestBehavior.AllowGet);
         }
 
         // GET: INV_Invoice/Print/5
