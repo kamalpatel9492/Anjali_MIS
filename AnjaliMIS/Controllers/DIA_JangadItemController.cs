@@ -336,7 +336,8 @@ namespace AnjaliMIS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Find(id);
+            //DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Find(id);
+            DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Where(e => e.JangadID == id).FirstOrDefault();
             if (dIA_JangadItem == null)
             {
                 return HttpNotFound();
