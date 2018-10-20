@@ -31,7 +31,7 @@
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
-                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger",id = "vsValidation" })
                         <h3 class="form-section">Invoice Details</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -108,7 +108,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-10">
-                                <a href="javascript:null" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                <a href="javascript:null" class="button btn default btn-sm  add-row"><i class="fa fa-plus" aria-hidden="true"></i>  Add Item</a>
                             </div>
                         </div>
                         <div id="divItemList" class="form-group" hidden>
@@ -142,34 +142,38 @@
                                             <td colspan="4" id="tdIGST" class="text-right"></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" class="text-right">Final Total</td>
-                                            <td colspan="4" id="tdFinalTotal" class="text-right"></td>
+                                            <td colspan="4" class="text-right">Total</td>
+                                            <td colspan="4" id="tdTotal" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" class="text-right bold">Final Total</td>
+                                            <td colspan="4" id="tdFinalTotal" class="text-right bold"></td>
                                         </tr>
                                     </tbody>
 
                                 </table>
-                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                <button type="button" style="float:right;" class="btn default btn-sm delete-row">Delete Item</button>
                             </div>
                         </div>
                         @*<h3 class="form-section">Payment Details</h3>*@
 
                         @*<div class="form-group">
-                            @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
-                                @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
-                                @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
-                            </div>
-                            @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2 allownumericwithdecimal" })
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                @Html.ValidationMessageFor(model => model.AmountPending, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                                @Html.LabelFor(model => model.Casar, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Casar, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
+                                    @Html.ValidationMessageFor(model => model.Casar, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.AmountReceived, "Amount Received", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
+                                    @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.AmountPending, "Amount Pending", htmlAttributes: new { @class = "control -label col-md-2 allownumericwithdecimal" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.AmountPending, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.AmountPending, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                     </div>
                     <div class="form-actions">
                         <div class="row">
@@ -202,26 +206,26 @@
          @:IGSTID = @Model.IGST
          @:SGSTID = @Model.SGST
          @:$('#divItemList').show();
-                    foreach (var @item in Model.INV_InvoiceItems)
-        {
-            @:  productList.push({ ItemID: @item.ItemID , Quantity: @item.Quantity , PricePerUnit: @item.PricePerUnit        });
-
-            @:var itemid = @item.ItemID;
-                        @:var itemname ='@item.INV_Item.ItemName';
-                        @:var Remarks;
-                        if (@item.Remarks != "") {
-                @: Remarks='@item.Remarks';
-                        }
-            @:var quantity = @item.Quantity;
-                        @:var priceAmount = @item.PricePerUnit;
-                        @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) +"</td></tr>";
-                    @:itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+            foreach (var @item in Model.INV_InvoiceItems)
+            {
+                @:  productList.push({ ItemID: @item.ItemID , Quantity: @item.Quantity , PricePerUnit: @item.PricePerUnit        });
+                @:var itemid = @item.ItemID;
+                @:var itemname ='@item.INV_Item.ItemName';
+                @:var Remarks;
+                if (@item.Remarks != "") {
+                    @: Remarks='@item.Remarks';
+                }
+                @:var quantity = @item.Quantity;
+                @:var priceAmount = @item.PricePerUnit;
+                @:var totalItemAmount = (quantity * priceAmount).toFixed(2);
+                @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount +"</td></tr>";
+                @:itemWiseEachStepAddTotalAmount += totalItemAmount;
                 @:$("table .list").prepend(markup);
-                    }
+            }
 
         @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                @:FinalCalculation();
-            }
+        @:FinalCalculation();
+    }
     $(document).ready(function () {
 
         $(".allownumericwithoutdecimal").on("keypress keyup blur",function (event) {
@@ -282,7 +286,7 @@
         //    $('#AmountPending').val(parseInt(newAmountPending));
         //});
         //$("#Casar").change(function () {
-           
+
         //    var newAmountPending = $('#tdFinalTotal').html() - $('#AmountReceived').val() - $('#Casar').val();
         //    $('#AmountPending').val(parseInt(newAmountPending));
         //});
@@ -330,6 +334,7 @@
                 var priceAmount = $("#txtItemPrice").val();
                 //var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
+                var totalItemAmount;
                 if((parseInt($('#txtQuantity').val()) != 0 && quantity !="") && (parseInt($('#txtItemPrice').val()) != 0 && priceAmount !=""))
                 {
                     productList.push({
@@ -338,10 +343,11 @@
                         PricePerUnit: priceAmount
                     });
                     //invoiceID++;
-                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + (priceAmount * quantity) + "</td></tr>";
+                    totalItemAmount = (priceAmount * quantity).toFixed(2);
+                    var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount + "</td></tr>";
                     $("table .list").prepend(markup);
-                    itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-                    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                    itemWiseEachStepAddTotalAmount += totalItemAmount;
+                    $('#tdItemTotal').html(parseFloat(itemWiseEachStepAddTotalAmount));
                     FinalCalculation();
                     $('html, body').animate({
                         scrollTop: $("#divItemList").offset().top
@@ -370,7 +376,7 @@
                             //productList.pop(key);
 
                             productList.splice(key, 1);
-                            itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
+                            itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - ((deductquantity * deductpriceperunit).toFixed(2));
                             $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
                             FinalCalculation();
                             return false;
@@ -427,7 +433,6 @@
             return false;
         }
 
-
         var newData = {
             InvoiceID:$('#InvoiceID').val(),
             PartyID: $('#PartyID').val(),
@@ -461,9 +466,10 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
-
-                if(result=="failure"){
-                    alert('failure');
+                if(result != "Sucess"){
+                    vsValidation
+                    $("#vsValidation").html(result);
+                    $("#vsValidation").css("display", "block");         
                 }
                 else{
                     $('#InvoiceMessage').modal('show');
@@ -476,35 +482,51 @@
         });
     }
     function FinalCalculation() {
+        var igstCalculation = 0;
+        var cgstCalculation = 0;
+        var sgstCalculation = 0;
+       
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
-        var igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100);
+        igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100).toFixed(2);
         if (igstCalculation > 0)
             $('#tdIGST').html(igstCalculation);
         else
             $('#tdIGST').html(0);
         if (igstpercentage > 0)
-            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage.toFixed(2) + "%)");
         else
             $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
+       
         var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        var cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100);
+        cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100).toFixed(2);
         if (cgstCalculation > 0)
             $('#tdCGST').html(cgstCalculation);
         else
             $('#tdCGST').html(0);
         if (cgstpercentage > 0)
-            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage.toFixed(2) + "%)");
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
+        
         var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
-        var sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100);
-        $('#tdSGST').html(sgstCalculation);
-        $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
-        var finaltotal = itemWiseEachStepAddTotalAmount + parseFloat($('#tdIGST').html()) + parseFloat($('#tdCGST').html()) + parseFloat($('#tdSGST').html());
+        sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
+        if (sgstCalculation > 0)
+            $('#tdSGST').html(sgstCalculation);
+        else
+            $('#tdSGST').html(0);
+
+        if (sgstpercentage > 0)
+            $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage.toFixed(2) + "%)");
+        else
+            $('#tdSpanPercentageSGSTValue').html("(" + 0 + "%)");
+       
+        var finaltotal = parseFloat(itemWiseEachStepAddTotalAmount) + parseFloat(igstCalculation) + parseFloat(cgstCalculation) + parseFloat(sgstCalculation);
+        finaltotal = parseFloat(finaltotal).toFixed(2)
+        $('#tdTotal').html(finaltotal);
+        $('#tdFinalTotal').html(Math.round(finaltotal,2));
+
         //finaltotal=parseInt(parseFloat(finaltotal));
         //$('#tdFinalTotal').html(Math.round(finaltotal,2));
-        $('#tdFinalTotal').html(parseFloat((finaltotal).toFixed(2)));
-
         //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
         //$('#AmountPending').val(parseInt(newAmountPending));
 

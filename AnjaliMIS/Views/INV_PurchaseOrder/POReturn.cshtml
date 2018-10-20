@@ -83,12 +83,12 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.SellerPartyID, "Seller Party", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.DropDownList("SellerPartyID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                @Html.DropDownListFor(model => model.SellerPartyID, null, htmlAttributes: new { @class = "form-control", disabled = "disabled" })
                                 @Html.ValidationMessageFor(model => model.SellerPartyID, "", new { @class = "text-danger" })
                             </div>
                             @Html.LabelFor(model => model.StatusID, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.DropDownList("StatusID", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                @Html.DropDownListFor(model => model.StatusID, null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
                                 @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                             </div>
                             @Html.LabelFor(model => model.PODate, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.PODate, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                <input type="text" value="@Model.PODate.Value.ToString("dd-MM-yyyy")" class="form-control" disabled="disabled"/>
                                 @Html.ValidationMessageFor(model => model.PODate, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -127,16 +127,16 @@
                                     <th>
                                         Item
                                     </th>
-                                    <th>
+                                    <th class="text-right">
                                         Puchase Price
                                     </th>
-                                    <th>
+                                    <th class="text-right">
                                         Ordered Quantity
                                     </th>
-                                    <th>
+                                    <th class="text-right">
                                         Received Quantity
                                     </th>
-                                    <th>
+                                    <th class="text-right">
                                         Receivable
                                     </th>
                                 </tr>
@@ -150,17 +150,17 @@
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PurchaseOrderItemID)
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].ItemID)
                                         </td>
-                                        <td class="col-md-2">
+                                        <td class="col-md-2 text-right">
                                             @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].PuchasePrice)
                                             @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].PuchasePrice, "", new { @class = "text-danger" })
                                         </td>
-                                        <td class="col-md-2">
+                                        <td class="col-md-2 text-right">
                                             @Html.DisplayFor(model => Model.INV_PurchaseOrderItems[i].OrderedQuantity, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.HiddenFor(modelItem => Model.INV_PurchaseOrderItems[i].OrderedQuantity)
 
                                         </td>
-                                        <td class="col-md-2">
+                                        <td class="col-md-2 text-right">
                                             @{
                                                 Int32 PendingToReceive = 0;
                                                 if (Model.INV_PurchaseOrderItems[i].OrderedQuantity != Model.INV_PurchaseOrderItems[i].ReceivedQuantity)
@@ -173,7 +173,7 @@
                                             }
 
                                         </td>
-                                        <td class="col-md-2">
+                                        <td class="col-md-2 text-right">
                                             @{
                                                 Int32 PendingToReceive2 = 0;
                                                 if (Model.INV_PurchaseOrderItems[i].OrderedQuantity != Model.INV_PurchaseOrderItems[i].ReceivedQuantity)
@@ -182,12 +182,12 @@
                                                     Model.INV_PurchaseOrderItems[i].ReceivedQuantity = PendingToReceive2;
                                                 }
 
-                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                @Html.EditorFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, new { htmlAttributes = new { @class = "form-control text-right", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => Model.INV_PurchaseOrderItems[i].ReceivedQuantity, "", new { @class = "text-danger" })
                                             }
                                         </td>
                                     </tr>
-                                }
+                                                }
                             </tbody>
                         </table>
                     </div>
@@ -215,38 +215,38 @@
     </div>
 
     <!--Add-Edit code end-->
-}
+                                    }
 
 <script>
-	var productList = [];
-	var itemWiseEachStepAddTotalAmount = 0;
-	$(document).ready(function () {
-		$('#btnSave').click(function (e) {
-			//AddNewPurchaseOrderWithItem();
-		    e.preventDefault();
-            //$("#POReturn").submit();
-            document.POReturn.submit();
+    var productList = [];
+    var itemWiseEachStepAddTotalAmount = 0;
+    $(document).ready(function () {
+        $('#btnSave').click(function (e) {
+            //AddNewPurchaseOrderWithItem();
+            e.preventDefault();
+            $("#POReturn").submit();
+            //document.POReturn.submit();
         });
 
-		$("#ItemID").change(function () {
+        $("#ItemID").change(function () {
 
-			var ddlitemid = $('#ItemID').val();
-			GetItemPrice(ddlitemid);
-		});
-		$("#PaidAmount").change(function () {
+            var ddlitemid = $('#ItemID').val();
+            GetItemPrice(ddlitemid);
+        });
+        $("#PaidAmount").change(function () {
 
-			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-			$('#PendingAmount').val(newAmountPending);
-		});
-		$("#Casar").change(function () {
+            var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+            $('#PendingAmount').val(newAmountPending);
+        });
+        $("#Casar").change(function () {
 
-			var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
-			$('#PendingAmount').val(newAmountPending);
-		});
-		$("#btnModalOK").click(function () {
-			$('#InvoiceMessage').modal('hide');
-			location.reload(true);
-		});
+            var newAmountPending = $('#tdFinalTotal').html() - $('#PaidAmount').val() - $('#Casar').val();
+            $('#PendingAmount').val(newAmountPending);
+        });
+        $("#btnModalOK").click(function () {
+            $('#InvoiceMessage').modal('hide');
+            location.reload(true);
+        });
 
         $('input:radio[name=isLocal]').change(function () {
             if ($('input[name=isLocal]:checked').val() == "True") {
@@ -271,63 +271,63 @@
         });
 
 
-		$(".add-row").click(function () {
+        $(".add-row").click(function () {
 
-			$('#divItemList').show();
-			if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
+            $('#divItemList').show();
+            if ($('#ItemID').val() != null && $('#txtItemPrice').val() != "") {
 
-				var itemid = $("#ItemID").val();
-				var itemname = $("#ItemID").find('option:selected').text();
-				var priceAmount = $("#txtItemPrice").val();
-				var invoiceID = 1;
+                var itemid = $("#ItemID").val();
+                var itemname = $("#ItemID").find('option:selected').text();
+                var priceAmount = $("#txtItemPrice").val();
+                var invoiceID = 1;
                 var quantity = $('#txtQuantity').val();
                 IsComplete = $('input[name=ReceivePO]:checked').val(),
 				productList.push({
-					//InvoiceItemID: InvoiceItemID,
-					//InvoiceID: invoiceID,
-					ItemID: itemid,
-					Quantity: quantity,
-					//Created: Created,
-					//Modified: Modified,
-					//Remarks:Remarks,
-					PricePerUnit: priceAmount
+				    //InvoiceItemID: InvoiceItemID,
+				    //InvoiceID: invoiceID,
+				    ItemID: itemid,
+				    Quantity: quantity,
+				    //Created: Created,
+				    //Modified: Modified,
+				    //Remarks:Remarks,
+				    PricePerUnit: priceAmount
 				});
-				invoiceID++;
-				var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
-				$("table .list").prepend(markup);
-				itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
-				$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-				FinalCalculation();
-			}
-		});
+                invoiceID++;
+                var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td>" + quantity + "</td><td>" + priceAmount + "</td><td>" + (priceAmount * quantity) + "</td></tr>";
+                $("table .list").prepend(markup);
+                itemWiseEachStepAddTotalAmount += (priceAmount * quantity);
+                $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
+                FinalCalculation();
+            }
+        });
 
-	});
+    });
 
 
-	function AddNewPurchaseOrderWithItem() {
-		var newData = {
+    function AddNewPurchaseOrderWithItem() {
+        var newData = {
             PuchasePrice: $('#PuchasePrice').val(),
             ReceivedQuantity: $('#ReceivedQuantity').val(),
             PurchaseOrderItemID: $('#PurchaseOrderItemID').val(),
             PurchaseOrderID: $('#PurchaseOrderID').val(),
-		};
-		console.log(newData);
+        };
+        console.log(newData);
 
-		$.ajax({
-			url: '@Url.Action("AddPurchaseOrder", "INV_PurchaseOrder")',
-			data: JSON.stringify(newData),
-			type: "POST",
-			contentType: "application/json;charset=utf-8",
-			dataType: "json",
-			success: function (result) {
+        $.ajax({
+            url: '@Url.Action("AddPurchaseOrder", "INV_PurchaseOrder")',
+            data: JSON.stringify(newData),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
 
-				$('#InvoiceMessage').modal('show');
-			},
-			error: function (errormessage) {
+                $('#InvoiceMessage').modal('show');
+            },
+            error: function (errormessage) {
 
 
-			}
-		});
+            }
+        });
     }
 
     $(".PONoSearch").click(function () {
@@ -354,17 +354,17 @@
                         //var _result = result;
                         window.location.href = FinalURL;
 
-                    //$("#ddlItemList").append('<option value="0">Select Item</option>');
-                    for (var i = 0; i < result.length; i++) {
-                        var option = $("<option/>");
-                        option.attr("value", result[i].ItemID).text(result[i].ItemName);
-                        $("#ddlItemList").append(option);
+                        //$("#ddlItemList").append('<option value="0">Select Item</option>');
+                        for (var i = 0; i < result.length; i++) {
+                            var option = $("<option/>");
+                            option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                            $("#ddlItemList").append(option);
+                        }
                     }
+                },
+                error: function (errormessage) {
                 }
-			},
-			error: function (errormessage) {
-			}
-		});
+            });
 
         }
         else {
