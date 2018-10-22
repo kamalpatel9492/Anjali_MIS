@@ -122,8 +122,9 @@
                                 @*@Html.ActionLink("Details", "Details", new { id = item.JangadItemID }) |*@
                                 @*@Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) |*@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.JangadID }) |
-                                @*<span id="JangadItemID" class="JangadItemID">Forward</span>*@
-                                <span id="JangadID" class="JangadID">Forward</span>
+                                @Html.ActionLink("Forward", "Forward", new { id = item.JangadID })
+                                 @*|
+                                <span id="JangadID" class="JangadID">Forward</span>*@
                             </td>
                         </tr>
                     }
@@ -273,6 +274,7 @@
                     }
                 });
             }
+
             $(document).ready(function () {
 
                 $('input:radio[name=Jangad]').change(function () {

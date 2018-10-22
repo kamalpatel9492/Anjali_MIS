@@ -1,12 +1,172 @@
 ﻿@model AnjaliMIS.Models.DIA_JangadItem
 
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Created)
     @Html.HiddenFor(model => model.JangadItemID)
+    @Html.HiddenFor(model => model.DIA_Jangad.JangadID)
+
+    
+    <script>
+        var PolishingStageListArray = [];
+        var PolishingStageListArrayHtml = '';
+        var SubmitArrayJangadItemList = [];
+
+        $(document).ready(function () {
+
+            RetrievePolishingStageList();
+            $('#txtJangadNo').val(@Model.DIA_Jangad.JangadNo);
+
+            $('input:radio[name=Jangad]').change(function () {
+                if ($('input[name=Jangad]:checked').val() == "Partial") {
+                    $('#divPartialJangadItemList').show();
+                    $('#divRemarks').hide();
+                    $('#divCompleteJangad').hide();
+                    //var janagadid = $('#txtJangadNo').attr('data-id');
+                    var janagadid = $('#DIA_Jangad_JangadID').val();
+                    debugger;
+                    GetJangadItemList(janagadid);
+                }
+                else {
+                    $('#divPartialJangadItemList').hide();
+                    $('#divRemarks').show();
+                    $('#divCompleteJangad').show();
+                }
+
+            });
+
+            $("#btnSaveJangadForward").click(function () {
+
+                if ($('input[name=Jangad]:checked').val() == "Complete") {
+                    debugger;
+                    var jangadID = @Model.JangadID;
+                    var polishingStageID = $('#ddlPolishingStageID').val();
+                    var remarks = $('#txtRemarks').val();
+                    //alert("The paragraph was clicked." + issuenumber);
+                    SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+                }
+                else if ($('input[name=Jangad]:checked').val() == "Partial") {
+                    debugger;
+                    var jangadID = @Model.JangadID;
+                    SubmitArrayJangadItemList = [];
+                    for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++) {
+                        SubmitArrayJangadItemList.push({
+                            jangadItemID: $('#tblItems tbody tr#tr' + i + '  #firsttd' + i + '').html(),
+                            polishingStageID: $('#tblItems tbody tr#tr' + i + ' #secondtd' + i + ' .ddlPolishingStageID').val(),
+                            remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
+                        });
+                    }
+                    //console.log(SubmitArrayJangadItemList);
+                    SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+
+                }
+            });
+
+        });
+
+        function GetJangadItemList(jangadid) {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ "jangadID": jangadid }),
+
+                success: function (result) {
+                    if (result.length > 0) {
+                        var html = '';
+                        $('#tbodyJangadItemList').html(html);
+                        for (var i = 0; i < result.length; i++) {
+                            var jangaditemid = result[i].JangadItemID;
+                            html += '<tr id="tr' + i + '">';
+                            html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                            html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
+                            html += '</tr>';
+
+                            //var option = $("<option/>");
+                            //option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                            //$("#ddlItemList").append(option);
+                        }
+                        $('#tbodyJangadItemList').append(html);
+                    }
+                },
+                error: function (errormessage) {
+                }
+            });
+        }
+
+        function RetrievePolishingStageList() {
+            $.ajax({
+                url: '@Url.Action("RetrievePolishingStageList", "DIA_JangadItem")',
+                //url: "/DIA_JangadItem/RetrievePolishingStageList",
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: (function (result) {
+
+                    PolishingStageListArray = result;
+                    if (result.length > 0) {
+
+                        var html = '<option value="0">Select Item</option>';
+                        for (var i = 0; i < result.length; i++) {
+                            html += '<option value="' + result[i].PolishingStageID + '">' + result[i].SatgeName + '</option>';
+                        }
+                        PolishingStageListArrayHtml = html;
+                        $("#ddlPolishingStageID").empty();
+                        $("#ddlPolishingStageID").append('<option value="0">Select Item</option>');
+                        for (var i = 0; i < result.length; i++) {
+                            var option = $("<option/>");
+                            option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
+                            $("#ddlPolishingStageID").append(option);
+                        }
+                    }
 
 
+                }),
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
+            debugger;
+            $.ajax({
+                //url: "/DIA_JangadItem/SaveJangadForward",
+                url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
+                data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == "Success") {
+
+                        alert(result);
+                        location.reload(true);
+                    }
+                    else {
+
+                        alert("not exist some error thrown.");
+
+                    }
+
+                    $('#txtJangadNo').val('');
+                    $('#ddlPolishingStageID').val(0);
+                    $('#txtRemarks').val('');
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+    </script>
     <!--Add-Edit code start-->
     <div class="col-md-12">
         <!-- BEGIN VALIDATION STATES-->
@@ -16,11 +176,11 @@
                     <i class="fa fa-gift"></i>Forward 
                 </div>
             </div>
-            <div class="portlet-body form">
+            @*<div class="portlet-body form">
                 <!-- BEGIN FORM-->
                 <div class="form-horizontal">
                     <div class="form-body">
-                        @*<h3 class="form-section">Basic validation States</h3>*@
+                        <h3 class="form-section">Basic validation States</h3>
                         <div class="form-group">
                             @Html.LabelFor(model => model.PolishingStageID, new { @class = "control-label col-md-3" })
 
@@ -42,6 +202,73 @@
                             <div class="col-md-offset-3 col-md-9">
                                 <input type="submit" value="Save" class="btn green" />
                                 @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <div class="portlet-body">
+                <!-- BEGIN FORM-->
+                <div class="form-horizontal form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Forword</label>
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="Jangad" value="Complete" checked="checked">Complete Receive
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="Jangad" value="Partial">Partial Receive
+                                </label>
+                            </div>
+                        </div>
+                        @*<h3 class="form-section">Basic validation States</h3>*@
+                        <div class="form-group">
+                            <label class="control-label col-md-3">JANGAD No</label>
+                            <div class="col-md-4">
+                                <input id="txtJangadNo" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" id="divPartialJangadItemList" hidden>
+                            <label class="control-label col-md-3">Set PolishingStageID</label>
+                            <div class="col-md-4">
+                                <table class="table" id="tblItems">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                jangaditemid
+                                            </th>
+                                            <th>
+                                                PolishingStageID
+                                            </th>
+                                            <th>
+                                                remarks
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyJangadItemList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divCompleteJangad">
+                            <label class="control-label col-md-3">PolishingStageID</label>
+
+                            <div class="col-md-4">
+                                @*<input id="txtPolishingStageID" type="text" class="form-control" />*@
+                                <select id="ddlPolishingStageID" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divRemarks">
+                            <label class="control-label col-md-3">Remarks</label>
+                            <div class="col-md-4">
+                                <input id="txtRemarks" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input id="btnSaveJangadForward" type="button" value="Save" class="btn green" />
                             </div>
                         </div>
                     </div>
