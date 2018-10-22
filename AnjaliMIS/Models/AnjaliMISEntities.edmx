@@ -219,6 +219,11 @@
           <Property Name="IsLocal" Type="bit" />
           <Property Name="Casar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="JangadCode" Type="varchar" MaxLength="50" />
+          <Property Name="QTYByThan" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsRatePerThan" Type="bit" />
+          <Property Name="IsRatePerCarat" Type="bit" />
         </EntityType>
         <EntityType Name="DIA_JangadHistory">
           <Key>
@@ -253,6 +258,11 @@
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Operation" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="JangadID" Type="int" />
+          <Property Name="JangadCode" Type="varchar" MaxLength="50" />
+          <Property Name="QTYByThan" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsRatePerThan" Type="bit" />
+          <Property Name="IsRatePerCarat" Type="bit" />
         </EntityType>
         <EntityType Name="DIA_JangadItem">
           <Key>
@@ -261,10 +271,10 @@
           <Property Name="JangadItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="JangadID" Type="int" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="18" Scale="3" />
-          <Property Name="Size" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Dia" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PavalionAngle" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CrownAngle" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="CrownWeight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CrownHeight" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Girdle" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Para1" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Para2" Type="decimal" Precision="18" Scale="2" />
@@ -284,6 +294,10 @@
           <Property Name="PhysicalSendDateTime" Type="datetime" />
           <Property Name="Delivered" Type="bit" />
           <Property Name="DeliveredDateTime" Type="datetime" />
+          <Property Name="RWeight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PWeight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Culet" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="JangadItemCode" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -3992,7 +4006,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             <End Role="SYS_Module" EntitySet="SYS_Module" />
             <End Role="SEC_UserPrivileges" EntitySet="SEC_UserPrivileges" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="PR_SEC_UserPrivileges_SelectByUserID_Result">
           <Property Type="Int32" Name="ModuleID" Nullable="false" />
           <Property Type="String" Name="ModuleName" Nullable="false" MaxLength="100" />
@@ -4267,6 +4281,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="IsLocal" Type="Boolean" />
           <Property Name="Casar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="JangadCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QTYByThan" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsRatePerThan" Type="Boolean" />
+          <Property Name="IsRatePerCarat" Type="Boolean" />
           <NavigationProperty Name="ACC_Tax" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_CGST_201806280655PM" FromRole="DIA_Jangad" ToRole="ACC_Tax" />
           <NavigationProperty Name="ACC_Tax1" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_IGST_201806280655PM" FromRole="DIA_Jangad" ToRole="ACC_Tax" />
           <NavigationProperty Name="ACC_Tax2" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_Jangad_SGST_201806280655PM" FromRole="DIA_Jangad" ToRole="ACC_Tax" />
@@ -4312,6 +4331,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Operation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="JangadID" Type="Int32" />
+          <Property Name="JangadCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QTYByThan" Type="Int32" />
+          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsRatePerThan" Type="Boolean" />
+          <Property Name="IsRatePerCarat" Type="Boolean" />
           <NavigationProperty Name="ACC_Tax" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_CGST_201806280656PM" FromRole="DIA_JangadHistory" ToRole="ACC_Tax" />
           <NavigationProperty Name="ACC_Tax1" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_IGST_201806280656PM" FromRole="DIA_JangadHistory" ToRole="ACC_Tax" />
           <NavigationProperty Name="ACC_Tax2" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadHistory_SGST_201806280656PM" FromRole="DIA_JangadHistory" ToRole="ACC_Tax" />
@@ -4330,10 +4354,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="JangadItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="JangadID" Type="Int32" Nullable="false" />
           <Property Name="Weight" Type="Decimal" Precision="18" Scale="3" />
-          <Property Name="Size" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Dia" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PavalionAngle" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CrownAngle" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CrownWeight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CrownHeight" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Girdle" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Para1" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Para2" Type="Decimal" Precision="18" Scale="2" />
@@ -4353,6 +4377,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PhysicalSendDateTime" Type="DateTime" Precision="3" />
           <Property Name="Delivered" Type="Boolean" />
           <Property Name="DeliveredDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RWeight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PWeight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Culet" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="JangadItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DIA_Cassett" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_CassettsID_201806280502PM" FromRole="DIA_JangadItem" ToRole="DIA_Cassett" />
           <NavigationProperty Name="DIA_Jangad" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_JangadID_201806280502PM" FromRole="DIA_JangadItem" ToRole="DIA_Jangad" />
           <NavigationProperty Name="SYS_PolishingStage" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_PolishingStageID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SYS_PolishingStage" />
@@ -6965,7 +6993,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -7181,6 +7209,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_Jangad">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_Jangad">
               <MappingFragment StoreEntitySet="DIA_Jangad">
+                <ScalarProperty Name="IsRatePerCarat" ColumnName="IsRatePerCarat" />
+                <ScalarProperty Name="IsRatePerThan" ColumnName="IsRatePerThan" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="QTYByThan" ColumnName="QTYByThan" />
+                <ScalarProperty Name="JangadCode" ColumnName="JangadCode" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="Casar" ColumnName="Casar" />
                 <ScalarProperty Name="IsLocal" ColumnName="IsLocal" />
@@ -7215,6 +7248,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_JangadHistory">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_JangadHistory">
               <MappingFragment StoreEntitySet="DIA_JangadHistory">
+                <ScalarProperty Name="IsRatePerCarat" ColumnName="IsRatePerCarat" />
+                <ScalarProperty Name="IsRatePerThan" ColumnName="IsRatePerThan" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="QTYByThan" ColumnName="QTYByThan" />
+                <ScalarProperty Name="JangadCode" ColumnName="JangadCode" />
                 <ScalarProperty Name="JangadID" ColumnName="JangadID" />
                 <ScalarProperty Name="Operation" ColumnName="Operation" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
@@ -7250,6 +7288,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_JangadItem">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_JangadItem">
               <MappingFragment StoreEntitySet="DIA_JangadItem">
+                <ScalarProperty Name="JangadItemCode" ColumnName="JangadItemCode" />
+                <ScalarProperty Name="Culet" ColumnName="Culet" />
+                <ScalarProperty Name="PWeight" ColumnName="PWeight" />
+                <ScalarProperty Name="RWeight" ColumnName="RWeight" />
                 <ScalarProperty Name="DeliveredDateTime" ColumnName="DeliveredDateTime" />
                 <ScalarProperty Name="Delivered" ColumnName="Delivered" />
                 <ScalarProperty Name="PhysicalSendDateTime" ColumnName="PhysicalSendDateTime" />
@@ -7269,10 +7311,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
                 <ScalarProperty Name="Para2" ColumnName="Para2" />
                 <ScalarProperty Name="Para1" ColumnName="Para1" />
                 <ScalarProperty Name="Girdle" ColumnName="Girdle" />
-                <ScalarProperty Name="CrownWeight" ColumnName="CrownWeight" />
+                <ScalarProperty Name="CrownHeight" ColumnName="CrownHeight" />
                 <ScalarProperty Name="CrownAngle" ColumnName="CrownAngle" />
                 <ScalarProperty Name="PavalionAngle" ColumnName="PavalionAngle" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="JangadID" ColumnName="JangadID" />
                 <ScalarProperty Name="JangadItemID" ColumnName="JangadItemID" />
@@ -7995,7 +8037,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

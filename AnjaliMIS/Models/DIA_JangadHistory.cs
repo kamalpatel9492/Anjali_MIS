@@ -43,6 +43,11 @@ namespace AnjaliMIS.Models
         public decimal TotalAmount { get; set; }
         public string Operation { get; set; }
         public Nullable<int> JangadID { get; set; }
+        public string JangadCode { get; set; }
+        public Nullable<int> QTYByThan { get; set; }
+        public Nullable<decimal> Rate { get; set; }
+        public Nullable<bool> IsRatePerThan { get; set; }
+        public Nullable<bool> IsRatePerCarat { get; set; }
     
         public virtual ACC_Tax ACC_Tax { get; set; }
         public virtual ACC_Tax ACC_Tax1 { get; set; }

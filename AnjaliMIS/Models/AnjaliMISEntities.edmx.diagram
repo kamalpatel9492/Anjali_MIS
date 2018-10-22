@@ -4,59 +4,59 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="582c46662d374207839f88ae62d1b24e" Name="Diagram1">
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_AccountHead" Width="1.5" PointX="3.75" PointY="60.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Bank" Width="1.5" PointX="0.75" PointY="67.25" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Expense" Width="1.5" PointX="6" PointY="65.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_ExpenseHistory" Width="1.5" PointX="9.75" PointY="88.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_PaymentMode" Width="1.5" PointX="3.75" PointY="74.125" />
+      <Diagram DiagramId="582c46662d374207839f88ae62d1b24e" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_AccountHead" Width="1.5" PointX="3.75" PointY="61.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Bank" Width="1.5" PointX="0.75" PointY="68.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Expense" Width="1.5" PointX="6" PointY="66.625" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_ExpenseHistory" Width="1.5" PointX="9.75" PointY="80.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_PaymentMode" Width="1.5" PointX="3.75" PointY="75" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Receipt" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_ReceiptHistory" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Tax" Width="1.5" PointX="13.5" PointY="105.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_AssignCassettToMachine" Width="1.5" PointX="7.5" PointY="83.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Cassett" Width="1.5" PointX="10.5" PointY="83.625" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Jangad" Width="1.5" PointX="15.75" PointY="103" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadHistory" Width="1.5" PointX="29.25" PointY="96.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadItem" Width="1.5" PointX="18" PointY="92.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Machine" Width="1.5" PointX="10.5" PointY="78.625" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineMaintenance" Width="1.5" PointX="16" PointY="85.25" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineWorkHistory" Width="1.5" PointX="21.25" PointY="86.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Department" Width="1.5" PointX="7.5" PointY="143.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Designation" Width="1.5" PointX="7.5" PointY="140.125" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Employee" Width="1.5" PointX="3" PointY="64.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_EmployeeAttendance" Width="1.5" PointX="7.5" PointY="76.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Punch" Width="1.5" PointX="5.25" PointY="91.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Category" Width="1.5" PointX="7.5" PointY="109.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Invoice" Width="1.5" PointX="12.75" PointY="96.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceHistory" Width="1.5" PointX="23.25" PointY="95.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceItem" Width="1.5" PointX="15" PointY="93.25" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Width="1.5" PointX="15.75" PointY="97.125" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Item" Width="1.5" PointX="12.75" PointY="89.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemConfiguration" Width="1.5" PointX="16" PointY="80.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemPrice" Width="1.5" PointX="21" PointY="92.625" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrder" Width="1.5" PointX="9.75" PointY="96.5" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderHistory" Width="1.5" PointX="26.25" PointY="95.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderItem" Width="1.5" PointX="18" PointY="101" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_StockHistory" Width="1.5" PointX="21" PointY="97.125" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Unit" Width="1.5" PointX="10.5" PointY="105.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_City" Width="1.5" PointX="13.5" PointY="83.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_Country" Width="1.5" PointX="7.5" PointY="146.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_State" Width="1.5" PointX="9.75" PointY="113.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.ACC_Tax" Width="1.5" PointX="13.5" PointY="89.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_AssignCassettToMachine" Width="1.5" PointX="12.75" PointY="51.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Cassett" Width="1.5" PointX="7.5" PointY="46.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Jangad" Width="1.5" PointX="15.75" PointY="78.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadHistory" Width="1.5" PointX="23.25" PointY="75.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_JangadItem" Width="1.5" PointX="18" PointY="63.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_Machine" Width="1.5" PointX="7.5" PointY="51.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineMaintenance" Width="1.5" PointX="21" PointY="59" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.DIA_MachineWorkHistory" Width="1.5" PointX="20.25" PointY="54" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Department" Width="1.5" PointX="7.5" PointY="61.75" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Designation" Width="1.5" PointX="7.5" PointY="100.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Employee" Width="1.5" PointX="3" PointY="65.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_EmployeeAttendance" Width="1.5" PointX="10.5" PointY="60.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.EMP_Punch" Width="1.5" PointX="5.25" PointY="85.625" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Category" Width="1.5" PointX="7.5" PointY="110.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Invoice" Width="1.5" PointX="12.75" PointY="80.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceHistory" Width="1.5" PointX="26.25" PointY="73.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_InvoiceItem" Width="1.5" PointX="18" PointY="79.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_IssueReturn" Width="1.5" PointX="9.75" PointY="87.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Item" Width="1.5" PointX="12.75" PointY="73.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemConfiguration" Width="1.5" PointX="15" PointY="62.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_ItemPrice" Width="1.5" PointX="21" PointY="75.625" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrder" Width="1.5" PointX="9.75" PointY="71.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderHistory" Width="1.5" PointX="20.25" PointY="79.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_PurchaseOrderItem" Width="1.5" PointX="15" PointY="73.875" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_StockHistory" Width="1.5" PointX="18" PointY="83.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.INV_Unit" Width="1.5" PointX="10.5" PointY="68.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_City" Width="1.5" PointX="10.5" PointY="47.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_Country" Width="1.5" PointX="7.5" PointY="58.25" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOC_State" Width="1.5" PointX="9.75" PointY="55.875" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_DBMSError" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_PageError" Width="1.5" PointX="4.75" PointY="5.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_PageVisited" Width="1.5" PointX="7.5" PointY="137" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_PageVisited" Width="1.5" PointX="7.5" PointY="107" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.LOG_SPExecution" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.MST_Party" Width="1.5" PointX="21" PointY="111.25" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_LoginHistory" Width="1.5" PointX="7.5" PointY="73.125" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_User" Width="1.5" PointX="5.25" PointY="80.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_UserPrivileges" Width="1.5" PointX="7.5" PointY="88" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Company" Width="1.5" PointX="18.75" PointY="81.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_FinYear" Width="1.5" PointX="7.5" PointY="113.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Module" Width="1.5" PointX="5.25" PointY="94.625" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_OperationType" Width="1.5" PointX="18.75" PointY="106" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PartyType" Width="1.5" PointX="18.75" PointY="113.875" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PolishingStage" Width="1.5" PointX="15.75" PointY="76.375" />
-        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Status" Width="1.5" PointX="8.25" PointY="67.625" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.MST_Party" Width="1.5" PointX="18" PointY="50.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_LoginHistory" Width="1.5" PointX="7.5" PointY="103.75" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_User" Width="1.5" PointX="5.25" PointY="48.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SEC_UserPrivileges" Width="1.5" PointX="10.5" PointY="51.75" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Company" Width="1.5" PointX="15.75" PointY="48.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_FinYear" Width="1.5" PointX="7.5" PointY="113.625" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Module" Width="1.5" PointX="8.25" PointY="41.375" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_OperationType" Width="1.5" PointX="15.75" PointY="89" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PartyType" Width="1.5" PointX="15.75" PointY="45.125" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_PolishingStage" Width="1.5" PointX="15.75" PointY="58.5" />
+        <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SYS_Status" Width="1.5" PointX="5.25" PointY="43.25" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_CustomFK" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_FixColumn" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="DB_A157D8_AnjaliMISModel.SQL_FKDisplayMember" Width="1.5" PointX="6.75" PointY="6.75" />

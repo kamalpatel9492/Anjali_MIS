@@ -23,10 +23,10 @@ namespace AnjaliMIS.Models
         public int JangadItemID { get; set; }
         public int JangadID { get; set; }
         public Nullable<decimal> Weight { get; set; }
-        public Nullable<decimal> Size { get; set; }
+        public Nullable<decimal> Dia { get; set; }
         public Nullable<decimal> PavalionAngle { get; set; }
         public Nullable<decimal> CrownAngle { get; set; }
-        public Nullable<decimal> CrownWeight { get; set; }
+        public Nullable<decimal> CrownHeight { get; set; }
         public Nullable<decimal> Girdle { get; set; }
         public Nullable<decimal> Para1 { get; set; }
         public Nullable<decimal> Para2 { get; set; }
@@ -46,6 +46,10 @@ namespace AnjaliMIS.Models
         public Nullable<System.DateTime> PhysicalSendDateTime { get; set; }
         public Nullable<bool> Delivered { get; set; }
         public Nullable<System.DateTime> DeliveredDateTime { get; set; }
+        public Nullable<decimal> RWeight { get; set; }
+        public Nullable<decimal> PWeight { get; set; }
+        public Nullable<decimal> Culet { get; set; }
+        public string JangadItemCode { get; set; }
     
         public virtual DIA_Cassett DIA_Cassett { get; set; }
         public virtual DIA_Jangad DIA_Jangad { get; set; }

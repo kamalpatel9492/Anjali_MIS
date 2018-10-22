@@ -154,10 +154,10 @@ namespace AnjaliMIS.Controllers
                                 new_DIA_JangadItem = new DIA_JangadItem();
                                 new_DIA_JangadItem.JangadID = new_DIA_Jangad.JangadID;
                                 new_DIA_JangadItem.Weight = item.Weight;
-                                new_DIA_JangadItem.Size = item.Size;
+                                new_DIA_JangadItem.Dia = item.Dia;
                                 new_DIA_JangadItem.PavalionAngle = item.PavalionAngle;
                                 new_DIA_JangadItem.CrownAngle = item.CrownAngle;
-                                new_DIA_JangadItem.CrownWeight = item.CrownWeight;
+                                new_DIA_JangadItem.CrownHeight = item.CrownHeight;
                                 new_DIA_JangadItem.Girdle = item.Girdle;
                                 new_DIA_JangadItem.Para1 = item.Para1;
                                 new_DIA_JangadItem.Para2 = item.Para2;
