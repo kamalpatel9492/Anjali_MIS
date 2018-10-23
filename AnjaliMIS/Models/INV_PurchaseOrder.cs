@@ -37,11 +37,11 @@ namespace AnjaliMIS.Models
         public Nullable<System.DateTime> PODate { get; set; }
         public int FinYearID { get; set; }
         public bool IsLocal { get; set; }
-        public Nullable<decimal> CGST { get; set; }
+        public Nullable<int> CGST { get; set; }
         public Nullable<decimal> CGSTAmount { get; set; }
-        public Nullable<decimal> SGST { get; set; }
+        public Nullable<int> SGST { get; set; }
         public Nullable<decimal> SGSTAmount { get; set; }
-        public Nullable<decimal> IGST { get; set; }
+        public Nullable<int> IGST { get; set; }
         public Nullable<decimal> IGSTAmount { get; set; }
         public decimal TotalAmount { get; set; }
     
