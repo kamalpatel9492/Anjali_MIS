@@ -150,7 +150,7 @@
           <Key>
             <PropertyRef Name="TaxID" />
           </Key>
-          <Property Name="TaxID" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TaxID" Type="int" Nullable="false" />
           <Property Name="Tax" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Percentage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
@@ -212,10 +212,10 @@
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TDSAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TDS" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
+          <Property Name="SGST" Type="int" />
+          <Property Name="IGST" Type="int" />
+          <Property Name="TDS" Type="int" />
           <Property Name="IsLocal" Type="bit" />
           <Property Name="Casar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -249,10 +249,10 @@
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TDSAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TDS" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
+          <Property Name="SGST" Type="int" />
+          <Property Name="IGST" Type="int" />
+          <Property Name="TDS" Type="int" />
           <Property Name="IsLocal" Type="bit" />
           <Property Name="Casar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -455,11 +455,11 @@
           <Property Name="PONo" Type="int" Nullable="false" />
           <Property Name="AmountPending" Type="int" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
           <Property Name="CGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="int" />
           <Property Name="SGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="int" />
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsLocal" Type="bit" />
           <Property Name="IsActive" Type="bit" />
@@ -484,11 +484,11 @@
           <Property Name="PONo" Type="int" Nullable="false" />
           <Property Name="AmountPending" Type="int" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
           <Property Name="CGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="int" />
           <Property Name="SGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="int" />
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IsLocal" Type="bit" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
@@ -594,11 +594,11 @@
           <Property Name="PODate" Type="date" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
           <Property Name="IsLocal" Type="bit" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
           <Property Name="CGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="int" />
           <Property Name="SGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="int" />
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
@@ -621,11 +621,11 @@
           <Property Name="PODate" Type="date" />
           <Property Name="FinYearID" Type="int" Nullable="false" />
           <Property Name="IsLocal" Type="bit" Nullable="false" />
-          <Property Name="CGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="int" />
           <Property Name="CGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="int" />
           <Property Name="SGSTAmount" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="int" />
           <Property Name="IGSTAmount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Operation" Type="varchar" MaxLength="50" Nullable="false" />
@@ -4182,7 +4182,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Key>
             <PropertyRef Name="TaxID" />
           </Key>
-          <Property Name="TaxID" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TaxID" Type="Int32" Nullable="false" />
           <Property Name="Tax" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Percentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
@@ -4274,10 +4274,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TDSAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TDS" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
+          <Property Name="SGST" Type="Int32" />
+          <Property Name="IGST" Type="Int32" />
+          <Property Name="TDS" Type="Int32" />
           <Property Name="IsLocal" Type="Boolean" />
           <Property Name="Casar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
@@ -4322,10 +4322,10 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TDSAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TDS" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
+          <Property Name="SGST" Type="Int32" />
+          <Property Name="IGST" Type="Int32" />
+          <Property Name="TDS" Type="Int32" />
           <Property Name="IsLocal" Type="Boolean" />
           <Property Name="Casar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
@@ -4577,11 +4577,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PONo" Type="Int32" Nullable="false" />
           <Property Name="AmountPending" Type="Int32" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
           <Property Name="CGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="Int32" />
           <Property Name="SGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="Int32" />
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsLocal" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" />
@@ -4616,11 +4616,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PONo" Type="Int32" Nullable="false" />
           <Property Name="AmountPending" Type="Int32" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
           <Property Name="CGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="Int32" />
           <Property Name="SGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="Int32" />
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IsLocal" Type="Boolean" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
@@ -4758,11 +4758,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PODate" Type="DateTime" Precision="0" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
           <Property Name="IsLocal" Type="Boolean" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
           <Property Name="CGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="Int32" />
           <Property Name="SGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="Int32" />
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="ACC_Tax" Relationship="DB_A157D8_AnjaliMISModel.FK_INV_PurchaseOrder_CGST_201806280659PM" FromRole="INV_PurchaseOrder" ToRole="ACC_Tax" />
@@ -4795,11 +4795,11 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PODate" Type="DateTime" Precision="0" />
           <Property Name="FinYearID" Type="Int32" Nullable="false" />
           <Property Name="IsLocal" Type="Boolean" Nullable="false" />
-          <Property Name="CGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CGST" Type="Int32" />
           <Property Name="CGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SGST" Type="Int32" />
           <Property Name="SGSTAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IGST" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IGST" Type="Int32" />
           <Property Name="IGSTAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Operation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />

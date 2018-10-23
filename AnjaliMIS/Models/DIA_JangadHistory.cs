@@ -34,10 +34,10 @@ namespace AnjaliMIS.Models
         public Nullable<decimal> IGSTAmount { get; set; }
         public Nullable<decimal> TDSAmount { get; set; }
         public bool IsActive { get; set; }
-        public Nullable<decimal> CGST { get; set; }
-        public Nullable<decimal> SGST { get; set; }
-        public Nullable<decimal> IGST { get; set; }
-        public Nullable<decimal> TDS { get; set; }
+        public Nullable<int> CGST { get; set; }
+        public Nullable<int> SGST { get; set; }
+        public Nullable<int> IGST { get; set; }
+        public Nullable<int> TDS { get; set; }
         public Nullable<bool> IsLocal { get; set; }
         public Nullable<decimal> Casar { get; set; }
         public decimal TotalAmount { get; set; }

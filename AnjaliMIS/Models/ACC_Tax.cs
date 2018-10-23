@@ -39,7 +39,7 @@ namespace AnjaliMIS.Models
             this.INV_PurchaseOrderHistory2 = new HashSet<INV_PurchaseOrderHistory>();
         }
     
-        public decimal TaxID { get; set; }
+        public int TaxID { get; set; }
         public string Tax { get; set; }
         public decimal Percentage { get; set; }
         public System.DateTime Created { get; set; }
