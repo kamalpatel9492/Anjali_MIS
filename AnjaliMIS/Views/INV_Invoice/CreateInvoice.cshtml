@@ -508,7 +508,7 @@
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         
-        var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        var sgstpercentage = $("#ddlSGST option:selected").attr("data-id");
         sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
         if (sgstCalculation > 0)
             $('#tdSGST').html(sgstCalculation);
