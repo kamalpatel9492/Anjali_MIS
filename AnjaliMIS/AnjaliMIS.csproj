@@ -4714,6 +4714,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
+    <Folder Include="SQLScript\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
