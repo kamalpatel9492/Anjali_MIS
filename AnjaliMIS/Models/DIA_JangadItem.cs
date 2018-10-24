@@ -38,7 +38,6 @@ namespace AnjaliMIS.Models
         public int StatusID { get; set; }
         public string QCRemarks { get; set; }
         public System.DateTime Created { get; set; }
-        public Nullable<System.DateTime> Completed { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> PhysicalReceived { get; set; }
         public Nullable<System.DateTime> PhysicalReceivedDateTime { get; set; }
@@ -50,6 +49,7 @@ namespace AnjaliMIS.Models
         public Nullable<decimal> PWeight { get; set; }
         public Nullable<decimal> Culet { get; set; }
         public string JangadItemCode { get; set; }
+        public Nullable<decimal> ji_table { get; set; }
     
         public virtual DIA_Cassett DIA_Cassett { get; set; }
         public virtual DIA_Jangad DIA_Jangad { get; set; }

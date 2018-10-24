@@ -286,7 +286,6 @@
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="QCRemarks" Type="varchar" MaxLength="500" />
           <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="Completed" Type="datetime" />
           <Property Name="Remarks" Type="varchar" MaxLength="500" />
           <Property Name="PhysicalReceived" Type="bit" />
           <Property Name="PhysicalReceivedDateTime" Type="datetime" />
@@ -298,6 +297,7 @@
           <Property Name="PWeight" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Culet" Type="decimal" Precision="18" Scale="2" />
           <Property Name="JangadItemCode" Type="varchar" MaxLength="50" />
+          <Property Name="ji_table" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -4369,7 +4369,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="QCRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Completed" Type="DateTime" Precision="3" />
           <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="PhysicalReceived" Type="Boolean" />
           <Property Name="PhysicalReceivedDateTime" Type="DateTime" Precision="3" />
@@ -4387,6 +4386,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="SYS_Status" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_StatusID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SYS_Status" />
           <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_UserID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SEC_User" />
           <NavigationProperty Name="DIA_MachineWorkHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_JangadItemID_201806280509PM" FromRole="DIA_JangadItem" ToRole="DIA_MachineWorkHistory" />
+          <Property Name="ji_table" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -7288,6 +7288,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_JangadItem">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_JangadItem">
               <MappingFragment StoreEntitySet="DIA_JangadItem">
+                <ScalarProperty Name="ji_table" ColumnName="ji_table" />
                 <ScalarProperty Name="JangadItemCode" ColumnName="JangadItemCode" />
                 <ScalarProperty Name="Culet" ColumnName="Culet" />
                 <ScalarProperty Name="PWeight" ColumnName="PWeight" />
@@ -7299,7 +7300,6 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
                 <ScalarProperty Name="PhysicalReceivedDateTime" ColumnName="PhysicalReceivedDateTime" />
                 <ScalarProperty Name="PhysicalReceived" ColumnName="PhysicalReceived" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Completed" ColumnName="Completed" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="QCRemarks" ColumnName="QCRemarks" />
                 <ScalarProperty Name="StatusID" ColumnName="StatusID" />

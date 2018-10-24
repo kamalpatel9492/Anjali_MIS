@@ -192,17 +192,17 @@ namespace AnjaliMIS.Controllers
                                 new_DIA_JangadItem.StatusID = CommonConfig.GetStatusPending();
                                 new_DIA_JangadItem.QCRemarks = item.QCRemarks;//ask to kamal
                                 new_DIA_JangadItem.Created = DateTime.Now;
-                                new_DIA_JangadItem.Completed = item.Completed;//ask to kamal
                                 new_DIA_JangadItem.Remarks = item.Remarks;
                                 new_DIA_JangadItem.PhysicalReceived = item.PhysicalReceived;//ask to kamal
-                                new_DIA_JangadItem.PhysicalReceivedDateTime = DateTime.Now;//ask to kamal
+                                new_DIA_JangadItem.PhysicalReceivedDateTime = item.PhysicalReceivedDateTime;//ask to kamal
                                 new_DIA_JangadItem.PhysicalSend = item.PhysicalSend;//ask to kamal
-                                new_DIA_JangadItem.PhysicalSendDateTime = DateTime.Now;//ask to kamal
+                                new_DIA_JangadItem.PhysicalSendDateTime = item.PhysicalSendDateTime;//ask to kamal
                                 new_DIA_JangadItem.Delivered = item.Delivered;//ask to kamal
-                                new_DIA_JangadItem.DeliveredDateTime = DateTime.Now;//ask to kamal
+                                new_DIA_JangadItem.DeliveredDateTime = item.DeliveredDateTime;//ask to kamal
                                 new_DIA_JangadItem.RWeight = item.RWeight;//ask to kamal
                                 new_DIA_JangadItem.PWeight = item.PWeight;//ask to kamal
                                 new_DIA_JangadItem.Culet = item.Culet;//ask to kamal
+                                new_DIA_JangadItem.ji_table = item.ji_table;//ask to kamal
                                 new_DIA_JangadItem.JangadItemCode = item.JangadItemCode;//ask to kamal
 
                                 //new_DIA_JangadItem.PolishingStageID = 1;
