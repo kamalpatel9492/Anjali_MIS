@@ -382,7 +382,7 @@
                         //var deductquantity = value.OrderedQuantity;
                         //var deductpriceperunit = value.PuchasePrice;
                         if (checkId == value.tablerowid) {
-                            
+
                         //    //productList.pop(key);
                             jangadList.splice(key, 1);
                         //    itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
@@ -456,6 +456,8 @@
             success: function (result) {
 
                 $('#InvoiceMessage').modal('show');
+                
+                window.location.href = '@Url.Action("AddJangad", "DIA_JangadItem")';
             },
             error: function (errormessage) {
 
