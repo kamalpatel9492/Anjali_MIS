@@ -569,9 +569,13 @@ namespace AnjaliMIS.Controllers
 
                         INV_StockHistory _StockHistoryNew = new INV_StockHistory();
                         _StockHistoryNew = db.INV_StockHistory.Where(w => w.IssueNumber == iNV_IssueReturnViewModal.IssueReturnNo && w.ItemID == item.ItemID).FirstOrDefault();
+
+                        List<INV_StockHistory> _receivedStockHistory = new List<INV_StockHistory>();
+                        _receivedStockHistory = db.INV_StockHistory.Where(w => w.IssueNumber == iNV_IssueReturnViewModal.IssueReturnNo && w.ItemID == item.ItemID && w.Remarks == "Return" && w.OperationTypeID == 9).ToList();
+
                         if (_StockHistoryNew != null)
                         {
-                            if (_StockHistoryNew.Quantity < item.Quantity)
+                            if (_StockHistoryNew.Quantity < (item.Quantity + _receivedStockHistory.Sum(i => i.Quantity)))
                             {
                                 if (Err == "")
                                     Err = Err + "You can not return more than issue. " + inv_Item.ItemName;
@@ -588,7 +592,7 @@ namespace AnjaliMIS.Controllers
 
                         INV_StockHistory new_INV_StockHistory = new INV_StockHistory();
                         new_INV_StockHistory.ItemID = item.ItemID;
-                        new_INV_StockHistory.OperationTypeID = 8;
+                        new_INV_StockHistory.OperationTypeID = 9;
                         new_INV_StockHistory.ReferenceID = _NewIssueReturnNo;
                         new_INV_StockHistory.Quantity = item.Quantity;
                         new_INV_StockHistory.UserID = item.UserID;
@@ -596,8 +600,8 @@ namespace AnjaliMIS.Controllers
                         new_INV_StockHistory.Modified = DateTime.Now;
                         new_INV_StockHistory.Remarks = "Return";
                         new_INV_StockHistory.FinYearID = CommonConfig.GetFinYearID();
-
-                        new_INV_StockHistory.IssueNumber = _NewIssueReturnNo;
+                        new_INV_StockHistory.IssueNumber = iNV_IssueReturnViewModal.IssueReturnNo;
+                        new_INV_StockHistory.ReturnNumber = _NewIssueReturnNo;
                         db.INV_StockHistory.Add(new_INV_StockHistory);
                         if (iNV_IssueReturnViewModal.IsRejected)
                         {
@@ -634,7 +638,7 @@ namespace AnjaliMIS.Controllers
         {
             try
             {
-                var itemList = db.INV_StockHistory.Where(e => e.IssueNumber == issueNumer).Select(e => new
+                var itemList = db.INV_StockHistory.Where(e => e.IssueNumber == issueNumer && e.OperationTypeID == 8 && e.Remarks== "Issue").Select(e => new
                 {
                     ItemID = e.ItemID,
                     ItemName = e.INV_Item.ItemName,
