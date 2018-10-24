@@ -243,7 +243,7 @@
             }
         });
 
-        //RetrieveSGST();
+        RetrieveSGST();
         RetrieveCGST();
         RetrieveIGST();
         RetrieveitemList();
@@ -251,7 +251,7 @@
         $("#ddlCGST").change(function () {
             var changeSGSTValueDependOnCGST=$("option:selected","#ddlCGST").attr("data-id");
             $("#txtSGSTValue").val("SGST-"+changeSGSTValueDependOnCGST);
-            //$('#ddlSGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
+            $('#ddlCGST option[data-id="'+ changeSGSTValueDependOnCGST +'"]').prop('selected', true);
             FinalCalculation();
         });
         //$("#ddlSGST").change(function () {
@@ -315,7 +315,7 @@
                 //$('#divSGST').hide();
                 $('#divIGST').show();
                 $('#ddlCGST').val("0");
-                $('#txtSGSTValue').val("0");
+                $('#ddlSGST').val("0");
             } else {
                 $('#divCGST').hide();
                 //$('#divSGST').hide();
@@ -485,7 +485,7 @@
         var igstCalculation = 0;
         var cgstCalculation = 0;
         var sgstCalculation = 0;
-       
+        
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100).toFixed(2);
         if (igstCalculation > 0)
@@ -493,7 +493,7 @@
         else
             $('#tdIGST').html(0);
         if (igstpercentage > 0)
-            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage.toFixed(2) + "%)");
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
         else
             $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
        
@@ -504,19 +504,18 @@
         else
             $('#tdCGST').html(0);
         if (cgstpercentage > 0)
-            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage.toFixed(2) + "%)");
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
         else
             $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
         
-        var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        var sgstpercentage =$("#ddlCGST option:selected").attr("data-id");
         sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
         if (sgstCalculation > 0)
             $('#tdSGST').html(sgstCalculation);
         else
             $('#tdSGST').html(0);
-
         if (sgstpercentage > 0)
-            $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage.toFixed(2) + "%)");
+            $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
         else
             $('#tdSpanPercentageSGSTValue').html("(" + 0 + "%)");
        
@@ -536,7 +535,7 @@
 
 
     //Retrive SGST
-    @*function RetrieveSGST() {
+    function RetrieveSGST() {
         $.ajax({
             url: '@Url.Action("RetrieveSGST", "INV_Invoice")',
             type: "GET",
@@ -564,7 +563,7 @@
                 alert(errormessage.responseText);
             }
         });
-    }*@
+    }
 
     //Retrive CGST
     function RetrieveCGST() {
