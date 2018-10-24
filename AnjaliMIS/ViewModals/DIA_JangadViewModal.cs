@@ -47,5 +47,26 @@ namespace AnjaliMIS.ViewModals
 
         public List<DIA_JangadItem> DIA_JangadItems { get; set; }
         public List<DIA_JangadHistory> DIA_JangadHistory { get; set; }
+
+
+       
+        public string JangadCode { get; set; }
+        public Nullable<int> QTYByThan { get; set; }
+        public Nullable<decimal> Rate { get; set; }
+        public Nullable<bool> IsRatePerThan { get; set; }
+        public Nullable<bool> IsRatePerCarat { get; set; }
+
+        public virtual ACC_Tax ACC_Tax { get; set; }
+        public virtual ACC_Tax ACC_Tax1 { get; set; }
+        public virtual ACC_Tax ACC_Tax2 { get; set; }
+        public virtual ACC_Tax ACC_Tax3 { get; set; }
+        public virtual SYS_Company SYS_Company { get; set; }
+        public virtual SYS_FinYear SYS_FinYear { get; set; }
+        public virtual MST_Party MST_Party { get; set; }
+        public virtual SYS_Status SYS_Status { get; set; }
+        public virtual SEC_User SEC_User { get; set; }
+        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIA_JangadItem> DIA_JangadItem { get; set; }
     }
 }
