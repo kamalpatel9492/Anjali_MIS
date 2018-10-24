@@ -298,6 +298,8 @@
           <Property Name="Culet" Type="decimal" Precision="18" Scale="2" />
           <Property Name="JangadItemCode" Type="varchar" MaxLength="50" />
           <Property Name="ji_table" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CompletedDateTime" Type="datetime" />
+          <Property Name="Completed" Type="bit" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -4387,6 +4389,8 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_UserID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SEC_User" />
           <NavigationProperty Name="DIA_MachineWorkHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_JangadItemID_201806280509PM" FromRole="DIA_JangadItem" ToRole="DIA_MachineWorkHistory" />
           <Property Name="ji_table" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CompletedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Completed" Type="Boolean" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -7288,6 +7292,8 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_JangadItem">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_JangadItem">
               <MappingFragment StoreEntitySet="DIA_JangadItem">
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="CompletedDateTime" ColumnName="CompletedDateTime" />
                 <ScalarProperty Name="ji_table" ColumnName="ji_table" />
                 <ScalarProperty Name="JangadItemCode" ColumnName="JangadItemCode" />
                 <ScalarProperty Name="Culet" ColumnName="Culet" />
