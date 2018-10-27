@@ -402,6 +402,53 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
+        public JsonResult PhysicalSend(int jangadID, int jangadItemID)
+        {
+            try
+            {
+                if (jangadItemID == 0)
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID).ToList();
+                    if (getJangadItem.Count > 0)
+                    {
+                        foreach (var item in getJangadItem)
+                        {
+                            item.PhysicalSend = true;
+                            item.PhysicalSendDateTime = DateTime.Now;
+                        }
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else 
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.JangadItemID== jangadItemID).FirstOrDefault();
+                    if (getJangadItem != null)
+                    {
+                        getJangadItem.PhysicalSend = true;
+                        getJangadItem.PhysicalSendDateTime = DateTime.Now;
+
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                throw;
+            }           
+        }
+
+        [HttpPost]
         public JsonResult SaveJangadForward(int? jangadID, int? polishingStageID, string remarks, List<DIA_JangadItem> jangadItemList, string jangadForwordTypeCompleteOrPartial)
         {
             try
