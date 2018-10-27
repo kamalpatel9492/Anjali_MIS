@@ -32,19 +32,6 @@
                 }
             });
 
-
-            //$('.chkCompleted').change(function() {
-            //    debugger;
-            //    //$('#textbox1').val($(this).is(':checked'));
-            //    //if($(this).is(':checked')==true)
-            //    //{
-            //    //    $(this).attr("disabled", true);
-            //    //    $('#ddlPolishingStageID').attr("disabled", false);
-            //    //    $('#chkPhysicalSend').attr("disabled", false);
-
-            //    //}
-            //});
-            
            
             $('#chkPhysicalSend').change(function() {
                 var jangadID = @Model.JangadID;
@@ -90,7 +77,6 @@
                     var jangadID = @Model.JangadID;
                     var polishingStageID = $('#ddlPolishingStageID').val();
                     var remarks = $('#txtRemarks').val();
-                    //alert("The paragraph was clicked." + issuenumber);
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
                 }
                 else if ($('input[name=Jangad]:checked').val() == "Partial") {
@@ -115,11 +101,11 @@
         
         $(document).on("change", ".chkCompleted", function () {
             debugger;
-            alert(this.value);
+           
             var id=this.id;
-            alert(this.id);
+            
             var a= id.replace('chkCompleted', ''); 
-            alert(a);
+            
             if($(this).is(':checked')==true)
             {
                 $(this).attr("disabled", true);
@@ -131,15 +117,15 @@
 
         $(document).on("change", ".chkPhysicalSend", function () {
             debugger;
-            alert(this.value);
+            
             var jangadID = @Model.JangadID;
             var id=this.id;
-            alert(this.id);
+            
             var a= id.replace('chkPhysicalSend', ''); 
             if ($('input[name=Jangad]:checked').val() == "Partial")
             {
                 jangaditemID=a;
-                alert(jangadID,jangaditemID);
+                
                 PhysicalSend(jangadID,jangaditemID);
                 $('#chkPhysicalSend'+a).attr("disabled", true);
             }
