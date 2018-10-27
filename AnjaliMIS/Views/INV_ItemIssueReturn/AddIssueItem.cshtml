@@ -15,7 +15,28 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @{
+        var _Data = ViewData["UploadData"] as AnjaliMIS.Models.DIA_JangadItem;
+        //if (ViewData["UploadData"] != null)
+        //{
+        //    AnjaliMIS.Models.DIA_JangadItem J = new AnjaliMIS.Models.DIA_JangadItem();
 
+        //    //List<AnjaliMIS.Models.DIA_JangadItem> dIA_JangadItems = new List<AnjaliMIS.Models.DIA_JangadItem>();
+        //}
+    }
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+        <tr>
+            <td>@_Data.Dia</td>
+            <td>@_Data.PWeight</td>
+            <td>@_Data.RWeight</td>
+        </tr>
+    </table>
     <div class="col-md-12">
         <div class="portlet box blue">
             <div class="portlet-title">
