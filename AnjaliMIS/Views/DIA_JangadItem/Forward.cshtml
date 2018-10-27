@@ -32,6 +32,20 @@
                 }
             });
 
+
+            //$('.chkCompleted').change(function() {
+            //    debugger;
+            //    //$('#textbox1').val($(this).is(':checked'));
+            //    //if($(this).is(':checked')==true)
+            //    //{
+            //    //    $(this).attr("disabled", true);
+            //    //    $('#ddlPolishingStageID').attr("disabled", false);
+            //    //    $('#chkPhysicalSend').attr("disabled", false);
+
+            //    //}
+            //});
+            
+           
             $('#chkPhysicalSend').change(function() {
                 var jangadID = @Model.JangadID;
                 if ($('input[name=Jangad]:checked').val() == "Complete")
@@ -47,7 +61,7 @@
             });
 
             $('input:radio[name=Jangad]').change(function () {
-                if ($('input[name=Jangad]:checked').val() == "Partial") 
+                if ($('input[name=Jangad]:checked').val() == "Partial")
                 {
                     $('#divPartialJangadItemList').show();
                     $('#divRemarks').hide();
@@ -98,8 +112,42 @@
 
         });
 
+        
+        $(document).on("change", ".chkCompleted", function () {
+            debugger;
+            alert(this.value);
+            var id=this.id;
+            alert(this.id);
+            var a= id.replace('chkCompleted', ''); 
+            alert(a);
+            if($(this).is(':checked')==true)
+            {
+                $(this).attr("disabled", true);
+                $("#ddlPolishingStageID"+a).attr("disabled", false);
+                $("#chkPhysicalSend"+a).attr("disabled", false);
+
+            }
+        });
+
+        $(document).on("change", ".chkPhysicalSend", function () {
+            debugger;
+            alert(this.value);
+            var jangadID = @Model.JangadID;
+            var id=this.id;
+            alert(this.id);
+            var a= id.replace('chkPhysicalSend', ''); 
+            if ($('input[name=Jangad]:checked').val() == "Partial")
+            {
+                jangaditemID=a;
+                alert(jangadID,jangaditemID);
+                PhysicalSend(jangadID,jangaditemID);
+                $('#chkPhysicalSend'+a).attr("disabled", true);
+            }
+        });
+
         function GetJangadItemList(jangadid) {
             debugger;
+            var jangadid = @Model.JangadID;
             $.ajax({
                 url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
                 type: 'POST',
@@ -115,7 +163,9 @@
                             var jangaditemid = result[i].JangadItemID;
                             html += '<tr id="tr' + i + '">';
                             html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
-                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                            html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
+                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                            html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
                             html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
                             html += '</tr>';
 
@@ -324,7 +374,13 @@
                                                 jangaditemid
                                             </th>
                                             <th>
+                                                Completed
+                                            </th>
+                                            <th>
                                                 PolishingStageID
+                                            </th>
+                                            <th>
+                                                Partial Receive
                                             </th>
                                             <th>
                                                 remarks
