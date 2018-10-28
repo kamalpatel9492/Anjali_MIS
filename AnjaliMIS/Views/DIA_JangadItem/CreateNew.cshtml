@@ -27,7 +27,7 @@
                             </div>*@
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.PartyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.DropDownList("PartyID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.PartyID, "", new { @class = "text-danger" })
@@ -40,27 +40,15 @@
                                 @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
                             </div>
-                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                            @Html.LabelFor(model => model.Quantity, "Than", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                             </div>
+
                         </div>
 
-                        <div class="form-group">
-
-
-                            @*@Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                                </div>*@
-                            @*@Html.LabelFor(model => model.PricePerCarat, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-4">
-                                    @Html.EditorFor(model => model.PricePerCarat, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PricePerCarat, "", new { @class = "text-danger" })
-                                </div>*@
-                        </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.IsLocal, "Is Local ?", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4 radio-list">
@@ -71,9 +59,12 @@
                                     <input type="radio" name="isLocal" value="False">No
                                 </label>
                             </div>
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
                         </div>
-
-
 
                         <div id="divCGST" class="form-group" hidden>
                             @Html.LabelFor(model => model.CGST, "CGST", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -95,114 +86,75 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label col-md-2">Jangad Type?</label>
+                            <label class="control-label col-md-2"></label>
                             <div class="col-md-4 radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" name="isJangadType" value="True">Than
+                                    <input type="radio" name="isJangadType" value="True">Is Rate Per Than?
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="isJangadType" value="False">Carat
+                                    <input type="radio" name="isJangadType" value="False">Is Rate Per Carat?
                                 </label>
                             </div>
                         </div>
 
-                        <div class="form-group" id="divThan" hidden>
-                            @*@Html.LabelFor(model => model.QTYByThan, "QTYByThan", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">QTYByThan</label>
-                            <div class="col-md-4">
-                                <input id="txtQTYByThan" type="text" class="form-control" />
-                            </div>
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Rate, "Rate", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                <input id="txtRateThan" type="text" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="divCarat" hidden>
-                            @*@Html.LabelFor(model => model.QTYByThan, "QTYByThan", htmlAttributes: new { @class = "control-label col-md-2" })*@
-                            <label class="control-label col-md-2">QTYByCarat</label>
-                            <div class="col-md-4">
-                                <input id="txtQTYByCarat" type="text" class="form-control" />
-                            </div>
-                            @Html.LabelFor(model => model.PricePerCarat, "PricePerCarat", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-4">
-                                <input id="txtPricePerCarat" type="text" class="form-control" />
+                                <input id="txtRate" type="text" class="form-control" />
                             </div>
                         </div>
 
                         <h3 class="form-section">Jangad Items</h3>
                         <div class="form-group">
-                            @*@Html.LabelFor(model => model., "Item", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-2">
-                                    @Html.DropDownList("ItemID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
-                                </div>*@
-                            <label class="control-label col-md-2">Weight</label>
-                            <div class="col-md-2">
-                                <input id="txtWeight" type="text" class="form-control allownumericwithoutdecimal" />
-                            </div>
-
-                            @* <label class="control-label col-md-2">Size</label><div class="col-md-2">
-                                    <input id="txtSize" type="text" class="form-control allownumericwithoutdecimal" />
-                                </div>*@
                             <label class="control-label col-md-2">Dia</label>
                             <div class="col-md-2">
                                 <input id="txtDia" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">PavalionAngle</label>
+                            <label class="control-label col-md-2">RWeight</label>
                             <div class="col-md-2">
-                                <input id="txtPavalionAngle" type="text" class="form-control allownumericwithdecimal" />
+                                <input id="txtRWeight" type="text" class="form-control allownumericwithdecimal" />
+                            </div>
+                            <label class="control-label col-md-2">PWeight</label>
+                            <div class="col-md-2">
+                                <input id="txtPWeight" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label col-md-2">PavalionAngle</label>
+                            <div class="col-md-2">
+                                <input id="txtPavalionAngle" type="text" class="form-control allownumericwithoutdecimal" />
+                            </div>
 
                             <label class="control-label col-md-2">CrownAngle</label>
                             <div class="col-md-2">
                                 <input id="txtCrownAngle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            @*<label class="control-label col-md-2">CrownWeight</label>
-                            <div class="col-md-2">
-                                <input id="txtCrownWeight" type="text" class="form-control allownumericwithoutdecimal" />
-                            </div>*@
                             <label class="control-label col-md-2">CrownHeight</label>
                             <div class="col-md-2">
-                                <input id="txtCrownHeight" type="text" class="form-control allownumericwithoutdecimal" />
+                                <input id="txtCrownHeight" type="text" class="form-control allownumericwithdecimal" />
                             </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-md-2">Girdle</label>
                             <div class="col-md-2">
-                                <input id="txtGirdle" type="text" class="form-control allownumericwithdecimal" />
+                                <input id="txtGirdle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Para1</label>
+                            <label class="control-label col-md-2">Culet</label>
                             <div class="col-md-2">
-                                <input id="txtPara1" type="text" class="form-control allownumericwithoutdecimal" />
+                                <input id="txtCulet" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">Para2</label>
-                            <div class="col-md-2">
-                                <input id="txtPara2" type="text" class="form-control allownumericwithoutdecimal" />
-                            </div>
-                            <label class="control-label col-md-2">Para3</label>
-                            <div class="col-md-2">
-                                <input id="txtPara3" type="text" class="form-control allownumericwithdecimal" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <label class="control-label col-md-2">ji_table</label>
                             <div class="col-md-2">
-                                <input id="txt_ji_table" type="text" class="form-control allownumericwithoutdecimal" />
+                                <input id="txtji_table" type="text" class="form-control allownumericwithdecimal" />
                             </div>
-                            @*<label class="control-label col-md-2">Para2</label>
-                            <div class="col-md-2">
-                                <input id="txtPara2" type="text" class="form-control allownumericwithoutdecimal" />
-                            </div>
-                            *@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
-                            <div class="col-md-10">
+                            <div class="col-md-5">
                                 <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
                             </div>
                         </div>
 
@@ -213,25 +165,44 @@
                                     <thead>
                                         <tr>
                                             <th>Select</th>
-                                            <th>Weight</th>
-                                            @*<th class="text-right">Size</th>*@
                                             <th class="text-right">Dia</th>
+                                            <th class="text-right">RWeight</th>
+                                            <th class="text-right">PWeight</th>
                                             <th class="text-right">PavalionAngle</th>
                                             <th class="text-right">CrownAngle</th>
-                                            @*<th class="text-right">CrownWeight</th>*@
                                             <th class="text-right">CrownHeight</th>
                                             <th class="text-right">Girdle</th>
-                                            <th class="text-right">Para1</th>
-                                            <th class="text-right">Para2</th>
-                                            <th class="text-right">Para3</th>
+                                            <th class="text-right">Culet</th>
                                             <th class="text-right">ji_table</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody class="list">
-                                       
+                                        <tr>
+                                            <td colspan="9" class="text-right">Rate (<span id="tdValues"></span>)</td>
+                                            <td colspan="9" id="tdItemTotal" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></td>
+                                            <td colspan="9" id="tdSGST" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></td>
+                                            <td colspan="9" id="tdCGST" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></td>
+                                            <td colspan="9" id="tdIGST" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-right">Total</td>
+                                            <td colspan="9" id="tdTotal" class="text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="9" class="text-right bold">Final Total</td>
+                                            <td colspan="9" id="tdFinalTotal" class="text-right bold"></td>
+                                        </tr>
                                     </tbody>
-
                                 </table>
                                 <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
@@ -256,6 +227,7 @@
 }
 
 <script>
+    var itemWiseEachStepAddTotalAmount = 0;
     var jangadList = [];
     var CGSTID = 0;
     var IGSTID = 0;
@@ -306,7 +278,7 @@
             var changeSGSTValueDependOnCGST = $("option:selected", "#ddlCGST").attr("data-id");
             $("#txtSGSTValue").val("SGST-" + changeSGSTValueDependOnCGST);
             $('#ddlCGST option[data-id="' + changeSGSTValueDependOnCGST + '"]').prop('selected', true);
-            //FinalCalculation();
+            FinalCalculation();
         });
 
         $(".add-row").click(function () {
@@ -314,73 +286,44 @@
             $('#divJangadList').show();
 
 
-            var weight = $('#txtWeight').val();
-            var dia = $('#txtDia').val();
-            //var size = $('#txtSize').val();
-            var pavalionAngle = $('#txtPavalionAngle').val();
-            var crownAngle = $('#txtCrownAngle').val();
-            //var crownWeight = $('#txtCrownWeight').val();
-            var crownHeight = $('#txtCrownHeight').val();
-            var girdle = $('#txtGirdle').val();
-            var para1 = $('#txtPara1').val();
-            var para2 = $('#txtPara2').val();
-            var para3 = $('#txtPara3').val();
-            var ji_Table = $('#txt_ji_table').val();
+            var Dia = $('#txtDia').val();
+            var RWeight = $('#txtRWeight').val();
+            var PWeight = $('#txtPWeight').val();
+            var PavalionAngle = $('#txtPavalionAngle').val();
+            var CrownAngle = $('#txtCrownAngle').val();
+            var CrownHeight = $('#txtCrownHeight').val();
+            var Girdle = $('#txtGirdle').val();
+            var Culet = $('#txtCulet').val();
+            var ji_table = $('#txtji_table').val();
+
             jangadList.push({
-                //InvoiceItemID: InvoiceItemID,
-                //InvoiceID: invoiceID,
                 tablerowid:i,
-                Weight: weight,
-                Dia: dia,
-                //Size: size,
-                PavalionAngle: pavalionAngle,
-                CrownAngle: crownAngle,
-                //CrownWeight: crownWeight,
-                CrownHeight:crownHeight,
-                Girdle: girdle,
-                Para1: para1,
-                Para2: para2,
-                Para3: para3,
-                ji_table: ji_Table,
-                //CassettsID: CassettsID,
-                //PolishingStageID: PolishingStageID,
-                //PavalionORCrown: PavalionORCrown,
-                //StatusID: StatusID,
-                //QCRemarks: QCRemarks,
-                //Completed: Completed,
-                //Remarks: Remarks,
-                //PhysicalReceived: PhysicalReceived,
-                //PhysicalReceivedDateTime: PhysicalReceivedDateTime,
-                //PhysicalSend: PhysicalSend,
-                //PhysicalSendDateTime: PhysicalSendDateTime,
-                //Delivered: Delivered,
-                //DeliveredDateTime: DeliveredDateTime,
-                //RWeight: RWeight,
-                //PWeight: PWeight,
-                //Culet: Culet,
-                //JangadItemCode: JangadItemCode,
+                Dia: Dia,
+                RWeight: RWeight,
+                PWeight: PWeight,
+                PavalionAngle: PavalionAngle,
+                CrownAngle: CrownAngle,
+                CrownHeight: CrownHeight,
+                Girdle: Girdle,
+                Culet: Culet,
+                ji_table: ji_table,
             });
 
 
             var markup = "<tr>";
             markup += "<td><input type='checkbox' name='record' id='" + i + "'></td>";
-            markup += "<td>" + weight + "</td>";
-            //markup += "<td class='text-right'>" + size + "</td>";
-            markup += "<td class='text-right'>" + dia + "</td>";
-            markup += "<td class='text-right'>" + pavalionAngle + "</td>";
-            markup += "<td class='text-right'>" + crownAngle + "</td>";
-            //markup += "<td class='text-right'>" + crownWeight + "</td>";
-            markup += "<td class='text-right'>" + crownHeight + "</td>";
-            markup += "<td class='text-right'>" + girdle + "</td>";
-            markup += "<td class='text-right'>" + para1 + "</td>";
-            markup += "<td class='text-right'>" + para2 + "</td>";
-            markup += "<td class='text-right'>" + para3 + "</td>";
-            markup += "<td class='text-right'>" + ji_Table + "</td>";
-            
+            markup += "<td>" + Dia + "</td>";
+            markup += "<td class='text-right'>" + RWeight + "</td>";
+            markup += "<td class='text-right'>" + PWeight + "</td>";
+            markup += "<td class='text-right'>" + PavalionAngle + "</td>";
+            markup += "<td class='text-right'>" + CrownAngle + "</td>";
+            markup += "<td class='text-right'>" + CrownHeight + "</td>";
+            markup += "<td class='text-right'>" + Girdle + "</td>";
+            markup += "<td class='text-right'>" + Culet + "</td>";
+            markup += "<td class='text-right'>" + ji_table + "</td>";
             markup += "</tr>";
 
-            //$("table .list").prepend(markup);
-            $("table .list").append(markup);
+            $("table .list").prepend(markup);
         });
 
 
@@ -404,7 +347,7 @@
                             jangadList.splice(key, 1);
                         //    itemWiseEachStepAddTotalAmount = itemWiseEachStepAddTotalAmount - (deductquantity * deductpriceperunit);
                         //    $('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
-                        //    FinalCalculation();
+                            FinalCalculation();
                         //    return false;
                         }
 
@@ -425,21 +368,21 @@
 
         var qTYByThan = 0;
         var quantity = 0;
-        var txtRateThan = 0;
+        var Rate = 0;
         var txtPricePerCarat = 0;
 
         var isRatePerThan = false;
         if ($('input[name=isJangadType]:checked').val() == "True") {
             isRatePerThan = true;
-            qTYByThan = $('#txtQTYByThan').val();
-            txtRateThan = $('#txtRateThan').val();
+            //qTYByThan = $('#txtQTYByThan').val();
+            Rate = $('#txtRate').val();
         }
 
         var isRatePerCarat = false;
         if ($('input[name=isJangadType]:checked').val() == "False") {
             isRatePerCarat = true;
-            quantity = $('#txtQTYByCarat').val();
-            txtPricePerCarat = $('#txtPricePerCarat').val();
+            Quantity = $('#Quantity').val();
+            //txtPricePerCarat = $('#txtPricePerCarat').val();
         }
 
         var newData = {
@@ -452,13 +395,12 @@
             SGSTAmount: $('#tdSGST').html(),
             IGST: $('#ddlIGST').val(),
             IGSTAmount: $('#tdIGST').html(),
-            //TDS: $('#TDS').html(),asko to kamal
             IsLocal: $('input[name=isLocal]:checked').val(),
             IsActive: $('#IsActive').val(),
             QTYByThan: qTYByThan,
-            Quantity: quantity,
-            Rate: txtRateThan,
-            PricePerCarat: txtPricePerCarat,
+            Quantity: Quantity,
+            Rate: Rate,
+            PricePerCarat: Rate,
             IsRatePerThan: isRatePerThan,
             IsRatePerCarat: isRatePerCarat,
             DIA_JangadItems: jangadList
@@ -473,7 +415,7 @@
             success: function (result) {
 
                 $('#InvoiceMessage').modal('show');
-                
+
                 window.location.href = '@Url.Action("CreateNew", "DIA_JangadItem")';
             },
             error: function (errormessage) {
@@ -508,16 +450,32 @@
 
     function CheckJangadType() {
         if ($('input[name=isJangadType]:checked').val() == "True") {
-            $('#divThan').show();
-            $('#divCarat').hide();
+            debugger;
+            var Quantity = $('#Quantity').val();
+            var Rate = $('#txtRate').val();
+            
+            $('#tdValues').html(Rate + " * " + Quantity);
+
+            itemWiseEachStepAddTotalAmount = Rate * Quantity;
+            $('#tdItemTotal').html(parseFloat(itemWiseEachStepAddTotalAmount));
+
+
+
+            FinalCalculation();
         }
         else if ($('input[name=isJangadType]:checked').val() == "False") {
-            $('#divThan').hide();
-            $('#divCarat').show();
+            debugger;
+
+            var Weight = $('#Weight').val();
+            var Rate = $('#txtRate').val();
+
+            $('#tdValues').html(Rate + " * " + Weight);
+            itemWiseEachStepAddTotalAmount = Rate * Weight;
+            FinalCalculation();
         }
         else {
-            $('#divThan').hide();
-            $('#divCarat').hide();
+            //$('#divThan').hide();
+            //$('#divCarat').hide();
         }
     }
     //Retrive CGST
@@ -546,7 +504,7 @@
                         $('#ddlCGST').val(0);
                         $('#txtSGSTValue').val(0);
                     }
-                    //FinalCalculation();
+                    FinalCalculation();
 
                 }
             }),
@@ -579,7 +537,7 @@
                     else
                         $('#ddlIGST').val(0);
 
-                    //FinalCalculation();
+                    FinalCalculation();
 
                 }
             }),
@@ -588,4 +546,134 @@
             }
         });
     }
+    FinalCalculation();
+    function FinalCalculation() {
+        var igstCalculation = 0;
+        var cgstCalculation = 0;
+        var sgstCalculation = 0;
+
+        var Quantity = $('#Quantity').val();
+        var Rate = $('#txtRate').val();
+        var Weight = $('#Weight').val();
+
+      
+
+        var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
+        igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100).toFixed(2);
+        if (igstCalculation > 0)
+            $('#tdIGST').html(igstCalculation);
+        else
+            $('#tdIGST').html(0);
+        if (igstpercentage > 0)
+            $('#tdSpanPercentageIGSTValue').html("(" + igstpercentage + "%)");
+        else
+            $('#tdSpanPercentageIGSTValue').html("(" + 0 + "%)");
+
+        var cgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        cgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * cgstpercentage / 100).toFixed(2);
+        if (cgstCalculation > 0)
+            $('#tdCGST').html(cgstCalculation);
+        else
+            $('#tdCGST').html(0);
+        if (cgstpercentage > 0)
+            $('#tdSpanPercentageCGSTValue').html("(" + cgstpercentage + "%)");
+        else
+            $('#tdSpanPercentageCGSTValue').html("(" + 0 + "%)");
+
+        var sgstpercentage = $("#ddlCGST option:selected").attr("data-id");
+        sgstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * sgstpercentage / 100).toFixed(2);
+        if (sgstCalculation > 0)
+            $('#tdSGST').html(sgstCalculation);
+        else
+            $('#tdSGST').html(0);
+        if (sgstpercentage > 0)
+            $('#tdSpanPercentageSGSTValue').html("(" + sgstpercentage + "%)");
+        else
+            $('#tdSpanPercentageSGSTValue').html("(" + 0 + "%)");
+
+        var finaltotal = parseFloat(itemWiseEachStepAddTotalAmount) + parseFloat(igstCalculation) + parseFloat(cgstCalculation) + parseFloat(sgstCalculation);
+        finaltotal = parseFloat(finaltotal).toFixed(2)
+        $('#tdTotal').html(finaltotal);
+        $('#tdFinalTotal').html(Math.round(finaltotal, 2));
+
+        //finaltotal=parseInt(parseFloat(finaltotal));
+        //$('#tdFinalTotal').html(Math.round(finaltotal,2));
+        //var newAmountPending = finaltotal - $('#AmountReceived').val() - $('#Casar').val();
+        //$('#AmountPending').val(parseInt(newAmountPending));
+
+        $('#Quantity').val("");
+        $('#txtItemPrice').val("");
+    }
+
+
+    $('input[type="file"]').change(function (e) {
+        debugger
+        var lengthfile = e.target.files.length;
+
+        var filename = e.target.files[0].name;
+        var Files = $("#fileLoadDoc").get(0);
+        $("#txtfile").val(filename);
+        // $("#btnsbmt").trigger("click");
+        formdata = new FormData();
+        for (var i = 0; i < e.target.files.length; i++) {
+            formdata.append(e.target.files[i].name, e.target.files[i]);
+        }
+        $.ajax({
+            url: '@Url.Action("UploadCollectionFile", "DIA_JangadItem")',
+            type: "POST",
+            datatype: "JSON",
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function (result) {
+                debugger;
+
+                $('#divJangadList').show();
+
+                result.DIA_JangadItems[0].Dia
+
+                for (var i = 0; i < result.DIA_JangadItems.length; i++) {
+                    var Dia = result.DIA_JangadItems[i].Dia;
+                    var RWeight = result.DIA_JangadItems[i].RWeight;
+                    var PWeight = result.DIA_JangadItems[i].PWeight;
+                    var PavalionAngle = result.DIA_JangadItems[i].PavalionAngle;
+                    var CrownAngle = result.DIA_JangadItems[i].CrownAngle;
+                    var CrownHeight = result.DIA_JangadItems[i].CrownHeight;
+                    var Girdle = result.DIA_JangadItems[i].Girdle;
+                    var Culet = result.DIA_JangadItems[i].Culet;
+                    var ji_table = result.DIA_JangadItems[i].ji_table;
+
+                    jangadList.push({
+                        tablerowid: i,
+                        Dia: Dia,
+                        RWeight: RWeight,
+                        PWeight: PWeight,
+                        PavalionAngle: PavalionAngle,
+                        CrownAngle: CrownAngle,
+                        CrownHeight: CrownHeight,
+                        Girdle: Girdle,
+                        Culet: Culet,
+                        ji_table: ji_table,
+                    });
+
+
+                    var markup = "<tr>";
+                    markup += "<td><input type='checkbox' name='record' id='" + i + "'></td>";
+                    markup += "<td>" + Dia + "</td>";
+                    markup += "<td class='text-right'>" + RWeight + "</td>";
+                    markup += "<td class='text-right'>" + PWeight + "</td>";
+                    markup += "<td class='text-right'>" + PavalionAngle + "</td>";
+                    markup += "<td class='text-right'>" + CrownAngle + "</td>";
+                    markup += "<td class='text-right'>" + CrownHeight + "</td>";
+                    markup += "<td class='text-right'>" + Girdle + "</td>";
+                    markup += "<td class='text-right'>" + Culet + "</td>";
+                    markup += "<td class='text-right'>" + ji_table + "</td>";
+                    markup += "</tr>";
+
+                    $("table .list").prepend(markup);
+                }
+            }
+
+        })
+    });
 </script>

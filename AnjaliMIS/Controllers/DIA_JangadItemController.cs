@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,7 +22,7 @@ namespace AnjaliMIS.Controllers
         public ActionResult Index()
         {
             //var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
-            var _DIA_Jangad = db.DIA_Jangad.ToList();
+            var _DIA_Jangad = db.DIA_Jangad.OrderByDescending(j=>j.Created).ToList();
             ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
 
             //var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
@@ -104,12 +105,12 @@ namespace AnjaliMIS.Controllers
                         new_DIA_Jangad.UserID = dIA_JangadViewModal.UserID;
                         new_DIA_Jangad.Amount = 0;//dIA_JangadViewModal.Amount;
                         new_DIA_Jangad.RecivedAmount = 0;//dIA_JangadViewModal.RecivedAmount;
-                        
+
                         new_DIA_Jangad.JangadNo = dIA_JangadViewModal.JangadNo; ;//ask to kamal
                         new_DIA_Jangad.Created = DateTime.Now;
                         new_DIA_Jangad.Modified = DateTime.Now;
                         new_DIA_Jangad.Remarks = dIA_JangadViewModal.Remarks;
-                       
+
                         new_DIA_Jangad.PricePerCarat = dIA_JangadViewModal.PricePerCarat;
                         new_DIA_Jangad.FinYearID = CommonConfig.GetFinYearID();
                         new_DIA_Jangad.CGSTAmount = dIA_JangadViewModal.CGSTAmount;
@@ -164,7 +165,7 @@ namespace AnjaliMIS.Controllers
 
                         }
                         new_DIA_Jangad.JangadCode = dIA_JangadViewModal.JangadCode;//ask to kamal//common ma funcation ready te use karvanu
-                       
+
                         db.DIA_Jangad.Add(new_DIA_Jangad);
                         db.SaveChanges();
 
@@ -402,6 +403,53 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
+        public JsonResult PhysicalSend(int jangadID, int jangadItemID)
+        {
+            try
+            {
+                if (jangadItemID == 0)
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID).ToList();
+                    if (getJangadItem.Count > 0)
+                    {
+                        foreach (var item in getJangadItem)
+                        {
+                            item.PhysicalSend = true;
+                            item.PhysicalSendDateTime = DateTime.Now;
+                        }
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else 
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.JangadItemID== jangadItemID).FirstOrDefault();
+                    if (getJangadItem != null)
+                    {
+                        getJangadItem.PhysicalSend = true;
+                        getJangadItem.PhysicalSendDateTime = DateTime.Now;
+
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                throw;
+            }           
+        }
+
+        [HttpPost]
         public JsonResult SaveJangadForward(int? jangadID, int? polishingStageID, string remarks, List<DIA_JangadItem> jangadItemList, string jangadForwordTypeCompleteOrPartial)
         {
             try
@@ -537,6 +585,75 @@ namespace AnjaliMIS.Controllers
             return View(dIA_JangadItem.Where(w => w.PolishingStageID == 4).ToList());
         }
         #endregion Fixing
+
+
+
+        // GET: DIA_JangadItem/Edit/5
+        public ActionResult ABC()
+        {
+            DIA_JangadItem dIA_JangadItem = new DIA_JangadItem();
+            return View(dIA_JangadItem);
+        }
+        public DIA_JangadViewModal ListDIA_JangadViewModal = new DIA_JangadViewModal();
+        public JsonResult UploadCollectionFile()
+        {
+            var tempobj = new List<object>();
+            try
+            {
+                if (Request.Files.Count > 0)
+                {
+                    HttpFileCollectionBase file = Request.Files;
+                    if (file != null)
+                    {
+                        var filecount = file.Count;
+
+                        for (int f = 0; f < filecount; f++)
+                        {
+                            if ((file != null) && (file.Count > 0))
+                            {
+                                byte[] fileBytes = new byte[Request.Files[f].ContentLength];
+                                var fileBytess = new byte[Request.Files[f].ContentLength];
+                                var data = Request.Files[f].InputStream.Read(fileBytess, 0, fileBytess.Length);
+
+                                #region Directory 
+                                string subPath = "~/Upload/Jangad"; // your code goes here
+                                bool exists = System.IO.Directory.Exists(Server.MapPath(subPath));
+                                if (!exists)
+                                    System.IO.Directory.CreateDirectory(Server.MapPath(subPath));
+                                string pathtosave = Server.MapPath(subPath) + "\\" + file[f].FileName;
+                                file[f].SaveAs(pathtosave);
+                                #endregion Directory
+
+                                string text1 = System.IO.File.ReadAllText(pathtosave);
+                                text1.Replace(System.Environment.NewLine, string.Empty);
+                                string[] split = text1.Split('\t');
+                                DIA_JangadItem newDIA_JangadItem = new DIA_JangadItem();
+                                newDIA_JangadItem.Dia = Convert.ToDecimal(split[5]);
+                                newDIA_JangadItem.RWeight = Convert.ToDecimal(split[3]);
+                                newDIA_JangadItem.PWeight = Convert.ToDecimal(split[4]);
+                                newDIA_JangadItem.PavalionAngle = Convert.ToDecimal(split[6]);
+                                newDIA_JangadItem.CrownAngle = Convert.ToDecimal(split[7]);
+                                newDIA_JangadItem.CrownHeight = Convert.ToDecimal(split[8]);
+                                split[9] = split[9].Replace("M: ", "");
+                                newDIA_JangadItem.Girdle = Convert.ToDecimal(split[9]);
+                                newDIA_JangadItem.Culet = Convert.ToDecimal(split[10]);
+                                newDIA_JangadItem.ji_table = Convert.ToDecimal(split[11]);
+                                ListDIA_JangadViewModal.DIA_JangadItems.Add(newDIA_JangadItem);
+
+                            }
+                        }
+
+                        ViewData["UploadData"] = ListDIA_JangadViewModal;
+                        return Json(ListDIA_JangadViewModal, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

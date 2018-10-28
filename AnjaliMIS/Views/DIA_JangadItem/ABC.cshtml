@@ -1,0 +1,49 @@
+﻿@model AnjaliMIS.Models.DIA_JangadItem
+
+@{
+    ViewBag.Title = "ABC";
+}
+
+<h2>ABC</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
+}
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $('input[type="file"]').change(function (e) {
+        debugger
+        var lengthfile = e.target.files.length;
+
+
+        //for (i = 0; i < lengthfile; i++) {
+        //    var filename = e.target.files[i].name;
+        //}
+
+        var filename = e.target.files[0].name;
+        var Files = $("#fileLoadDoc").get(0);
+        $("#txtfile").val(filename);
+        // $("#btnsbmt").trigger("click");
+        formdata = new FormData();
+        for (var i = 0; i < e.target.files.length; i++) {
+            formdata.append(e.target.files[i].name, e.target.files[i]);
+        }
+        $.ajax({
+            url: '@Url.Action("UploadCollectionFile", "DIA_JangadItem")',
+            type: "POST",
+            datatype: "JSON",
+            contentType: false,
+            processData: false,
+            data: formdata,
+            success: function (result) {
+            }
+
+        })
+    });
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

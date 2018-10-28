@@ -4740,11 +4740,13 @@
     <Content Include="Views\INV_PurchaseOrder\POReturn.cshtml" />
     <Content Include="Views\INV_ItemIssueReturn\Details.cshtml" />
     <Content Include="Views\DIA_JangadItem\CreateNew.cshtml" />
+    <Content Include="Views\DIA_JangadItem\ABC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\global\plugins\angularjs\plugins\angular-file-upload\uploads\" />
     <Folder Include="SQLScript\" />
+    <Folder Include="Upload\Jangad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
