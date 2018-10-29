@@ -47,7 +47,7 @@ namespace AnjaliMIS.Report
             DataTable dtItem = new DataTable();
             List<ItemStockReportViewModal> _ItemStockReportViewModal = new List<ItemStockReportViewModal>();
 
-            if (ddlCategoryID.SelectedIndex>0)
+            if (ddlCategoryID.SelectedIndex > 0)
             {
                 CategoryID = Convert.ToInt32(ddlCategoryID.SelectedValue);
                 CategoryName = ddlCategoryID.SelectedItem.Text;

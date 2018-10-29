@@ -18,8 +18,8 @@ namespace AnjaliMIS.ViewModals
         public int UnitID { get; set; }
         public string Unit { get; set; }
         public bool IsConfigurable { get; set; }
-        public SqlInt32 Quantity { get; set; }
-        public SqlInt32 MinStockLimit { get; set; }
-        public SqlInt32 RejectedQuantity { get; set; }
+        public int? Quantity { get; set; }
+        public int? MinStockLimit { get; set; }
+        public int? RejectedQuantity { get; set; }
     }
 }
