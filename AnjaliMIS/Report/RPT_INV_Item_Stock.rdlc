@@ -878,7 +878,7 @@
             </Textbox>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>0.75in</Height>
+          <Height>0.875in</Height>
           <Width>7.5in</Width>
           <Style>
             <Border>
