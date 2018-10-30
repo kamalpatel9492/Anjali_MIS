@@ -429,6 +429,13 @@
     <Compile Include="Report\RPT_INV_Item_Stock.aspx.designer.cs">
       <DependentUpon>RPT_INV_Item_Stock.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Report\RPT_INV_PurchaseOrder_Print.aspx.cs">
+      <DependentUpon>RPT_INV_PurchaseOrder_Print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\RPT_INV_PurchaseOrder_Print.aspx.designer.cs">
+      <DependentUpon>RPT_INV_PurchaseOrder_Print.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModals\DashboardViewModal.cs" />
     <Compile Include="ViewModals\DIA_JangadViewModal.cs" />
@@ -439,6 +446,7 @@
     <Compile Include="ViewModals\ItemStockReportViewModal.cs" />
     <Compile Include="ViewModals\LoginViewModal.cs" />
     <Compile Include="ViewModals\MenuViewModal.cs" />
+    <Compile Include="ViewModals\POPrintReportViewModal.cs" />
     <Compile Include="ViewModals\SEC_UserModal.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4574,6 +4582,7 @@
       <LastGenOutput>AnjaliMISEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Report\RPT_INV_Item_Stock.aspx" />
+    <Content Include="Report\RPT_INV_PurchaseOrder_Print.aspx" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -4771,6 +4780,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Report\RPT_INV_Item_Stock.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\RPT_INV_PurchaseOrder_Print.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
