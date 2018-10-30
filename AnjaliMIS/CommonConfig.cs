@@ -64,6 +64,20 @@ namespace AnjaliMIS
             return 4;
         }
 
+        public enum PolishingStage
+        {
+            Fresh = 1,
+            Planning = 2,
+            Fixing = 3,
+            Setup = 4,
+            Polishing = 5,
+            QC = 6,
+            Repair = 7,
+            Finish = 8,
+            Measurement = 9,
+            Delivery=10
+        }
+
         public static string GetNextNumber(string _NumberFor)
         {
             var db = new DB_A157D8_AnjaliMISEntities1();

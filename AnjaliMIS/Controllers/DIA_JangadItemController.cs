@@ -554,11 +554,12 @@ namespace AnjaliMIS.Controllers
         // GET: DIA_JangadItem/IndexPlanning
         public ActionResult IndexPlanning()
         {
-            var _DIA_Jangad = new SelectList(db.DIA_Jangad.ToList(), "JangadID", "JangadNo");
+            //var _DIA_Jangad = db.DIA_Jangad.Where(r=>r.DIA_JangadItem).OrderByDescending(j => j.Created).ToList();
+            List<int> jangadidList = db.DIA_JangadItem.Where(e => e.PolishingStageID == (int)CommonConfig.PolishingStage.Planning).Select(e => e.JangadID).ToList();
+            var _DIA_Jangad = db.DIA_Jangad.Where(e => jangadidList.Contains(e.JangadID)).ToList();
             ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
 
-            var dIA_JangadItem = db.DIA_JangadItem.Include(d => d.DIA_Cassett).Include(d => d.DIA_Jangad).Include(d => d.SYS_PolishingStage).Include(d => d.SYS_Status).Include(d => d.SEC_User);
-            return View(dIA_JangadItem.Where(w => w.PolishingStageID == 2).ToList());
+            return View(_DIA_Jangad);
         }
         #endregion Planning
 
