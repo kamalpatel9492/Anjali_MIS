@@ -68,6 +68,7 @@ namespace AnjaliMIS.Controllers
             ViewBag.SGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", modal.SGST);
             ViewBag.IGST = new SelectList(db.ACC_Tax, "TaxID", "Tax", modal.IGST);
             //ViewData["DIA_Jangad_SelectListItem"] = _DIA_Jangad;
+            modal.IsLocal = true;
             return View(modal);
         }
 
@@ -140,9 +141,9 @@ namespace AnjaliMIS.Controllers
                             new_DIA_Jangad.TDS = null;
 
                         new_DIA_Jangad.IsLocal = dIA_JangadViewModal.IsLocal;
-                        new_DIA_Jangad.Casar = dIA_JangadViewModal.Casar;//ask to kamal
+                        new_DIA_Jangad.Casar = 0;//ask to kamal
                         //start default value set
-                        new_DIA_Jangad.Quantity = 0;
+                        new_DIA_Jangad.Quantity = dIA_JangadViewModal.Quantity;
                         new_DIA_Jangad.PricePerCarat = 0;
                         new_DIA_Jangad.QTYByThan = 0;
                         new_DIA_Jangad.Rate = 0;
@@ -152,16 +153,16 @@ namespace AnjaliMIS.Controllers
                             new_DIA_Jangad.IsRatePerCarat = dIA_JangadViewModal.IsRatePerCarat;
                             new_DIA_Jangad.Quantity = dIA_JangadViewModal.Quantity;//ask to kamal
                             new_DIA_Jangad.PricePerCarat = dIA_JangadViewModal.PricePerCarat;//ask to kamal
-                            new_DIA_Jangad.TotalAmount = Convert.ToDecimal(dIA_JangadViewModal.Quantity * dIA_JangadViewModal.PricePerCarat);
-                            new_DIA_Jangad.PendingAmount = Convert.ToInt32(dIA_JangadViewModal.Quantity * dIA_JangadViewModal.PricePerCarat);
+                            new_DIA_Jangad.TotalAmount = dIA_JangadViewModal.TotalAmount;
+                            new_DIA_Jangad.PendingAmount = Convert.ToInt32(dIA_JangadViewModal.TotalAmount);
                         }
                         if (dIA_JangadViewModal.IsRatePerThan == true)
                         {
                             new_DIA_Jangad.IsRatePerThan = dIA_JangadViewModal.IsRatePerThan;
                             new_DIA_Jangad.QTYByThan = dIA_JangadViewModal.QTYByThan;//ask to kamal
                             new_DIA_Jangad.Rate = dIA_JangadViewModal.Rate;
-                            new_DIA_Jangad.TotalAmount = Convert.ToInt32(dIA_JangadViewModal.QTYByThan * dIA_JangadViewModal.Rate);
-                            new_DIA_Jangad.PendingAmount = Convert.ToInt32(dIA_JangadViewModal.QTYByThan * dIA_JangadViewModal.Rate);
+                            new_DIA_Jangad.TotalAmount = dIA_JangadViewModal.TotalAmount;
+                            new_DIA_Jangad.PendingAmount = Convert.ToInt32(dIA_JangadViewModal.TotalAmount);
 
                         }
                         new_DIA_Jangad.JangadCode = dIA_JangadViewModal.JangadCode;//ask to kamal//common ma funcation ready te use karvanu
@@ -186,27 +187,18 @@ namespace AnjaliMIS.Controllers
                                 new_DIA_JangadItem.Para1 = item.Para1;
                                 new_DIA_JangadItem.Para2 = item.Para2;
                                 new_DIA_JangadItem.Para3 = item.Para3;
-                                new_DIA_JangadItem.CassettsID = 1;//ask to kamal
-                                new_DIA_JangadItem.PolishingStageID = 1;//ask to kamal
                                 new_DIA_JangadItem.PavalionORCrown = "1";//ask to kamal
                                 new_DIA_JangadItem.UserID = dIA_JangadViewModal.UserID;
                                 new_DIA_JangadItem.StatusID = CommonConfig.GetStatusPending();
-                                new_DIA_JangadItem.QCRemarks = item.QCRemarks;//ask to kamal
                                 new_DIA_JangadItem.Created = DateTime.Now;
                                 new_DIA_JangadItem.Remarks = item.Remarks;
-                                new_DIA_JangadItem.PhysicalReceived = item.PhysicalReceived;//ask to kamal
-                                new_DIA_JangadItem.PhysicalReceivedDateTime = item.PhysicalReceivedDateTime;//ask to kamal
-                                new_DIA_JangadItem.PhysicalSend = item.PhysicalSend;//ask to kamal
-                                new_DIA_JangadItem.PhysicalSendDateTime = item.PhysicalSendDateTime;//ask to kamal
-                                new_DIA_JangadItem.Delivered = item.Delivered;//ask to kamal
-                                new_DIA_JangadItem.DeliveredDateTime = item.DeliveredDateTime;//ask to kamal
-                                new_DIA_JangadItem.RWeight = item.RWeight;//ask to kamal
-                                new_DIA_JangadItem.PWeight = item.PWeight;//ask to kamal
+                                new_DIA_JangadItem.RWeight = item.RWeight;
+                                new_DIA_JangadItem.PWeight = item.PWeight;
                                 new_DIA_JangadItem.Culet = item.Culet;//ask to kamal
                                 new_DIA_JangadItem.ji_table = item.ji_table;//ask to kamal
                                 new_DIA_JangadItem.JangadItemCode = item.JangadItemCode;//ask to kamal
 
-                                //new_DIA_JangadItem.PolishingStageID = 1;
+                                new_DIA_JangadItem.PolishingStageID = 1;//Jangad Fresh
                                 newList_DIA_JangadItems.Add(new_DIA_JangadItem);
                             }
                             db.DIA_JangadItem.AddRange(newList_DIA_JangadItems);
@@ -659,6 +651,7 @@ namespace AnjaliMIS.Controllers
                                 newDIA_JangadItem.Girdle = Convert.ToDecimal(split[9]);
                                 newDIA_JangadItem.Culet = Convert.ToDecimal(split[10]);
                                 newDIA_JangadItem.ji_table = Convert.ToDecimal(split[11]);
+                                newDIA_JangadItem.JangadItemCode = Request.Files[f].FileName;
                                 ListDIA_JangadViewModal.DIA_JangadItems.Add(newDIA_JangadItem);
 
                             }
