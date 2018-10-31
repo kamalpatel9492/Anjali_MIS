@@ -135,7 +135,7 @@
                 type: 'POST',
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
-                data: JSON.stringify({ "jangadID": jangadid }),
+                data: JSON.stringify({ "jangadID": jangadid ,"polishingStageID":1 }),
 
                 success: function (result) {
                     if (result.length > 0) {
@@ -143,15 +143,27 @@
                         $('#tbodyJangadItemList').html(html);
                         for (var i = 0; i < result.length; i++) {
                             var jangaditemid = result[i].JangadItemID;
-                            html += '<tr id="tr' + i + '">';
-                            html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
-                            html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
-                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
-                            html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
-                            html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
-                            html += '</tr>';
-
-                           
+                            var disabledvalue= result[i].Disabled;
+                            if(disabledvalue==true)
+                            {
+                                html += '<tr id="tr' + i + '">';
+                                html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                                html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
+                                html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                                html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
+                                html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
+                                html += '</tr>';
+                            }
+                            else if (disabledvalue==false)
+                            {
+                                html += '<tr id="tr' + i + '">';
+                                html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                                html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" disabled="disabled"  value="Completed">' + '</td>';
+                                html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                                html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
+                                html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" disabled="disabled"  /></td>';
+                                html += '</tr>';
+                            }
                         }
                         $('#tbodyJangadItemList').append(html);
                     }

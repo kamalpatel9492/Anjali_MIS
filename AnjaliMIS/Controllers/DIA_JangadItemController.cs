@@ -564,16 +564,17 @@ namespace AnjaliMIS.Controllers
 
         [HttpPost]
         // GET: GRN
-        public JsonResult RetrieveJangadItemList(int jangadID)
+        public JsonResult RetrieveJangadItemList(int jangadID,int polishingStageID)
         {
             try
             {   
                 if (jangadID != 0)
                 {
-                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID ).Select(e => new
+                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID).Select(e => new
                     {
                         JangadID = e.JangadID,
-                        JangadItemID = e.JangadItemID
+                        JangadItemID = e.JangadItemID,
+                        Disabled = e.PolishingStageID==polishingStageID?true: false
                     }).ToList();
                     if (jangadItemList.Count > 0)
                     {
