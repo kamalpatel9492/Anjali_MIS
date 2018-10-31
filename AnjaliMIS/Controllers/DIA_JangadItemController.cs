@@ -553,6 +553,26 @@ namespace AnjaliMIS.Controllers
 
             return View(_DIA_Jangad);
         }
+
+        public ActionResult ForwardPlanning(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Find(id);
+            DIA_JangadItem dIA_JangadItem = db.DIA_JangadItem.Where(e => e.JangadID == id).FirstOrDefault();
+            if (dIA_JangadItem == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CassettsID = new SelectList(db.DIA_Cassett, "CassettsID", "Remarks", dIA_JangadItem.CassettsID);
+            ViewBag.JangadID = new SelectList(db.DIA_Jangad, "JangadID", "Remarks", dIA_JangadItem.JangadID);
+            ViewBag.PolishingStageID = new SelectList(db.SYS_PolishingStage, "PolishingStageID", "SatgeName", dIA_JangadItem.PolishingStageID);
+            ViewBag.StatusID = new SelectList(db.SYS_Status, "StatusID", "StatusName", dIA_JangadItem.StatusID);
+            ViewBag.UserID = new SelectList(db.SEC_User, "UserID", "UserName", dIA_JangadItem.UserID);
+            return View(dIA_JangadItem);
+        }
         #endregion Planning
 
         #region Fixing

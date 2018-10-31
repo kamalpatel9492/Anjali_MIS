@@ -1,7 +1,8 @@
 ﻿@model AnjaliMIS.Models.DIA_JangadItem
-
+@{
+    ViewBag.Title = "ForwardPlanning";
+}
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -31,7 +32,7 @@
                 }
             });
 
-           
+
             $('#chkPhysicalSend').change(function() {
                 var jangadID = @Model.JangadID;
                 if ($('input[name=Jangad]:checked').val() == "Complete")
@@ -40,10 +41,7 @@
                     PhysicalSend(jangadID,jangaditemID);
                     $('#chkPhysicalSend').attr("disabled", true);
                 }
-                //else if ($('input[name=Jangad]:checked').val() == "Partial")
-                //{
-                //    PhysicalSend(jangadID,jangaditemID);
-                //}
+               
             });
 
             $('input:radio[name=Jangad]').change(function () {
@@ -55,7 +53,7 @@
                     $('#divForwordCompleted').hide();
                     $('#divPhysicalSend').hide();
                     var janagadid = $('#DIA_Jangad_JangadID').val();
-                
+             
                     GetJangadItemList(janagadid);
                 }
                 else {
@@ -71,14 +69,12 @@
             $("#btnSaveJangadForward").click(function () {
 
                 if ($('input[name=Jangad]:checked').val() == "Complete") {
-                    
                     var jangadID = @Model.JangadID;
                     var polishingStageID = $('#ddlPolishingStageID').val();
                     var remarks = $('#txtRemarks').val();
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
                 }
                 else if ($('input[name=Jangad]:checked').val() == "Partial") {
-                    
                     var jangadID = @Model.JangadID;
                     SubmitArrayJangadItemList = [];
                     for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++) {
@@ -88,7 +84,7 @@
                             remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
                         });
                     }
-                    //console.log(SubmitArrayJangadItemList);
+                  
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
 
                 }
@@ -96,13 +92,13 @@
 
         });
 
-        
+
         $(document).on("change", ".chkCompleted", function () {
-           
+          
             var id=this.id;
-            
-            var a= id.replace('chkCompleted', ''); 
-            
+
+            var a= id.replace('chkCompleted', '');
+
             if($(this).is(':checked')==true)
             {
                 $(this).attr("disabled", true);
@@ -113,22 +109,22 @@
         });
 
         $(document).on("change", ".chkPhysicalSend", function () {
-      
+            
             var jangadID = @Model.JangadID;
             var id=this.id;
-            
-            var a= id.replace('chkPhysicalSend', ''); 
+
+            var a= id.replace('chkPhysicalSend', '');
             if ($('input[name=Jangad]:checked').val() == "Partial")
             {
                 jangaditemID=a;
-                
+
                 PhysicalSend(jangadID,jangaditemID);
                 $('#chkPhysicalSend'+a).attr("disabled", true);
             }
         });
 
         function GetJangadItemList(jangadid) {
-
+         
             var jangadid = @Model.JangadID;
             $.ajax({
                 url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
@@ -150,8 +146,6 @@
                             html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
                             html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
                             html += '</tr>';
-
-                           
                         }
                         $('#tbodyJangadItemList').append(html);
                     }
@@ -164,7 +158,6 @@
         function RetrievePolishingStageList() {
             $.ajax({
                 url: '@Url.Action("RetrievePolishingStageList", "DIA_JangadItem")',
-              
                 type: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -196,9 +189,7 @@
         }
         function PhysicalSend(jangadID,jangaditemID)
         {
-
             $.ajax({
-                //url: "/DIA_JangadItem/SaveJangadForward",
                 url: '@Url.Action("PhysicalSend", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "jangadItemID": jangaditemID}),
                 type: "POST",
@@ -209,6 +200,7 @@
                       
                     }
                     else {
+                      
                         alert("not exist some error thrown.");
 
                     }
@@ -225,9 +217,8 @@
         }
 
         function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
-      
+       
             $.ajax({
-             
                 url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
                 type: "POST",
@@ -257,48 +248,15 @@
         }
 
     </script>
-    <!--Add-Edit code start-->
     <div class="col-md-12">
-        <!-- BEGIN VALIDATION STATES-->
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-gift"></i>Forward
                 </div>
             </div>
-            @*<div class="portlet-body form">
-                    <!-- BEGIN FORM-->
-                    <div class="form-horizontal">
-                        <div class="form-body">
-                            <h3 class="form-section">Basic validation States</h3>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.PolishingStageID, new { @class = "control-label col-md-3" })
-
-                                <div class="col-md-4">
-                                    @Html.DropDownList("PolishingStageID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.PolishingStageID, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Remarks, new { @class = "control-label col-md-3" })
-                                <div class="col-md-4">
-                                    @Html.TextAreaFor(model => model.Remarks, new { @class = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Remarks)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" value="Save" class="btn green" />
-                                    @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+         
             <div class="portlet-body">
-                <!-- BEGIN FORM-->
                 <div class="form-horizontal form">
                     <div class="form-body">
                         <div class="form-group">
@@ -313,14 +271,18 @@
                             </div>
                         </div>
 
-                        @*<h3 class="form-section">Basic validation States</h3>*@
                         <div class="form-group">
                             <label class="control-label col-md-3">JANGAD No</label>
                             <div class="col-md-4">
                                 <input id="txtJangadNo" type="text" class="form-control" />
                             </div>
                         </div>
-
+                        <div class="form-group" id="divForwordPhysicalReceive">
+                            <label class="control-label col-md-3"></label>
+                            <div class="col-md-4 ">
+                                <input id="chkPhysicalReceive" type="checkbox" name="chkPhysicalReceive" value="Physical Receive">Physical Receive
+                            </div>
+                        </div>
                         <div class="form-group" id="divForwordCompleted">
                             <label class="control-label col-md-3"></label>
                             <div class="col-md-4 ">
@@ -368,7 +330,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                         <div class="form-group" id="divRemarks">
                             <label class="control-label col-md-3">Remarks</label>
                             <div class="col-md-4">
@@ -384,10 +346,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- END FORM-->
             </div>
         </div>
-        <!-- END VALIDATION STATES-->
     </div>
-    <!--Add-Edit code end-->
 }
