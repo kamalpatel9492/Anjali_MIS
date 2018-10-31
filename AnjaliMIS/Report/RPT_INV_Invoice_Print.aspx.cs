@@ -13,7 +13,7 @@ using System.Web.UI.WebControls;
 
 namespace AnjaliMIS.Report
 {
-    public partial class RPT_INV_PurchaseOrder_Print : System.Web.UI.Page
+    public partial class RPT_INV_Invoice_Print : System.Web.UI.Page
     {
         DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1();
 
@@ -28,49 +28,51 @@ namespace AnjaliMIS.Report
 
                 FillDropDownList();
 
-                if (Request.QueryString["PurchaseOrderID"] != null)
+                if (Request.QueryString["InvoiceID"] != null)
                 {
-                    ddlPurchaseOrderID.SelectedValue = Convert.ToInt32(Request.QueryString["PurchaseOrderID"]).ToString();
+                    ddlInvoiceID.SelectedValue = Convert.ToInt32(Request.QueryString["InvoiceID"]).ToString();
                     btnShow_Click(btnShow, EventArgs.Empty);
                 }
             }
         }
 
+
         private void FillDropDownList()
         {
-            List<INV_PurchaseOrder> INV_PurchaseOrder = new List<INV_PurchaseOrder>();
-            INV_PurchaseOrder = db.INV_PurchaseOrder.ToList();
-            DataTable dt = CommonConfig.ToDataTable(INV_PurchaseOrder);
-            ddlPurchaseOrderID.DataSource = dt;
-            ddlPurchaseOrderID.DataValueField = "PurchaseOrderID";
-            ddlPurchaseOrderID.DataTextField = "PONo";
-            ddlPurchaseOrderID.DataBind();
-            ddlPurchaseOrderID.Items.Insert(0, new ListItem(" Select Purchse Order", "-99"));
+            List<INV_Invoice> INV_Invoice = new List<INV_Invoice>();
+            INV_Invoice = db.INV_Invoice.ToList();
+            DataTable dt = CommonConfig.ToDataTable(INV_Invoice);
+            ddlInvoiceID.DataSource = dt;
+            ddlInvoiceID.DataValueField = "InvoiceID";
+            ddlInvoiceID.DataTextField = "InvoiceNo";
+            ddlInvoiceID.DataBind();
+            ddlInvoiceID.Items.Insert(0, new ListItem(" Select Invoice", "-99"));
         }
+
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            if (ddlPurchaseOrderID.SelectedIndex > 1)
+            if (ddlInvoiceID.SelectedIndex > 1)
             {
-                SqlInt32 PurchaseOrderID = SqlInt32.Null;
-                DataTable dtPO = new DataTable();
-                List<POPrintReportViewModal> _POPrintReportViewModal = new List<POPrintReportViewModal>();
+                SqlInt32 InvoiceID = SqlInt32.Null;
+                DataTable dtInvoice = new DataTable();
+                List<InvoicePrintReportViewModal> _POPrintReportViewModal = new List<InvoicePrintReportViewModal>();
 
-                if (ddlPurchaseOrderID.SelectedIndex > 0)
-                    PurchaseOrderID = Convert.ToInt32(ddlPurchaseOrderID.SelectedValue);
+                if (ddlInvoiceID.SelectedIndex > 0)
+                    InvoiceID = Convert.ToInt32(ddlInvoiceID.SelectedValue);
 
                 using (DB_A157D8_AnjaliMISEntities1 db = new DB_A157D8_AnjaliMISEntities1())
                 {
                     try
                     {
-                        var sql = "exec PP_INV_PurchaseOrder_SelectForPrint @PurchaseOrderID";
+                        var sql = "exec PP_INV_Invoice_SelectForPrint @InvoiceID";
 
                         List<SqlParameter> parameterList = new List<SqlParameter>();
-                        parameterList.Add(new SqlParameter("@PurchaseOrderID", PurchaseOrderID));
+                        parameterList.Add(new SqlParameter("@InvoiceID", InvoiceID));
 
                         SqlParameter[] parameters = parameterList.ToArray();
 
-                        dtPO = CommonConfig.ToDataTable(db.Database.SqlQuery<POPrintReportViewModal>(sql, parameters).ToList());
+                        dtInvoice = CommonConfig.ToDataTable(db.Database.SqlQuery<InvoicePrintReportViewModal>(sql, parameters).ToList());
                     }
                     catch (Exception ex)
                     {
@@ -83,8 +85,8 @@ namespace AnjaliMIS.Report
                 rvReport.LocalReport.DataSources.Clear();
                 rvReport.ProcessingMode = ProcessingMode.Local;
                 rvReport.LocalReport.EnableExternalImages = true;
-                rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_PurchaseOrder_Print.rdlc");
-                rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_PurchaseOrder_SelectForPrint", dtPO));
+                rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_Invoice_Print.rdlc");
+                rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_Invoice_SelectForPrint", dtInvoice));
 
                 rvReport.Visible = true;
                 rvReport.LocalReport.DisplayName = "Purchase Order";

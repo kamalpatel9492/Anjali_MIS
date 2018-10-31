@@ -422,6 +422,13 @@
       <DependentUpon>AnjaliMISEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\RPT_INV_Invoice_Print.aspx.cs">
+      <DependentUpon>RPT_INV_Invoice_Print.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\RPT_INV_Invoice_Print.aspx.designer.cs">
+      <DependentUpon>RPT_INV_Invoice_Print.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Report\RPT_INV_Item_Stock.aspx.cs">
       <DependentUpon>RPT_INV_Item_Stock.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -439,6 +446,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModals\DashboardViewModal.cs" />
     <Compile Include="ViewModals\DIA_JangadViewModal.cs" />
+    <Compile Include="ViewModals\InvoicePrintReportViewModal.cs" />
     <Compile Include="ViewModals\INV_InvoiceViewModal.cs" />
     <Compile Include="ViewModals\INV_IssueReturnViewModal.cs" />
     <Compile Include="ViewModals\INV_ItemConfigurationViewModal.cs" />
@@ -4581,6 +4589,7 @@
       <DependentUpon>AnjaliMISEntities.edmx</DependentUpon>
       <LastGenOutput>AnjaliMISEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Report\RPT_INV_Invoice_Print.aspx" />
     <Content Include="Report\RPT_INV_Item_Stock.aspx" />
     <Content Include="Report\RPT_INV_PurchaseOrder_Print.aspx" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -4601,6 +4610,7 @@
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SQLScript\31102018_InvoicePrintReport.sql" />
     <Content Include="SQLScript\31102018_ItemStockReport.sql" />
     <Content Include="SQLScript\31102018_POPrintReport.sql" />
     <Content Include="SqlServerTypes\readme.htm" />
@@ -4781,6 +4791,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Report\RPT_INV_Invoice_Print.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\RPT_INV_Item_Stock.rdlc">
       <SubType>Designer</SubType>
     </EmbeddedResource>
