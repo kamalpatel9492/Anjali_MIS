@@ -22,7 +22,7 @@
             $('#txtJangadNo').val(@Model.DIA_Jangad.JangadNo);
 
             $('#chkCompleted').change(function() {
-                debugger;
+               
                 if($(this).is(':checked')==true)
                 {
                     $(this).attr("disabled", true);
@@ -41,7 +41,7 @@
                     PhysicalSend(jangadID,jangaditemID);
                     $('#chkPhysicalSend').attr("disabled", true);
                 }
-                
+               
             });
 
             $('input:radio[name=Jangad]').change(function () {
@@ -53,6 +53,7 @@
                     $('#divForwordCompleted').hide();
                     $('#divPhysicalSend').hide();
                     var janagadid = $('#DIA_Jangad_JangadID').val();
+             
                     GetJangadItemList(janagadid);
                 }
                 else {
@@ -83,6 +84,7 @@
                             remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
                         });
                     }
+                  
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
 
                 }
@@ -92,7 +94,7 @@
 
 
         $(document).on("change", ".chkCompleted", function () {
-
+          
             var id=this.id;
 
             var a= id.replace('chkCompleted', '');
@@ -107,8 +109,7 @@
         });
 
         $(document).on("change", ".chkPhysicalSend", function () {
-            debugger;
-
+            
             var jangadID = @Model.JangadID;
             var id=this.id;
 
@@ -123,7 +124,7 @@
         });
 
         function GetJangadItemList(jangadid) {
-            debugger;
+         
             var jangadid = @Model.JangadID;
             $.ajax({
                 url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
@@ -165,13 +166,13 @@
                     PolishingStageListArray = result;
                     if (result.length > 0) {
 
-                        var html = '<option value="0">Select Item</option>';
+                        var html = '<option value="0">Select Stage</option>';
                         for (var i = 0; i < result.length; i++) {
                             html += '<option value="' + result[i].PolishingStageID + '">' + result[i].SatgeName + '</option>';
                         }
                         PolishingStageListArrayHtml = html;
                         $("#ddlPolishingStageID").empty();
-                        $("#ddlPolishingStageID").append('<option value="0">Select Item</option>');
+                        $("#ddlPolishingStageID").append('<option value="0">Select Stage</option>');
                         for (var i = 0; i < result.length; i++) {
                             var option = $("<option/>");
                             option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
@@ -188,7 +189,6 @@
         }
         function PhysicalSend(jangadID,jangaditemID)
         {
-
             $.ajax({
                 url: '@Url.Action("PhysicalSend", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "jangadItemID": jangaditemID}),
@@ -197,10 +197,10 @@
                 dataType: "json",
                 success: function (result) {
                     if (result == "Success") {
-                        debugger;
+                      
                     }
                     else {
-                        debugger;
+                      
                         alert("not exist some error thrown.");
 
                     }
@@ -217,7 +217,7 @@
         }
 
         function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
-            debugger;
+       
             $.ajax({
                 url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
@@ -248,27 +248,25 @@
         }
 
     </script>
-    <!--Add-Edit code start-->
     <div class="col-md-12">
-        <!-- BEGIN VALIDATION STATES-->
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-gift"></i>Forward
                 </div>
             </div>
-            
+         
             <div class="portlet-body">
                 <div class="form-horizontal form">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Forword</label>
+                            <label class="control-label col-md-3"></label>
                             <div class="col-md-4 radio-list">
                                 <label class="radio-inline">
-                                    <input type="radio" name="Jangad" value="Complete" checked="checked">Complete Forword
+                                    <input type="radio" name="Jangad" value="Complete" checked="checked">Complete Forward
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="Jangad" value="Partial">Partial Forword
+                                    <input type="radio" name="Jangad" value="Partial">Partial Forward
                                 </label>
                             </div>
                         </div>
@@ -279,23 +277,22 @@
                                 <input id="txtJangadNo" type="text" class="form-control" />
                             </div>
                         </div>
-                        <div class="form-group" id="divPhysicalSend">
-                            <label class="control-label col-md-3">Physical Receive</label>
+                        <div class="form-group" id="divForwordPhysicalReceive">
+                            <label class="control-label col-md-3"></label>
                             <div class="col-md-4 ">
-                                <input id="chkPhysicalReceive" type="checkbox" name="chkPhysicalReceive" value="Physical Receive" disabled="disabled">Physical Receive
+                                <input id="chkPhysicalReceive" type="checkbox" name="chkPhysicalReceive" value="Physical Receive">Physical Receive
                             </div>
                         </div>
                         <div class="form-group" id="divForwordCompleted">
-                            <label class="control-label col-md-3">Forword</label>
+                            <label class="control-label col-md-3"></label>
                             <div class="col-md-4 ">
                                 <input id="chkCompleted" type="checkbox" name="chkCompleted" value="Completed">Completed
                             </div>
                         </div>
                         <div class="form-group" id="divCompleteJangad">
-                            <label class="control-label col-md-3">PolishingStageID</label>
+                            <label class="control-label col-md-3">Stage</label>
 
                             <div class="col-md-4">
-                            
                                 <select id="ddlPolishingStageID" class="form-control" disabled="disabled"></select>
                             </div>
                         </div>
@@ -307,7 +304,7 @@
                         </div>
 
                         <div class="form-group" id="divPartialJangadItemList" hidden>
-                            <label class="control-label col-md-3">Set PolishingStageID</label>
+                            <label class="control-label col-md-3"></label>
                             <div class="col-md-4">
                                 <table class="table" id="tblItems">
                                     <thead>
@@ -319,7 +316,7 @@
                                                 Completed
                                             </th>
                                             <th>
-                                                PolishingStageID
+                                                Stage
                                             </th>
                                             <th>
                                                 Partial Receive
@@ -353,4 +350,3 @@
         </div>
     </div>
 }
-

@@ -21,8 +21,7 @@
             $('#txtJangadNo').val(@Model.DIA_Jangad.JangadNo);
 
             $('#chkCompleted').change(function() {
-                debugger;
-                //$('#textbox1').val($(this).is(':checked'));
+               
                 if($(this).is(':checked')==true)
                 {
                     $(this).attr("disabled", true);
@@ -55,9 +54,8 @@
                     $('#divCompleteJangad').hide();
                     $('#divForwordCompleted').hide();
                     $('#divPhysicalSend').hide();
-                    //var janagadid = $('#txtJangadNo').attr('data-id');
                     var janagadid = $('#DIA_Jangad_JangadID').val();
-                    debugger;
+                
                     GetJangadItemList(janagadid);
                 }
                 else {
@@ -73,14 +71,14 @@
             $("#btnSaveJangadForward").click(function () {
 
                 if ($('input[name=Jangad]:checked').val() == "Complete") {
-                    debugger;
+                    
                     var jangadID = @Model.JangadID;
                     var polishingStageID = $('#ddlPolishingStageID').val();
                     var remarks = $('#txtRemarks').val();
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
                 }
                 else if ($('input[name=Jangad]:checked').val() == "Partial") {
-                    debugger;
+                    
                     var jangadID = @Model.JangadID;
                     SubmitArrayJangadItemList = [];
                     for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++) {
@@ -100,7 +98,6 @@
 
         
         $(document).on("change", ".chkCompleted", function () {
-            debugger;
            
             var id=this.id;
             
@@ -116,8 +113,7 @@
         });
 
         $(document).on("change", ".chkPhysicalSend", function () {
-            debugger;
-            
+      
             var jangadID = @Model.JangadID;
             var id=this.id;
             
@@ -132,7 +128,7 @@
         });
 
         function GetJangadItemList(jangadid) {
-            debugger;
+
             var jangadid = @Model.JangadID;
             $.ajax({
                 url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
@@ -155,9 +151,7 @@
                             html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
                             html += '</tr>';
 
-                            //var option = $("<option/>");
-                            //option.attr("value", result[i].ItemID).text(result[i].ItemName);
-                            //$("#ddlItemList").append(option);
+                           
                         }
                         $('#tbodyJangadItemList').append(html);
                     }
@@ -170,7 +164,7 @@
         function RetrievePolishingStageList() {
             $.ajax({
                 url: '@Url.Action("RetrievePolishingStageList", "DIA_JangadItem")',
-                //url: "/DIA_JangadItem/RetrievePolishingStageList",
+              
                 type: "GET",
                 contentType: "application/json;charset=UTF-8",
                 dataType: "json",
@@ -202,7 +196,6 @@
         }
         function PhysicalSend(jangadID,jangaditemID)
         {
-            debugger;
 
             $.ajax({
                 //url: "/DIA_JangadItem/SaveJangadForward",
@@ -213,10 +206,9 @@
                 dataType: "json",
                 success: function (result) {
                     if (result == "Success") {
-                        debugger;
+                      
                     }
                     else {
-                        debugger;
                         alert("not exist some error thrown.");
 
                     }
@@ -233,9 +225,9 @@
         }
 
         function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
-            debugger;
+      
             $.ajax({
-                //url: "/DIA_JangadItem/SaveJangadForward",
+             
                 url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
                 type: "POST",
