@@ -1,56 +1,61 @@
-﻿@model IEnumerable<AnjaliMIS.Models.DIA_JangadItem>
+﻿@model IEnumerable<AnjaliMIS.Models.DIA_Jangad>
 
-<!--List Code Start-->
 <div class="col-md-12 col-sm-12">
     <!-- BEGIN PORTLET-->
     <div class="portlet light ">
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-bar-chart font-green-sharp hide"></i>
-                <span class="caption-subject font-green-sharp bold uppercase">Planning</span>
+                <span class="caption-subject font-green-sharp bold uppercase">Jangad Planning</span>
                 @*<span class="caption-helper">weekly stats...</span>*@
             </div>
             <div class="actions">
                 <div class="btn-group">
-                    @*@Html.ActionLink("Create New", "Create",
+                    @Html.ActionLink("Create New", "CreateNew",
                     new { controller = "DIA_JangadItem" },
-                    new { @class = "btn btn-transparent green btn-circle btn-sm active" })*@
+                    new { @class = "btn btn-transparent green btn-circle btn-sm active" })
                 </div>
             </div>
         </div>
         <div class="portlet-body">
             <div class="col-md-12 col-sm-12">
                 @*<div class="form-group">
-                        @Html.Label("Jangad", "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-6">
-                            @Html.DropDownList("DIA_Jangad_SelectListItem", (IEnumerable<SelectListItem>)ViewData["DIA_Jangad_SelectListItem"], htmlAttributes: new { @class = "form-control" })
-                        </div>
+                    @Html.Label("Jangad", "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                    @Html.DropDownList("DIA_Jangad_SelectListItem", (IEnumerable<SelectListItem>)ViewData["DIA_Jangad_SelectListItem"], htmlAttributes: new { @class = "form-control" })
+                    </div>
                     </div>*@
             </div>
-            <table class="table table-striped table-bordered table-advance table-hover" id="MyTable">
+            <table class="table table-striped table-bordered table-advance table-hover MyTable" id="MyTable">
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.DIA_Jangad.JangadNo)
+                            @*@Html.DisplayNameFor(model => model.DIA_Jangad.JangadNo)*@
+                            @Html.DisplayNameFor(model => model.JangadNo)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Weight)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Size)
+                            @*@Html.DisplayNameFor(model => model.Size)*@
+                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.PavalionAngle)
+                            @Html.DisplayNameFor(model => model.Quantity)
+                            @*@Html.DisplayNameFor(model => model.PavalionAngle)*@
                         </th>
-                        <th>
+                        @*<th>
                             @Html.DisplayNameFor(model => model.CrownAngle)
+                            </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Casar)
+                            @*@Html.DisplayNameFor(model => model.CrownWeight)*@
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.CrownWeight)
+                            @Html.DisplayNameFor(model => model.TotalAmount)
+                            @*@Html.DisplayNameFor(model => model.SYS_PolishingStage.SatgeName)*@
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.SYS_PolishingStage.SatgeName)
-                        </th>
+                       
                         <th>
                             @Html.DisplayNameFor(model => model.SYS_Status.StatusName)
                         </th>
@@ -60,54 +65,7 @@
                         <th>
                             Action
                         </th>
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.Girdle)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Para1)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Para2)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Para3)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PavalionORCrown)
-                            </th>*@
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.QCRemarks)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Created)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Completed)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Remarks)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PhysicalReceived)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PhysicalReceivedDateTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PhysicalSend)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PhysicalSendDateTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Delivered)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DeliveredDateTime)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DIA_Cassett.Remarks)
-                            </th>*@
+
 
 
                     </tr>
@@ -115,76 +73,36 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        @*<tr id='@item.JangadItemID' data-name='@item.DIA_Jangad.JangadNo'>*@
+                        <tr id='@item.JangadID' data-name='@item.JangadNo'>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DIA_Jangad.JangadNo)
+                                @*@Html.DisplayFor(modelItem => item.DIA_Jangad.JangadNo)*@
+                                @Html.DisplayFor(modelItem => item.JangadNo)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Weight)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Size)
+                                @*@Html.DisplayFor(modelItem => item.Size)*@
+                                @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PavalionAngle)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CrownAngle)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CrownWeight)
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                                @*@Html.DisplayFor(modelItem => item.PavalionAngle)*@
                             </td>
                             @*<td>
-                                    @Html.DisplayFor(modelItem => item.Girdle)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Para1)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Para2)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Para3)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PavalionORCrown)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.QCRemarks)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Created)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Completed)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Remarks)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhysicalReceived)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhysicalReceivedDateTime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhysicalSend)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhysicalSendDateTime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Delivered)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DeliveredDateTime)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DIA_Cassett.Remarks)
+                                @Html.DisplayFor(modelItem => item.CrownWeight)
                                 </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Casar)
+                                @*@Html.DisplayFor(modelItem => item.CrownAngle)*@
+                            </td>
+
+
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.SYS_PolishingStage.SatgeName)
+                                @Html.DisplayFor(modelItem => item.TotalAmount)
+                                @*@Html.DisplayFor(modelItem => item.SYS_PolishingStage.SatgeName)*@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
@@ -193,10 +111,14 @@
                                 @Html.DisplayFor(modelItem => item.SEC_User.UserName)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.JangadItemID }) |
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadItemID }) |*@
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadID }) |*@
                                 @*@Html.ActionLink("Details", "Details", new { id = item.JangadItemID }) |*@
-                                @Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) |
-                                @Html.ActionLink("Forward", "Forward", new { id = item.JangadItemID })
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) |*@
+                                @Html.ActionLink("Delete", "Delete", new { id = item.JangadID }) |
+                                @Html.ActionLink("Forward Planning", "Forward Planning", new { id = item.JangadID })
+                                @*|
+                                    <span id="JangadID" class="JangadID">Forward</span>*@
                             </td>
                         </tr>
                     }
@@ -227,20 +149,173 @@
 
 
     @section scripts {
-        @*@Scripts.Render("https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
-            <script>
-
-                    $(document).ready(function () {
-                            $('#myTable').DataTable();
-                    });
-            </script>*@
         <script>
+            var PolishingStageListArray = [];
+            var PolishingStageListArrayHtml = '';
+            var SubmitArrayJangadItemList=[];
             $('body').on('click', '#confirmDialog', function (e) {
                 e.preventDefault();
                 $(this).attr('data-target', '#dialog-confirm');
                 $(this).attr('data-toggle', 'modal');
             });
+
+
+
+
+            $("div table td").click(function () {
+                //alert("You clicked my <td>!" + $(this).html() +
+                //      "My TR is:" +);
+                $('#txtJangadNo').attr("data-id", $(this).parent("tr").attr("id"));
+                $('#txtJangadNo').val($(this).parent("tr").attr("data-name"));
+
+                $("table tr").removeClass("greenTR");
+                $(this).parent("tr").addClass("greenTR");
+                //$('#divJANGADFORWARD').show();
+
+            });
+
+            function RetrievePolishingStageList() {
+                $.ajax({
+                    url: "/DIA_JangadItem/RetrievePolishingStageList",
+                    type: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: "json",
+                    success: (function (result) {
+
+                        PolishingStageListArray = result;
+                        if (result.length > 0) {
+
+                            var html = '<option value="0">Select Item</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                html += '<option value="' + result[i].PolishingStageID + '">' + result[i].SatgeName + '</option>';
+                            }
+                            PolishingStageListArrayHtml = html;
+                            $("#ddlPolishingStageID").empty();
+                            $("#ddlPolishingStageID").append('<option value="0">Select Item</option>');
+                            for (var i = 0; i < result.length; i++) {
+                                var option = $("<option/>");
+                                option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
+                                $("#ddlPolishingStageID").append(option);
+                            }
+                        }
+
+
+                    }),
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+
+            function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
+
+                $.ajax({
+                    url: "/DIA_JangadItem/SaveJangadForward",
+                    data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
+                    type: "POST",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result == "Success") {
+
+                            alert(result);
+                            location.reload(true);
+                        }
+                        else {
+
+                            alert("not exist some error thrown.");
+
+                        }
+
+                        $('#txtJangadNo').val('');
+                        $('#ddlPolishingStageID').val(0);
+                        $('#txtRemarks').val('');
+
+                    },
+                    error: function (errormessage) {
+                        alert(errormessage.responseText);
+                    }
+                });
+            }
+            function GetJangadItemList(jangadid) {
+                $.ajax({
+                    url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
+                    type: 'POST',
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ "jangadID": jangadid }),
+
+                    success: function (result) {
+                        if (result.length > 0) {
+                            var html = '';
+                            $('#tbodyJangadItemList').html(html);
+                            for (var i = 0; i < result.length; i++) {
+                                var jangaditemid = result[i].JangadItemID;
+                                html +='<tr id="tr'+i+'">';
+                                html += '<td id="firsttd'+i+'">' + jangaditemid + '</td>';
+                                html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                                html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
+                                html += '</tr>' ;
+
+                                //var option = $("<option/>");
+                                //option.attr("value", result[i].ItemID).text(result[i].ItemName);
+                                //$("#ddlItemList").append(option);
+                            }
+                            $('#tbodyJangadItemList').append(html);
+                        }
+                    },
+                    error: function (errormessage) {
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+
+                $('input:radio[name=Jangad]').change(function () {
+                    if ($('input[name=Jangad]:checked').val() == "Partial") {
+                        $('#divPartialJangadItemList').show();
+                        $('#divCompleteJangad').hide();
+                        var janagadid = $('#txtJangadNo').attr('data-id');
+                        GetJangadItemList(janagadid);
+                    }
+                    else {
+                        $('#divPartialJangadItemList').hide();
+                        $('#divCompleteJangad').show();
+                    }
+
+                });
+
+                RetrievePolishingStageList();
+
+                $("#btnSaveJangadForward").click(function () {
+
+                    if ($('input[name=Jangad]:checked').val() == "Complete") {
+
+                        var jangadID = $('#txtJangadNo').attr('data-id');
+                        var polishingStageID = $('#ddlPolishingStageID').val();
+                        var remarks = $('#txtRemarks').val();
+                        //alert("The paragraph was clicked." + issuenumber);
+                        SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+                    }
+                    else if ($('input[name=Jangad]:checked').val() == "Partial") {
+
+                        var jangadID = $('#txtJangadNo').attr('data-id');
+                        SubmitArrayJangadItemList = [];
+                        for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++)
+                        {
+                            SubmitArrayJangadItemList.push({
+                                jangadItemID: $('#tblItems tbody tr#tr' + i + '  #firsttd' + i +'').html(),
+                                polishingStageID: $('#tblItems tbody tr#tr'+i+' #secondtd'+i+' .ddlPolishingStageID').val(),
+                                remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
+                            });
+                        }
+                        //console.log(SubmitArrayJangadItemList);
+                        SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+
+                    }
+                });
+
+            });
         </script>
     }
 </div>
-<!--List Code End-->

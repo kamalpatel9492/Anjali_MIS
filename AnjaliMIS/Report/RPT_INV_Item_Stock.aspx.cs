@@ -22,8 +22,11 @@ namespace AnjaliMIS.Report
         {
             if (!Page.IsPostBack)
             {
-                //#region 11.1 Check User Login
-                //#endregion 11.1 Check User Login
+                #region 11.1 Check User Login
+                if (Session["UserID"] == null)
+                    Response.Redirect("~/Home/Index");
+                #endregion 11.1 Check User Login
+
                 FillDropDownList();
             }
         }
@@ -47,7 +50,7 @@ namespace AnjaliMIS.Report
             DataTable dtItem = new DataTable();
             List<ItemStockReportViewModal> _ItemStockReportViewModal = new List<ItemStockReportViewModal>();
 
-            if (ddlCategoryID.SelectedIndex>0)
+            if (ddlCategoryID.SelectedIndex > 0)
             {
                 CategoryID = Convert.ToInt32(ddlCategoryID.SelectedValue);
                 CategoryName = ddlCategoryID.SelectedItem.Text;
