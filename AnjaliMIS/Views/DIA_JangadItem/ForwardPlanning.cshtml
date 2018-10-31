@@ -21,8 +21,19 @@
             RetrievePolishingStageList();
             $('#txtJangadNo').val(@Model.DIA_Jangad.JangadNo);
 
+            $('#chkPhysicalReceive').change(function() {
+                var jangadID = @Model.JangadID;
+                if($(this).is(':checked')==true)
+                {
+                    jangaditemID=0;
+                    PhysicalReceive(jangadID,jangaditemID);
+                    $(this).attr("disabled", true);
+                    $('#chkCompleted').attr("disabled", false);
+                }
+            });
+
             $('#chkCompleted').change(function() {
-               
+
                 if($(this).is(':checked')==true)
                 {
                     $(this).attr("disabled", true);
@@ -41,7 +52,7 @@
                     PhysicalSend(jangadID,jangaditemID);
                     $('#chkPhysicalSend').attr("disabled", true);
                 }
-               
+
             });
 
             $('input:radio[name=Jangad]').change(function () {
@@ -49,16 +60,18 @@
                 {
                     $('#divPartialJangadItemList').show();
                     $('#divRemarks').hide();
+                    $('#divForwordPhysicalReceive').hide();
                     $('#divCompleteJangad').hide();
                     $('#divForwordCompleted').hide();
                     $('#divPhysicalSend').hide();
                     var janagadid = $('#DIA_Jangad_JangadID').val();
-             
+
                     GetJangadItemList(janagadid);
                 }
                 else {
                     $('#divPartialJangadItemList').hide();
                     $('#divRemarks').show();
+                    $('#divForwordPhysicalReceive').show();
                     $('#divCompleteJangad').show();
                     $('#divForwordCompleted').show();
                     $('#divPhysicalSend').show();
@@ -84,7 +97,7 @@
                             remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
                         });
                     }
-                  
+
                     SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
 
                 }
@@ -92,9 +105,24 @@
 
         });
 
+        $(document).on("change", ".chkPhysicalReceive", function () {
+            debugger;
+            var jangadID = @Model.JangadID;
+            var id=this.id;
+
+            var a= id.replace('chkPhysicalReceive', '');
+            if ($('input[name=Jangad]:checked').val() == "Partial")
+            {
+                jangaditemID=a;
+
+                PhysicalReceive(jangadID,jangaditemID);
+                $('#chkPhysicalReceive'+a).attr("disabled", true);
+                $("#chkCompleted"+a).attr("disabled", false);
+            }
+        });
 
         $(document).on("change", ".chkCompleted", function () {
-          
+
             var id=this.id;
 
             var a= id.replace('chkCompleted', '');
@@ -109,7 +137,7 @@
         });
 
         $(document).on("change", ".chkPhysicalSend", function () {
-            
+
             var jangadID = @Model.JangadID;
             var id=this.id;
 
@@ -124,7 +152,7 @@
         });
 
         function GetJangadItemList(jangadid) {
-         
+
             var jangadid = @Model.JangadID;
             $.ajax({
                 url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
@@ -138,13 +166,15 @@
                         var html = '';
                         $('#tbodyJangadItemList').html(html);
                         for (var i = 0; i < result.length; i++) {
+                            debugger;
                             var jangaditemid = result[i].JangadItemID;
-                            html += '<tr id="tr' + i + '">';
+                            html += '<tr id="tr' + i + '" disabled="disabled">';
                             html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
-                            html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
-                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
-                            html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
-                            html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
+                            html += '<td id="secondtd' + i + '">' + '<input id="chkPhysicalReceive' + jangaditemid + '" class="chkPhysicalReceive"  type="checkbox" name="chkPhysicalReceive" value="Physical Receive">' + '</td>';
+                            html += '<td id="thirdtd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed" disabled="disabled">' + '</td>';
+                            html += '<td id="fourthtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                            html += '<td id="fifthtd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
+                            html += '<td id="sixthtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
                             html += '</tr>';
                         }
                         $('#tbodyJangadItemList').append(html);
@@ -187,6 +217,35 @@
                 }
             });
         }
+        function PhysicalReceive(jangadID,jangaditemID)
+        {
+            $.ajax({
+                url: '@Url.Action("PhysicalReceive", "DIA_JangadItem")',
+                data: JSON.stringify({ "jangadID": jangadID, "jangadItemID": jangaditemID}),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == "Success") {
+
+                    }
+                    else {
+
+                        alert("not exist some error thrown.");
+
+                    }
+
+                    $('#txtJangadNo').val('');
+                    $('#ddlPolishingStageID').val(0);
+                    $('#txtRemarks').val('');
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
         function PhysicalSend(jangadID,jangaditemID)
         {
             $.ajax({
@@ -197,10 +256,10 @@
                 dataType: "json",
                 success: function (result) {
                     if (result == "Success") {
-                      
+
                     }
                     else {
-                      
+
                         alert("not exist some error thrown.");
 
                     }
@@ -217,7 +276,7 @@
         }
 
         function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
-       
+
             $.ajax({
                 url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
                 data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
@@ -286,7 +345,7 @@
                         <div class="form-group" id="divForwordCompleted">
                             <label class="control-label col-md-3"></label>
                             <div class="col-md-4 ">
-                                <input id="chkCompleted" type="checkbox" name="chkCompleted" value="Completed">Completed
+                                <input id="chkCompleted" type="checkbox" name="chkCompleted" value="Completed" disabled="disabled">Completed
                             </div>
                         </div>
                         <div class="form-group" id="divCompleteJangad">

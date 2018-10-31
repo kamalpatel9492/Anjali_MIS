@@ -395,6 +395,53 @@ namespace AnjaliMIS.Controllers
         }
 
         [HttpPost]
+        public JsonResult PhysicalReceive(int jangadID, int jangadItemID)
+        {
+            try
+            {
+                if (jangadItemID == 0)
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID).ToList();
+                    if (getJangadItem.Count > 0)
+                    {
+                        foreach (var item in getJangadItem)
+                        {
+                            item.PhysicalReceived = true;
+                            item.PhysicalReceivedDateTime = DateTime.Now;
+                        }
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    var getJangadItem = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.JangadItemID == jangadItemID).FirstOrDefault();
+                    if (getJangadItem != null)
+                    {
+                        getJangadItem.PhysicalReceived = true;
+                        getJangadItem.PhysicalReceivedDateTime = DateTime.Now;
+
+                        db.SaveChanges();
+                        return Json("Success", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("failure", JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
         public JsonResult PhysicalSend(int jangadID, int jangadItemID)
         {
             try
@@ -520,10 +567,10 @@ namespace AnjaliMIS.Controllers
         public JsonResult RetrieveJangadItemList(int jangadID)
         {
             try
-            {
+            {   
                 if (jangadID != 0)
                 {
-                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID && e.PolishingStageID == 1).Select(e => new
+                    var jangadItemList = db.DIA_JangadItem.Where(e => e.JangadID == jangadID ).Select(e => new
                     {
                         JangadID = e.JangadID,
                         JangadItemID = e.JangadItemID
