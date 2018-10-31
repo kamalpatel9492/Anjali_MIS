@@ -1,0 +1,356 @@
+﻿@model AnjaliMIS.Models.DIA_JangadItem
+@{
+    ViewBag.Title = "ForwardPlanning";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Created)
+    @Html.HiddenFor(model => model.JangadItemID)
+    @Html.HiddenFor(model => model.DIA_Jangad.JangadID)
+
+
+    <script>
+        var PolishingStageListArray = [];
+        var PolishingStageListArrayHtml = '';
+        var SubmitArrayJangadItemList = [];
+
+        $(document).ready(function () {
+
+            RetrievePolishingStageList();
+            $('#txtJangadNo').val(@Model.DIA_Jangad.JangadNo);
+
+            $('#chkCompleted').change(function() {
+                debugger;
+                if($(this).is(':checked')==true)
+                {
+                    $(this).attr("disabled", true);
+                    $('#ddlPolishingStageID').attr("disabled", false);
+                    $('#chkPhysicalSend').attr("disabled", false);
+
+                }
+            });
+
+
+            $('#chkPhysicalSend').change(function() {
+                var jangadID = @Model.JangadID;
+                if ($('input[name=Jangad]:checked').val() == "Complete")
+                {
+                    jangaditemID=0;
+                    PhysicalSend(jangadID,jangaditemID);
+                    $('#chkPhysicalSend').attr("disabled", true);
+                }
+                
+            });
+
+            $('input:radio[name=Jangad]').change(function () {
+                if ($('input[name=Jangad]:checked').val() == "Partial")
+                {
+                    $('#divPartialJangadItemList').show();
+                    $('#divRemarks').hide();
+                    $('#divCompleteJangad').hide();
+                    $('#divForwordCompleted').hide();
+                    $('#divPhysicalSend').hide();
+                    var janagadid = $('#DIA_Jangad_JangadID').val();
+                    GetJangadItemList(janagadid);
+                }
+                else {
+                    $('#divPartialJangadItemList').hide();
+                    $('#divRemarks').show();
+                    $('#divCompleteJangad').show();
+                    $('#divForwordCompleted').show();
+                    $('#divPhysicalSend').show();
+                }
+
+            });
+
+            $("#btnSaveJangadForward").click(function () {
+
+                if ($('input[name=Jangad]:checked').val() == "Complete") {
+                    var jangadID = @Model.JangadID;
+                    var polishingStageID = $('#ddlPolishingStageID').val();
+                    var remarks = $('#txtRemarks').val();
+                    SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+                }
+                else if ($('input[name=Jangad]:checked').val() == "Partial") {
+                    var jangadID = @Model.JangadID;
+                    SubmitArrayJangadItemList = [];
+                    for (i = 0; i < $("#tblItems").find("tbody>tr").length; i++) {
+                        SubmitArrayJangadItemList.push({
+                            jangadItemID: $('#tblItems tbody tr#tr' + i + '  #firsttd' + i + '').html(),
+                            polishingStageID: $('#tblItems tbody tr#tr' + i + ' #secondtd' + i + ' .ddlPolishingStageID').val(),
+                            remarks: $('#tblItems tbody tr#tr' + i + '  #thirdtd' + i + '  input').val()
+                        });
+                    }
+                    SaveJangadForward(jangadID, polishingStageID, remarks, SubmitArrayJangadItemList, $('input[name=Jangad]:checked').val());
+
+                }
+            });
+
+        });
+
+
+        $(document).on("change", ".chkCompleted", function () {
+
+            var id=this.id;
+
+            var a= id.replace('chkCompleted', '');
+
+            if($(this).is(':checked')==true)
+            {
+                $(this).attr("disabled", true);
+                $("#ddlPolishingStageID"+a).attr("disabled", false);
+                $("#chkPhysicalSend"+a).attr("disabled", false);
+
+            }
+        });
+
+        $(document).on("change", ".chkPhysicalSend", function () {
+            debugger;
+
+            var jangadID = @Model.JangadID;
+            var id=this.id;
+
+            var a= id.replace('chkPhysicalSend', '');
+            if ($('input[name=Jangad]:checked').val() == "Partial")
+            {
+                jangaditemID=a;
+
+                PhysicalSend(jangadID,jangaditemID);
+                $('#chkPhysicalSend'+a).attr("disabled", true);
+            }
+        });
+
+        function GetJangadItemList(jangadid) {
+            debugger;
+            var jangadid = @Model.JangadID;
+            $.ajax({
+                url: '@Url.Action("RetrieveJangadItemList", "DIA_JangadItem")',
+                type: 'POST',
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ "jangadID": jangadid }),
+
+                success: function (result) {
+                    if (result.length > 0) {
+                        var html = '';
+                        $('#tbodyJangadItemList').html(html);
+                        for (var i = 0; i < result.length; i++) {
+                            var jangaditemid = result[i].JangadItemID;
+                            html += '<tr id="tr' + i + '">';
+                            html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                            html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
+                            html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
+                            html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
+                            html += '<td id="thirdtd' + i + '"><input id="txtRemarks' + jangaditemid + '" type="text" class="form-control" /></td>';
+                            html += '</tr>';
+                        }
+                        $('#tbodyJangadItemList').append(html);
+                    }
+                },
+                error: function (errormessage) {
+                }
+            });
+        }
+
+        function RetrievePolishingStageList() {
+            $.ajax({
+                url: '@Url.Action("RetrievePolishingStageList", "DIA_JangadItem")',
+                type: "GET",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: (function (result) {
+
+                    PolishingStageListArray = result;
+                    if (result.length > 0) {
+
+                        var html = '<option value="0">Select Item</option>';
+                        for (var i = 0; i < result.length; i++) {
+                            html += '<option value="' + result[i].PolishingStageID + '">' + result[i].SatgeName + '</option>';
+                        }
+                        PolishingStageListArrayHtml = html;
+                        $("#ddlPolishingStageID").empty();
+                        $("#ddlPolishingStageID").append('<option value="0">Select Item</option>');
+                        for (var i = 0; i < result.length; i++) {
+                            var option = $("<option/>");
+                            option.attr("value", result[i].PolishingStageID).text(result[i].SatgeName);
+                            $("#ddlPolishingStageID").append(option);
+                        }
+                    }
+
+
+                }),
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+        function PhysicalSend(jangadID,jangaditemID)
+        {
+
+            $.ajax({
+                url: '@Url.Action("PhysicalSend", "DIA_JangadItem")',
+                data: JSON.stringify({ "jangadID": jangadID, "jangadItemID": jangaditemID}),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == "Success") {
+                        debugger;
+                    }
+                    else {
+                        debugger;
+                        alert("not exist some error thrown.");
+
+                    }
+
+                    $('#txtJangadNo').val('');
+                    $('#ddlPolishingStageID').val(0);
+                    $('#txtRemarks').val('');
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+        function SaveJangadForward(jangadID, polishingStageID, remarks, submitArrayJangadItemList, jangadForwordType) {
+            debugger;
+            $.ajax({
+                url: '@Url.Action("SaveJangadForward", "DIA_JangadItem")',
+                data: JSON.stringify({ "jangadID": jangadID, "polishingStageID": polishingStageID, "remarks": remarks, "jangadItemList": submitArrayJangadItemList, "jangadForwordTypeCompleteOrPartial": jangadForwordType }),
+                type: "POST",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    if (result == "Success") {
+
+                        alert(result);
+                        location.reload(true);
+                    }
+                    else {
+
+                        alert("not exist some error thrown.");
+
+                    }
+
+                    $('#txtJangadNo').val('');
+                    $('#ddlPolishingStageID').val(0);
+                    $('#txtRemarks').val('');
+
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+
+    </script>
+    <!--Add-Edit code start-->
+    <div class="col-md-12">
+        <!-- BEGIN VALIDATION STATES-->
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i>Forward
+                </div>
+            </div>
+            
+            <div class="portlet-body">
+                <div class="form-horizontal form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Forword</label>
+                            <div class="col-md-4 radio-list">
+                                <label class="radio-inline">
+                                    <input type="radio" name="Jangad" value="Complete" checked="checked">Complete Forword
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="Jangad" value="Partial">Partial Forword
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3">JANGAD No</label>
+                            <div class="col-md-4">
+                                <input id="txtJangadNo" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group" id="divPhysicalSend">
+                            <label class="control-label col-md-3">Physical Receive</label>
+                            <div class="col-md-4 ">
+                                <input id="chkPhysicalReceive" type="checkbox" name="chkPhysicalReceive" value="Physical Receive" disabled="disabled">Physical Receive
+                            </div>
+                        </div>
+                        <div class="form-group" id="divForwordCompleted">
+                            <label class="control-label col-md-3">Forword</label>
+                            <div class="col-md-4 ">
+                                <input id="chkCompleted" type="checkbox" name="chkCompleted" value="Completed">Completed
+                            </div>
+                        </div>
+                        <div class="form-group" id="divCompleteJangad">
+                            <label class="control-label col-md-3">PolishingStageID</label>
+
+                            <div class="col-md-4">
+                            
+                                <select id="ddlPolishingStageID" class="form-control" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divPhysicalSend">
+                            <label class="control-label col-md-3">Physical Send</label>
+                            <div class="col-md-4 ">
+                                <input id="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">Physical Send
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divPartialJangadItemList" hidden>
+                            <label class="control-label col-md-3">Set PolishingStageID</label>
+                            <div class="col-md-4">
+                                <table class="table" id="tblItems">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                jangaditemid
+                                            </th>
+                                            <th>
+                                                Completed
+                                            </th>
+                                            <th>
+                                                PolishingStageID
+                                            </th>
+                                            <th>
+                                                Partial Receive
+                                            </th>
+                                            <th>
+                                                remarks
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyJangadItemList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divRemarks">
+                            <label class="control-label col-md-3">Remarks</label>
+                            <div class="col-md-4">
+                                <input id="txtRemarks" type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input id="btnSaveJangadForward" type="button" value="Save" class="btn green" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

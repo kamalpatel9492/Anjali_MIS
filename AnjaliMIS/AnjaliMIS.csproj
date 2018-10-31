@@ -4765,6 +4765,7 @@
     <Content Include="Views\INV_ItemIssueReturn\Details.cshtml" />
     <Content Include="Views\DIA_JangadItem\CreateNew.cshtml" />
     <Content Include="Views\DIA_JangadItem\ABC.cshtml" />
+    <Content Include="Views\DIA_JangadItem\ForwardPlanning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
