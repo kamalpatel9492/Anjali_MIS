@@ -19,12 +19,12 @@
                     <div class="form-body">
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<div class="form-group">
-                                @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+            @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,10 +43,10 @@
 
                             @Html.LabelFor(model => model.Quantity, "Than", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                <input id="txtQuantity" type="text" class="form-control allownumericwithoutdecimal"  />
-                                @*@Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control allownumericwithoutdecimal" } })*@
-                                @*@Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })*@
+                                <input id="txtQuantity" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
+
+
 
                         </div>
 
@@ -60,10 +60,10 @@
                                     <input type="radio" name="isLocal" value="False">No
                                 </label>
                             </div>
-                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                            @Html.LabelFor(model => model.JangadNo, "Jangad No", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-4">
-                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                <input id="txtJangadNo" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
                         </div>
 
@@ -77,6 +77,7 @@
                                 @*<select id="ddlSGST" class="form-control"></select>*@
                                 <input id="txtSGSTValue" type="text" class="form-control" readonly="readonly" />
                             </div>
+
                         </div>
 
                         <div class="form-group" id="divIGST" hidden>
@@ -103,7 +104,34 @@
                             <div class="col-md-4">
                                 <input id="txtRate" type="text" class="form-control" />
                             </div>
+                            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
                         </div>
+                        <table class="table-bordered table">
+                            <thead>
+                                <tr>
+                                    <th class="text-right">Rate (<span id="tdValues"></span>)</th>
+                                    <th class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></th>
+                                    <th class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></th>
+                                    <th class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></th>
+                                    <th class="text-right">Total</th>
+                                    <th class="text-right">Final Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="tdItemTotal" class="text-right"></td>
+                                    <td id="tdSGST" class="text-right"></td>
+                                    <td id="tdCGST" class="text-right"></td>
+                                    <td id="tdIGST" class="text-right"></td>
+                                    <td id="tdTotal" class="text-right"></td>
+                                    <td id="tdFinalTotal" class="text-right bold"></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <h3 class="form-section">Jangad Items</h3>
                         <div class="form-group">
@@ -111,26 +139,26 @@
                             <div class="col-md-2">
                                 <input id="txtDia" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">RWeight</label>
+                            <label class="control-label col-md-2">R Weight</label>
                             <div class="col-md-2">
                                 <input id="txtRWeight" type="text" class="form-control allownumericwithdecimal" />
                             </div>
-                            <label class="control-label col-md-2">PWeight</label>
+                            <label class="control-label col-md-2">P Weight</label>
                             <div class="col-md-2">
                                 <input id="txtPWeight" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">PavalionAngle</label>
+                            <label class="control-label col-md-2">Pavalion Angle</label>
                             <div class="col-md-2">
                                 <input id="txtPavalionAngle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
 
-                            <label class="control-label col-md-2">CrownAngle</label>
+                            <label class="control-label col-md-2">Crown Angle</label>
                             <div class="col-md-2">
                                 <input id="txtCrownAngle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">CrownHeight</label>
+                            <label class="control-label col-md-2">Crown Height</label>
                             <div class="col-md-2">
                                 <input id="txtCrownHeight" type="text" class="form-control allownumericwithdecimal" />
                             </div>
@@ -144,82 +172,81 @@
                             <div class="col-md-2">
                                 <input id="txtCulet" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">ji_table</label>
+                            <label class="control-label col-md-2">table</label>
                             <div class="col-md-2">
                                 <input id="txtji_table" type="text" class="form-control allownumericwithdecimal" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2"></label>
-                            <div class="col-md-5">
-                                <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                            <label class="control-label col-md-2">Para 1</label>
+                            <div class="col-md-2">
+                                <input id="txtPara1" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <div class="col-md-5">
-                                <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
+                            <label class="control-label col-md-2">Para 2</label>
+                            <div class="col-md-2">
+                                <input id="txtPara2" type="text" class="form-control allownumericwithoutdecimal" />
+                            </div>
+                            <label class="control-label col-md-2">Para 3</label>
+                            <div class="col-md-2">
+                                <input id="txtPara3" type="text" class="form-control allownumericwithdecimal" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">Item Code</label>
+                            <div class="col-md-2">
+                                <input id="txtJangadItemCode" type="text" class="form-control allownumericwithdecimal" />
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2"></label>
+                                <div class="col-md-5">
+                                    <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
+                                </div>
+                            </div>
 
-                        <div id="divJangadList" class="form-group" hidden>
-                            <label class="control-label col-md-2">Jangad List</label>
-                            <div class="col-md-10">
-                                <table class="table table-bordered table-responsive" id="selected_units">
-                                    <thead>
-                                        <tr>
-                                            <th>Select</th>
-                                            <th class="text-right">Dia</th>
-                                            <th class="text-right">RWeight</th>
-                                            <th class="text-right">PWeight</th>
-                                            <th class="text-right">PavalionAngle</th>
-                                            <th class="text-right">CrownAngle</th>
-                                            <th class="text-right">CrownHeight</th>
-                                            <th class="text-right">Girdle</th>
-                                            <th class="text-right">Culet</th>
-                                            <th class="text-right">ji_table</th>
+                            <div id="divJangadList" class="form-group" hidden>
+                                <label class="control-label col-md-2">Jangad List</label>
+                                <div class="col-md-10">
+                                    <table class="table table-bordered table-responsive" id="selected_units">
+                                        <thead>
+                                            <tr>
+                                                <th>Select</th>
+                                                <th class="text-right">Code</th>
+                                                <th class="text-right">Dia</th>
+                                                <th class="text-right">R Weight</th>
+                                                <th class="text-right">P Weight</th>
+                                                <th class="text-right">Pavalion Angle</th>
+                                                <th class="text-right">Crown Angle</th>
+                                                <th class="text-right">Crown Height</th>
+                                                <th class="text-right">Girdle</th>
+                                                <th class="text-right">Culet</th>
+                                                <th class="text-right">table</th>
+                                                <th class="text-right">para 1</th>
+                                                <th class="text-right">para 2</th>
+                                                <th class="text-right">para 3</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody class="list">
-                                        <tr>
-                                            <td colspan="9" class="text-right">Rate (<span id="tdValues"></span>)</td>
-                                            <td colspan="9" id="tdItemTotal" class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="9" class="text-right">SGST <span id="tdSpanPercentageSGSTValue"></span></td>
-                                            <td colspan="9" id="tdSGST" class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="9" class="text-right">CGST <span id="tdSpanPercentageCGSTValue"></span></td>
-                                            <td colspan="9" id="tdCGST" class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="9" class="text-right">IGST <span id="tdSpanPercentageIGSTValue"></span></td>
-                                            <td colspan="9" id="tdIGST" class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="9" class="text-right">Total</td>
-                                            <td colspan="9" id="tdTotal" class="text-right"></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="9" class="text-right bold">Final Total</td>
-                                            <td colspan="9" id="tdFinalTotal" class="text-right bold"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list"></tbody>
+                                    </table>
+                                    <button type="button" style="float:right;" class="delete-row">Delete Item</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <input type="button" id="btnSave" value="Save" class="btn green" />
+                                    @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
+                                </div>
                             </div>
                         </div>
 
                     </div>
-                    <div class="form-actions">
-                        <div class="row">
-                            <div class="col-md-offset-3 col-md-9">
-                                <input type="button" id="btnSave" value="Save" class="btn green" />
-                                @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <!-- END FORM-->
             </div>
         </div>
@@ -251,6 +278,17 @@
     $(document).ready(function () {
         RetrieveCGST();
         RetrieveIGST();
+
+        $("#txtRate").change(function () {
+            CheckJangadType();
+
+        });
+        $("#Weight").change(function () {
+            CheckJangadType();
+        });
+        $("#txtQuantity").change(function () {
+            CheckJangadType();
+        });
 
         $('input:radio[name=isLocal]').change(function () {
             CheckIsLocal();
@@ -296,7 +334,11 @@
             var Girdle = $('#txtGirdle').val();
             var Culet = $('#txtCulet').val();
             var ji_table = $('#txtji_table').val();
-
+            var para1 = $('#txtPara1').val();
+            var para2 = $('#txtPara2').val();
+            var para3 = $('#txtPara3').val();
+            var JangadItemCode = $('#txtJangadItemCode').val();
+            
             jangadList.push({
                 tablerowid:i,
                 Dia: Dia,
@@ -308,11 +350,16 @@
                 Girdle: Girdle,
                 Culet: Culet,
                 ji_table: ji_table,
+                Para1: para1,
+                Para2: para2,
+                Para3: para3,
+                JangadItemCode: JangadItemCode,
             });
 
 
             var markup = "<tr>";
             markup += "<td><input type='checkbox' name='record' id='" + i + "'></td>";
+            markup += "<td class='text-right'>" + JangadItemCode + "</td>";
             markup += "<td>" + Dia + "</td>";
             markup += "<td class='text-right'>" + RWeight + "</td>";
             markup += "<td class='text-right'>" + PWeight + "</td>";
@@ -322,6 +369,9 @@
             markup += "<td class='text-right'>" + Girdle + "</td>";
             markup += "<td class='text-right'>" + Culet + "</td>";
             markup += "<td class='text-right'>" + ji_table + "</td>";
+            markup += "<td class='text-right'>" + para1 + "</td>";
+            markup += "<td class='text-right'>" + para2 + "</td>";
+            markup += "<td class='text-right'>" + para3 + "</td>";
             markup += "</tr>";
 
             $("table .list").prepend(markup);
@@ -399,7 +449,8 @@
             IsLocal: $('input[name=isLocal]:checked').val(),
             IsActive: $('#IsActive').val(),
             QTYByThan: qTYByThan,
-            Quantity: Quantity,
+            Quantity: $('#txtQuantity').val(),
+            JangadNo: $('#txtJangadNo').val(),
             Rate: Rate,
             PricePerCarat: Rate,
             IsRatePerThan: isRatePerThan,
@@ -455,7 +506,7 @@
             debugger;
             var Quantity = $('#txtQuantity').val();
             var Rate = $('#txtRate').val();
-            
+
             $('#tdValues').html(Rate + " * " + Quantity);
 
             itemWiseEachStepAddTotalAmount = Rate * Quantity;
@@ -559,7 +610,7 @@
         var Rate = $('#txtRate').val();
         var Weight = $('#Weight').val();
 
-      
+
 
         var igstpercentage = $("#ddlIGST option:selected").attr("data-id");
         igstCalculation = parseFloat(itemWiseEachStepAddTotalAmount * igstpercentage / 100).toFixed(2);
@@ -645,6 +696,8 @@
                     var Girdle = result.DIA_JangadItems[i].Girdle;
                     var Culet = result.DIA_JangadItems[i].Culet;
                     var ji_table = result.DIA_JangadItems[i].ji_table;
+                    var JangadItemCode = result.DIA_JangadItems[i].JangadItemCode;
+                    
 
                     jangadList.push({
                         tablerowid: i,
@@ -657,11 +710,16 @@
                         Girdle: Girdle,
                         Culet: Culet,
                         ji_table: ji_table,
+                        Para1: 0,
+                        Para2: 0,
+                        Para3: 0,
+                        JangadItemCode: JangadItemCode
                     });
 
 
                     var markup = "<tr>";
                     markup += "<td><input type='checkbox' name='record' id='" + i + "'></td>";
+                    markup += "<td class='text-right'>" + JangadItemCode + "</td>";
                     markup += "<td>" + Dia + "</td>";
                     markup += "<td class='text-right'>" + RWeight + "</td>";
                     markup += "<td class='text-right'>" + PWeight + "</td>";
@@ -671,6 +729,9 @@
                     markup += "<td class='text-right'>" + Girdle + "</td>";
                     markup += "<td class='text-right'>" + Culet + "</td>";
                     markup += "<td class='text-right'>" + ji_table + "</td>";
+                    markup += "<td class='text-right'>" + "0" + "</td>";
+                    markup += "<td class='text-right'>" + "0" + "</td>";
+                    markup += "<td class='text-right'>" + "0" + "</td>";
                     markup += "</tr>";
 
                     $("table .list").prepend(markup);
