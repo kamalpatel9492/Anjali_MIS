@@ -19,12 +19,12 @@
                     <div class="form-body">
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<div class="form-group">
-                                @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
+            @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -135,6 +135,12 @@
 
                         <h3 class="form-section">Jangad Items</h3>
                         <div class="form-group">
+                            <label class="control-label col-md-2">Item Code</label>
+                            <div class="col-md-2">
+                                <input id="txtJangadItemCode" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-md-2">Dia</label>
                             <div class="col-md-2">
                                 <input id="txtDia" type="text" class="form-control allownumericwithoutdecimal" />
@@ -149,16 +155,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">Pavalion Angle</label>
+                            <label class="control-label col-md-2">P Angle</label>
                             <div class="col-md-2">
                                 <input id="txtPavalionAngle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
 
-                            <label class="control-label col-md-2">Crown Angle</label>
+                            <label class="control-label col-md-2">C Angle</label>
                             <div class="col-md-2">
                                 <input id="txtCrownAngle" type="text" class="form-control allownumericwithoutdecimal" />
                             </div>
-                            <label class="control-label col-md-2">Crown Height</label>
+                            <label class="control-label col-md-2">C Height</label>
                             <div class="col-md-2">
                                 <input id="txtCrownHeight" type="text" class="form-control allownumericwithdecimal" />
                             </div>
@@ -191,12 +197,7 @@
                                 <input id="txtPara3" type="text" class="form-control allownumericwithdecimal" />
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Item Code</label>
-                            <div class="col-md-2">
-                                <input id="txtJangadItemCode" type="text" class="form-control" />
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="control-label col-md-2"></label>
                             <div class="col-md-5">
