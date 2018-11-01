@@ -266,7 +266,7 @@
             @:var priceAmount = @item.PuchasePrice;
             @:var totalItemAmount = (quantity * priceAmount).toFixed(2);
             @:var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount +"</td></tr>";
-            @:itemWiseEachStepAddTotalAmount +=totalItemAmount;
+            @:itemWiseEachStepAddTotalAmount =  parseFloat(itemWiseEachStepAddTotalAmount) + parseFloat(totalItemAmount);
             @:$("table .list").prepend(markup);
         }
         @:$('#tdItemTotal').html(itemWiseEachStepAddTotalAmount);
@@ -359,7 +359,7 @@
 			        invoiceID++;
 			        var markup = "<tr><td><input type='checkbox' name='record' id='" + itemid + "'></td><td>" + itemname + "</td><td class='text-right'>" + quantity + "</td><td class='text-right'>" + priceAmount + "</td><td class='text-right'>" + totalItemAmount + "</td></tr>";
 			        $("table .list").prepend(markup);
-			        itemWiseEachStepAddTotalAmount += totalItemAmount;
+			        itemWiseEachStepAddTotalAmount =  parseFloat(itemWiseEachStepAddTotalAmount) + parseFloat(totalItemAmount);
 			        $('#tdItemTotal').html(parseFloat(itemWiseEachStepAddTotalAmount));
 			        FinalCalculation();
 			        $('html, body').animate({
@@ -498,6 +498,7 @@
     }
 
     function FinalCalculation() {
+        debugger;
         var igstCalculation = 0;
         var cgstCalculation = 0;
         var sgstCalculation = 0;
