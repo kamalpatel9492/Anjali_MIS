@@ -19,12 +19,12 @@
                     <div class="form-body">
                         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
                         @*<div class="form-group">
-            @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                                @Html.LabelFor(model => model.CompanyID, "Jangad", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("JangadID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.PartyID, "Party", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -194,59 +194,59 @@
                         <div class="form-group">
                             <label class="control-label col-md-2">Item Code</label>
                             <div class="col-md-2">
-                                <input id="txtJangadItemCode" type="text" class="form-control allownumericwithdecimal" />
+                                <input id="txtJangadItemCode" type="text" class="form-control" />
                             </div>
                         </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-2"></label>
-                                <div class="col-md-5">
-                                    <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
-                                </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2"></label>
+                            <div class="col-md-5">
+                                <a href="#" class="button bu-block btn default glyphicon glyphicon-plus add-row"> Add Item</a>
                             </div>
-
-                            <div id="divJangadList" class="form-group" hidden>
-                                <label class="control-label col-md-2">Jangad List</label>
-                                <div class="col-md-10">
-                                    <table class="table table-bordered table-responsive" id="selected_units">
-                                        <thead>
-                                            <tr>
-                                                <th>Select</th>
-                                                <th class="text-right">Code</th>
-                                                <th class="text-right">Dia</th>
-                                                <th class="text-right">R Weight</th>
-                                                <th class="text-right">P Weight</th>
-                                                <th class="text-right">Pavalion Angle</th>
-                                                <th class="text-right">Crown Angle</th>
-                                                <th class="text-right">Crown Height</th>
-                                                <th class="text-right">Girdle</th>
-                                                <th class="text-right">Culet</th>
-                                                <th class="text-right">table</th>
-                                                <th class="text-right">para 1</th>
-                                                <th class="text-right">para 2</th>
-                                                <th class="text-right">para 3</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="list"></tbody>
-                                    </table>
-                                    <button type="button" style="float:right;" class="delete-row">Delete Item</button>
-                                </div>
+                            <div class="col-md-5">
+                                <input type="file" class="upload" name="UploadedFile" id="fileLoadDoc" multiple="multiple" />
                             </div>
-
                         </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <input type="button" id="btnSave" value="Save" class="btn green" />
-                                    @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
-                                </div>
+
+                        <div id="divJangadList" class="form-group" hidden>
+                            <label class="control-label col-md-2">Jangad List</label>
+                            <div class="col-md-10">
+                                <table class="table table-bordered table-responsive" id="selected_units">
+                                    <thead>
+                                        <tr>
+                                            <th>Select</th>
+                                            <th class="text-right">Code</th>
+                                            <th class="text-right">Dia</th>
+                                            <th class="text-right">R Weight</th>
+                                            <th class="text-right">P Weight</th>
+                                            <th class="text-right">Pavalion Angle</th>
+                                            <th class="text-right">Crown Angle</th>
+                                            <th class="text-right">Crown Height</th>
+                                            <th class="text-right">Girdle</th>
+                                            <th class="text-right">Culet</th>
+                                            <th class="text-right">table</th>
+                                            <th class="text-right">para 1</th>
+                                            <th class="text-right">para 2</th>
+                                            <th class="text-right">para 3</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list"></tbody>
+                                </table>
+                                <button type="button" style="float:right;" class="delete-row">Delete Item</button>
                             </div>
                         </div>
 
                     </div>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="button" id="btnSave" value="Save" class="btn green" />
+                                @Html.ActionLink("Back to List", "index", "DIA_JangadItem", new { @class = "btn default" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <!-- END FORM-->
             </div>
         </div>
@@ -321,6 +321,14 @@
         });
 
         $(".add-row").click(function () {
+
+            var response = true;
+            response = ValidationItemControls(false);
+            if (response == false) {
+                alert('Please fill all the compulsory field(s).');
+                return false;
+            }
+
             i++;
             $('#divJangadList').show();
 
@@ -338,7 +346,7 @@
             var para2 = $('#txtPara2').val();
             var para3 = $('#txtPara3').val();
             var JangadItemCode = $('#txtJangadItemCode').val();
-            
+
             jangadList.push({
                 tablerowid:i,
                 Dia: Dia,
@@ -375,7 +383,131 @@
             markup += "</tr>";
 
             $("table .list").prepend(markup);
+
+            $('#txtDia').val('');
+            $('#txtRWeight').val('');
+            $('#txtPWeight').val('');
+            $('#txtPavalionAngle').val('');
+            $('#txtCrownAngle').val('');
+            $('#txtCrownHeight').val('');
+            $('#txtGirdle').val('');
+            $('#txtCulet').val('');
+            $('#txtji_table').val('');
+            $('#txtPara1').val('');
+            $('#txtPara2').val('');
+            $('#txtPara3').val('');
+            $('#txtJangadItemCode').val('');
+
         });
+
+        function ValidationItemControls() {
+            var isValid = true;
+
+            if ($('#txtDia').val().trim() == "") {
+                $('#txtDia').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtDia').css('border-color', '#ccc');
+            }
+
+            if ($('#txtRWeight').val().trim() == "") {
+                $('#txtRWeight').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtRWeight').css('border-color', '#ccc');
+            }
+
+            if ($('#txtPWeight').val().trim() == "") {
+                $('#txtPWeight').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtPWeight').css('border-color', '#ccc');
+            }
+
+            if ($('#txtPavalionAngle').val().trim() == "") {
+                $('#txtPavalionAngle').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtPavalionAngle').css('border-color', '#ccc');
+            }
+
+            if ($('#txtCrownAngle').val().trim() == "") {
+                $('#txtCrownAngle').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtCrownAngle').css('border-color', '#ccc');
+            }
+
+            if ($('#txtCrownHeight').val().trim() == "") {
+                $('#txtCrownHeight').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtCrownHeight').css('border-color', '#ccc');
+            }
+
+            if ($('#txtGirdle').val().trim() == "") {
+                $('#txtGirdle').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtGirdle').css('border-color', '#ccc');
+            }
+
+            if ($('#txtCulet').val().trim() == "") {
+                $('#txtCulet').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtCulet').css('border-color', '#ccc');
+            }
+
+            if ($('#txtji_table').val().trim() == "") {
+                $('#txtji_table').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtji_table').css('border-color', '#ccc');
+            }
+
+            if ($('#txtPara1').val().trim() == "") {
+                $('#txtPara1').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtPara1').css('border-color', '#ccc');
+            }
+
+            if ($('#txtPara2').val().trim() == "") {
+                $('#txtPara2').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtPara2').css('border-color', '#ccc');
+            }
+
+            if ($('#txtPara3').val().trim() == "") {
+                $('#txtPara3').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtPara3').css('border-color', '#ccc');
+            }
+
+            if ($('#txtJangadItemCode').val().trim() == "") {
+                $('#txtJangadItemCode').css('border-color', 'Red');
+                isValid = false;
+            }
+            else {
+                $('#txtJangadItemCode').css('border-color', '#ccc');
+            }
+            return isValid;
+        }
 
 
 
@@ -697,7 +829,7 @@
                     var Culet = result.DIA_JangadItems[i].Culet;
                     var ji_table = result.DIA_JangadItems[i].ji_table;
                     var JangadItemCode = result.DIA_JangadItems[i].JangadItemCode;
-                    
+
 
                     jangadList.push({
                         tablerowid: i,
