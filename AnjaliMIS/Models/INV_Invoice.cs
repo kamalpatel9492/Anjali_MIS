@@ -59,6 +59,6 @@ namespace AnjaliMIS.Models
         public virtual ICollection<INV_InvoiceHistory> INV_InvoiceHistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INV_InvoiceItem> INV_InvoiceItem { get; set; }
-        public int NewAmountReceived { get; set; }
+        public int NewAmountReceived { get;  set; }
     }
 }

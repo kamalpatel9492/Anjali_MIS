@@ -52,6 +52,7 @@ namespace AnjaliMIS.Models
         public Nullable<decimal> ji_table { get; set; }
         public Nullable<System.DateTime> CompletedDateTime { get; set; }
         public Nullable<bool> Completed { get; set; }
+        public string ItemFilePath { get; set; }
     
         public virtual DIA_Cassett DIA_Cassett { get; set; }
         public virtual DIA_Jangad DIA_Jangad { get; set; }

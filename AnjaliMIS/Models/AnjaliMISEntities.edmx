@@ -300,6 +300,7 @@
           <Property Name="ji_table" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CompletedDateTime" Type="datetime" />
           <Property Name="Completed" Type="bit" />
+          <Property Name="ItemFilePath" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -4382,15 +4383,16 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <Property Name="PWeight" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Culet" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="JangadItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ji_table" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CompletedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="ItemFilePath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DIA_Cassett" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_CassettsID_201806280502PM" FromRole="DIA_JangadItem" ToRole="DIA_Cassett" />
           <NavigationProperty Name="DIA_Jangad" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_JangadID_201806280502PM" FromRole="DIA_JangadItem" ToRole="DIA_Jangad" />
           <NavigationProperty Name="SYS_PolishingStage" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_PolishingStageID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SYS_PolishingStage" />
           <NavigationProperty Name="SYS_Status" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_StatusID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SYS_Status" />
           <NavigationProperty Name="SEC_User" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_JangadItem_UserID_201806280502PM" FromRole="DIA_JangadItem" ToRole="SEC_User" />
           <NavigationProperty Name="DIA_MachineWorkHistory" Relationship="DB_A157D8_AnjaliMISModel.FK_DIA_MachineWorkHistory_JangadItemID_201806280509PM" FromRole="DIA_JangadItem" ToRole="DIA_MachineWorkHistory" />
-          <Property Name="ji_table" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CompletedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="Completed" Type="Boolean" />
         </EntityType>
         <EntityType Name="DIA_Machine">
           <Key>
@@ -7292,6 +7294,7 @@ warning 6002: The table/view 'DB_A157D8_AnjaliMIS.dbo.SQL_Sequence' does not hav
           <EntitySetMapping Name="DIA_JangadItem">
             <EntityTypeMapping TypeName="DB_A157D8_AnjaliMISModel.DIA_JangadItem">
               <MappingFragment StoreEntitySet="DIA_JangadItem">
+                <ScalarProperty Name="ItemFilePath" ColumnName="ItemFilePath" />
                 <ScalarProperty Name="Completed" ColumnName="Completed" />
                 <ScalarProperty Name="CompletedDateTime" ColumnName="CompletedDateTime" />
                 <ScalarProperty Name="ji_table" ColumnName="ji_table" />
