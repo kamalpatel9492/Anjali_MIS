@@ -4612,6 +4612,7 @@
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="SQLScript\01112018_GetDomainURL.sql" />
+    <Content Include="SQLScript\01112018_JangadItemAddField_Filepath.sql" />
     <Content Include="SQLScript\31102018_InvoicePrintReport.sql" />
     <Content Include="SQLScript\31102018_ItemStockReport.sql" />
     <Content Include="SQLScript\31102018_POPrintReport.sql" />
