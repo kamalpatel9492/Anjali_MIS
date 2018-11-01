@@ -143,11 +143,13 @@
                         $('#tbodyJangadItemList').html(html);
                         for (var i = 0; i < result.length; i++) {
                             var jangaditemid = result[i].JangadItemID;
+                            var JangadItemCode = result[i].JangadItemCode;
                             var disabledvalue= result[i].Disabled;
                             if(disabledvalue==true)
                             {
                                 html += '<tr id="tr' + i + '">';
                                 html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                                html += '<td id="CodeTD' + i + '">' + JangadItemCode + '</td>';
                                 html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" value="Completed">' + '</td>';
                                 html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
                                 html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
@@ -158,6 +160,7 @@
                             {
                                 html += '<tr id="tr' + i + '">';
                                 html += '<td id="firsttd' + i + '">' + jangaditemid + '</td>';
+                                html += '<td id="CodeTD' + i + '">' + JangadItemCode + '</td>';
                                 html += '<td id="firsttd' + i + '">' + '<input id="chkCompleted' + jangaditemid + '" class="chkCompleted"  type="checkbox" name="chkCompleted" disabled="disabled"  value="Completed">' + '</td>';
                                 html += '<td id="secondtd' + i + '">' + '<select id="ddlPolishingStageID' + jangaditemid + '" class="form-control ddlPolishingStageID" disabled="disabled">' + PolishingStageListArrayHtml + '</select>' + '</td>';
                                 html += '<td id="firsttd' + i + '">' + '<input id="chkPhysicalSend' + jangaditemid + '" class="chkPhysicalSend" type="checkbox" name="chkPhysicalSend" value="Physical Send" disabled="disabled">' + '</td>';
@@ -360,7 +363,10 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                jangaditemid
+                                                ID
+                                            </th>
+                                            <th>
+                                                jangad Code
                                             </th>
                                             <th>
                                                 Completed

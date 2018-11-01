@@ -574,6 +574,7 @@ namespace AnjaliMIS.Controllers
                     {
                         JangadID = e.JangadID,
                         JangadItemID = e.JangadItemID,
+                        JangadItemCode = e.JangadItemCode,
                         Disabled = e.PolishingStageID==polishingStageID?true: false
                     }).ToList();
                     if (jangadItemList.Count > 0)
