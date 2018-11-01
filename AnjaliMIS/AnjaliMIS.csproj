@@ -1213,6 +1213,7 @@
     <Content Include="assets\global\plugins\typeahead\README.md" />
     <Content Include="assets\global\plugins\uniform\css\uniform.default.scss" />
     <Content Include="assets\global\plugins\uniform\README.md" />
+    <Content Include="Images\logo.png" />
     <Content Include="List.html" />
     <EntityDeploy Include="Models\AnjaliMISEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -4610,6 +4611,7 @@
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SQLScript\01112018_GetDomainURL.sql" />
     <Content Include="SQLScript\31102018_InvoicePrintReport.sql" />
     <Content Include="SQLScript\31102018_ItemStockReport.sql" />
     <Content Include="SQLScript\31102018_POPrintReport.sql" />

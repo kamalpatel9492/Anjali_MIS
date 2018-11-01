@@ -105,19 +105,23 @@ namespace AnjaliMIS.Report
             //    }
             //}
 
+            if (dtItem != null)
+            {
+                rvReport.Reset();
 
-            rvReport.Reset();
+                rvReport.LocalReport.DataSources.Clear();
+                rvReport.ProcessingMode = ProcessingMode.Local;
+                rvReport.LocalReport.EnableExternalImages = true;
+                rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_Item_Stock.rdlc");
+                rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_Item_SelectItemStockReportByCategoryID", dtItem));
 
-            rvReport.LocalReport.DataSources.Clear();
-            rvReport.ProcessingMode = ProcessingMode.Local;
-            rvReport.LocalReport.EnableExternalImages = true;
-            rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_Item_Stock.rdlc");
-            rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_Item_SelectItemStockReportByCategoryID", dtItem));
-
-            rvReport.Visible = true;
-            rvReport.LocalReport.DisplayName = "Item Stock Report";
-            rvReport.LocalReport.Refresh();
-            rvReport.DataBind();
+                rvReport.Visible = true;
+                rvReport.LocalReport.DisplayName = "Item Stock Report";
+                rvReport.LocalReport.Refresh();
+                rvReport.DataBind();
+            }
+            else
+                rvReport.Visible = false;
         }
     }
 }
