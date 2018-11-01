@@ -34,6 +34,7 @@ SELECT
 		[dbo].[INV_Invoice].[PONo],
 		[dbo].[INV_Invoice].[CompanyID],
 		[dbo].[SYS_Company].[CompanyName],
+		REPLACE([dbo].[SYS_Company].[LogoPath],'~',[dbo].[GetDomainURL]()) as LogoPath,
 		[dbo].[SYS_Company].[Address] as CompanyAddress,
 		[dbo].[SYS_Company].[GSTIN] as CompanyGSTIN,
 		[dbo].[SYS_Company].[Phone],

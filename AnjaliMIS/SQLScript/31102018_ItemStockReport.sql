@@ -33,6 +33,7 @@ SELECT
 		[dbo].[INV_Category].[CategoryName],
 		[dbo].[INV_Item].[CompanyID],
 		[dbo].[SYS_Company].[CompanyName],
+		REPLACE([dbo].[SYS_Company].[LogoPath],'~',[dbo].[GetDomainURL]()) as LogoPath,
 		[dbo].[INV_Item].[ItemName],
 		[dbo].[INV_Item].[ItemCode],
 		[dbo].[INV_Item].[UnitID],

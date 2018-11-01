@@ -50,7 +50,7 @@ namespace AnjaliMIS.Report
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            if (ddlPurchaseOrderID.SelectedIndex > 1)
+            if (ddlPurchaseOrderID.SelectedIndex > 0)
             {
                 SqlInt32 PurchaseOrderID = SqlInt32.Null;
                 DataTable dtPO = new DataTable();
@@ -78,19 +78,27 @@ namespace AnjaliMIS.Report
 
                     }
                 }
-                rvReport.Reset();
 
-                rvReport.LocalReport.DataSources.Clear();
-                rvReport.ProcessingMode = ProcessingMode.Local;
-                rvReport.LocalReport.EnableExternalImages = true;
-                rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_PurchaseOrder_Print.rdlc");
-                rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_PurchaseOrder_SelectForPrint", dtPO));
+                if (dtPO != null)
+                {
+                    rvReport.Reset();
 
-                rvReport.Visible = true;
-                rvReport.LocalReport.DisplayName = "Purchase Order";
-                rvReport.LocalReport.Refresh();
-                rvReport.DataBind();
+                    rvReport.LocalReport.DataSources.Clear();
+                    rvReport.ProcessingMode = ProcessingMode.Local;
+                    rvReport.LocalReport.EnableExternalImages = true;
+                    rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_PurchaseOrder_Print.rdlc");
+                    rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_PurchaseOrder_SelectForPrint", dtPO));
+
+                    rvReport.Visible = true;
+                    rvReport.LocalReport.DisplayName = "Purchase Order";
+                    rvReport.LocalReport.Refresh();
+                    rvReport.DataBind();
+                }
+                else
+                    rvReport.Visible = false;
             }
+            else
+                rvReport.Visible = false;
         }
     }
 }

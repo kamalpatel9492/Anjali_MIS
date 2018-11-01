@@ -13,6 +13,7 @@ namespace AnjaliMIS.ViewModals
         public int PONo { get; set; }
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
+        public string LogoPath { get; set; }
         public string CompanyAddress { get; set; }
         public string CompanyGSTIN { get; set; }
         public string Phone { get; set; }

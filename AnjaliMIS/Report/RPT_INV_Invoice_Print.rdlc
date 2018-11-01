@@ -1317,13 +1317,14 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Left>2in</Left>
               <Height>0.25in</Height>
-              <Width>7.5in</Width>
+              <Width>5.5in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1346,14 +1347,15 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox3</rd:DefaultName>
               <Top>0.25in</Top>
+              <Left>2in</Left>
               <Height>0.25in</Height>
-              <Width>7.5in</Width>
+              <Width>5.5in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1377,14 +1379,15 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Right</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox18</rd:DefaultName>
               <Top>0.5in</Top>
+              <Left>2in</Left>
               <Height>0.25in</Height>
-              <Width>7.5in</Width>
+              <Width>5.5in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1396,9 +1399,23 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Image Name="image1">
+              <Source>External</Source>
+              <Value>=First(Fields!LogoPath.Value, "PP_INV_Invoice_SelectForPrint")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Height>0.75in</Height>
+              <Width>1.625in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Height>0.88542in</Height>
+          <Height>0.875in</Height>
           <Width>7.5in</Width>
           <Style>
             <Border>
@@ -1465,6 +1482,10 @@
         </Field>
         <Field Name="CompanyName">
           <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LogoPath">
+          <DataField>LogoPath</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="CompanyAddress">

@@ -52,7 +52,7 @@ namespace AnjaliMIS.Report
 
         protected void btnShow_Click(object sender, EventArgs e)
         {
-            if (ddlInvoiceID.SelectedIndex > 1)
+            if (ddlInvoiceID.SelectedIndex > 0)
             {
                 SqlInt32 InvoiceID = SqlInt32.Null;
                 DataTable dtInvoice = new DataTable();
@@ -80,19 +80,26 @@ namespace AnjaliMIS.Report
 
                     }
                 }
-                rvReport.Reset();
+                if (dtInvoice != null)
+                {
+                    rvReport.Reset();
 
-                rvReport.LocalReport.DataSources.Clear();
-                rvReport.ProcessingMode = ProcessingMode.Local;
-                rvReport.LocalReport.EnableExternalImages = true;
-                rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_Invoice_Print.rdlc");
-                rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_Invoice_SelectForPrint", dtInvoice));
+                    rvReport.LocalReport.DataSources.Clear();
+                    rvReport.ProcessingMode = ProcessingMode.Local;
+                    rvReport.LocalReport.EnableExternalImages = true;
+                    rvReport.LocalReport.ReportPath = Server.MapPath("~/Report/RPT_INV_Invoice_Print.rdlc");
+                    rvReport.LocalReport.DataSources.Add(new ReportDataSource("PP_INV_Invoice_SelectForPrint", dtInvoice));
 
-                rvReport.Visible = true;
-                rvReport.LocalReport.DisplayName = "Purchase Order";
-                rvReport.LocalReport.Refresh();
-                rvReport.DataBind();
+                    rvReport.Visible = true;
+                    rvReport.LocalReport.DisplayName = "Purchase Order";
+                    rvReport.LocalReport.Refresh();
+                    rvReport.DataBind();
+                }
+                else
+                    rvReport.Visible = false;
             }
+            else
+                rvReport.Visible = false;
         }
     }
 }
