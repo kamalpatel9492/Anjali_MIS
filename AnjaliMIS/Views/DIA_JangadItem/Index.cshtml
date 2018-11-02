@@ -36,30 +36,19 @@
                 <thead>
                     <tr>
                         <th>
-                            @*@Html.DisplayNameFor(model => model.DIA_Jangad.JangadNo)*@
                             @Html.DisplayNameFor(model => model.JangadNo)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Weight)
                         </th>
                         <th>
-                            @*@Html.DisplayNameFor(model => model.Size)*@
-                            @Html.DisplayNameFor(model => model.SYS_Company.CompanyName)
-                        </th>
-                        <th>
                             @Html.DisplayNameFor(model => model.Quantity)
-                            @*@Html.DisplayNameFor(model => model.PavalionAngle)*@
                         </th>
-                        @*<th>
-                            @Html.DisplayNameFor(model => model.CrownAngle)
-                            </th>*@
                         <th>
                             @Html.DisplayNameFor(model => model.Casar)
-                            @*@Html.DisplayNameFor(model => model.CrownWeight)*@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.TotalAmount)
-                            @*@Html.DisplayNameFor(model => model.SYS_PolishingStage.SatgeName)*@
                         </th>
                        
                         <th>
@@ -71,9 +60,6 @@
                         <th>
                             Action
                         </th>
-
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -82,33 +68,21 @@
                         @*<tr id='@item.JangadItemID' data-name='@item.DIA_Jangad.JangadNo'>*@
                         <tr id='@item.JangadID' data-name='@item.JangadNo'>
                             <td>
-                                @*@Html.DisplayFor(modelItem => item.DIA_Jangad.JangadNo)*@
                                 @Html.DisplayFor(modelItem => item.JangadNo)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Weight)
                             </td>
-                            <td>
-                                @*@Html.DisplayFor(modelItem => item.Size)*@
-                                @Html.DisplayFor(modelItem => item.SYS_Company.CompanyName)
-                            </td>
+                         
                             <td>
                                 @Html.DisplayFor(modelItem => item.Quantity)
-                                @*@Html.DisplayFor(modelItem => item.PavalionAngle)*@
                             </td>
-                            @*<td>
-                                @Html.DisplayFor(modelItem => item.CrownWeight)
-                                </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Casar)
-                                @*@Html.DisplayFor(modelItem => item.CrownAngle)*@
                             </td>
-
-
 
                             <td>
                                 @Html.DisplayFor(modelItem => item.TotalAmount)
-                                @*@Html.DisplayFor(modelItem => item.SYS_PolishingStage.SatgeName)*@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.SYS_Status.StatusName)
@@ -117,14 +91,8 @@
                                 @Html.DisplayFor(modelItem => item.SEC_User.UserName)
                             </td>
                             <td>
-                                @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadItemID }) |*@
-                                @*@Html.ActionLink("Edit", "Edit", new { id = item.JangadID }) |*@
-                                @*@Html.ActionLink("Details", "Details", new { id = item.JangadItemID }) |*@
-                                @*@Html.ActionLink("Delete", "Delete", new { id = item.JangadItemID }) |*@
                                 @Html.ActionLink("Delete", "Delete", new { id = item.JangadID }) |
                                 @Html.ActionLink("Forward", "Forward", new { id = item.JangadID })
-                                 @*|
-                                <span id="JangadID" class="JangadID">Forward</span>*@
                             </td>
                         </tr>
                     }

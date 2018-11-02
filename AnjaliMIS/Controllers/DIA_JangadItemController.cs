@@ -165,7 +165,10 @@ namespace AnjaliMIS.Controllers
                             new_DIA_Jangad.PendingAmount = Convert.ToInt32(dIA_JangadViewModal.TotalAmount);
 
                         }
-                        new_DIA_Jangad.JangadCode = dIA_JangadViewModal.JangadCode;//ask to kamal//common ma funcation ready te use karvanu
+                        #region Generate InvoiceNo
+                        String _NewJangadCode = CommonConfig.GetNextNumber("JN");
+                        #endregion Generate InvoiceNo
+                        new_DIA_Jangad.JangadCode = _NewJangadCode;
 
                         db.DIA_Jangad.Add(new_DIA_Jangad);
                         db.SaveChanges();
